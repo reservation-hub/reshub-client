@@ -39,4 +39,4 @@ reshub-client-bashを使用して、クライアントに実行中のコンテ�
 
 
 
-### 毎回 source aliases.shするのは面倒くさいので~/.zshrc や　~/.bashrc に alias reshub="cd /path-to-reshub-client-file&&source aliases.sh"を追加してください。それでsource ~/.zshrc や ~/.bashrc してください。やるとタルミナルに reshub を入力したら source aliases.sh を自動的に動きます。便利になると思います。やり方わからなかったら私に聞いてください。宜しくお願いします。
+### 毎回 source aliases.shするのは面倒くさいので~/.zshrc や　~/.bashrc に alias reshub="cd /reshubclientファイルへのパス&&source aliases.sh"を追加してください。それでsource ~/.zshrc や ~/.bashrc してください。やるとタルミナルに reshub を入力したら source aliases.sh を自動的に動きます。便利になると思います。やり方わからなかったら私に聞いてください。宜しくお願いします。
