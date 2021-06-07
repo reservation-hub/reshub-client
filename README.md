@@ -6,7 +6,6 @@
 初期設定
 ```
 $ source aliases.sh
-$ board-init
 ```
 
 * コンテナーの起動
@@ -46,5 +45,5 @@ $ source /reshub-clientのファイルパス/aliases.sh 又は alias reshub='cd 
 
 2. vimや編集エディター終了後
 ```
-source ~/.zshrc 又は ~/.bashrc
+$ source ~/.zshrc 又は ~/.bashrc
 ```
