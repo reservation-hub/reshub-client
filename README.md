@@ -1,31 +1,30 @@
 # ResHub-Clientの立ち上げ
 
----------------------------------------------
 
 ### 立ち上げ方法及びsehllファイルのコマンド
 
-1.初期設定
+初期設定
 ```
 $ source aliases.sh
 $ board-init
 ```
 
-*コンテナーの起動
+* コンテナーの起動
 ```
 $ reshub-up
 ```
 
-*dockerイメージビルト
+* dockerイメージビルト
 ```
 $ rehub-build
 ```
 
-*コンテナーの停止
+* コンテナーの停止
 ```
 $ reshub-down
 ```
 
-＊実行中のコンテナーのbashに接続
+* 実行中のコンテナーのbashに接続
 ```
 $ reshub-client-bash
 ```
@@ -37,15 +36,15 @@ _http://localhost:3001_
 
 -------------------------------
 
-###　もっと簡単に立ち上げるには
+### もっと簡単に立ち上げるには
 
-1.ターミナル起動後
+1. ターミナル起動後
 ```
 $ vim ~/.zshrc 又は　vim ~/.bashrc
 $ source /reshub-clientのファイルパス/aliases.sh 又は alias reshub='cd /ResHub-Clientファイルパス&&source aliases.sh'
 ```
 
-2.vimや編集エディター終了後
+2. vimや編集エディター終了後
 ```
 source ~/.zshrc 又は ~/.bashrc
 ```
