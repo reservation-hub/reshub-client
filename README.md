@@ -1,48 +1,51 @@
-## 初期化する方法
+# ResHub-Clientの立ち上げ
 
+---------------------------------------------
 
+### 立ち上げ方法及びsehllファイルのコマンド
 
-まず source aliases.sh を実行します
+1.初期設定
+```
+$ source aliases.sh
+$ board-init
+```
 
+*コンテナーの起動
+```
+$ reshub-up
+```
 
+*dockerイメージビルト
+```
+$ rehub-build
+```
 
+*コンテナーの停止
+```
+$ reshub-down
+```
 
+＊実行中のコンテナーのbashに接続
+```
+$ reshub-client-bash
+```
 
+-------------------------------
 
-reshub-build を使用してイメージをビルドします。
+ResHub-ClientのURL及び起動ポートは
+_http://localhost:3001_
 
+-------------------------------
 
+###　もっと簡単に立ち上げるには
 
+1.ターミナル起動後
+```
+$ vim ~/.zshrc 又は　vim ~/.bashrc
+$ source /reshub-clientのファイルパス/aliases.sh 又は alias reshub='cd /ResHub-Clientファイルパス&&source aliases.sh'
+```
 
-
-
-reshub-up を使用してコンテナーを開始します。
-
-
-
-
-
-
-reshub-down を使用してクライアントコンテナを停止します
-
-
-
-
-
-
-
-reshub-client-bashを使用して、クライアントに実行中のコンテナーbashを使用します。
-
-
-
-クライアントは https：//localhost：8080 を聞きます
-
-
-
-### 毎回 source aliases.shするのは面倒くさいので~/.zshrc や　~/.bashrc に 
-
-
-```source reshubclientファイルへのパス/aliases.sh ```
-
-
-を追加してください。それでsource ~/.zshrc や ~/.bashrc してください。やるパソコン起動いたら source aliases.sh を自動的に動きます。便利になると思います。やり方わからなかったら私に聞いてください。宜しくお願いします。
+2.vimや編集エディター終了後
+```
+source ~/.zshrc 又は ~/.bashrc
+```
