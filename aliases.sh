@@ -1,3 +1,5 @@
+alias client-init="git submodule update --init reshub-deploy"
+
 alias reshub-build="docker-compose build"
 alias reshub-up="docker-compose up client"
 alias reshub-down="docker-compose down"

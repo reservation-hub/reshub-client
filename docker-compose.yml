@@ -13,7 +13,7 @@ services:
     environment:
       - COMMAND=${COMMAND:-start}
     env_file:
-      - .env
+      - reshub-deploy/.env.dev
     image: client
     ports:
       - 3001:3000
