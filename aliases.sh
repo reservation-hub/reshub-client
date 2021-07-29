@@ -1,6 +1,6 @@
 alias client-init="git submodule update --init reshub-deploy"
 
-alias reshub-build="docker-compose build"
-alias reshub-up="docker-compose up client"
-alias reshub-down="docker-compose down"
-alias reshub-client-bash="docker-compose exec client bash" 
+alias rhcl="docker-compose up client"
+alias rhcl-down="docker-compose down"
+alias rhcl-bash="docker-compose exec client bash"
+alias rhcl-log="docker-compose logs -f --tail 100 client "

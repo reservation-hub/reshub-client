@@ -1,31 +1,32 @@
 # ResHub-Clientの立ち上げ
-
+Reshubのクライアントレポジトリー
 
 ### 立ち上げ方法及びsehllファイルのコマンド
 
 初期設定
 ```
 $ source aliases.sh
+$ client-init
 ```
 
 * コンテナーの起動
 ```
-$ reshub-up
-```
-
-* dockerイメージビルト
-```
-$ rehub-build
+$ rhcl
 ```
 
 * コンテナーの停止
 ```
-$ reshub-down
+$ rhcl-down
 ```
 
 * 実行中のコンテナーのbashに接続
 ```
-$ reshub-client-bash
+$ rhcl-bash
+```
+
+* 実行中のコンテナーのlogを見る
+```
+$ rhcl-log
 ```
 
 -------------------------------
