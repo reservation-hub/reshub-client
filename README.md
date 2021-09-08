@@ -11,22 +11,22 @@ $ client-init
 
 * コンテナーの起動
 ```
-$ rhcl
+$ rh-cl
 ```
 
 * コンテナーの停止
 ```
-$ rhcl-down
+$ cl-down
 ```
 
 * 実行中のコンテナーのbashに接続
 ```
-$ rhcl-bash
+$ cl-bash
 ```
 
 * 実行中のコンテナーのlogを見る
 ```
-$ rhcl-log
+$ cl-log
 ```
 
 -------------------------------
@@ -48,3 +48,10 @@ $ source /reshub-clientのファイルパス/aliases.sh 又は alias reshub='cd 
 ```
 $ source ~/.zshrc 又は ~/.bashrc
 ```
+-----------------------------
+
+### figmaデザイン
+
+現在作成中
+
+-------------------------------

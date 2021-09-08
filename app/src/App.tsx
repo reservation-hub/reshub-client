@@ -3,7 +3,9 @@ import React from 'react'
 function App() {
   return (
     <div className="App">
-      Hello Reshub
+      <span className='text-5xl bg-primary text-secondary-main'>
+        hello reshub-client
+      </span>
     </div>
   )
 }
