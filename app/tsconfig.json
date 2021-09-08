@@ -1,13 +1,11 @@
 {
+  "include": ["src"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "esnext",
-    "target": "es6",
+    "target": "es5",
     "typeRoots": ["node_modules/@types"],
-    "lib": [
-      "es6",
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "sourceMap": true,
     "skipLibCheck": true,
@@ -21,8 +19,5 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true
-  },
-  "include": [
-    "./src/**/*"
-  ]
+  }
 }
