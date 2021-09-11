@@ -1,8 +1,8 @@
-# ResHub-Clientの立ち上げ
+# ResHub-Client
 
 Reshubのクライアントレポジトリー
 
-### 立ち上げ方法及びsehllファイルのコマンド
+## 立ち上げ方法及びsehllファイルのコマンド
 
 初期設定
 
