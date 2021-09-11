@@ -1,0 +1,8 @@
+yarn.lock
+.prettierrc
+*.json
+*.config.js
+
+src/styles/*
+public/*
+node_module/*

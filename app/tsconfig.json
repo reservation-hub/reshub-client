@@ -1,11 +1,22 @@
 {
-  "include": ["src"],
-  "exclude": ["node_modules"],
+  "extends": "./tsconfig.paths.json",
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "module": "esnext",
     "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "sourceMap": true,
     "skipLibCheck": true,

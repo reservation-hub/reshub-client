@@ -1,5 +1,6 @@
 module.exports = {
-  purge: ['./src/components/**/*.tsx', './src/pages/**/*.tsx', './public/index.html'],
+  mode: 'jit',
+  purge: ['./src/**/*.tsx', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -26,13 +27,18 @@ module.exports = {
           dark: '#459648'
         }
       },
-      flex: {...Array.from(Array(12 + 1)).map((_, i) => `${i} ${i} 0%`)}, // ex) flex-1(flex: 1 1 0%)
-      // todo 테마폰트 지정할것
+      flex: { ...Array.from(Array(12 + 1)).map((_, i) => `${i} ${i} 0%`) }, // ex) flex-1(flex: 1 1 0%)
       fontFamily: {}
-    },
+    }
   },
   variants: {
-    extend: {},
+    accessibility: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    cursor: ['hover'],
+    extend: {
+      fontWeight: ['hover', 'focus', 'active'],
+      textColor: ['hover', 'focus', 'active']
+    }
   },
-  plugins: [],
+  plugins: []
 }

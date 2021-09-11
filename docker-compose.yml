@@ -11,12 +11,13 @@ services:
       dockerfile: docker/Dockerfile
     container_name: client
     environment:
-      - COMMAND=${COMMAND:-start}
+      - COMMAND=${COMMAND:-dev}
+      - CHOKIDAR_USEPOLLING=true
     env_file:
       - reshub-deploy/.env.dev
     image: client
     ports:
-      - 3001:3000
+      - "3001:3000"
     volumes:
       - ./app:/app
     tty: true
