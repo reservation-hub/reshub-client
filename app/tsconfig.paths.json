@@ -2,13 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      //もし、ディレクトリが増えたらここに追加しておくこと。
       "@/*": ["./*"],
       "@store/*": ["store/*"],
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@entity/*": ["entities/*"],
+      "@model/*": ["model/*"]
     }
   }
 }
