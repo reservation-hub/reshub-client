@@ -1,0 +1,27 @@
+name: PR
+on:
+  pull_request:
+    branches:
+      - main
+    path:
+      - "app/**"
+jobs:
+  app:
+    runs-on: [ubuntu-latest]
+    defaults:
+      run:
+        working-directory: app
+    setps:
+      - name: checkout source code
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.2.0
+        with:
+          node-version: 14.x
+          cache: yarn
+      - name: yarn install ...
+        run: yarn install --frozen-lockfile
+      - name: check format
+        run: yarn fmt:check
+      - name: check eslint
+        run: yarn lint

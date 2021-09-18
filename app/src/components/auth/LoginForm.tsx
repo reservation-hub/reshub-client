@@ -4,8 +4,8 @@ const LoginForm = () => {
   return (
     <div>
       <form>
-        <input type="text"/>
-        <input type="text"/>
+        <input type='text' />
+        <input type='text' />
         <button>submit</button>
       </form>
     </div>

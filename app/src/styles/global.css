@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +7,5 @@
 html {
   @apply m-0;
   font-size: 62.5%;
+  font-family: 'Noto Sans JP', sans-serif;
 }
