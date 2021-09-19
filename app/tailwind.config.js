@@ -32,13 +32,7 @@ module.exports = {
     }
   },
   variants: {
-    accessibility: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
-    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
-    cursor: ['hover'],
-    extend: {
-      fontWeight: ['hover', 'focus', 'active'],
-      textColor: ['hover', 'focus', 'active']
-    }
+
   },
   plugins: []
 }
