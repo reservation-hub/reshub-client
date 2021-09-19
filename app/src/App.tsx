@@ -1,10 +1,13 @@
 import React from 'react'
+import MainTemplate from '@components/Template/MainTemplate'
 
 function App() {
   return (
-    <div className='h-[5rem] bg-primary'>
-      <span>hello reshub</span>
-    </div>
+    <>
+      <MainTemplate>
+        <span className='text-[10rem]'>hello Reshub</span>
+      </MainTemplate>
+    </>
   )
 }
 
