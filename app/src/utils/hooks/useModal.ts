@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-export const useModal = (initialState: boolean, type?: string | undefined) => {
+const useModal = (initialState: boolean, type?: string | undefined) => {
   const [open, setModalState] = useState<boolean>(initialState)
   const [modalType, setModalType] = useState<string | undefined>(type)
 
@@ -16,3 +16,5 @@ export const useModal = (initialState: boolean, type?: string | undefined) => {
 
   return { open, openModal, closeModal, modalType }
 }
+
+export default useModal
