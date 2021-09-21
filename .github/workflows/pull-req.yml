@@ -17,7 +17,6 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.x
-          cache: yarn
       - name: yarn install ...
         run: yarn install --frozen-lockfile
       - name: check format
