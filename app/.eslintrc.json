@@ -2,11 +2,13 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
-    "plugin:prettier/recommended",
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "prettier"
   ],
   "parserOptions": {
@@ -21,6 +23,9 @@
     "@typescript-eslint"
   ],
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolve": {
       "alias": {
         "map": [[
