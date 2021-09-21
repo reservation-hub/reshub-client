@@ -1,5 +1,5 @@
 import React from 'react'
 
-export interface TemplateProps {
+export interface ITemplateProps {
   children?: React.ReactNode
 }

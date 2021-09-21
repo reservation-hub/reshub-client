@@ -1,6 +1,6 @@
 import React from 'react'
 
-export interface ModalProps {
+export interface IModalProps {
   open: boolean
   children?: React.ReactNode
 }
