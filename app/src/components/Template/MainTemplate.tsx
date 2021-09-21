@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from '@components/common/Header'
 import Footer from '@components/common/Footer'
-import { TemplateProps } from '@components/Template/_PropsType'
+import { ITemplateProps } from '@components/Template/_PropsType'
 
-const MainTemplate = ({ children }: TemplateProps) => {
+const MainTemplate = ({ children }: ITemplateProps) => {
   return (
     <>
       <Header />
