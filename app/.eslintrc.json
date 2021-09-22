@@ -1,11 +1,15 @@
 {
+  "root": true,
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,9 +20,12 @@
   },
   "plugins": [
     "react",
-    "prettier"
+    "@typescript-eslint"
   ],
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolve": {
       "alias": {
         "map": [[
@@ -29,17 +36,7 @@
     }
   },
   "rules": {
-    "max-depth": [
-      "error",
-      2
-    ],
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ]
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "ignorePatterns": [
     "craco.config.js"
