@@ -11,7 +11,8 @@ function App() {
         <span className='text-[10rem]'>hello Reshub</span>
         <button
           className='w-[3rem] h-[3rem] text-[2.4rem]'
-          onClick={modal.openModal}>
+          onClick={modal.openModal}
+        >
           modal
         </button>
         <ModalOverlay open={modal.open} onClose={modal.closeModal}>
