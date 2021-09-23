@@ -3,8 +3,6 @@
 //----------------------------------
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-type Data = { [key: string]: string | number | object | boolean }
-
 export interface CustomInstance extends AxiosInstance {
   get<T = any, R = AxiosResponse<T>>(
     url: string,
@@ -16,17 +14,12 @@ export interface CustomInstance extends AxiosInstance {
   ): Promise<R>
   post<T = any, R = AxiosResponse<T>>(
     url: string,
-    data?: Data,
-    config?: AxiosRequestConfig
-  ): Promise<R>
-  put<T = any, R = AxiosResponse<T>>(
-    url: string,
-    data?: Data,
+    data?: Record<string, any>,
     config?: AxiosRequestConfig
   ): Promise<R>
   patch<T = any, R = AxiosResponse<T>>(
     url: string,
-    data?: Data,
+    data?: Record<string, any>,
     config?: AxiosRequestConfig
   ): Promise<R>
 }
