@@ -3,7 +3,7 @@ import Login from '@/pages/auth/Login'
 //----------------------------------------
 // TODO あくまでも仮であってある程度要件が定まり次第リファクタすること
 //----------------------------------------
-export const MainRouterPaths: {
+export const ROUTER_PATHS: {
   path: string
   exact?: boolean
   component?: () => JSX.Element
@@ -18,7 +18,7 @@ export const MainRouterPaths: {
   { path: '*' }
 ]
 
-export const NavMenu: { path: string; text: string }[] = [
+export const NAV_MENU: { path: string; text: string }[] = [
   { path: '/salon', text: '美容室' },
   { path: '/catalog', text: 'カタログ' },
   { path: '/reservations/search', text: '予約管理' },

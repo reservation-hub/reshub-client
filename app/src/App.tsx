@@ -1,22 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { MainRouterPaths } from '@/constants/paths'
+import MainRouter from '@utils/Router'
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        {MainRouterPaths.map((router, index) => (
-          <Route
-            key={index}
-            path={router.path}
-            exact={router.exact}
-            component={router.component}
-          />
-        ))}
-      </Switch>
-    </Router>
-  )
+  return <MainRouter />
 }
 
 export default App
