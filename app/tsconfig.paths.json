@@ -9,7 +9,8 @@
       "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"],
       "@entity/*": ["entities/*"],
-      "@model/*": ["model/*"]
+      "@model/*": ["model/*"],
+      "@constants/*": ["constants/*"]
     }
   }
 }

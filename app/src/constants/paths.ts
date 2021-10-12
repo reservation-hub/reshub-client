@@ -1,4 +1,5 @@
-import Login from '@/pages/auth/Login'
+import Login from '@pages/auth/Login'
+import Error from '@pages/error/Error'
 
 //----------------------------------------
 // TODO あくまでも仮であってある程度要件が定まり次第リファクタすること
@@ -15,7 +16,7 @@ export const ROUTER_PATHS: {
   { path: '/user' },
   { path: '/reservations' },
   { path: '/search' },
-  { path: '*' }
+  { path: '*', component: Error }
 ]
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [
