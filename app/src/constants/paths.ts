@@ -18,9 +18,17 @@ export const ROUTER_PATHS: {
   { path: '*' }
 ]
 
-export const NAV_MENU: { path: string; text: string }[] = [
+export const PRIVATE_MENU: { path: string; text: string }[] = [
   { path: '/salon', text: '美容室' },
   { path: '/catalog', text: 'カタログ' },
   { path: '/reservations/search', text: '予約管理' },
-  { path: '/user/:id', text: 'マイページ' }
+  { path: '/user/:id', text: 'マイページ' },
+  { path: '/logout', text: 'ログアウト' }
+]
+
+export const PUBLIC_MENU: { path: string; text: string }[] = [
+  { path: '/salon', text: '美容室' },
+  { path: '/catalog', text: 'カタログ' },
+  { path: '/reservations/search', text: '予約管理' },
+  { path: '/login', text: 'ログイン' }
 ]
