@@ -1,5 +1,5 @@
-import Login from '@pages/auth/Login'
 import Error from '@pages/error/Error'
+import Main from '@pages/main/Main'
 
 //----------------------------------------
 // TODO あくまでも仮であってある程度要件が定まり次第リファクタすること
@@ -9,7 +9,7 @@ export const ROUTER_PATHS: {
   exact?: boolean
   component?: () => JSX.Element
 }[] = [
-  { path: '/', exact: true, component: Login },
+  { path: '/', exact: true, component: Main },
   { path: '/salon' },
   { path: '/review' },
   { path: '/catalog' },
