@@ -57,7 +57,10 @@ const SearchBox = ({
         </Button>
       </div>
       <div className='border border-secondary-black w-[41rem] h-[4.5rem] mx-auto flex'>
-        <Input placebolder='サロン名・エリアなど' classes='w-[35rem] h-[4.3rem]' />
+        <Input
+          placebolder='サロン名・エリアなど'
+          classes='w-[35rem] h-[4.3rem]'
+        />
         <Button onClick={search} classes='border-none w-[5.9rem] h-[4.3rem]'>
           <AiOutlineSearch className='w-full h-full bg-primary text-secondary-light' />
         </Button>

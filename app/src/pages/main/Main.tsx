@@ -9,7 +9,9 @@ const Main = () => {
     <MainTemplate>
       <div className='w-full h-[30rem] mt-20 text-center bg-primary flex justify-center'>
         <div className='grid text-secondary-light mr-[14rem]'>
-          <span className='text-[3.8rem] mt-28'>あなたにぴったりな <br /> サロンを見つけ方</span>
+          <span className='text-[3.8rem] mt-28'>
+            あなたにぴったりな <br /> サロンを見つけ方
+          </span>
         </div>
         <SearchBox />
       </div>

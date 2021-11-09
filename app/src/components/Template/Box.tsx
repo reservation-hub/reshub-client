@@ -2,13 +2,12 @@ import React from 'react'
 import { IBoxProps } from './_PropsType'
 
 const Box = ({
-  children, 
+  children,
   boxClass,
   headerClass,
   spanClass,
   title
 }: IBoxProps) => {
-
   return (
     <div className={`${boxClass} shadow-md`}>
       <div className={`${headerClass} h-[3.5rem] bg-primary`}>

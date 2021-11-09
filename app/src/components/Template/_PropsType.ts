@@ -4,7 +4,6 @@ export interface ITemplateProps {
   children?: React.ReactNode
 }
 
-
 export interface IBoxProps {
   children?: React.ReactNode
   boxClass?: string
