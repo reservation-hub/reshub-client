@@ -5,11 +5,11 @@ import { ClassesAndChildren } from '@components/_PropsTypes'
 
 const MainTemplate = ({ children }: ClassesAndChildren) => {
   return (
-    <>
+    <main className='bg-secondary-light h-screen relative'>
       <Header />
-      <main className='bg-secondary-light'>{children}</main>
+      {children}
       <Footer />
-    </>
+    </main>
   )
 }
 
