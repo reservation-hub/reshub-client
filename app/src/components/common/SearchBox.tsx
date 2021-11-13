@@ -4,7 +4,8 @@ import { AiOutlineCalendar, AiOutlineSearch } from 'react-icons/ai'
 import { ISearchBarProps } from '@components/common/_PropsType'
 import { IoLocationOutline } from 'react-icons/io5'
 import { BiTrain, BiCrown } from 'react-icons/bi'
-import Input from './Input'
+import Input from '@components/common/Input'
+import IconButton from '@components/common/SearchButton'
 
 const SearchBox = ({
   search,
@@ -19,42 +20,34 @@ const SearchBox = ({
         <span className='text-[2rem]'>条件からサロンを探す</span>
       </div>
       <div className='m-auto text-secondary-dark '>
-        <Button
-          onClick={searchFromArea}
-          classes='w-[20rem] h-[4.5rem] text-[1.6rem] m-2'
+        <IconButton 
+          icon 
+          onClick={searchFromArea} 
+          text='エリアから探す'
         >
-          <span className='flex p-3'>
-            <IoLocationOutline className='text-primary w-[2.4rem] h-[2.4rem] mr-2' />
-            エリアから探す
-          </span>
-        </Button>
-        <Button
+          <IoLocationOutline className='text-primary w-[2.4rem] h-[2.4rem] mr-2' />
+        </IconButton>
+        <IconButton
+          icon
           onClick={searchFromStation}
-          classes='w-[20rem] h-[4.5rem] text-[1.6rem] m-2'
+          text='駅から探す'
         >
-          <span className='flex p-3'>
-            <BiTrain className='text-primary w-[2.4rem] h-[2.4rem] mr-2' />
-            駅から探す
-          </span>
-        </Button>
-        <Button
+          <BiTrain className='text-primary w-[2.4rem] h-[2.4rem] mr-2' />
+        </IconButton>
+        <IconButton
+          icon
           onClick={searchFromRanking}
-          classes='w-[20rem] h-[4.5rem] text-[1.6rem] m-2'
+          text='ランキングから探す'
         >
-          <span className='flex p-3'>
-            <BiCrown className='w-[2.4rem] h-[2.4rem] mr-2 text-primary' />
-            ランキングから探す
-          </span>
-        </Button>
-        <Button
+          <BiCrown className='w-[2.4rem] h-[2.4rem] mr-2 text-primary' />
+        </IconButton>
+        <IconButton
+          icon
           onClick={searchFromDays}
-          classes='w-[20rem] h-[4.5rem] text-[1.6rem] m-2'
+          text='日付から探す'
         >
-          <span className='flex p-3'>
-            <AiOutlineCalendar className='w-[2.4rem] h-[2.4rem] text-primary mr-2' />
-            日付から探す
-          </span>
-        </Button>
+          <AiOutlineCalendar className='w-[2.4rem] h-[2.4rem] text-primary mr-2' />
+        </IconButton>
       </div>
       <div className='border border-secondary-black w-[41rem] h-[4.5rem] mx-auto flex'>
         <Input

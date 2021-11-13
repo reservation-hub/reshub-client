@@ -15,6 +15,13 @@ export interface ISearchBarProps {
   searchFromDays?: () => void
 }
 
+export interface ISearchButtonProps {
+  onClick?: () => void
+  children?: React.ReactNode
+  icon?: boolean
+  text?: string
+}
+
 export interface IInputProps {
   classes?: string
   value?: string
@@ -22,4 +29,19 @@ export interface IInputProps {
   placebolder?: string
   required?: boolean
   name?: string
+  error?: boolean
+  errorText?: string
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  autoComplete?: 'on' | 'off'
+  id?: string
+  fullWidth?: boolean
+}
+
+export interface IErrorMessageProps {
+  classes?: string
+  errorMessage?: string
+}
+
+export interface ICardProps {
+  
 }

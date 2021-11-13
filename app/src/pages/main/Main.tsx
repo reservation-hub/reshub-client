@@ -7,13 +7,15 @@ import Box from '@components/Template/Box'
 const Main = () => {
   return (
     <MainTemplate>
-      <div className='w-full h-[30rem] mt-20 text-center bg-primary flex justify-center'>
-        <div className='grid text-secondary-light mr-[14rem]'>
-          <span className='text-[3.8rem] mt-28'>
-            あなたにぴったりな <br /> サロンを見つけ方
-          </span>
+      <div className='w-full h-[30rem] mt-20 text-center bg-primary'>
+        <div className='w-[100rem] flex justify-between mx-auto'>
+          <div className='grid text-secondary-light mr-[14rem]'>
+            <span className='text-[3.8rem] m-auto'>
+              あなたにぴったりな <br /> サロンを見つけ方
+            </span>
+          </div>
+          <SearchBox />
         </div>
-        <SearchBox />
       </div>
 
       <div className='w-[100rem] h-full mx-auto mt-20 flex text-[1.6rem] justify-between'>
