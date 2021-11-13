@@ -1,5 +1,12 @@
 import React from 'react'
-import { IBoxProps } from './_PropsType'
+import { ClassesAndChildren } from '@components/_PropsTypes'
+
+export interface IBoxProps extends ClassesAndChildren {
+  boxClass?: string
+  headerClass?: string
+  spanClass?: string
+  title?: string
+}
 
 const Box = ({
   children,

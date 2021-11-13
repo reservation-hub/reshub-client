@@ -1,15 +1,15 @@
 import React from 'react'
 import Header from '@components/Template/Header'
 import Footer from '@components/Template/Footer'
-import { ITemplateProps } from '@components/Template/_PropsType'
+import { ClassesAndChildren } from '@components/_PropsTypes'
 
-const MainTemplate = ({ children }: ITemplateProps) => {
+const MainTemplate = ({ children }: ClassesAndChildren) => {
   return (
-    <>
+    <main className='bg-secondary-light h-screen relative'>
       <Header />
-      <main className='bg-secondary-light'>{children}</main>
+      {children}
       <Footer />
-    </>
+    </main>
   )
 }
 
