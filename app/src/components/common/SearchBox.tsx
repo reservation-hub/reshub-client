@@ -1,11 +1,18 @@
 import React from 'react'
 import Button from '@components/common/Button'
 import { AiOutlineCalendar, AiOutlineSearch } from 'react-icons/ai'
-import { ISearchBarProps } from '@components/common/_PropsType'
 import { IoLocationOutline } from 'react-icons/io5'
 import { BiTrain, BiCrown } from 'react-icons/bi'
 import Input from '@components/common/Input'
-import IconButton from '@components/common/SearchButton'
+import IconButton from '@/components/common/IconButton'
+
+export interface ISearchBarProps {
+  search?: () => void
+  searchFromArea?: () => void
+  searchFromStation?: () => void
+  searchFromRanking?: () => void
+  searchFromDays?: () => void
+}
 
 const SearchBox = ({
   search,
@@ -20,32 +27,16 @@ const SearchBox = ({
         <span className='text-[2rem]'>条件からサロンを探す</span>
       </div>
       <div className='m-auto text-secondary-dark '>
-        <IconButton 
-          icon 
-          onClick={searchFromArea} 
-          text='エリアから探す'
-        >
+        <IconButton icon onClick={searchFromArea} text='エリアから探す'>
           <IoLocationOutline className='text-primary w-[2.4rem] h-[2.4rem] mr-2' />
         </IconButton>
-        <IconButton
-          icon
-          onClick={searchFromStation}
-          text='駅から探す'
-        >
+        <IconButton icon onClick={searchFromStation} text='駅から探す'>
           <BiTrain className='text-primary w-[2.4rem] h-[2.4rem] mr-2' />
         </IconButton>
-        <IconButton
-          icon
-          onClick={searchFromRanking}
-          text='ランキングから探す'
-        >
+        <IconButton icon onClick={searchFromRanking} text='ランキングから探す'>
           <BiCrown className='w-[2.4rem] h-[2.4rem] mr-2 text-primary' />
         </IconButton>
-        <IconButton
-          icon
-          onClick={searchFromDays}
-          text='日付から探す'
-        >
+        <IconButton icon onClick={searchFromDays} text='日付から探す'>
           <AiOutlineCalendar className='w-[2.4rem] h-[2.4rem] text-primary mr-2' />
         </IconButton>
       </div>

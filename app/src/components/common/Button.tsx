@@ -1,5 +1,10 @@
 import React from 'react'
-import { IButtonProps } from '@components/common/_PropsType'
+import { ClassesAndChildren } from '@/components/_PropsTypes'
+
+export interface IButtonProps extends ClassesAndChildren {
+  disabled?: boolean
+  onClick?: () => void
+}
 
 const Button = ({ children, classes, onClick, disabled }: IButtonProps) => {
   return (

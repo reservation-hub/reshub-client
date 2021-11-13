@@ -1,6 +1,20 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
-import { IInputProps } from './_PropsType'
+import { ClassesAndChildren } from '@/components/_PropsTypes'
+
+export interface IInputProps extends ClassesAndChildren {
+  value?: string
+  type?: 'text' | 'number' | 'file' | 'password'
+  placebolder?: string
+  required?: boolean
+  name?: string
+  error?: boolean
+  errorText?: string
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  autoComplete?: 'on' | 'off'
+  id?: string
+  fullWidth?: boolean
+}
 
 const Input = ({
   classes,

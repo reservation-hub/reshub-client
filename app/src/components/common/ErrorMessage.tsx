@@ -1,5 +1,9 @@
 import React from 'react'
-import { IErrorMessageProps } from './_PropsType'
+import { ClassesAndChildren } from '@/components/_PropsTypes'
+
+export interface IErrorMessageProps extends ClassesAndChildren {
+  errorMessage?: string
+}
 
 const ErrorMessage = ({ classes, errorMessage }: IErrorMessageProps) => {
   return (
