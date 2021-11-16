@@ -1,8 +1,7 @@
 import React from 'react'
 import { AiFillGithub } from 'react-icons/all'
-import { ClassesAndChildren } from '@components/_PropsTypes'
 
-const Footer = ({ classes }: ClassesAndChildren) => {
+const Footer = () => {
   return (
     <footer className='w-full h-[9rem] bottom-0 flex justify-around items-center bg-primary'>
       <h1 className='text-[2rem] text-secondary-main'>
