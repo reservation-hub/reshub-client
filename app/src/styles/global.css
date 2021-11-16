@@ -9,3 +9,7 @@ html {
   font-size: 62.5%;
   font-family: 'Noto Sans JP', sans-serif;
 }
+
+.box-center {
+  @apply left-2/4 top-2/4 transform translate-x-[-50%] translate-y-[-50%] fixed
+}

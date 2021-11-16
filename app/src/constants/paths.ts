@@ -1,3 +1,4 @@
+import Login from '@/pages/auth/Login'
 import Error from '@pages/error/Error'
 import Main from '@pages/main/Main'
 
@@ -16,6 +17,7 @@ export const ROUTER_PATHS: {
   { path: '/user' },
   { path: '/reservations' },
   { path: '/search' },
+  { path: '/login', component: Login },
   { path: '*', component: Error }
 ]
 

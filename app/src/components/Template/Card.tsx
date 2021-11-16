@@ -1,9 +1,19 @@
 import React from 'react'
 import { ClassesAndChildren } from '@components/_PropsTypes'
 
-const Card = ({ children, classes }: ClassesAndChildren) => {
+export interface ICardProps extends ClassesAndChildren {
+  shadow?: boolean
+}
+
+const Card = ({ children, classes, shadow }: ICardProps) => {
   return (
-    <div className={`${classes} bg-secondary-light shadow-lg`}>{children}</div>
+    <div
+      className={`${classes} ${
+        shadow ? 'shadow-lg' : ''
+      } text=[1.6rem] bg-secondary-light`}
+    >
+      {children}
+    </div>
   )
 }
 
