@@ -5,7 +5,7 @@ import Loading from '@/components/common/Loading'
 
 const Login = () => {
   return (
-    <MainTemplate classes='absolute'>
+    <MainTemplate>
       <Loading />
     </MainTemplate>
   )
