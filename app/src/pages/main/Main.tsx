@@ -5,29 +5,34 @@ import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 
 const Main = () => {
+  const contentsBox =
+    'w-[100rem] h-full mx-auto mt-20 flex text-[1.6rem] justify-between'
+
   return (
     <MainTemplate>
-      <div className='w-full h-[30rem] mt-20 text-center bg-primary'>
-        <div className='w-[100rem] flex justify-between mx-auto'>
-          <div className='grid text-secondary-light mr-[14rem]'>
-            <span className='text-[3.8rem] m-auto'>
-              あなたにぴったりな <br /> サロンを見つけ方
-            </span>
+      <section className='mb-20'>
+        <div className='w-full h-[30rem] mt-20 text-center bg-primary'>
+          <div className='w-[100rem] flex justify-between mx-auto'>
+            <div className='grid text-secondary-light mr-[14rem]'>
+              <span className='text-[3.8rem] m-auto'>
+                あなたにぴったりな <br /> サロンを見つけ方
+              </span>
+            </div>
+            <SearchBox />
           </div>
-          <SearchBox />
         </div>
-      </div>
 
-      <div className='w-[100rem] h-full mx-auto mt-20 flex text-[1.6rem] justify-between'>
-        <div className='w-[60rem] h-full'>
-          <Box boxClass='h-[19.7rem]' title='ランキング'></Box>
-          <Box boxClass='h-[85.5rem] mt-16' title='店舗'></Box>
+        <div className={contentsBox}>
+          <div className='w-[60rem] h-full'>
+            <Box boxClass='h-[19.7rem]' title='ランキング'></Box>
+            <Box boxClass='h-[85.5rem] mt-16' title='店舗'></Box>
+          </div>
+          <div className='w-[38.5rem]'>
+            <Box boxClass='h-[55rem]' title='キャンペーン'></Box>
+            <Box boxClass='h-[50.2rem] mt-16' title='運営からのお知らせ'></Box>
+          </div>
         </div>
-        <div className='w-[38.5rem]'>
-          <Box boxClass='h-[55rem]' title='キャンペーン'></Box>
-          <Box boxClass='h-[50.2rem] mt-16' title='運営からのお知らせ'></Box>
-        </div>
-      </div>
+      </section>
     </MainTemplate>
   )
 }
