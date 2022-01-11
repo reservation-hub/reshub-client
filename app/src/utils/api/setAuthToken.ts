@@ -1,12 +1,5 @@
-//--------------------------------------------
-// set authorization token in instance header
-//--------------------------------------------
-import instance from '@utils/api/axiosBase'
+import instance from './index'
 
-/**
- * @param token: string
- * @example setAuthToken(responseToken)
- */
 const setAuthToken = (token: string | undefined) => {
   if (token) {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`

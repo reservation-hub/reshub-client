@@ -32,4 +32,19 @@ const store = createStore(
   composeEnhancer(applyMiddleware(...middleware))
 )
 
+export type RootState = ReturnType<typeof store.getState>
+export type DefaultState = {
+  loading: boolean
+  msg?: string
+}
+
+export function typedAction<T extends string>(type: T): { type: T }
+export function typedAction<T extends string, P extends any>(
+  type: T,
+  payload: P
+): { type: T; payload: P }
+export function typedAction(type: string, payload?: any) {
+  return { type, payload }
+}
+
 export default store

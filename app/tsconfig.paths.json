@@ -10,7 +10,8 @@
       "@styles/*": ["styles/*"],
       "@entity/*": ["entities/*"],
       "@model/*": ["model/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@request-response-types/*": ["utils/api/request-response-types/*"],
     }
   }
 }
