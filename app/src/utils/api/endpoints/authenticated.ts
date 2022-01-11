@@ -6,14 +6,14 @@ import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
   localAuthenticationQuery,
   loginResponse
-} from '@utils/api/request-response-types/Auth'
+} from '@utils/api/request-response-types/client/Auth'
 import { AxiosResponse } from 'axios'
 
 export const localLogin = async (
   formData: localAuthenticationQuery
 ): Promise<AxiosResponse<loginResponse>> => {
   return await instance.post<loginResponse>(`${baseEndpoint.auth}/login`, {
-    email: formData.email,
+    username: formData.username,
     password: formData.password
   })
 }

@@ -50,14 +50,14 @@ export const silentLogin =
 // localログインを実行するアクション
 export const loginStart =
   (
-    email: string,
+    username: string,
     password: string
   ): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(loginRequestStart())
     try {
       const user = await apiEndpoint.authenticated.localLogin({
-        email,
+        username,
         password
       })
       const token = user.data.token
@@ -66,7 +66,7 @@ export const loginStart =
       setAuthToken(token)
 
       dispatch(fetchUser(user.data.user))
-      history.push('/dashboard')
+      history.push('/')
     } catch (e: any) {
       dispatch(loginRequestFailure(e.response.data))
     }
@@ -91,7 +91,7 @@ export const googleLogin =
       setAuthToken(token)
 
       dispatch(fetchUser(user.data.user))
-      history.push('/dashboard')
+      history.push('/')
     } catch (e: any) {
       dispatch(loginRequestFailure(e.response.data))
     }
