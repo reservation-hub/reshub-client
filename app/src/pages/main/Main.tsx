@@ -12,7 +12,7 @@ import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import usePagination from '@utils/hooks/usePagination'
 
-const  Main = ({
+const Main = ({
   match,
   location
 }: RouteComponentProps<MatchParams, any, TCurrentPage>) => {
@@ -65,7 +65,7 @@ const  Main = ({
         <div className={contentsBox}>
           <div className='w-[60rem] h-full'>
             <Box boxClass='h-[19.7rem] mb-4' title='ランキング'></Box>
-            <Box title="店舗一覧">
+            <Box title='店舗一覧'>
               <SalonList
                 item={shops.values}
                 admin={authCheck}

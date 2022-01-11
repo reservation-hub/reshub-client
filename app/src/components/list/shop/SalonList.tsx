@@ -4,9 +4,7 @@ import IsEmpty from '@components/common/atoms/IsEmpty'
 import Table from '@components/common/atoms/Table'
 import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
-const SalonList = ({
-  item,
-}: IListProps) => {
+const SalonList = ({ item }: IListProps) => {
   const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
@@ -15,7 +13,7 @@ const SalonList = ({
   return (
     <>
       {rowItems.map((item, i) => (
-        <ShopItem key={i} shop={item}/>
+        <ShopItem key={i} shop={item} />
       ))}
     </>
   )

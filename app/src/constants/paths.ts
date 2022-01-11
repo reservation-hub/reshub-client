@@ -3,7 +3,6 @@ import Error from '@pages/error/Error'
 import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
 
-
 //----------------------------------------
 // TODO あくまでも仮であってある程度要件が定まり次第リファクタすること
 //----------------------------------------

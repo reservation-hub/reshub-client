@@ -26,9 +26,7 @@ const Table = <T extends Record<string, any>>({
 
   return (
     <>
-      <ul>
-        {'test'}
-      </ul>
+      <ul>{'test'}</ul>
       <table className={`${styled} ${classes}`}>
         <thead className='bg-table-header text-table-headerFont h-[5rem]'>
           <tr className='text-[1.8rem]'>
