@@ -64,14 +64,16 @@ const  Main = ({
 
         <div className={contentsBox}>
           <div className='w-[60rem] h-full'>
-            <Box boxClass='h-[19.7rem]' title='ランキング'></Box>
-            <SalonList
-              item={shops.values}
-              admin={authCheck}
-              totalPage={shops.totalCount}
-              page={currentPage}
-              // pageChangeHandler={pageChangeHandler}
-            />
+            <Box boxClass='h-[19.7rem] mb-4' title='ランキング'></Box>
+            <Box title="店舗一覧">
+              <SalonList
+                item={shops.values}
+                admin={authCheck}
+                totalPage={shops.totalCount}
+                page={currentPage}
+                // pageChangeHandler={pageChangeHandler}
+              />
+            </Box>
           </div>
           <div className='w-[38.5rem]'>
             <Box boxClass='h-[55rem]' title='キャンペーン'></Box>

@@ -6,10 +6,6 @@ import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 const SalonList = ({
   item,
-  admin,
-  page,
-  totalPage,
-  pageChangeHandler
 }: IListProps) => {
   const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
     ...shop,
@@ -19,7 +15,7 @@ const SalonList = ({
   return (
     <>
       {rowItems.map((item, i) => (
-        <ShopItem key={i} details={item}/>
+        <ShopItem key={i} shop={item}/>
       ))}
     </>
   )
