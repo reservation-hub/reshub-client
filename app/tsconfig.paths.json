@@ -8,8 +8,6 @@
       "@pages/*": ["pages/*"],
       "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"],
-      "@entity/*": ["entities/*"],
-      "@model/*": ["model/*"],
       "@constants/*": ["constants/*"],
       "@request-response-types/*": ["utils/api/request-response-types/*"],
     }

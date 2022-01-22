@@ -1,5 +1,5 @@
 import React from 'react'
-import history from '@utils/routes/history'
+import history from '@/utils/routers/history'
 
 interface IItemProps<T> {
   details: any

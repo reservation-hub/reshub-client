@@ -1,5 +1,5 @@
 import apiEndpoint from '@utils/api/apiEndpoint'
-import history from '@utils/routes/history'
+import history from '@/utils/routers/history'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState, typedAction } from '@store/store'

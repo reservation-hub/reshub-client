@@ -8,7 +8,7 @@ import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import setAuthToken from '@utils/api/setAuthToken'
-import history from '@utils/routes/history'
+import history from '@/utils/routers/history'
 import Cookies from 'js-cookie'
 import { UserForAuth } from '@utils/api/request-response-types/models/User'
 
