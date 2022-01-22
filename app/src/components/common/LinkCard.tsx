@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../Template/Card'
-import { ClassesAndChildren } from '../_PropsTypes'
+import { HasURL } from '../_PropsTypes'
 
-export interface ILinkCardProps extends ClassesAndChildren {
-  url: string
+export interface ILinkCardProps extends HasURL {
   shadow?: boolean
 }
 

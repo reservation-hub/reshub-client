@@ -1,9 +1,8 @@
 import React from 'react'
-import MainTemplate from '@components/Template/MainTemplate'
 
 const Error = () => {
   return (
-    <MainTemplate>
+    <>
       <section className='h-[84.3%]'>
         <div className='w-full top-[45%] absolute'>
           <div className='gird text-center'>
@@ -15,7 +14,7 @@ const Error = () => {
           </div>
         </div>
       </section>
-    </MainTemplate>
+    </>
   )
 }
 

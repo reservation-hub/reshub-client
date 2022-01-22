@@ -12,7 +12,7 @@ const Button = ({ children, classes, onClick, disabled }: IButtonProps) => {
       <button
         disabled={disabled}
         onClick={onClick}
-        className={`bg-secondary-light rounded-[.2rem] border border-secondary-dark border-solid ${classes}`}
+        className={`rounded-[.2rem] border border-secondary-dark border-solid ${classes}`}
       >
         {children}
       </button>

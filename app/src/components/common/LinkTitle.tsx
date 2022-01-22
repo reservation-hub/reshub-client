@@ -1,18 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ClassesAndChildren } from '@/components/_PropsTypes'
+import { HasURL } from '@/components/_PropsTypes'
+import H1 from './H1'
 
-export interface ITitleProps extends ClassesAndChildren {
-  isLink?: boolean
+export interface ITitleProps extends HasURL {
   title: string
-  url: string
 }
 
-const LinkTitle = ({ classes, isLink, url, title }: ITitleProps) => {
+const LinkTitle = ({ classes, url, title }: ITitleProps) => {
   return (
-    <h1 className={`${classes} text-[3.2rem]`}>
-      {isLink ? <Link to={url}>{title}</Link> : title}
-    </h1>
+    <H1 classes={classes}>
+      <Link to={url}>{title}</Link>
+    </H1>
   )
 }
 

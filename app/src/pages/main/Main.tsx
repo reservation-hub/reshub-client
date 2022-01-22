@@ -49,7 +49,7 @@ const Main = ({
   }, [page, dispatch, currentPage, match.isExact, order])
 
   return (
-    <MainTemplate>
+    <>
       <section className='mb-20'>
         <div className='w-full h-[30rem] mt-20 text-center bg-primary'>
           <div className='w-[100rem] flex justify-between mx-auto'>
@@ -81,7 +81,7 @@ const Main = ({
           </div>
         </div>
       </section>
-    </MainTemplate>
+    </>
   )
 }
 
