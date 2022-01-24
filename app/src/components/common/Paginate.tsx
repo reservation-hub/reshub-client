@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
 import '@styles/paginate.css'
-import { ClassesAndChildren } from '@components/common/_PropsType'
+import { ClassesAndChildren } from '@components/_PropsTypes'
 
 export interface IPaginateProps extends ClassesAndChildren {
   totalPage?: number

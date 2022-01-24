@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import MainTemplate from '@components/Template/MainTemplate'
 import { Route, RouteComponentProps, Switch } from 'react-router-dom'
 import { fetchShopList } from '@store/actions/shopAction'
-import { MatchParams } from '@components/common/_PropsType'
 import { TCurrentPage } from '@components/list/_PropsType'
 import SalonList from '@components/list/shop/SalonList'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
@@ -11,6 +10,7 @@ import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import usePagination from '@utils/hooks/usePagination'
+import { MatchParams } from '@/components/_PropsTypes'
 
 const Main = ({
   match,
@@ -58,7 +58,7 @@ const Main = ({
                 あなたにぴったりな <br /> サロンを見つけ方
               </span>
             </div>
-            <SearchBox />
+            {/* <SearchBox /> */}
           </div>
         </div>
 
