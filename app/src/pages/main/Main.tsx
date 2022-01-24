@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import MainTemplate from '@components/Template/MainTemplate'
 import { Route, RouteComponentProps, Switch } from 'react-router-dom'
 import { fetchShopList } from '@store/actions/shopAction'
-import { MatchParams } from '@components/common/_PropsType'
 import { TCurrentPage } from '@components/list/_PropsType'
 import SalonList from '@components/list/shop/SalonList'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
@@ -11,6 +10,7 @@ import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import usePagination from '@utils/hooks/usePagination'
+import { MatchParams } from '@/components/_PropsTypes'
 
 const Main = ({
   match,
@@ -34,13 +34,8 @@ const Main = ({
     }),
     shallowEqual
   )
-  const authCheck = user?.role?.name === 'admin'
 
-  const pageChangeHandler = usePagination(
-    authCheck ? 'salon' : 'shops',
-    page,
-    setPage
-  )
+  const pageChangeHandler = usePagination('shops', page, setPage)
 
   console.log(user, shops, loading)
 
@@ -49,7 +44,7 @@ const Main = ({
   }, [page, dispatch, currentPage, match.isExact, order])
 
   return (
-    <MainTemplate>
+    <>
       <section className='mb-20'>
         <div className='w-full h-[30rem] mt-20 text-center bg-primary'>
           <div className='w-[100rem] flex justify-between mx-auto'>
@@ -58,7 +53,7 @@ const Main = ({
                 あなたにぴったりな <br /> サロンを見つけ方
               </span>
             </div>
-            <SearchBox />
+            {/* <SearchBox /> */}
           </div>
         </div>
 
@@ -68,7 +63,6 @@ const Main = ({
             <Box title='店舗一覧'>
               <SalonList
                 item={shops.values}
-                admin={authCheck}
                 totalPage={shops.totalCount}
                 page={currentPage}
                 // pageChangeHandler={pageChangeHandler}
@@ -81,7 +75,7 @@ const Main = ({
           </div>
         </div>
       </section>
-    </MainTemplate>
+    </>
   )
 }
 

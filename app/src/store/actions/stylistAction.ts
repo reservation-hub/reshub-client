@@ -9,7 +9,7 @@ import { RootState, typedAction } from '@store/store'
 import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@/utils/api/apiEndpoint'
-import history from '@utils/routes/history'
+import history from '@/utils/routers/history'
 
 const stylistRequsetStart = () => {
   return typedAction(STYLIST_TPYE.REQUEST_START)

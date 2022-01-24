@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClassesAndChildren } from '@components/common/_PropsType'
+import { ClassesAndChildren } from '../_PropsTypes'
 
 const TableRow = ({ children, classes }: ClassesAndChildren) => {
   return (

@@ -9,7 +9,7 @@ import {
 import { ThunkAction } from 'redux-thunk'
 import apiEndpoint from '@/utils/api/apiEndpoint'
 import { Action } from 'redux'
-import history from '@/utils/routes/history'
+import history from '@/utils/routers/history'
 
 const menuRequsetStart = () => {
   return typedAction(MENU_TYPE.REQUEST_START)

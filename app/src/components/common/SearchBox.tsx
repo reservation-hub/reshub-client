@@ -5,6 +5,7 @@ import { IoLocationOutline } from 'react-icons/io5'
 import { BiTrain, BiCrown } from 'react-icons/bi'
 import Input from '@components/common/Input'
 import IconButton from '@/components/common/IconButton'
+import { InputProps } from '../_PropsTypes'
 
 export interface ISearchBarProps {
   search?: () => void
@@ -12,6 +13,7 @@ export interface ISearchBarProps {
   searchFromStation?: () => void
   searchFromRanking?: () => void
   searchFromDays?: () => void
+  control?: any
 }
 
 const SearchBox = ({
@@ -19,7 +21,8 @@ const SearchBox = ({
   searchFromArea,
   searchFromStation,
   searchFromRanking,
-  searchFromDays
+  searchFromDays,
+  control
 }: ISearchBarProps) => {
   // searchBox div
   const searchBox =
@@ -53,8 +56,10 @@ const SearchBox = ({
       </div>
       <div className={searchInputBox}>
         <Input
-          placebolder='サロン名・エリアなど'
+          name=''
+          placeholder='サロン名・エリアなど'
           classes='w-[35rem] h-[4.3rem]'
+          control={control}
         />
         <Button onClick={search} classes='border-none w-[5.9rem] h-[4.3rem]'>
           <AiOutlineSearch className='w-full h-full bg-primary text-secondary-light' />

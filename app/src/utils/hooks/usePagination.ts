@@ -1,5 +1,5 @@
 import React, { SetStateAction } from 'react'
-import history from '@utils/routes/history'
+import history from '@/utils/routers/history'
 
 const usePagination = (
   pageType: string,

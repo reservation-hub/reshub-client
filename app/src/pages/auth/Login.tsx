@@ -3,17 +3,27 @@ import { googleLogin, loginStart } from '@store/actions/authAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import useInput from '@utils/hooks/useInput'
-import LoginForm from '@components/auth/LoginForm'
-import LoginSelectHeader from '@components/common/choose/LoginSelectHeader'
-import LoginSelectFooter from '@components/common/choose/LoginSelectFooter'
-import CenterBox from '@components/common/layout/CenterBox'
 import { RootState } from '@store/store'
-import SubTemplate from '@components/common/layout/SubTemplate'
 import Cookies from 'js-cookie'
+import MainTemplate from '@/components/Template/MainTemplate'
+import LoginForm from '@/components/form/auth/LoginForm'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { loginSchema, LoginSchema } from '@/components/form/auth/loginSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const Login = () => {
-  const { input, ChangeHandler } = useInput({ username: '', password: '' })
   const { err } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch()
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginSchema>({
+    mode: 'onSubmit',
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: '', passowrd: '' }
+  })
 
   const hasError = {
     username: err?.error?.keys?.includes('username'),
@@ -21,14 +31,11 @@ const Login = () => {
     invalid: err?.error?.message === 'Invalid query params'
   }
 
-  const dispatch = useDispatch()
-
-  const onSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      dispatch(loginStart(input.username, input.password))
+  const onSubmit: SubmitHandler<LoginSchema> = useCallback(
+    (value) => {
+      dispatch(loginStart(value.email, value.passowrd))
     },
-    [dispatch, input]
+    [dispatch]
   )
 
   const googleHandler = useCallback(
@@ -41,19 +48,14 @@ const Login = () => {
   if (Cookies.get('authToken')) return <Redirect to='/' />
 
   return (
-    <SubTemplate>
-      <CenterBox>
-        <LoginSelectHeader />
-        <LoginForm
-          value={input}
-          setValue={ChangeHandler}
-          onSubmit={onSubmit}
-          googleHandler={googleHandler}
-          error={hasError}
-        />
-        <LoginSelectFooter />
-      </CenterBox>
-    </SubTemplate>
+    <>
+      <LoginForm
+        googleHandler={googleHandler}
+        submitHandler={handleSubmit(onSubmit)}
+        error={errors}
+        control={control}
+      />
+    </>
   )
 }
 

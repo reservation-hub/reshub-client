@@ -1,6 +1,6 @@
 import React from 'react'
 import TableRow from './TableRow'
-import history from '@utils/routes/history'
+import history from '@/utils/routers/history'
 import Paginate, { IPaginateProps } from './Paginate'
 
 interface ITableProps<T> extends IPaginateProps {
@@ -26,7 +26,6 @@ const Table = <T extends Record<string, any>>({
 
   return (
     <>
-      <ul>{'test'}</ul>
       <table className={`${styled} ${classes}`}>
         <thead className='bg-table-header text-table-headerFont h-[5rem]'>
           <tr className='text-[1.8rem]'>

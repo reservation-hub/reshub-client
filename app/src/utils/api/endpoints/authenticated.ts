@@ -18,19 +18,26 @@ export const localLogin = async (
   })
 }
 
-export const googleLogin = async (provider: string, tokenId: string) => {
-  return await instance.post(`${baseEndpoint.auth}/google`, {
+export const googleLogin = async (
+  provider: string,
+  tokenId: string
+): Promise<AxiosResponse<loginResponse>> => {
+  return await instance.post<loginResponse>(`${baseEndpoint.auth}/google`, {
     provider,
     tokenId
   })
 }
 
-export const silentRefresh = async () => {
-  return await instance.post(`${baseEndpoint.auth}/silent_refresh`)
+export const silentRefresh = async (): Promise<
+  AxiosResponse<loginResponse>
+> => {
+  return await instance.post<loginResponse>(
+    `${baseEndpoint.auth}/silent_refresh`
+  )
 }
 
-export const logout = async () => {
-  return await instance.get(`${baseEndpoint.auth}/logout`)
+export const logout = async (): Promise<AxiosResponse<string>> => {
+  return await instance.get<string>(`${baseEndpoint.auth}/logout`)
 }
 
 const authenticated = {

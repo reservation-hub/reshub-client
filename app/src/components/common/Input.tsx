@@ -1,54 +1,51 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
-import { ClassesAndChildren } from '@/components/_PropsTypes'
+import { InputProps } from '@/components/_PropsTypes'
+import { useController } from 'react-hook-form'
 
-export interface IInputProps extends ClassesAndChildren {
-  value?: string
-  type?: 'text' | 'number' | 'file' | 'password'
-  placebolder?: string
-  required?: boolean
-  name?: string
-  error?: boolean
-  errorText?: string
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
-  autoComplete?: 'on' | 'off'
-  id?: string
-  fullWidth?: boolean
+const INPUT_TYPE = {
+  TEXT: 'text',
+  NUMBER: 'number',
+  FILE: 'file',
+  PASSWORD: 'password'
+} as const
+
+export interface IInputProps extends InputProps {
+  type?: typeof INPUT_TYPE[keyof typeof INPUT_TYPE]
 }
 
 const Input = ({
   classes,
-  value,
-  placebolder,
+  placeholder,
   type,
   required,
   name,
   error,
   errorText,
-  onChange,
   autoComplete,
   id,
-  fullWidth
+  fullWidth,
+  label,
+  control
 }: IInputProps) => {
+  const { field } = useController({ name, control })
+  const input = 'w-full p-3 border rounded-[.25rem]'
   return (
-    <>
-      <input
-        type={type}
-        placeholder={placebolder}
-        value={value}
-        className={
-          fullWidth
-            ? `${classes} text-[1.6rem] p-3 w-full`
-            : `${classes} text-[1.6rem] p-3`
-        }
-        required={required}
-        name={name}
-        onChange={onChange}
-        autoComplete={autoComplete}
-        id={id}
-      />
-      {error && <ErrorMessage errorMessage={errorText} />}
-    </>
+    <div className={fullWidth ? `${classes} w-full` : classes}>
+      <div className='text-[1.6rem]'>
+        <label htmlFor={id}>{label}</label>
+        <input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          required={required}
+          autoComplete={autoComplete}
+          className={error ? `${input} border-error-main` : input}
+          {...field}
+        />
+      </div>
+      {error && <ErrorMessage text={errorText} />}
+    </div>
   )
 }
 

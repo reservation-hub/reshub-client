@@ -6,3 +6,5 @@ yarn.lock
 src/styles/*
 public/*
 node_module/*
+
+src/utils/api/request-response-types

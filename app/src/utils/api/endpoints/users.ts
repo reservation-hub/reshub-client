@@ -11,15 +11,6 @@ import {
   UserResponse
 } from '@utils/api/request-response-types/User'
 
-export const getUsers = async (
-  page: number,
-  order: 'asc' | 'desc'
-): Promise<AxiosResponse<UserListResponse>> => {
-  return await instance.get<UserListResponse>(
-    `${baseEndpoint.users}?page=${page}&order=${order}`
-  )
-}
-
 export const getUser = async (
   id: number
 ): Promise<AxiosResponse<UserResponse>> => {
@@ -47,7 +38,6 @@ export const deleteUser = async (
 }
 
 const users = {
-  getUsers,
   getUser,
   createUser,
   patchUser,
