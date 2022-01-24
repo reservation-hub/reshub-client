@@ -5,20 +5,18 @@ import {
   UserListResponse,
   UserResponse
 } from '@utils/api/request-response-types/User'
+import { DefaultState } from '../store'
 
 export const USER_TYPE = {
-  REQUEST_START: 'USERS_REQUEST_START',
-  REQUEST_SUCCESS: 'USERS_REQUEST_SUCCESS',
-  GET_SUCCESS: 'USERS_GET_SUCCESS',
-  ADD_SUCCESS: 'USERS_ADD_SUCCESS',
-  EDIT_SUCCESS: 'USERS_EDIT_SUCCESS',
-  DELETE_SUCCESS: 'USERS_DELETE_SUCCESS',
-  REQUEST_FAILURE: 'USERS_REQUEST_FAILURE'
+  REQUEST_START: 'CLIENT_REQUEST_START',
+  REQUEST_SUCCESS: 'CLIENT_REQUEST_SUCCESS',
+  SIGNUP_SUCCESS: 'CLIENT_SIGNUP_SUCCESS',
+  EDIT_SUCCESS: 'CLIENT_EDIT_SUCCESS',
+  DELETE_SUCCESS: 'CLIENT_DELETE_SUCCESS',
+  REQUEST_FAILURE: 'CLIENT_REQUEST_FAILURE'
 } as const
 
-export type UsersState = {
-  loading: boolean
+export type UsersState = DefaultState & {
   users: UserListResponse
   user: UserResponse
-  msg: string
 }

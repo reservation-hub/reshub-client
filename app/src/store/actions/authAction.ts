@@ -8,7 +8,7 @@ import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import setAuthToken from '@utils/api/setAuthToken'
-import history from '@/utils/routers/history'
+import history from '@utils/routers/history'
 import Cookies from 'js-cookie'
 import { UserForAuth } from '@utils/api/request-response-types/models/User'
 
@@ -22,8 +22,8 @@ const fetchUser = (user: UserForAuth) => {
 }
 
 //ユーザーのリクエストが失敗の時に実行するアクション
-const loginRequestFailure = (err: Record<string, any>) => {
-  return typedAction(AUTH_TYPE.REQUEST_FAILURE, err)
+const loginRequestFailure = (msg: string) => {
+  return typedAction(AUTH_TYPE.REQUEST_FAILURE, msg)
 }
 
 const logoutSuccess = (msg: string) => {

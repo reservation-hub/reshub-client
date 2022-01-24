@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClassesAndChildren } from '@/components/_PropsTypes'
+import { ClassesAndChildren } from '@components/_PropsTypes'
 
 export interface IButtonProps extends ClassesAndChildren {
   disabled?: boolean

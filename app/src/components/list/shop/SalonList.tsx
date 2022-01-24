@@ -1,6 +1,6 @@
 import React from 'react'
 import { IListProps } from '@components/list/_PropsType'
-import Table from '@/components/common/Table'
+import Table from '@components/common/Table'
 import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 const SalonList = ({ item }: IListProps) => {

@@ -10,7 +10,7 @@ import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import usePagination from '@utils/hooks/usePagination'
-import { MatchParams } from '@/components/_PropsTypes'
+import { MatchParams } from '@components/_PropsTypes'
 
 const Main = ({
   match,

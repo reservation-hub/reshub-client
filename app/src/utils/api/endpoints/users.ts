@@ -7,7 +7,6 @@ import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
   InsertUserQuery,
   UpdateUserQuery,
-  UserListResponse,
   UserResponse
 } from '@utils/api/request-response-types/User'
 

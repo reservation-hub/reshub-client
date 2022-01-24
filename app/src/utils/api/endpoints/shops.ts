@@ -5,10 +5,8 @@ import instance from '@utils/api'
 import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
-  InsertShopQuery,
   ShopListResponse,
-  ShopResponse,
-  UpdateShopQuery
+  ShopResponse
 } from '@utils/api/request-response-types/Shop'
 
 export const fetchAll = async () => {
@@ -30,33 +28,34 @@ export const getShop = async (
   return await instance.get<ShopResponse>(`${baseEndpoint.shops}/${id}`)
 }
 
-export const createShop = async (
-  shopData: InsertShopQuery
-): Promise<AxiosResponse<string>> => {
-  return await instance.post<string>(baseEndpoint.shops, { ...shopData })
+export const shopsSearchToKeyword = async (
+  keyword: string,
+  page?: number,
+  order?: 'asc' | 'desc'
+): Promise<AxiosResponse<ShopListResponse>> => {
+  return await instance.get<ShopListResponse>(
+    baseEndpoint.shops + page
+      ? `/search/?keyword=${keyword}&page=${page}&order=${order}`
+      : `/search/?keyword=${keyword}`
+  )
 }
 
-export const patchShop = async (
-  shopData: UpdateShopQuery
-): Promise<AxiosResponse<string>> => {
-  return await instance.patch<string>(`${baseEndpoint.shops}/${shopData.id}`, {
-    ...shopData.params
-  })
-}
-
-export const deleteShop = async (
-  id: number
-): Promise<AxiosResponse<string>> => {
-  return await instance.delete<string>(`${baseEndpoint.shops}/${id}`)
+export const shopsSearchToLocation = async (
+  areaId: number,
+  prefectureId?: number,
+  cityId?: number,
+  page?: number,
+  order?: 'asc' | 'desc'
+): Promise<AxiosResponse<ShopListResponse>> => {
+  return await instance.get<ShopListResponse>(
+    `${baseEndpoint.shops}/search/area/?areaId=${areaId}`
+  )
 }
 
 const shops = {
   fetchAll,
   getShops,
-  getShop,
-  createShop,
-  patchShop,
-  deleteShop
+  getShop
 }
 
 export default shops

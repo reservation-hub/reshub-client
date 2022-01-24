@@ -1,5 +1,5 @@
 import apiEndpoint from '@utils/api/apiEndpoint'
-import history from '@/utils/routers/history'
+import history from '@utils/routers/history'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState, typedAction } from '@store/store'
@@ -19,10 +19,6 @@ const reservationsRequestSuccess = (data: ReservationListResponse) => {
   return typedAction(RESERVATION_TYPE.REQUSET_SUCCESS, data)
 }
 
-const reservationForCalendarSuccess = (data: ReservationListResponse) => {
-  return typedAction(RESERVATION_TYPE.FOR_CALENDAR, data)
-}
-
 const reservationGetSuccess = (data: ReservationResponse) => {
   return typedAction(RESERVATION_TYPE.GET_ONE_SUCCESS, data)
 }
@@ -39,8 +35,8 @@ const reservationDeleteSuccess = (data: string) => {
   return typedAction(RESERVATION_TYPE.DELETE_SUCCESS, data)
 }
 
-const reservationRequestFailure = (err: string) => {
-  return typedAction(RESERVATION_TYPE.REQUEST_FAILURE, err)
+const reservationRequestFailure = (msg: string) => {
+  return typedAction(RESERVATION_TYPE.REQUEST_FAILURE, msg)
 }
 
 export const fetchReservations =
@@ -58,26 +54,6 @@ export const fetchReservations =
         order
       )
       dispatch(reservationsRequestSuccess(res.data))
-    } catch {
-      history.push('/error')
-    }
-  }
-
-export const fetchReservationsForCalendar =
-  (
-    shopId: number,
-    year: number,
-    month: number
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
-    dispatch(reservationRequestStart())
-    try {
-      const res = await apiEndpoint.reservation.fetchReservationsForCalendar(
-        shopId,
-        year,
-        month
-      )
-      dispatch(reservationForCalendarSuccess(res.data))
     } catch {
       history.push('/error')
     }
@@ -154,7 +130,6 @@ export const deleteReservation =
 export type ReservationAction =
   | ReturnType<typeof reservationRequestStart>
   | ReturnType<typeof reservationsRequestSuccess>
-  | ReturnType<typeof reservationForCalendarSuccess>
   | ReturnType<typeof reservationGetSuccess>
   | ReturnType<typeof reservationAddSuccess>
   | ReturnType<typeof reservationPatchSuccess>

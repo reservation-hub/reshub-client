@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from './Button'
-import { ClassesAndChildren } from '@/components/_PropsTypes'
+import { ClassesAndChildren } from '@components/_PropsTypes'
 
 export interface IIconhButtonProps extends ClassesAndChildren {
   onClick?: () => void

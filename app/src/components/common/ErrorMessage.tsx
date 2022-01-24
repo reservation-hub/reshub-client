@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextProps } from '@/components/_PropsTypes'
+import { TextProps } from '@components/_PropsTypes'
 
 const ErrorMessage = ({ classes, text, children }: TextProps) => {
   return (

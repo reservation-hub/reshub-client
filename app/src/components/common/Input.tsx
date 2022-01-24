@@ -1,6 +1,6 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
-import { InputProps } from '@/components/_PropsTypes'
+import { InputProps } from '@components/_PropsTypes'
 import { useController } from 'react-hook-form'
 
 const INPUT_TYPE = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 
 interface IItemProps<T> {
   shop: ShopForList
