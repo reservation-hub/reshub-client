@@ -29,11 +29,13 @@ const Input = ({
   control
 }: IInputProps) => {
   const { field } = useController({ name, control })
-  const input = 'w-full p-3 border rounded-[.25rem]'
+  const input = 'w-full p-3 border rounded-[.25rem] mt-3'
   return (
     <div className={fullWidth ? `${classes} w-full` : classes}>
       <div className='text-[1.6rem]'>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id} className=''>
+          {label}
+        </label>
         <input
           id={id}
           type={type}

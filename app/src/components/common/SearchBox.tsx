@@ -5,7 +5,6 @@ import { IoLocationOutline } from 'react-icons/io5'
 import { BiTrain, BiCrown } from 'react-icons/bi'
 import Input from '@components/common/Input'
 import IconButton from '@components/common/IconButton'
-import { InputProps } from '../_PropsTypes'
 
 export interface ISearchBarProps {
   search?: () => void

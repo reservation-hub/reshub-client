@@ -5,7 +5,7 @@ import { ClassesAndChildren } from '@components/_PropsTypes'
 
 const MainTemplate = ({ children }: ClassesAndChildren) => {
   return (
-    <main className='bg-secondary-light h-screen'>
+    <main className='bg-secondary-light h-screen overflow-auto'>
       <Header />
       {children}
       <Footer />

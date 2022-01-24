@@ -1,17 +1,17 @@
-import React, { FormEvent, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { googleLogin, loginStart } from '@store/actions/authAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import useInput from '@utils/hooks/useInput'
 import { RootState } from '@store/store'
 import Cookies from 'js-cookie'
-import MainTemplate from '@components/Template/MainTemplate'
 import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { loginSchema, LoginSchema } from '@components/form/auth/loginSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const Login = () => {
+  const section =
+    'bg-secondary-main text-[1.6rem] w-[65rem] h-[41rem] p-10 rounded-[.5rem]'
   const { msg } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
 
@@ -42,14 +42,13 @@ const Login = () => {
   if (Cookies.get('authToken')) return <Redirect to='/' />
 
   return (
-    <>
+    <section className={section}>
       <LoginForm
-        googleHandler={googleHandler}
         submitHandler={handleSubmit(onSubmit)}
         error={errors}
         control={control}
       />
-    </>
+    </section>
   )
 }
 
