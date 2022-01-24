@@ -22,7 +22,7 @@ const SearchBox = ({
   searchFromStation,
   searchFromRanking,
   searchFromDays,
-  control,
+  control
 }: ISearchBarProps) => {
   // searchBox div
   const searchBox =

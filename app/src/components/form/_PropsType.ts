@@ -1,5 +1,5 @@
-import { FormEventHandler } from "react";
-import { Control } from "react-hook-form";
+import { FormEventHandler } from 'react'
+import { Control } from 'react-hook-form'
 
 export interface IFormPorps<T> {
   defaultValue?: Record<string, any>

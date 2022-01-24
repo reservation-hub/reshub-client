@@ -1,9 +1,12 @@
-import React from 'react';
-import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
-import { IFormPorps } from '@components/form/_PropsType';
-import Input from '@/components/common/Input';
-import ErrorMessage from '@/components/common/ErrorMessage';
-import Button from '@/components/common/Button';
+import React from 'react'
+import {
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline
+} from 'react-google-login'
+import { IFormPorps } from '@components/form/_PropsType'
+import Input from '@/components/common/Input'
+import ErrorMessage from '@/components/common/ErrorMessage'
+import Button from '@/components/common/Button'
 
 export interface IAuthFormProps<T> extends IFormPorps<T> {
   googleHandler: (
@@ -20,7 +23,7 @@ const LoginForm = <T extends any>({
   return (
     <div className='h-full'>
       <form onSubmit={submitHandler}>
-        <Input 
+        <Input
           id='email'
           name='email'
           autoComplete='off'
@@ -30,7 +33,7 @@ const LoginForm = <T extends any>({
           errorText={error?.email?.message}
           fullWidth
         />
-        <Input 
+        <Input
           id='password'
           name='password'
           type='password'
@@ -41,12 +44,11 @@ const LoginForm = <T extends any>({
           errorText={error?.password?.message}
           fullWidth
         />
-        {error?.invalid && ( <ErrorMessage /> )}
+        {error?.invalid && <ErrorMessage />}
         <Button>ログイン</Button>
       </form>
     </div>
   )
-};
+}
 
-export default LoginForm;
-
+export default LoginForm

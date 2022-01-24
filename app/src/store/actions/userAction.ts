@@ -10,7 +10,6 @@ import history from '@/utils/routers/history'
 import {
   InsertUserQuery,
   UpdateUserQuery,
-  UserListResponse,
   UserResponse
 } from '@utils/api/request-response-types/User'
 
@@ -18,15 +17,11 @@ const userRequestStart = () => {
   return typedAction(USER_TYPE.REQUEST_START)
 }
 
-const userRequestSuccess = (data: UserListResponse) => {
-  return typedAction(USER_TYPE.REQUEST_SUCCESS, data)
-}
-
-const userGetSuccess = (data: UserResponse) => {
+const userRequestSuccess = (data: UserResponse) => {
   return typedAction(USER_TYPE.GET_SUCCESS, data)
 }
 
-const userAddSuccess = (data: string) => {
+const userSignupSuccess = (data: string) => {
   return typedAction(USER_TYPE.ADD_SUCCESS, data)
 }
 
@@ -42,41 +37,26 @@ const userRequestFailure = (err: string) => {
   return typedAction(USER_TYPE.REQUEST_FAILURE, err)
 }
 
-export const fetchUserList =
-  (
-    page: number,
-    order: 'asc' | 'desc'
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
-    dispatch(userRequestStart())
-    try {
-      const res = await apiEndpoint.users.getUsers(page, order)
-      dispatch(userRequestSuccess(res.data))
-    } catch (e: any) {
-      history.push('/error')
-    }
-  }
-
 export const getOneUser =
   (id: number): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(userRequestStart())
     try {
       const res = await apiEndpoint.users.getUser(id)
-      dispatch(userGetSuccess(res.data))
+      dispatch(userRequestSuccess(res.data))
     } catch (e: any) {
       history.push('/error')
     }
   }
 
-export const addUser =
+export const createUser =
   (userData: InsertUserQuery): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(userRequestStart())
     try {
       const res = await apiEndpoint.users.createUser(userData)
-      dispatch(userAddSuccess(res.data))
-      history.push({ pathname: '/users', state: { currentPage: 1 } })
+      dispatch(userSignupSuccess(res.data))
+      history.push('/')
     } catch (e: any) {
       const error = e.response.data
       dispatch(userRequestFailure(error))
@@ -90,7 +70,7 @@ export const patchUser =
     try {
       const res = await apiEndpoint.users.patchUser(userData)
       dispatch(userPatchSuccess(res.data))
-      history.push(`/users/${userData.id}`)
+      history.push(`/mypage/${userData.id}`)
     } catch (e: any) {
       const error = e.response.data
       dispatch(userRequestFailure(error))
@@ -104,7 +84,7 @@ export const deleteUser =
     try {
       const res = await apiEndpoint.users.deleteUser(id)
       dispatch(userDeleteSuccess(res.data))
-      history.push({ pathname: '/users', state: { currentPage: 1 } })
+      history.push('/')
     } catch (e: any) {
       const error = e.response.data
       dispatch(userRequestFailure(error))
@@ -114,8 +94,7 @@ export const deleteUser =
 export type UserAction =
   | ReturnType<typeof userRequestStart>
   | ReturnType<typeof userRequestSuccess>
-  | ReturnType<typeof userGetSuccess>
-  | ReturnType<typeof userAddSuccess>
+  | ReturnType<typeof userSignupSuccess>
   | ReturnType<typeof userPatchSuccess>
   | ReturnType<typeof userDeleteSuccess>
   | ReturnType<typeof userRequestFailure>

@@ -34,13 +34,8 @@ const Main = ({
     }),
     shallowEqual
   )
-  const authCheck = user?.role?.name === 'admin'
 
-  const pageChangeHandler = usePagination(
-    authCheck ? 'salon' : 'shops',
-    page,
-    setPage
-  )
+  const pageChangeHandler = usePagination('shops', page, setPage)
 
   console.log(user, shops, loading)
 
@@ -68,7 +63,6 @@ const Main = ({
             <Box title='店舗一覧'>
               <SalonList
                 item={shops.values}
-                admin={authCheck}
                 totalPage={shops.totalCount}
                 page={currentPage}
                 // pageChangeHandler={pageChangeHandler}

@@ -15,7 +15,11 @@ const Login = () => {
   const { err } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
 
-  const { control, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginSchema>({
     mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', passowrd: '' }
@@ -30,7 +34,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<LoginSchema> = useCallback(
     (value) => {
       dispatch(loginStart(value.email, value.passowrd))
-    }, [dispatch]
+    },
+    [dispatch]
   )
 
   const googleHandler = useCallback(
@@ -44,7 +49,7 @@ const Login = () => {
 
   return (
     <>
-      <LoginForm 
+      <LoginForm
         googleHandler={googleHandler}
         submitHandler={handleSubmit(onSubmit)}
         error={errors}

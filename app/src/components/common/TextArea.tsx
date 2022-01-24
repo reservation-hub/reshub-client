@@ -1,7 +1,7 @@
-import React from 'react';
-import { useController } from 'react-hook-form';
-import { InputProps } from '../_PropsTypes';
-import ErrorMessage from './ErrorMessage';
+import React from 'react'
+import { useController } from 'react-hook-form'
+import { InputProps } from '../_PropsTypes'
+import ErrorMessage from './ErrorMessage'
 
 const TextArea = ({
   id,
@@ -20,7 +20,7 @@ const TextArea = ({
     <div className={fullWidth ? `${classes} w-full` : classes}>
       <div className='text-[1.6rem'>
         <label htmlFor={id}>{label}</label>
-        <textarea 
+        <textarea
           id={id}
           autoComplete={autoComplete}
           className={error ? `${textArea} border-error-main` : textArea}
@@ -30,6 +30,6 @@ const TextArea = ({
       {error && <ErrorMessage text={errorText} />}
     </div>
   )
-};
+}
 
-export default TextArea;
+export default TextArea
