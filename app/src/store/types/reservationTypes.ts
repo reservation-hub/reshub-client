@@ -2,11 +2,11 @@ import {
   ReservationListResponse,
   ReservationResponse
 } from '@utils/api/request-response-types/Shop'
+import { DefaultState } from '../store'
 
 export const RESERVATION_TYPE = {
   REQUEST_START: 'REQUEST_START',
   REQUSET_SUCCESS: 'REQUEST_SUCCESS',
-  FOR_CALENDAR: 'FOR_CALENDAR',
   GET_ONE_SUCCESS: 'GET_ONE_SUCCESS',
   ADD_SUCCESS: 'ADD_SUCCESS',
   PATCH_SUCCESS: 'PATCH_SUCCESS',
@@ -14,10 +14,7 @@ export const RESERVATION_TYPE = {
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 } as const
 
-export type ReservationState = {
-  loading: boolean
+export type ReservationState = DefaultState & {
   reservations: ReservationListResponse
   reservation: ReservationResponse
-  err: string
-  msg: string
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PUBLIC_MENU } from '@/constants/paths'
+import { PUBLIC_MENU } from '@constants/paths'
 import { NavLink } from 'react-router-dom'
 
 const NavMenu = () => {

@@ -9,7 +9,7 @@ const initialState: AuthState = {
   loading: false,
   isAuthenticated: false,
   user: {} as UserForAuth,
-  err: {}
+  msg: ''
 }
 
 const authReducer = (state = initialState, action: AuthAction) => {
@@ -31,7 +31,7 @@ const authReducer = (state = initialState, action: AuthAction) => {
         ...state,
         loading: false,
         isAuthenticated: false,
-        err: action.payload
+        msg: action.payload
       }
     case AUTH_TYPE.LOGOUT_SUCCESS:
       return {

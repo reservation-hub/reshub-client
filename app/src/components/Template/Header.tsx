@@ -1,6 +1,6 @@
 import React from 'react'
 import NavMenu from '@components/common/NavMenu'
-import LinkTitle from '@/components/common/LinkTitle'
+import LinkTitle from '@components/common/LinkTitle'
 
 const Header = () => {
   return (

@@ -9,6 +9,7 @@ export const authPersistConfig = {
   storage,
   whitelist: ['isAuthenticated', 'user']
 }
+
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, auth),
   shop

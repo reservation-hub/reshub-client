@@ -6,7 +6,7 @@ import { RootState, typedAction } from '@store/store'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import apiEndpoint from '@utils/api/apiEndpoint'
-import history from '@/utils/routers/history'
+import history from '@utils/routers/history'
 import {
   InsertUserQuery,
   UpdateUserQuery,
@@ -18,11 +18,11 @@ const userRequestStart = () => {
 }
 
 const userRequestSuccess = (data: UserResponse) => {
-  return typedAction(USER_TYPE.GET_SUCCESS, data)
+  return typedAction(USER_TYPE.REQUEST_SUCCESS, data)
 }
 
 const userSignupSuccess = (data: string) => {
-  return typedAction(USER_TYPE.ADD_SUCCESS, data)
+  return typedAction(USER_TYPE.SIGNUP_SUCCESS, data)
 }
 
 const userPatchSuccess = (data: string) => {

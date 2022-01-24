@@ -21,16 +21,6 @@ export const fetchReservations = async (
   )
 }
 
-export const fetchReservationsForCalendar = async (
-  shopId: number,
-  year: number,
-  month: number
-): Promise<AxiosResponse<ReservationListResponse>> => {
-  return await instance.get<ReservationListResponse>(
-    `${baseEndpoint.shops}/${shopId}/reservation/calendar?year=${year}&month=${month}`
-  )
-}
-
 export const getReservation = async (
   shopId: number,
   reservationId: number
@@ -71,7 +61,6 @@ export const deleteReservation = async (
 
 const reservation = {
   fetchReservations,
-  fetchReservationsForCalendar,
   getReservation,
   createReservation,
   patchReservation,

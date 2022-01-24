@@ -3,7 +3,7 @@ import { LOCATION_TYPE } from '@store/types/LocationTypes'
 import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@utils/api/apiEndpoint'
-import history from '@/utils/routers/history'
+import history from '@utils/routers/history'
 import {
   AreaPrefecturesResponse,
   PrefectureCitiesResponse

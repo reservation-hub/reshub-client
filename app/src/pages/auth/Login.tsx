@@ -5,14 +5,14 @@ import { Redirect } from 'react-router-dom'
 import useInput from '@utils/hooks/useInput'
 import { RootState } from '@store/store'
 import Cookies from 'js-cookie'
-import MainTemplate from '@/components/Template/MainTemplate'
-import LoginForm from '@/components/form/auth/LoginForm'
+import MainTemplate from '@components/Template/MainTemplate'
+import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { loginSchema, LoginSchema } from '@/components/form/auth/loginSchema'
+import { loginSchema, LoginSchema } from '@components/form/auth/loginSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const Login = () => {
-  const { err } = useSelector((state: RootState) => state.auth)
+  const { msg } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
 
   const {
@@ -24,12 +24,6 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', passowrd: '' }
   })
-
-  const hasError = {
-    username: err?.error?.keys?.includes('username'),
-    password: err?.error?.keys?.includes('password'),
-    invalid: err?.error?.message === 'Invalid query params'
-  }
 
   const onSubmit: SubmitHandler<LoginSchema> = useCallback(
     (value) => {

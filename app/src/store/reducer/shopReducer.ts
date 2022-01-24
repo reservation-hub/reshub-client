@@ -41,29 +41,11 @@ const shopReducer = (state = initialState, action: ShopAction) => {
         loading: false,
         shop: action.payload
       }
-    case SHOPS_TYPE.ADD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        msg: action.payload
-      }
-    case SHOPS_TYPE.EDIT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        msg: action.payload
-      }
-    case SHOPS_TYPE.DELETE_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        msg: action.payload
-      }
     case SHOPS_TYPE.REQUEST_FAILURE:
       return {
         ...state,
         loading: false,
-        err: action.payload || state
+        msg: action.payload
       }
     default:
       return state

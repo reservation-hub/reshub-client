@@ -4,9 +4,9 @@ import {
   GoogleLoginResponseOffline
 } from 'react-google-login'
 import { IFormPorps } from '@components/form/_PropsType'
-import Input from '@/components/common/Input'
-import ErrorMessage from '@/components/common/ErrorMessage'
-import Button from '@/components/common/Button'
+import Input from '@components/common/Input'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Button from '@components/common/Button'
 
 export interface IAuthFormProps<T> extends IFormPorps<T> {
   googleHandler: (

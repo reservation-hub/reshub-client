@@ -1,5 +1,5 @@
 import React from 'react'
-import MainRouter from '@/utils/routers'
+import MainRouter from '@utils/routers'
 
 function App() {
   return <MainRouter />

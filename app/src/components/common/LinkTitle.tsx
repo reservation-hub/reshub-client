@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { HasURL } from '@/components/_PropsTypes'
+import { HasURL } from '@components/_PropsTypes'
 import H1 from './H1'
 
 export interface ITitleProps extends HasURL {

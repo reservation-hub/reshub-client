@@ -1,5 +1,5 @@
-import Login from '@/pages/auth/Login'
-import Salon from '@/pages/shop/Salon'
+import Login from '@pages/auth/Login'
+import Salon from '@pages/shop/Salon'
 import Error from '@pages/error/Error'
 import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
