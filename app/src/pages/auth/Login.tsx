@@ -61,8 +61,6 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
     [dispatch]
   )
 
-  if (Cookies.get('authToken')) return <Redirect to='/' />
-
   return (
     <section className={section}>
       <LoginForm

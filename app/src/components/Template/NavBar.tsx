@@ -1,18 +1,18 @@
+import React, { useCallback } from 'react'
 import Login from '@pages/auth/Login'
 import Signup from '@pages/auth/Signup'
 import { useModal } from '@utils/hooks/useModal'
-import React, { useCallback } from 'react'
 import ModalOverlay from '@components/modal/ModalOverlay'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IModalProps } from '@components/modal/_PropsType'
-import { UserForAuth } from '@utils/api/request-response-types/client/models/User'
 import NavMenu from '../common/NavMenu'
 import { PRIVATE_MENU, PUBLIC_MENU } from '@constants/paths'
 import { logout } from '@store/actions/authAction'
 import Cookies from 'js-cookie'
+import { RootState } from '@/store/store'
 
 export interface INavBarProps extends IModalProps {
-  user?: UserForAuth
+  loading?: boolean
   menuItem?: { path: string; text: string }[]
 }
 
@@ -21,6 +21,7 @@ const NavBar = () => {
   const signup = useModal(false)
   const dispatch = useDispatch()
   const authToken = Cookies.get('authToken')
+  const { loading } = useSelector((state: RootState) => state.auth)
 
   const onLogout = useCallback(() => {
     dispatch(logout())
@@ -29,6 +30,7 @@ const NavBar = () => {
   return (
     <div className='flex'>
       <NavMenu
+        loading={loading}
         onClose={authToken ? onLogout : login.modalHandler}
         menuItem={authToken ? PRIVATE_MENU : PUBLIC_MENU}
       />
