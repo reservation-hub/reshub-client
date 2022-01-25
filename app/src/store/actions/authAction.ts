@@ -108,8 +108,6 @@ export const logout =
       localStorage.clear()
 
       dispatch(logoutSuccess(message.data))
-
-      history.push('/auth')
     } catch (e: any) {
       dispatch(loginRequestFailure(e.response.data))
     }

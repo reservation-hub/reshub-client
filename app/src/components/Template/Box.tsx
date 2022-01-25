@@ -17,7 +17,9 @@ const Box = ({
 }: IBoxProps) => {
   return (
     <div className={`${boxClass} shadow-md`}>
-      <div className={`${headerClass} h-[3.5rem] bg-primary`}>
+      <div
+        className={`${headerClass} w-full h-[3.5rem] bg-primary flex items-center`}
+      >
         <span className={`${spanClass} text-secondary-light pl-5`}>
           {title}
         </span>

@@ -6,9 +6,9 @@ import { RootState } from '@store/store'
 import Cookies from 'js-cookie'
 import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { loginSchema, LoginSchema } from '@/components/form/auth/authValidation'
+import { loginSchema, LoginSchema } from '@components/form/auth/authValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IModalProps } from '@/components/modal/_PropsType'
+import { IModalProps } from '@components/modal/_PropsType'
 
 export interface ILoginPorps extends IModalProps {
   subModalHandler: () => void
@@ -43,7 +43,13 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
 
   const onSubmit: SubmitHandler<LoginSchema> = useCallback(
     (value) => {
-      dispatch(loginStart(value.email, value.password))
+      try {
+        dispatch(loginStart(value.email, value.password))
+      } catch {
+        console.log('e')
+      } finally {
+        onClose()
+      }
     },
     [dispatch]
   )

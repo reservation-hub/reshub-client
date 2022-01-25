@@ -10,11 +10,11 @@ const SalonList = ({ item }: IListProps) => {
   }))
 
   return (
-    <>
+    <div>
       {rowItems?.map((item, i) => (
         <ShopItem key={i} shop={item} />
       ))}
-    </>
+    </div>
   )
 }
 export default SalonList

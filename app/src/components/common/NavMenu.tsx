@@ -1,24 +1,17 @@
 import React from 'react'
-import { PUBLIC_MENU } from '@constants/paths'
 import { NavLink } from 'react-router-dom'
-import ModalOverlay from '@components/modal/ModalOverlay'
-import Login from '@/pages/auth/Login'
-import { useModal } from '@utils/hooks/useModal'
 import Button from './Button'
-import Signup from '@pages/auth/Signup'
+import { INavBarProps } from '@components/Template/NavBar'
 
-const NavMenu = () => {
-  const login = useModal(false)
-  const signup = useModal(false)
-
+const NavMenu = ({ user, onClose, menuItem }: INavBarProps) => {
   return (
     <div className='flex'>
-      {PUBLIC_MENU.map((values, index) => (
+      {menuItem?.map((values, index) => (
         <React.Fragment key={index}>
-          {values.path === '/login' ? (
+          {values.path === '/login' || values.path === '/logout' ? (
             <Button
               classes='border-none text-[1.6rem] text-secondary-main hover:text-secondary-dark'
-              onClick={login.modalHandler}
+              onClick={onClose}
             >
               {values.text}
             </Button>
@@ -32,40 +25,6 @@ const NavMenu = () => {
           )}
         </React.Fragment>
       ))}
-
-      {login.open && (
-        <ModalOverlay open={login.open} onClose={login.modalHandler}>
-          <div
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-          >
-            <Login
-              onClose={login.modalHandler}
-              subModalHandler={() => {
-                signup.modalHandler(), login.modalHandler()
-              }}
-            />
-          </div>
-        </ModalOverlay>
-      )}
-
-      {signup.open && (
-        <ModalOverlay open={signup.open} onClose={signup.modalHandler}>
-          <div
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-          >
-            <Signup
-              onClose={signup.modalHandler}
-              subModalHandler={() => {
-                signup.modalHandler(), login.modalHandler()
-              }}
-            />
-          </div>
-        </ModalOverlay>
-      )}
     </div>
   )
 }

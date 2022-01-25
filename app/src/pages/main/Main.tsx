@@ -35,12 +35,8 @@ const Main = ({
     shallowEqual
   )
 
-  const pageChangeHandler = usePagination('shops', page, setPage)
-
-  console.log(user, shops, loading)
-
   useEffect(() => {
-    if (match.isExact) dispatch(fetchShopList(Number(currentPage), order))
+    if (match.isExact) dispatch(fetchShopList(page, order))
   }, [page, dispatch, currentPage, match.isExact, order])
 
   return (
@@ -65,7 +61,6 @@ const Main = ({
                 item={shops.values}
                 totalPage={shops.totalCount}
                 page={currentPage}
-                // pageChangeHandler={pageChangeHandler}
               />
             </Box>
           </div>
