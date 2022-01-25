@@ -12,6 +12,7 @@ const INPUT_TYPE = {
 
 export interface IInputProps extends InputProps {
   type?: typeof INPUT_TYPE[keyof typeof INPUT_TYPE]
+  inputClasses?: string
 }
 
 const Input = ({
@@ -26,26 +27,31 @@ const Input = ({
   id,
   fullWidth,
   label,
-  control
+  control,
+  inputClasses
 }: IInputProps) => {
   const { field } = useController({ name, control })
-  const input = 'w-full p-3 border rounded-[.25rem] mt-3'
+  const input = 'w-full p-3 border rounded-[.25rem]'
   return (
     <div className={fullWidth ? `${classes} w-full` : classes}>
-      <div className='text-[1.6rem]'>
-        <label htmlFor={id} className=''>
-          {label}
-        </label>
+      <>
+        {label && (
+          <div className='mb-3'>
+            <label htmlFor={id}>{label}</label>
+          </div>
+        )}
         <input
           id={id}
           type={type}
           placeholder={placeholder}
           required={required}
           autoComplete={autoComplete}
-          className={error ? `${input} border-error-main` : input}
+          className={
+            error ? `${input} border-error-main` : `${input} ${inputClasses}`
+          }
           {...field}
         />
-      </div>
+      </>
       {error && <ErrorMessage text={errorText} />}
     </div>
   )

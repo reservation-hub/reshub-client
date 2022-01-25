@@ -35,7 +35,7 @@ const Signup = ({ onClose, subModalHandler }: ILoginPorps) => {
   )
 
   return (
-    <section className='bg-secondary-light text-[1.6rem] rounded-[.5rem] w-[65rem] h-[63rem]'>
+    <section className='bg-secondary-light rounded-[.5rem] md:w-[65rem] w-[39rem] md:h-[63rem]'>
       <SignupForm
         control={control}
         error={errors}

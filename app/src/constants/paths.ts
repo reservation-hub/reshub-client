@@ -44,8 +44,8 @@ export const ROUTER_PATHS: TRouter[] = [
   { path: PATHS.RESERVATION, exact: false },
   { path: PATHS.SEARCH, exact: false },
   { path: PATHS.LOGIN, exact: false, component: Login },
-  { path: PATHS.SIGNUP, exact: false },
-  { path: PATHS.ERROR, exact: false, component: Error }
+  { path: PATHS.SIGNUP, exact: false }
+  // { path: PATHS.ERROR, exact: false, component: Error }
 ]
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [
@@ -53,7 +53,7 @@ export const PRIVATE_MENU: { path: string; text: string }[] = [
   { path: PATHS.CATALOG, text: 'カタログ' },
   { path: `${PATHS.RESERVATION}${PATHS.SEARCH}`, text: '予約管理' },
   { path: `${PATHS.USER}/:id`, text: 'マイページ' },
-  { path: '/logout', text: 'ログアウト' }
+  { path: PATHS.LOGOUT, text: 'ログアウト' }
 ]
 
 export const PUBLIC_MENU: { path: string; text: string }[] = [

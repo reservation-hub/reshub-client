@@ -4,5 +4,5 @@
 }
 
 .modal-container {
-  @apply top-2/4 left-2/4 fixed;
+  @apply lg:top-2/4 md:top-[40%] top-2/4 left-2/4 fixed;
 }

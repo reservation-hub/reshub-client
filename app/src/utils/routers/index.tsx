@@ -6,20 +6,18 @@ import MainTemplate from '@/components/Template/MainTemplate'
 const MainRouter = () => {
   return (
     <Router>
-      <MainTemplate>
-        <Switch>
+      <Switch>
+        <MainTemplate>
           {ROUTER_PATHS.map((router, index) => (
-            <React.Fragment key={index}>
-              <Route
-                key={index}
-                path={router.path}
-                exact={router.exact}
-                component={router.component}
-              />
-            </React.Fragment>
+            <Route
+              key={index}
+              path={router.path}
+              exact={router.exact}
+              component={router.component}
+            />
           ))}
-        </Switch>
-      </MainTemplate>
+        </MainTemplate>
+      </Switch>
     </Router>
   )
 }
