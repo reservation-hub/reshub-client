@@ -1,7 +1,7 @@
 import React from 'react'
 
 export interface IModalProps {
-  open: boolean
+  open?: boolean
   onClose: () => void
   children?: React.ReactNode
 }

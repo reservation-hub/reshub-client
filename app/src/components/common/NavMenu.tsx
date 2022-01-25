@@ -1,13 +1,16 @@
 import React from 'react'
 import { PUBLIC_MENU } from '@constants/paths'
 import { NavLink } from 'react-router-dom'
-import ModalOverlay from '../modal/ModalOverlay'
+import ModalOverlay from '@components/modal/ModalOverlay'
 import Login from '@/pages/auth/Login'
-import { useModal } from '@/utils/hooks/useModal'
+import { useModal } from '@utils/hooks/useModal'
 import Button from './Button'
+import Signup from '@pages/auth/Signup'
 
 const NavMenu = () => {
-  const { open, modalHandler } = useModal(false)
+  const login = useModal(false)
+  const signup = useModal(false)
+
   return (
     <div className='flex'>
       {PUBLIC_MENU.map((values, index) => (
@@ -15,7 +18,7 @@ const NavMenu = () => {
           {values.path === '/login' ? (
             <Button
               classes='border-none text-[1.6rem] text-secondary-main hover:text-secondary-dark'
-              onClick={modalHandler}
+              onClick={login.modalHandler}
             >
               {values.text}
             </Button>
@@ -29,9 +32,40 @@ const NavMenu = () => {
           )}
         </React.Fragment>
       ))}
-      <ModalOverlay open={open} onClose={modalHandler}>
-        <Login />
-      </ModalOverlay>
+
+      {login.open && (
+        <ModalOverlay open={login.open} onClose={login.modalHandler}>
+          <div
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Login
+              onClose={login.modalHandler}
+              subModalHandler={() => {
+                signup.modalHandler(), login.modalHandler()
+              }}
+            />
+          </div>
+        </ModalOverlay>
+      )}
+
+      {signup.open && (
+        <ModalOverlay open={signup.open} onClose={signup.modalHandler}>
+          <div
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Signup
+              onClose={signup.modalHandler}
+              subModalHandler={() => {
+                signup.modalHandler(), login.modalHandler()
+              }}
+            />
+          </div>
+        </ModalOverlay>
+      )}
     </div>
   )
 }

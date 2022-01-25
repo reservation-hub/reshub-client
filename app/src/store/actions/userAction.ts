@@ -8,10 +8,10 @@ import { ThunkAction } from 'redux-thunk'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import history from '@utils/routers/history'
 import {
-  InsertUserQuery,
   UpdateUserQuery,
   UserResponse
 } from '@utils/api/request-response-types/User'
+import { InsertUserQuery } from '@request-response-types/client/User'
 
 const userRequestStart = () => {
   return typedAction(USER_TYPE.REQUEST_START)
