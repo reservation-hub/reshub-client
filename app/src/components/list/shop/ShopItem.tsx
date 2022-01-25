@@ -15,12 +15,12 @@ const ShopItem = <T extends Record<string, any>>({
           <span>{shop.name}</span>
           {'rating and reviews'}
         </header>
-        <body className='bg-white p-4 shadow'>
+        <div className='bg-white p-4 shadow'>
           <div className='block'>
             <p>address: {shop.address}</p>
             <p>phone number: {shop.phoneNumber}</p>
           </div>
-        </body>
+        </div>
       </div>
     </section>
   )

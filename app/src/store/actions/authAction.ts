@@ -79,7 +79,7 @@ export const googleLogin =
   ): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     const provider = 'google'
-
+    dispatch(loginRequestStart())
     try {
       const user = await apiEndpoint.authenticated.googleLogin(
         provider,
@@ -100,6 +100,7 @@ export const googleLogin =
 // ログアウトを実行するアクション
 export const logout =
   (): ThunkAction<void, RootState, null, Action> => async (dispatch) => {
+    dispatch(loginRequestStart())
     try {
       setAuthToken(Cookies.get('sessionToken'))
       const message = await apiEndpoint.authenticated.logout()
@@ -108,8 +109,7 @@ export const logout =
       localStorage.clear()
 
       dispatch(logoutSuccess(message.data))
-
-      history.push('/auth')
+      history.push('/')
     } catch (e: any) {
       dispatch(loginRequestFailure(e.response.data))
     }

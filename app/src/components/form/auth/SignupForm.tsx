@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from '@/components/common/Button'
-import Input from '@/components/common/Input'
+import Button from '@components/common/Button'
+import Input from '@components/common/Input'
 import { IModalFormProps } from '@components/form/_PropsType'
 import { SignupSchema } from './authValidation'
 import ModalFormWrapper from '../ModalFormWrapper'
