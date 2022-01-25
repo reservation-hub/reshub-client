@@ -6,7 +6,7 @@ import { PATHS } from '@/constants/paths'
 
 const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
   return (
-    <div className='flex text-[1.6rem] text-secondary-main'>
+    <div className='flex  text-secondary-main'>
       {menuItem?.map((values, index) => (
         <React.Fragment key={index}>
           {loading ? (

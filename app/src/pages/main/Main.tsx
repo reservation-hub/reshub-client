@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MainTemplate from '@components/Template/MainTemplate'
-import { Route, RouteComponentProps, Switch } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import { fetchShopList } from '@store/actions/shopAction'
 import { TCurrentPage } from '@components/list/_PropsType'
 import SalonList from '@components/list/shop/SalonList'
@@ -9,22 +8,30 @@ import { RootState } from '@store/store'
 import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
-import usePagination from '@utils/hooks/usePagination'
 import { MatchParams } from '@components/_PropsTypes'
+import { useForm } from 'react-hook-form'
 
 const Main = ({
   match,
   location
 }: RouteComponentProps<MatchParams, any, TCurrentPage>) => {
-  console.log('in main page')
   const dispatch = useDispatch()
   const currentPage = location?.state?.currentPage ?? 1
   const [page, setPage] = useState<number>(currentPage)
   const [correct, setCorrect] = useState<boolean>(true)
   const order: 'asc' | 'desc' = correct ? 'desc' : 'asc'
 
-  const contentsBox =
-    'w-[100rem] h-full mx-auto mt-20 flex text-[1.6rem] justify-between'
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({})
+
+  const contestSection =
+    'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5 lg:p-0 p-5 lg:flex lg:justify-between'
+
+  const searchSection =
+    'lg:w-[100rem] w-full md:flex justify-between lg:mx-auto px-5 pt-4 lg:p-0'
 
   const { shops, loading, user } = useSelector(
     (state: RootState) => ({
@@ -41,22 +48,23 @@ const Main = ({
 
   return (
     <>
-      <section className='mb-20'>
-        <div className='w-full h-[30rem] mt-20 text-center bg-primary'>
-          <div className='w-[100rem] flex justify-between mx-auto'>
-            <div className='grid text-secondary-light mr-[14rem]'>
-              <span className='text-[3.8rem] m-auto'>
-                あなたにぴったりな <br /> サロンを見つけ方
+      <section className='lg:my-20 my-5'>
+        <div className='w-full h-[30rem] text-center bg-primary'>
+          <div className={searchSection}>
+            <div className='md:grid hidden text-secondary-light m-auto'>
+              <span className='lg:text-[3.8rem] text-[3.1rem] text-left'>
+                <p>あなたにぴったりな</p>
+                <p>サロンの見つけ方</p>
               </span>
             </div>
-            {/* <SearchBox /> */}
+            <SearchBox control={control} />
           </div>
         </div>
 
-        <div className={contentsBox}>
-          <div className='w-[60rem] h-full'>
-            <Box boxClass='h-[19.7rem] mb-4' title='ランキング'></Box>
-            <Box title='店舗一覧'>
+        <div className={contestSection}>
+          <div className='lg:w-[60rem] w-full h-full'>
+            <Box boxClass='h-[20rem] mb-4' title='ランキング'></Box>
+            <Box title='店舗一覧' boxClass='lg:mb-0 mb-4'>
               <SalonList
                 item={shops.values}
                 totalPage={shops.totalCount}
@@ -64,9 +72,12 @@ const Main = ({
               />
             </Box>
           </div>
-          <div className='w-[38.5rem]'>
-            <Box boxClass='h-[55rem]' title='キャンペーン'></Box>
-            <Box boxClass='h-[50.2rem] mt-16' title='運営からのお知らせ'></Box>
+          <div className='lg:w-[38rem] w-full'>
+            <Box
+              boxClass='lg:h-[35rem] h-[20rem] mb-4'
+              title='キャンペーン'
+            ></Box>
+            <Box boxClass='lg:h-[35rem]' title='運営からのお知らせ'></Box>
           </div>
         </div>
       </section>

@@ -30,10 +30,10 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
 
   const section =
     errors.email && errors.password
-      ? 'bg-secondary-main text-[1.6rem] w-[65rem] h-[45rem] rounded-[.5rem]'
+      ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[45rem] rounded-[.5rem]'
       : errors.email || errors.password
-      ? 'bg-secondary-main text-[1.6rem] w-[65rem] h-[43rem] rounded-[.5rem]'
-      : 'bg-secondary-main text-[1.6rem] w-[65rem] h-[41rem] rounded-[.5rem]'
+      ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[43rem] rounded-[.5rem]'
+      : 'bg-secondary-main md:w-[65rem] w-[39rem] h-[41rem] rounded-[.5rem]'
 
   const hasError = {
     email: errors?.email,

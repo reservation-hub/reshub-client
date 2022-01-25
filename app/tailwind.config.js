@@ -50,6 +50,10 @@ module.exports = {
       background: {
         'main-img': 'url(https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80)'
       }
+    },
+    screen: {
+      'sm': { 'max': '48rem' },
+      'lg': { 'max': '10.24rem' }
     }
   },
   variants: {

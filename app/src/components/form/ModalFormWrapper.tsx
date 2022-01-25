@@ -11,14 +11,17 @@ const ModalFormWrapper = <T extends Record<string, any>>({
   subModalHandler
 }: IModalFormProps<T>) => {
   return (
-    <div className='w-full h-full text-gray-main flex'>
-      <div className='h-full bg-primary flex items-center p-10'>
-        <span className='text-[2.1rem] text-secondary-light w-[18rem]'>
+    <div className='w-full h-full text-gray-main md:flex'>
+      <div className='md:h-full bg-primary flex items-center md:justify-items-start justify-between md:p-10 p-5'>
+        <span className='md:text-[2.1rem] text-secondary-light w-[18rem]'>
           {pageType === 'login' ? 'Reshubへログイン' : 'Reshubへ会員登録'}
         </span>
+        <div className='md:hidden justify-end text-secondary-light'>
+          <AiOutlineClose className='h-8 w-8' onClick={modalHandler} />
+        </div>
       </div>
-      <div className='w-full h-full p-10 grid items-center'>
-        <div className='flex justify-end'>
+      <div className='w-full h-full md:p-10 p-5 md:grid items-center'>
+        <div className='md:flex hidden justify-end'>
           <AiOutlineClose className='h-8 w-8' onClick={modalHandler} />
         </div>
         <form onSubmit={submitHandler} className='mb-5'>

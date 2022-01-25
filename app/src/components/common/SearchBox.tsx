@@ -2,9 +2,10 @@ import React from 'react'
 import Button from '@components/common/Button'
 import { AiOutlineCalendar, AiOutlineSearch } from 'react-icons/ai'
 import { IoLocationOutline } from 'react-icons/io5'
-import { BiTrain, BiCrown } from 'react-icons/bi'
+import { BiCrown } from 'react-icons/bi'
 import Input from '@components/common/Input'
 import IconButton from '@components/common/IconButton'
+import { Control } from 'react-hook-form'
 
 export interface ISearchBarProps {
   search?: () => void
@@ -12,58 +13,81 @@ export interface ISearchBarProps {
   searchFromStation?: () => void
   searchFromRanking?: () => void
   searchFromDays?: () => void
-  control?: any
+  control?: Control<any>
 }
 
 const SearchBox = ({
   search,
   searchFromArea,
-  searchFromStation,
   searchFromRanking,
   searchFromDays,
   control
 }: ISearchBarProps) => {
   // searchBox div
   const searchBox =
-    'w-[45rem] h-[28.5rem] border bg-secondary-light grid mt-3 shadow-lg'
+    'md:w-[45rem] w-full lg:text-[1.6rem] text-[1.3rem] lg:h-[28.5rem] h-[26rem] border bg-secondary-light mt-3 shadow-lg lg:p-8 p-4 rounded-[.5rem] text-gray-main'
 
   // searchBox svg icons
-  const buttonIcons = 'text-primary w-[2.4rem] h-[2.4rem] mr-2'
+  const buttonIcons =
+    'text-primary lg:w-[2.4rem] w-[2rem] lg:h-[2.4rem] h-[2rem] lg:mr-2 mr-1'
+  const hoverButton = 'border border-primary rounded'
 
   // searchBox Input box
   const searchInputBox =
-    'border border-secondary-black w-[41rem] h-[4.5rem] mx-auto flex'
+    'border border-primary lg:w-[41rem] w-full h-[4.3rem] mx-auto flex rounded'
 
   return (
     <div className={searchBox}>
-      <div className='my-auto w-[25.9rem]'>
-        <span className='text-[2rem]'>条件からサロンを探す</span>
+      <span className='md:text-[2rem] text-[1.8rem] flex items-start my-5'>
+        条件からサロンを探す
+      </span>
+      <div className='text-gray-main'>
+        <ul className='flex flex-wrap	justify-between my-4'>
+          <li className='mb-5'>
+            <IconButton
+              icon
+              onClick={searchFromArea}
+              text='エリアから探す'
+              classes={hoverButton}
+            >
+              <IoLocationOutline className={buttonIcons} />
+            </IconButton>
+          </li>
+          <li className='mb-5'>
+            <IconButton
+              icon
+              onClick={searchFromRanking}
+              text='ランキングから探す'
+              classes={hoverButton}
+            >
+              <BiCrown className={buttonIcons} />
+            </IconButton>
+          </li>
+          <li className='mb-5'>
+            <IconButton
+              icon
+              onClick={searchFromDays}
+              text='日付から探す'
+              classes={hoverButton}
+            >
+              <AiOutlineCalendar className={buttonIcons} />
+            </IconButton>
+          </li>
+        </ul>
       </div>
-      <div className='m-auto text-secondary-dark '>
-        <IconButton icon onClick={searchFromArea} text='エリアから探す'>
-          <IoLocationOutline className={buttonIcons} />
-        </IconButton>
-        <IconButton icon onClick={searchFromStation} text='駅から探す'>
-          <BiTrain className={buttonIcons} />
-        </IconButton>
-        <IconButton icon onClick={searchFromRanking} text='ランキングから探す'>
-          <BiCrown className={buttonIcons} />
-        </IconButton>
-        <IconButton icon onClick={searchFromDays} text='日付から探す'>
-          <AiOutlineCalendar className={buttonIcons} />
-        </IconButton>
-      </div>
-      <div className={searchInputBox}>
+      <form className={searchInputBox}>
         <Input
-          name=''
+          name='keyword'
           placeholder='サロン名・エリアなど'
-          classes='w-[35rem] h-[4.3rem]'
+          autoComplete='off'
+          classes='lg:w-[35rem] w-full h-[4.3rem]'
+          inputClasses='border-none h-[4.1rem]'
           control={control}
         />
-        <Button onClick={search} classes='border-none w-[5.9rem] h-[4.3rem]'>
+        <Button onClick={search} classes='border-none w-[5.9rem] h-[4.1rem]'>
           <AiOutlineSearch className='w-full h-full bg-primary text-secondary-light' />
         </Button>
-      </div>
+      </form>
     </div>
   )
 }
