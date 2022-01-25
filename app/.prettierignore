@@ -3,8 +3,9 @@ yarn.lock
 *.json
 *.config.js
 
-src/styles/*
 public/*
-node_module/*
+node_modules/*
+src/utils/api/request-response-types/*
+src/styles
 
-src/utils/api/request-response-types
+build

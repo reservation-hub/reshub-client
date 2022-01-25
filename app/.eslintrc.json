@@ -36,9 +36,12 @@
     }
   },
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "ignorePatterns": [
-    "craco.config.js"
+    "craco.config.js",
+    "src/entities/*",
+    "src/utils/api/request-response-type"
   ]
 }

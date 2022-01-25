@@ -5,10 +5,10 @@ import instance from '@utils/api'
 import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
-  InsertUserQuery,
   UpdateUserQuery,
   UserResponse
 } from '@utils/api/request-response-types/User'
+import { InsertUserQuery } from '@request-response-types/client/User'
 
 export const getUser = async (
   id: number
@@ -19,7 +19,9 @@ export const getUser = async (
 export const createUser = async (
   userData: InsertUserQuery
 ): Promise<AxiosResponse<string>> => {
-  return await instance.post<string>(baseEndpoint.users, { ...userData })
+  return await instance.post<string>(`${baseEndpoint.users}/create`, {
+    ...userData
+  })
 }
 
 export const patchUser = async (

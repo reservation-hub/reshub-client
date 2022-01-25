@@ -25,6 +25,9 @@ module.exports = {
           main: '#4CAF50',
           light: 'rgba(76, 175, 79, 0.5)',
           dark: '#459648'
+        },
+        gray: {
+          main: '#868E96'
         }
       },
       flex: { ...Array.from(Array(12 + 1)).map((_, i) => `${i} ${i} 0%`) }, // ex) flex-1(flex: 1 1 0%)

@@ -9,12 +9,14 @@ const MainRouter = () => {
       <MainTemplate>
         <Switch>
           {ROUTER_PATHS.map((router, index) => (
-            <Route
-              key={index}
-              path={router.path}
-              exact={router.exact}
-              component={router.component}
-            />
+            <React.Fragment key={index}>
+              <Route
+                key={index}
+                path={router.path}
+                exact={router.exact}
+                component={router.component}
+              />
+            </React.Fragment>
           ))}
         </Switch>
       </MainTemplate>

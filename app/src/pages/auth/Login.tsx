@@ -1,17 +1,20 @@
-import React, { FormEvent, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { googleLogin, loginStart } from '@store/actions/authAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import useInput from '@utils/hooks/useInput'
 import { RootState } from '@store/store'
 import Cookies from 'js-cookie'
-import MainTemplate from '@components/Template/MainTemplate'
 import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { loginSchema, LoginSchema } from '@components/form/auth/loginSchema'
+import { loginSchema, LoginSchema } from '@/components/form/auth/authValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { IModalProps } from '@/components/modal/_PropsType'
 
-const Login = () => {
+export interface ILoginPorps extends IModalProps {
+  subModalHandler: () => void
+}
+
+const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
   const { msg } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
 
@@ -22,12 +25,25 @@ const Login = () => {
   } = useForm<LoginSchema>({
     mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: '', passowrd: '' }
+    defaultValues: { email: '', password: '' }
   })
+
+  const section =
+    errors.email && errors.password
+      ? 'bg-secondary-main text-[1.6rem] w-[65rem] h-[45rem] rounded-[.5rem]'
+      : errors.email || errors.password
+      ? 'bg-secondary-main text-[1.6rem] w-[65rem] h-[43rem] rounded-[.5rem]'
+      : 'bg-secondary-main text-[1.6rem] w-[65rem] h-[41rem] rounded-[.5rem]'
+
+  const hasError = {
+    email: errors?.email,
+    password: errors?.password,
+    invalid: msg
+  }
 
   const onSubmit: SubmitHandler<LoginSchema> = useCallback(
     (value) => {
-      dispatch(loginStart(value.email, value.passowrd))
+      dispatch(loginStart(value.email, value.password))
     },
     [dispatch]
   )
@@ -42,15 +58,17 @@ const Login = () => {
   if (Cookies.get('authToken')) return <Redirect to='/' />
 
   return (
-    <>
+    <section className={section}>
       <LoginForm
-        googleHandler={googleHandler}
         submitHandler={handleSubmit(onSubmit)}
+        googleHandler={googleHandler}
+        modalHandler={onClose}
+        subModalHandler={subModalHandler}
         error={errors}
         control={control}
       />
-    </>
+    </section>
   )
 }
 
-export default React.memo(Login)
+export default Login

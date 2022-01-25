@@ -21,29 +21,44 @@ export type TRouter = {
     | undefined
 }
 
+export const PATHS = {
+  MAIN: '/',
+  SHOPS: '/salon',
+  REVIEW: '/review',
+  CATALOG: '/catalog',
+  USER: '/user',
+  RESERVATION: '/reservation',
+  SEARCH: '/search',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  LOGOUT: '/logout',
+  ERROR: '*'
+} as const
+
 export const ROUTER_PATHS: TRouter[] = [
-  { path: '/', exact: true, component: Main },
-  { path: '/salon', exact: false },
-  { path: '/review', exact: false },
-  { path: '/catalog', exact: false },
-  { path: '/user', exact: false },
-  { path: '/reservations', exact: false },
-  { path: '/search', exact: false },
-  { path: '/login', exact: false, component: Login },
-  { path: '*', exact: false, component: Error }
+  { path: PATHS.MAIN, exact: true, component: Main },
+  { path: PATHS.SHOPS, exact: false, component: Salon },
+  { path: PATHS.REVIEW, exact: false },
+  { path: PATHS.CATALOG, exact: false },
+  { path: PATHS.USER, exact: false },
+  { path: PATHS.RESERVATION, exact: false },
+  { path: PATHS.SEARCH, exact: false },
+  { path: PATHS.LOGIN, exact: false, component: Login },
+  { path: PATHS.SIGNUP, exact: false },
+  { path: PATHS.ERROR, exact: false, component: Error }
 ]
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [
-  { path: '/salon', text: '美容室' },
-  { path: '/catalog', text: 'カタログ' },
-  { path: '/reservations/search', text: '予約管理' },
-  { path: '/user/:id', text: 'マイページ' },
+  { path: PATHS.SHOPS, text: '美容室' },
+  { path: PATHS.CATALOG, text: 'カタログ' },
+  { path: `${PATHS.RESERVATION}${PATHS.SEARCH}`, text: '予約管理' },
+  { path: `${PATHS.USER}/:id`, text: 'マイページ' },
   { path: '/logout', text: 'ログアウト' }
 ]
 
 export const PUBLIC_MENU: { path: string; text: string }[] = [
-  { path: '/salon', text: '美容室' },
-  { path: '/catalog', text: 'カタログ' },
-  { path: '/reservations/search', text: '予約管理' },
-  { path: '/login', text: 'ログイン' }
+  { path: PATHS.SHOPS, text: '美容室' },
+  { path: PATHS.CATALOG, text: 'カタログ' },
+  { path: `${PATHS.RESERVATION}${PATHS.SEARCH}`, text: '予約管理' },
+  { path: PATHS.LOGIN, text: 'ログイン' }
 ]
