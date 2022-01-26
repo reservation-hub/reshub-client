@@ -1,36 +1,34 @@
 import React from 'react'
 import Card from '../Template/Card'
-import { IoLocationOutline } from 'react-icons/io5'
 import Button from '../common/Button'
 import ShopInfo from './ShopInfo'
 import SubTitle from '../common/SubTitle'
 
 const ShopsCard = () => {
   const goToShopDetailButton =
-    'w-[15rem] h-[3.5rem] text-[1.6rem] bg-primary text-secondary-light absolute right-2 bottom-2'
+    'w-[15rem] h-[3.5rem] bg-primary text-secondary-light'
 
   return (
-    <Card classes='w-[80rem] h-[20rem] my-10 ml-10 relative' shadow>
-      <div>
-        <div className='border-b-2 h-[4rem]'>
-          <SubTitle text='test' />
-        </div>
+    <Card classes='w-full h-[20rem] relative' shadow>
+      <div className='border-b-2 px-5 flex items-center justify-between'>
+        <SubTitle text='shop name' />
+        <span>rating and reviews</span>
+      </div>
 
-        <div className='flex'>
-          <div className='w-[10rem] h-[10rem] border-2 mt-3 ml-3'>
-            <img src='' alt='' className='w-full h-full' />
-          </div>
-          <div className='mt-3 ml-9'>
-            <span className='text-[1.8rem]'>
-              dummy text dummy text dummy text
-            </span>
-            <div className='text-[1.6rem]'>
-              <span>dummy text</span>
-            </div>
-            <ShopInfo />
-          </div>
+      <div className='flex px-5 py-3 w-full'>
+        <div className='w-[10rem] h-[10rem] border-2'>
+          <img src='img/salon.jpeg' alt='' className='w-full h-full' />
         </div>
+        <div className='px-5 grid'>
+          <span className='text-[1.8rem]'>description</span>
+          <div className=''>
+            <span>address</span>
+          </div>
+          <ShopInfo />
+        </div>
+      </div>
 
+      <div className='flex justify-end px-5'>
         <Button classes={goToShopDetailButton}>空席確認・予約</Button>
       </div>
     </Card>

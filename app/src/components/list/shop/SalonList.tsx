@@ -1,9 +1,10 @@
 import React from 'react'
 import { IListProps } from '@components/list/_PropsType'
-import Table from '@components/common/Table'
 import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
-const SalonList = ({ item }: IListProps) => {
+import CardLoading from './CardLoading'
+
+const SalonList = ({ item, loading }: IListProps) => {
   const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
@@ -12,7 +13,7 @@ const SalonList = ({ item }: IListProps) => {
   return (
     <div>
       {rowItems?.map((item, i) => (
-        <ShopItem key={i} shop={item} />
+        <>{loading ? <CardLoading /> : <ShopItem key={i} item={item} />}</>
       ))}
     </div>
   )

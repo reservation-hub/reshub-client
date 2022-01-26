@@ -31,7 +31,7 @@ const Input = ({
   inputClasses
 }: IInputProps) => {
   const { field } = useController({ name, control })
-  const input = 'w-full p-3 border rounded-[.25rem]'
+  const input = 'w-full p-3 border rounded'
   return (
     <div className={fullWidth ? `${classes} w-full` : classes}>
       <>

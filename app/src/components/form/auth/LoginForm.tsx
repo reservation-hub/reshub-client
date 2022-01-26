@@ -8,7 +8,6 @@ import Input from '@components/common/Input'
 import ErrorMessage from '@components/common/ErrorMessage'
 import Button from '@components/common/Button'
 import { FcGoogle } from 'react-icons/fc'
-import { AiOutlineClose } from 'react-icons/ai'
 import ModalFormWrapper from '../ModalFormWrapper'
 
 export interface IAuthFormProps<T> extends IModalFormProps<T> {

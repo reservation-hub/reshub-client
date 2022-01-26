@@ -6,7 +6,7 @@ export interface ISubTitleProps extends ClassesAndChildren {
 }
 
 const SubTitle = ({ text, classes }: TextProps) => {
-  return <span className={`${classes} text-[2.8rem]`}>{text}</span>
+  return <span className={`${classes} text-[2.4rem]`}>{text}</span>
 }
 
 export default SubTitle

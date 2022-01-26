@@ -25,7 +25,7 @@ const SearchBox = ({
 }: ISearchBarProps) => {
   // searchBox div
   const searchBox =
-    'md:w-[45rem] w-full lg:text-[1.6rem] text-[1.3rem] lg:h-[28.5rem] h-[26rem] border bg-secondary-light mt-3 shadow-lg lg:p-8 p-4 rounded-[.5rem] text-gray-main'
+    'md:w-[45rem] w-full lg:text-[1.6rem] text-[1.3rem] lg:h-[28.5rem] h-[26rem] border bg-secondary-light mt-3 shadow-lg lg:p-8 p-4 rounded-lg text-gray-main'
 
   // searchBox svg icons
   const buttonIcons =

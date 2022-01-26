@@ -10,6 +10,7 @@ import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
+import MainTemplate from '@/components/Template/MainTemplate'
 
 const Main = ({
   match,
@@ -33,21 +34,14 @@ const Main = ({
   const searchSection =
     'lg:w-[100rem] w-full md:flex justify-between lg:mx-auto px-5 pt-4 lg:p-0'
 
-  const { shops, loading, user } = useSelector(
-    (state: RootState) => ({
-      loading: state.shop.loading,
-      shops: state.shop.shops,
-      user: state.auth.user
-    }),
-    shallowEqual
-  )
+  const { shops, loading } = useSelector((state: RootState) => state.shop)
 
   useEffect(() => {
     if (match.isExact) dispatch(fetchShopList(page, order))
   }, [page, dispatch, currentPage, match.isExact, order])
 
   return (
-    <>
+    <MainTemplate>
       <section className='lg:my-20 my-5'>
         <div className='w-full h-[30rem] text-center bg-primary'>
           <div className={searchSection}>
@@ -69,6 +63,7 @@ const Main = ({
                 item={shops.values}
                 totalPage={shops.totalCount}
                 page={currentPage}
+                loading={loading}
               />
             </Box>
           </div>
@@ -81,7 +76,7 @@ const Main = ({
           </div>
         </div>
       </section>
-    </>
+    </MainTemplate>
   )
 }
 
