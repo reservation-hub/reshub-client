@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineClockCircle, AiOutlinePhone } from 'react-icons/ai'
 import { IoCut } from 'react-icons/io5'
-import IconText from '../common/IconText'
+import IconText from '../../common/IconText'
 
 const ShopInfo = () => {
   return (

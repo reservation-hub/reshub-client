@@ -11,11 +11,16 @@ const SalonList = ({ item, loading }: IListProps) => {
   }))
 
   return (
-    <div>
+    <>
+      {loading && <CardLoading />}
       {rowItems?.map((item, i) => (
-        <>{loading ? <CardLoading /> : <ShopItem key={i} item={item} />}</>
+        loading ? (
+          <CardLoading key={item.id} />
+         ) : (
+          <ShopItem key={i} item={item} />
+         )
       ))}
-    </div>
+    </>
   )
 }
 export default SalonList

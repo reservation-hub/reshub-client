@@ -45,8 +45,6 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
     (value) => {
       try {
         dispatch(loginStart(value.email, value.password))
-      } catch {
-        console.log('e')
       } finally {
         onClose()
       }
@@ -56,7 +54,11 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
 
   const googleHandler = useCallback(
     (response) => {
-      dispatch(googleLogin(response))
+      try {
+        dispatch(googleLogin(response))
+      } finally {
+        onClose()
+      }
     },
     [dispatch]
   )

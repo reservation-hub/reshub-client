@@ -5,27 +5,27 @@ import React from 'react'
 const CardLoading = () => {
   return (
     <section className='p-5'>
-      <Card classes='w-full h-[20rem] relative' shadow>
-        <div className='border-b-2 px-5 flex items-center justify-between'>
-          <Skeleton width={20} height={3.6} />
-          <Skeleton width={14} height={2.4} />
+      <Card classes='w-full h-[20rem]' shadow>
+        <div className='border-b-2 px-5 flex items-center justify-between py-1'>
+          <Skeleton classes='w-[20rem] h-[3rem]' />
+          <Skeleton classes='w-[14rem] h-[2.4rem]' />
         </div>
 
         <div className='flex px-5 py-3 w-full'>
-          <Skeleton width={10} height={10} />
+          <Skeleton classes='w-[10rem] h-[10rem]' />
           <div className='px-5 grid'>
-            <Skeleton width={30} height={3} />
-            <Skeleton width={30} height={3} />
+            <Skeleton classes='w-[30rem] h-[3rem]' />
+            <Skeleton classes='w-[30rem] h-[3rem]' />
             <div className='flex'>
-              <Skeleton width={13} height={2.4} classes='mr-2' />
-              <Skeleton width={13} height={2.4} classes='mr-2' />
-              <Skeleton width={13} height={2.4} />
+              <Skeleton classes='mr-2 w-[13rem] h-[2.5rem]' />
+              <Skeleton classes='mr-2 w-[13rem] h-[2.5rem]' />
+              <Skeleton classes='w-[13rem] h-[2.5rem]' />
             </div>
           </div>
         </div>
 
         <div className='flex justify-end px-5'>
-          <Skeleton width={15} height={3.5} />
+          <Skeleton classes='w-[15rem] h-[3.5rem]' />
         </div>
       </Card>
     </section>

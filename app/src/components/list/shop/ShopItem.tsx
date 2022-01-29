@@ -1,6 +1,6 @@
 import React from 'react'
 import SubTitle from '@/components/common/SubTitle'
-import ShopInfo from '@/components/shop/ShopInfo'
+import ShopInfo from '@/components/list/shop/ShopInfo'
 import Button from '@/components/common/Button'
 import { IListProps } from '../_PropsType'
 import LinkCard from '@/components/common/LinkCard'
