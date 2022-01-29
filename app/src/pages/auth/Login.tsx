@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react'
 import { googleLogin, loginStart } from '@store/actions/authAction'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { RootState } from '@store/store'
-import Cookies from 'js-cookie'
 import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { loginSchema, LoginSchema } from '@components/form/auth/authValidation'
@@ -30,10 +28,10 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
 
   const section =
     errors.email && errors.password
-      ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[45rem] rounded-[.5rem]'
+      ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[45rem] rounded-lg'
       : errors.email || errors.password
-      ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[43rem] rounded-[.5rem]'
-      : 'bg-secondary-main md:w-[65rem] w-[39rem] h-[41rem] rounded-[.5rem]'
+      ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[43rem] rounded-lg'
+      : 'bg-secondary-main md:w-[65rem] w-[39rem] h-[41rem] rounded-lg'
 
   const hasError = {
     email: errors?.email,
@@ -45,8 +43,6 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
     (value) => {
       try {
         dispatch(loginStart(value.email, value.password))
-      } catch {
-        console.log('e')
       } finally {
         onClose()
       }
@@ -56,7 +52,11 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
 
   const googleHandler = useCallback(
     (response) => {
-      dispatch(googleLogin(response))
+      try {
+        dispatch(googleLogin(response))
+      } finally {
+        onClose()
+      }
     },
     [dispatch]
   )

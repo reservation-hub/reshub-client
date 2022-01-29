@@ -55,8 +55,9 @@ export const fetchShopList =
     dispatch(shopRequestStart())
     try {
       const res = await apiEndpoint.shops.getShops(page, order)
-      console.log('res : ', res)
-      dispatch(shopRequestSuccess(res.data))
+      setTimeout(() => {
+        dispatch(shopRequestSuccess(res.data))
+      }, 1500)
     } catch (e) {
       history.push('/error')
     }

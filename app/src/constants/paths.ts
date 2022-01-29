@@ -4,10 +4,6 @@ import Error from '@pages/error/Error'
 import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
 
-//----------------------------------------
-// TODO あくまでも仮であってある程度要件が定まり次第リファクタすること
-//----------------------------------------
-
 export type TStaticContext = {
   statusCode?: number | undefined
 }
@@ -44,8 +40,8 @@ export const ROUTER_PATHS: TRouter[] = [
   { path: PATHS.RESERVATION, exact: false },
   { path: PATHS.SEARCH, exact: false },
   { path: PATHS.LOGIN, exact: false, component: Login },
-  { path: PATHS.SIGNUP, exact: false }
-  // { path: PATHS.ERROR, exact: false, component: Error }
+  { path: PATHS.SIGNUP, exact: false },
+  { path: PATHS.ERROR, exact: false, component: Error }
 ]
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [
@@ -57,8 +53,5 @@ export const PRIVATE_MENU: { path: string; text: string }[] = [
 ]
 
 export const PUBLIC_MENU: { path: string; text: string }[] = [
-  { path: PATHS.SHOPS, text: '美容室' },
-  { path: PATHS.CATALOG, text: 'カタログ' },
-  { path: `${PATHS.RESERVATION}${PATHS.SEARCH}`, text: '予約管理' },
   { path: PATHS.LOGIN, text: 'ログイン' }
 ]

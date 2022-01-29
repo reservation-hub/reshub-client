@@ -20,7 +20,7 @@ const NavBar = () => {
   const login = useModal(false)
   const signup = useModal(false)
   const dispatch = useDispatch()
-  const authToken = Cookies.get('authToken')
+  const authToken = Cookies.get('sessionToken')
   const { loading } = useSelector((state: RootState) => state.auth)
 
   const onLogout = useCallback(() => {

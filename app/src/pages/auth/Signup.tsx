@@ -1,15 +1,11 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import Cookies from 'js-cookie'
-import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {
   signupSchema,
   SignupSchema
 } from '@components/form/auth/authValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IModalProps } from '@components/modal/_PropsType'
 import { createUser } from '@store/actions/userAction'
 import SignupForm from '@components/form/auth/SignupForm'
 import { ILoginPorps } from './Login'
@@ -35,7 +31,7 @@ const Signup = ({ onClose, subModalHandler }: ILoginPorps) => {
   )
 
   return (
-    <section className='bg-secondary-light rounded-[.5rem] md:w-[65rem] w-[39rem] md:h-[63rem]'>
+    <section className='bg-secondary-light rounded-lg md:w-[65rem] w-[39rem] md:h-[63rem]'>
       <SignupForm
         control={control}
         error={errors}

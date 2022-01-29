@@ -3,13 +3,15 @@ import { RouteComponentProps } from 'react-router-dom'
 import { fetchShopList } from '@store/actions/shopAction'
 import { TCurrentPage } from '@components/list/_PropsType'
 import SalonList from '@components/list/shop/SalonList'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
 import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
+import MainTemplate from '@/components/Template/MainTemplate'
+import Section from '@/components/Template/Section'
 
 const Main = ({
   match,
@@ -17,8 +19,8 @@ const Main = ({
 }: RouteComponentProps<MatchParams, any, TCurrentPage>) => {
   const dispatch = useDispatch()
   const currentPage = location?.state?.currentPage ?? 1
-  const [page, setPage] = useState<number>(currentPage)
-  const [correct, setCorrect] = useState<boolean>(true)
+  const [page] = useState<number>(currentPage)
+  const [correct] = useState<boolean>(true)
   const order: 'asc' | 'desc' = correct ? 'desc' : 'asc'
 
   const {
@@ -33,22 +35,15 @@ const Main = ({
   const searchSection =
     'lg:w-[100rem] w-full md:flex justify-between lg:mx-auto px-5 pt-4 lg:p-0'
 
-  const { shops, loading, user } = useSelector(
-    (state: RootState) => ({
-      loading: state.shop.loading,
-      shops: state.shop.shops,
-      user: state.auth.user
-    }),
-    shallowEqual
-  )
+  const { shops, loading } = useSelector((state: RootState) => state.shop)
 
   useEffect(() => {
     if (match.isExact) dispatch(fetchShopList(page, order))
   }, [page, dispatch, currentPage, match.isExact, order])
 
   return (
-    <>
-      <section className='lg:my-20 my-5'>
+    <MainTemplate>
+      <Section>
         <div className='w-full h-[30rem] text-center bg-primary'>
           <div className={searchSection}>
             <div className='md:grid hidden text-secondary-light m-auto'>
@@ -57,7 +52,10 @@ const Main = ({
                 <p>サロンの見つけ方</p>
               </span>
             </div>
-            <SearchBox control={control} />
+            <SearchBox
+              control={control}
+              classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
+            />
           </div>
         </div>
 
@@ -69,19 +67,25 @@ const Main = ({
                 item={shops.values}
                 totalPage={shops.totalCount}
                 page={currentPage}
+                loading={loading}
               />
             </Box>
           </div>
-          <div className='lg:w-[38rem] w-full'>
-            <Box
-              boxClass='lg:h-[35rem] h-[20rem] mb-4'
-              title='キャンペーン'
-            ></Box>
-            <Box boxClass='lg:h-[35rem]' title='運営からのお知らせ'></Box>
+          <div className='lg:w-[38rem] w-full text-center'>
+            <Box boxClass='mb-4' title='キャンペーン'>
+              <div className='p-5'>
+                <span>準備中です。</span>
+              </div>
+            </Box>
+            <Box title='運営からのお知らせ'>
+              <div className='p-5'>
+                <span>準備中です。</span>
+              </div>
+            </Box>
           </div>
         </div>
-      </section>
-    </>
+      </Section>
+    </MainTemplate>
   )
 }
 

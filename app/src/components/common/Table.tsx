@@ -22,7 +22,7 @@ const Table = <T extends Record<string, any>>({
   usePaginate,
   classes
 }: ITableProps<T>): React.ReactElement => {
-  const styled = 'w-full bg-secondary-main rounded-[.25rem] p-[10rem] mb-5'
+  const styled = 'w-full bg-secondary-main rounded p-[10rem] mb-5'
 
   return (
     <>

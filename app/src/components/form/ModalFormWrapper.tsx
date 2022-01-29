@@ -12,7 +12,7 @@ const ModalFormWrapper = <T extends Record<string, any>>({
 }: IModalFormProps<T>) => {
   return (
     <div className='w-full h-full text-gray-main md:flex'>
-      <div className='md:h-full bg-primary flex items-center md:justify-items-start justify-between md:p-10 p-5'>
+      <div className='md:h-full bg-primary flex items-center md:justify-items-start justify-between md:p-10 p-5 rounded-tl-lg rounded-bl-lg'>
         <span className='md:text-[2.1rem] text-secondary-light w-[18rem]'>
           {pageType === 'login' ? 'Reshubへログイン' : 'Reshubへ会員登録'}
         </span>
