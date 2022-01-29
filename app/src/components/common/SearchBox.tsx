@@ -6,27 +6,29 @@ import { BiCrown } from 'react-icons/bi'
 import Input from '@components/common/Input'
 import IconButton from '@components/common/IconButton'
 import { Control } from 'react-hook-form'
+import { ClassesAndChildren } from '../_PropsTypes'
 
-export interface ISearchBarProps {
+export interface ISearchBarProps extends ClassesAndChildren {
   search?: () => void
   searchFromArea?: () => void
   searchFromStation?: () => void
   searchFromRanking?: () => void
   searchFromDays?: () => void
   control?: Control<any>
+  buttonClass?: string
 }
-
+//md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]
 const SearchBox = ({
   search,
   searchFromArea,
   searchFromRanking,
   searchFromDays,
-  control
+  control,
+  classes,
+  buttonClass
 }: ISearchBarProps) => {
   // searchBox div
-  const searchBox =
-    'md:w-[45rem] w-full lg:text-[1.6rem] text-[1.3rem] lg:h-[28.5rem] h-[26rem] border bg-secondary-light mt-3 shadow-lg lg:p-8 p-4 rounded-lg text-gray-main'
-
+  const searchBox = `${classes} lg:text-[1.6rem] text-[1.3rem] border bg-secondary-light mt-3 shadow-lg lg:p-8 p-4 rounded-lg text-gray-main`
   // searchBox svg icons
   const buttonIcons =
     'text-primary lg:w-[2.4rem] w-[2rem] lg:h-[2.4rem] h-[2rem] lg:mr-2 mr-1'
@@ -34,7 +36,7 @@ const SearchBox = ({
 
   // searchBox Input box
   const searchInputBox =
-    'border border-primary lg:w-[41rem] w-full h-[4.3rem] mx-auto flex rounded'
+    'border border-primary w-full h-[4.3rem] mx-auto flex rounded'
 
   return (
     <div className={searchBox}>
@@ -43,7 +45,7 @@ const SearchBox = ({
       </span>
       <div className='text-gray-main'>
         <ul className='flex flex-wrap	justify-between my-4'>
-          <li className='mb-5'>
+          <li className={buttonClass ? `${buttonClass} mb-5` : 'mb-5'}>
             <IconButton
               icon
               onClick={searchFromArea}
@@ -53,7 +55,7 @@ const SearchBox = ({
               <IoLocationOutline className={buttonIcons} />
             </IconButton>
           </li>
-          <li className='mb-5'>
+          <li className={buttonClass ? `${buttonClass} mb-5` : 'mb-5'}>
             <IconButton
               icon
               onClick={searchFromRanking}
@@ -63,7 +65,7 @@ const SearchBox = ({
               <BiCrown className={buttonIcons} />
             </IconButton>
           </li>
-          <li className='mb-5'>
+          <li className={buttonClass ? `${buttonClass} mb-5` : 'mb-5'}>
             <IconButton
               icon
               onClick={searchFromDays}
@@ -80,7 +82,7 @@ const SearchBox = ({
           name='keyword'
           placeholder='サロン名・エリアなど'
           autoComplete='off'
-          classes='lg:w-[35rem] w-full h-[4.3rem]'
+          classes='w-full h-[4.3rem]'
           inputClasses='border-none h-[4.1rem]'
           control={control}
         />

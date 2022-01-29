@@ -4,6 +4,7 @@ import ShopInfo from '@/components/list/shop/ShopInfo'
 import Button from '@/components/common/Button'
 import { IListProps } from '../_PropsType'
 import LinkCard from '@/components/common/LinkCard'
+import history from '@utils/routers/history'
 
 const ShopItem = ({ item }: IListProps) => {
   const goToShopDetailButton =
@@ -11,11 +12,7 @@ const ShopItem = ({ item }: IListProps) => {
 
   return (
     <section className='p-5'>
-      <LinkCard
-        classes='w-full h-[20rem] relative'
-        shadow
-        url={`/salon/${item?.id}`}
-      >
+      <LinkCard classes='w-full h-[20rem]' shadow url={`/salon/${item?.id}`}>
         <div className='border-b-2 px-5 flex items-center justify-between'>
           <SubTitle text={item?.name} />
           <span>rating and reviews</span>
@@ -26,14 +23,18 @@ const ShopItem = ({ item }: IListProps) => {
             <img src='img/salon.jpeg' alt='' className='w-full h-full' />
           </div>
           <div className='px-5 grid'>
-            <span className='text-[1.8rem]'>description</span>
+            <span className='lg:text-[1.8rem]'>description</span>
             <span>{`${item?.prefectureName}${item?.cityName}${item?.address}`}</span>
             <ShopInfo />
           </div>
         </div>
-
         <div className='flex justify-end px-5'>
-          <Button classes={goToShopDetailButton}>空席確認・予約</Button>
+          <Button
+            onClick={() => history.push(`/reservation`)}
+            classes={goToShopDetailButton}
+          >
+            空席確認・予約
+          </Button>
         </div>
       </LinkCard>
     </section>

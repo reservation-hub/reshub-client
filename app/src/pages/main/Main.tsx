@@ -11,6 +11,7 @@ import Box from '@components/Template/Box'
 import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
 import MainTemplate from '@/components/Template/MainTemplate'
+import Section from '@/components/Template/Section'
 
 const Main = ({
   match,
@@ -18,8 +19,8 @@ const Main = ({
 }: RouteComponentProps<MatchParams, any, TCurrentPage>) => {
   const dispatch = useDispatch()
   const currentPage = location?.state?.currentPage ?? 1
-  const [page, setPage] = useState<number>(currentPage)
-  const [correct, setCorrect] = useState<boolean>(true)
+  const [page] = useState<number>(currentPage)
+  const [correct] = useState<boolean>(true)
   const order: 'asc' | 'desc' = correct ? 'desc' : 'asc'
 
   const {
@@ -42,7 +43,7 @@ const Main = ({
 
   return (
     <MainTemplate>
-      <section className='lg:my-20 my-5'>
+      <Section>
         <div className='w-full h-[30rem] text-center bg-primary'>
           <div className={searchSection}>
             <div className='md:grid hidden text-secondary-light m-auto'>
@@ -51,7 +52,10 @@ const Main = ({
                 <p>サロンの見つけ方</p>
               </span>
             </div>
-            <SearchBox control={control} />
+            <SearchBox
+              control={control}
+              classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
+            />
           </div>
         </div>
 
@@ -67,15 +71,20 @@ const Main = ({
               />
             </Box>
           </div>
-          <div className='lg:w-[38rem] w-full'>
-            <Box
-              boxClass='lg:h-[35rem] h-[20rem] mb-4'
-              title='キャンペーン'
-            ></Box>
-            <Box boxClass='lg:h-[35rem]' title='運営からのお知らせ'></Box>
+          <div className='lg:w-[38rem] w-full text-center'>
+            <Box boxClass='mb-4' title='キャンペーン'>
+              <div className='p-5'>
+                <span>準備中です。</span>
+              </div>
+            </Box>
+            <Box title='運営からのお知らせ'>
+              <div className='p-5'>
+                <span>準備中です。</span>
+              </div>
+            </Box>
           </div>
         </div>
-      </section>
+      </Section>
     </MainTemplate>
   )
 }

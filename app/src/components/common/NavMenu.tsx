@@ -10,7 +10,7 @@ const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
       {menuItem?.map((values, index) => (
         <React.Fragment key={index}>
           {loading ? (
-            <div className='mr-5 w-24 h-9 bg-secondary-dark rounded animate-pulse' />
+            <div className='mr-5 w-24 h-9 bg-gray-main rounded animate-pulse' />
           ) : (
             <>
               {values.path === PATHS.LOGIN || values.path === PATHS.LOGOUT ? (
