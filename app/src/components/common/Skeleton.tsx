@@ -8,11 +8,7 @@ export interface ISkeletonProps extends ClassesAndChildren {
 const Skeleton = ({ classes }: ISkeletonProps) => {
   const defaultStyle = `bg-gray-main animate-pulse`
   const useClassesStyle = `${classes} ${defaultStyle}`
-  return (
-    <div
-      className={classes ? useClassesStyle : defaultStyle}
-    />
-  )
+  return <div className={classes ? useClassesStyle : defaultStyle} />
 }
 
 export default Skeleton

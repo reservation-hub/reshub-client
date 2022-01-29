@@ -28,21 +28,21 @@ const Salon = () => {
   return (
     <MainTemplate>
       <Switch>
-          <Route exact path={PATHS.SHOPS}>
-            <section className='my-10 relative flex-grow lg:flex lg:w-[100rem] w-full mx-auto'>
-              <Box title='店舗一覧' boxClass='border mx-auto'> 
-                <SalonList item={shops.values} loading={loading} />
-              </Box>
-              <div className='h-auto bg-primary'>
-                <div className='mt-14'>
-                  <SearchBox control={control} />
-                </div>
+        <Route exact path={PATHS.SHOPS}>
+          <section className='my-10 relative flex-grow lg:flex lg:w-[100rem] w-full mx-auto'>
+            <Box title='店舗一覧' boxClass='border mx-auto'>
+              <SalonList item={shops.values} loading={loading} />
+            </Box>
+            <div className='h-auto bg-primary'>
+              <div className='mt-14'>
+                <SearchBox control={control} />
               </div>
-            </section>
-          </Route>
-          <Route path={`${PATHS.SHOPS}/:id`}>
-            <div>test</div>
-          </Route>
+            </div>
+          </section>
+        </Route>
+        <Route path={`${PATHS.SHOPS}/:id`}>
+          <div>test</div>
+        </Route>
       </Switch>
     </MainTemplate>
   )

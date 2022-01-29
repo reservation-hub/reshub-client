@@ -13,13 +13,13 @@ const SalonList = ({ item, loading }: IListProps) => {
   return (
     <>
       {loading && <CardLoading />}
-      {rowItems?.map((item, i) => (
+      {rowItems?.map((item, i) =>
         loading ? (
           <CardLoading key={item.id} />
-         ) : (
+        ) : (
           <ShopItem key={i} item={item} />
-         )
-      ))}
+        )
+      )}
     </>
   )
 }
