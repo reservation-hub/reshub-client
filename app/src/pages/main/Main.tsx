@@ -30,7 +30,7 @@ const Main = ({
   } = useForm({})
 
   const contestSection =
-    'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5 lg:p-0 p-5 lg:flex lg:justify-between'
+    'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5 lg:flex lg:justify-between'
 
   const searchSection =
     'lg:w-[100rem] w-full md:flex justify-between lg:mx-auto px-5 pt-4 lg:p-0'

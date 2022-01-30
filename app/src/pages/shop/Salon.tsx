@@ -17,7 +17,6 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 const Salon = () => {
   const dispatch = useDispatch()
   const { shops, loading } = useSelector((state: RootState) => state.shop)
-  const [correct, setCorrect] = useState<'asc' | 'desc'>('desc')
   const [open, setOpen] = useState<boolean>(false)
 
   const {
@@ -27,8 +26,8 @@ const Salon = () => {
   } = useForm({})
 
   useEffect(() => {
-    dispatch(fetchShopList(1, correct))
-  }, [dispatch, correct])
+    dispatch(fetchShopList(1, 'desc'))
+  }, [dispatch])
 
   return (
     <Switch>
@@ -46,14 +45,6 @@ const Salon = () => {
           <div className='h-auto lg:fixed right-[22rem] lg:flex hidden justify-center'>
             <div className='lg:w-[40rem] lg:mt-14 mb-5'>
               <SearchBox control={control} buttonClass='w-full' />
-              <Button
-                onClick={() => {
-                  correct === 'desc' ? setCorrect('asc') : setCorrect('desc')
-                }}
-                classes='mt-10 w-full bg-primary p-2 text-secondary-light'
-              >
-                並び替え
-              </Button>
               <footer className='text-gray-main'>
                 <span>Copyright© 2021 Reshub All rights reserved</span>
               </footer>

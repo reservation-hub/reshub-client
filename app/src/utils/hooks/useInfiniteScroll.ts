@@ -6,7 +6,7 @@ const useInfiniteScroll = <T extends ShopListResponse, K>(
   values: K[],
   baseEndpoint: string
 ) => {
-  const [page, setPage] = useState<number>(1)
+  const [page, setPage] = useState<number>(0)
   const [more, setMore] = useState<boolean>(true)
   const [list, setList] = useState<K[] | Record<string, any>[]>(values)
 
@@ -17,16 +17,17 @@ const useInfiniteScroll = <T extends ShopListResponse, K>(
         `${baseEndpoint}?page=${pages}&order=desc`
       )
 
-      const data = res.data.values.map((value) => ({
-        ...value,
-        address: `${value.prefectureName}${value.cityName}${
-          value.address || ''
-        }`
-      }))
+      const data: K[] | Record<string, any>[] = res.data.values.map(
+        (value) => ({
+          ...value,
+          address: `${value.prefectureName}${value.cityName}${
+            value.address || ''
+          }`
+        })
+      )
 
-      if (data.length === 0) {
+      if (data.length === 0 || data.length < 5) {
         setMore(false)
-        return
       }
 
       setList([...list, ...data])

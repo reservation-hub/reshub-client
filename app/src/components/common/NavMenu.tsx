@@ -6,7 +6,7 @@ import { PATHS } from '@/constants/paths'
 
 const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
   return (
-    <div className='flex  text-secondary-main'>
+    <div className='flex text-secondary-main mt-1 lg:items-center'>
       {menuItem?.map((values, index) => (
         <React.Fragment key={index}>
           {loading ? (
@@ -15,7 +15,7 @@ const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
             <>
               {values.path === PATHS.LOGIN || values.path === PATHS.LOGOUT ? (
                 <Button
-                  classes='border-none hover:text-secondary-dark'
+                  classes='border-none hover:text-secondary-dark lg:pl-4 pl-2'
                   onClick={onClose}
                 >
                   {values.text}
@@ -23,7 +23,8 @@ const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
               ) : (
                 <NavLink
                   to={values.path}
-                  className='mr-5 hover:text-secondary-dark'
+                  className='hover:text-secondary-dark lg:p-4 p-2'
+                  activeClassName='bg-secondary-main text-primary lg:h-[6rem] h-auto lg:mt-7 mt-0 rounded-tl-lg rounded-tr-lg'
                 >
                   {values.text}
                 </NavLink>

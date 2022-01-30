@@ -6,6 +6,7 @@ import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
 import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
 import { baseEndpoint } from '@/utils/api/apiEndpoint'
+import { ShopListResponse } from '@/utils/api/request-response-types/Shop'
 
 const SalonList = ({ item, loading, useInfinite }: IListProps) => {
   const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
@@ -13,10 +14,10 @@ const SalonList = ({ item, loading, useInfinite }: IListProps) => {
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
   }))
 
-  const { loadMore, more, list } = useInfiniteScroll(
-    rowItems,
-    baseEndpoint.shops
-  )
+  const { loadMore, more, list } = useInfiniteScroll<
+    ShopListResponse,
+    ShopForList
+  >(rowItems, baseEndpoint.shops)
 
   return (
     <>
@@ -34,12 +35,8 @@ const SalonList = ({ item, loading, useInfinite }: IListProps) => {
       ) : (
         <>
           {loading && <CardLoading />}
-          {rowItems?.map((item, i) =>
-            loading ? (
-              <CardLoading key={item.id} />
-            ) : (
-              <ShopItem key={i} item={item} />
-            )
+          {rowItems?.map((v, i) =>
+            loading ? <CardLoading key={v.id} /> : <ShopItem key={i} item={v} />
           )}
         </>
       )}
