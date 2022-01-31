@@ -14,11 +14,11 @@ import menu from '@utils/api/endpoints/menu'
 export const fetchAll = async () => await instance.get(`/`)
 
 export const baseEndpoint = {
-  shops: '/api/shops',
-  users: '/api/users',
-  area: '/api/areas',
-  prefecture: '/api/prefectures',
-  auth: '/api/auth'
+  shops: '/client/shops',
+  users: '/client/users',
+  area: '/client/areas',
+  prefecture: '/client/prefectures',
+  auth: '/client/auth'
 } as const
 
 const apiEndpoint = {
