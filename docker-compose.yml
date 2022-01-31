@@ -15,10 +15,25 @@ services:
       - CHOKIDAR_USEPOLLING=true
     env_file:
       - reshub-deploy/.env.dev
-    image: client
+    image: reshub-client
     ports:
       - "3001:3000"
     volumes:
       - ./app:/app
     tty: true
   
+  
+  prod:
+    build:
+      context: .
+      dockerfile: docker/prod/Dockerfile
+      args:
+        REACT_APP_BASE_URL: https://reshub.shop/api
+        REACT_APP_GOOGLE_CLIENT_ID: 224548880666-vn2bvunmncqhfuijjpstco19sv9gpucv.apps.googleusercontent.com
+        REACT_APP_GOOGLE_CLIENT_SECRET: W1cftxGBVhqa0mnOI9Ckv9Yg
+    container_name: reshub-client_prd
+    env_file:
+      - reshub-deploy/.env.production
+    image: reshub-client_prd
+    volumes:
+      - ./app/build:/app/dist

@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://reshub.shop",
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@fullcalendar/core": "^5.10.1",
