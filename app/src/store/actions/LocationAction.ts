@@ -1,5 +1,5 @@
 import { RootState, typedAction } from '@store/store'
-import { LOCATION_TYPE } from '@store/types/LocationTypes'
+import { LOCATION_TYPE } from '@store/types/locationTypes'
 import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@utils/api/apiEndpoint'
@@ -59,7 +59,7 @@ export const getOneCity =
     }
   }
 
-export type LocationAction =
+export type locationAction =
   | ReturnType<typeof locationRequestStart>
   | ReturnType<typeof areaReqSuccess>
   | ReturnType<typeof getOneAreaSuccess>

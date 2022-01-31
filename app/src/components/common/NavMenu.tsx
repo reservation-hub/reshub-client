@@ -6,7 +6,7 @@ import { PATHS } from '@/constants/paths'
 
 const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
   return (
-    <div className='flex text-secondary-main mt-1 lg:items-center'>
+    <div className='flex text-secondary-main mt-1 md:items-center'>
       {menuItem?.map((values, index) => (
         <React.Fragment key={index}>
           {loading ? (
@@ -24,7 +24,7 @@ const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
                 <NavLink
                   to={values.path}
                   className='hover:text-secondary-dark lg:p-4 p-2'
-                  activeClassName='bg-secondary-main text-primary lg:h-[6rem] h-auto lg:mt-7 mt-0 rounded-tl-lg rounded-tr-lg'
+                  activeClassName='bg-secondary-main text-primary lg:h-[6rem] md:h-[5rem] h-auto md:mt-7 mt-0 rounded-tl-lg rounded-tr-lg'
                 >
                   {values.text}
                 </NavLink>

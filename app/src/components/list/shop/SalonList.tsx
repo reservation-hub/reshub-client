@@ -4,20 +4,23 @@ import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
-import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
-import { baseEndpoint } from '@/utils/api/apiEndpoint'
-import { ShopListResponse } from '@/utils/api/request-response-types/Shop'
 
-const SalonList = ({ item, loading, useInfinite }: IListProps) => {
+export interface ISalonListProps extends IListProps {
+  loadMore(page: number): void | undefined
+  more?: boolean
+}
+
+const SalonList = ({
+  item,
+  loading,
+  useInfinite,
+  loadMore,
+  more
+}: ISalonListProps) => {
   const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
   }))
-
-  const { loadMore, more, list } = useInfiniteScroll<
-    ShopListResponse,
-    ShopForList
-  >(rowItems, baseEndpoint.shops)
 
   return (
     <>
@@ -26,16 +29,17 @@ const SalonList = ({ item, loading, useInfinite }: IListProps) => {
           loadMore={loadMore}
           pageStart={0}
           hasMore={more}
+          initialLoad={false}
           loader={<CardLoading key={0} />}
         >
-          {list?.map((v, i) => (
+          {rowItems?.map((v: any, i: number) => (
             <ShopItem key={i} item={v} />
           ))}
         </InfiniteScroll>
       ) : (
         <>
           {loading && <CardLoading />}
-          {rowItems?.map((v, i) =>
+          {item?.map((v: ShopForList, i: number) =>
             loading ? <CardLoading key={v.id} /> : <ShopItem key={i} item={v} />
           )}
         </>

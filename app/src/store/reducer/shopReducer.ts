@@ -7,11 +7,17 @@ import {
   ShopListResponse,
   ShopResponse
 } from '@utils/api/request-response-types/Shop'
+import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
 
 const initialState: ShopState = {
   loading: false,
   fetchAll: {} as ShopListResponse,
-  shops: {} as ShopListResponse,
+  shops: [] as ShopForList[],
+  totalCount: 0,
+  page: 0,
+  areaId: 0,
+  prefectureId: 0,
+  cityId: 0,
   shop: {} as ShopResponse,
   msg: ''
 }
@@ -33,7 +39,20 @@ const shopReducer = (state = initialState, action: ShopAction) => {
       return {
         ...state,
         loading: false,
-        shops: action.payload
+        shops: state.shops.concat(action.payload.data),
+        totalCount: action.payload.totalCount,
+        page: action.payload.page
+      }
+    case SHOPS_TYPE.SEARCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        shops: state.shops.concat(action.payload.data),
+        totalCount: action.payload.totalCount,
+        page: action.payload.page,
+        areaId: action.payload.areaId,
+        prefectureId: action.payload.prefectureId,
+        cityId: action.payload.cityId
       }
     case SHOPS_TYPE.GET_SUCCESS:
       return {

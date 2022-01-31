@@ -14,10 +14,10 @@ const Header = () => {
     >
       <div className={header}>
         <LinkTitle title='Reshub' url='/' classes='text-secondary-main' />
-        <div className='hidden lg:flex items-center'>
+        <div className='hidden md:flex items-center'>
           <NavBar />
         </div>
-        <div className='lg:hidden flex'>
+        <div className='md:hidden flex'>
           <GiHamburgerMenu
             onClick={() => setOpen(!open)}
             className='w-[3rem] h-[3rem] text-secondary-main'
@@ -25,7 +25,7 @@ const Header = () => {
         </div>
       </div>
       {open && (
-        <div className='bg-primary'>
+        <div className='bg-primary md:hidden'>
           <NavBar />
         </div>
       )}

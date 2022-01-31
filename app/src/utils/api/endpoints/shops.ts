@@ -41,21 +41,31 @@ export const shopsSearchToKeyword = async (
 }
 
 export const shopsSearchToLocation = async (
+  page: number,
   areaId: number,
   prefectureId?: number,
-  cityId?: number,
-  page?: number,
-  order?: 'asc' | 'desc'
+  cityId?: number
 ): Promise<AxiosResponse<ShopListResponse>> => {
   return await instance.get<ShopListResponse>(
-    `${baseEndpoint.shops}/search/area/?areaId=${areaId}`
+    `${baseEndpoint.shops}/search/area/?page=${page}&areaId=${areaId}${
+      prefectureId ? `&prefectureId=${prefectureId}` : ''
+    }${cityId ? `&cityId=${cityId}` : ''}`
+  )
+}
+
+export const shopsSearchToTags = async (
+  tags?: string
+): Promise<AxiosResponse<ShopListResponse>> => {
+  return await instance.get<ShopListResponse>(
+    `${baseEndpoint.shops}/search/tag/?tags[]=${tags}`
   )
 }
 
 const shops = {
   fetchAll,
   getShops,
-  getShop
+  getShop,
+  shopsSearchToLocation
 }
 
 export default shops

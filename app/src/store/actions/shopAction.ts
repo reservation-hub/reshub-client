@@ -11,6 +11,7 @@ import {
   ShopListResponse,
   ShopResponse
 } from '@utils/api/request-response-types/Shop'
+import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
 
 // リクエストを始まる
 const shopRequestStart = () => {
@@ -21,8 +22,30 @@ const fetchAllSuccess = (data: ShopListResponse) => {
   return typedAction(SHOPS_TYPE.FETCH_ALL, data)
 }
 
-const shopRequestSuccess = (data: ShopListResponse) => {
-  return typedAction(SHOPS_TYPE.REQUEST_SUCCESS, data)
+const shopRequestSuccess = (
+  data: ShopForList[],
+  totalCount: number,
+  page: number
+) => {
+  return typedAction(SHOPS_TYPE.REQUEST_SUCCESS, { data, totalCount, page })
+}
+
+const shopSearchSuccess = (
+  data: ShopForList[],
+  totalCount: number,
+  page: number,
+  areaId: number,
+  prefectureId?: number,
+  cityId?: number
+) => {
+  return typedAction(SHOPS_TYPE.SEARCH_SUCCESS, {
+    data,
+    totalCount,
+    page,
+    areaId,
+    prefectureId,
+    cityId
+  })
 }
 
 const shopGetSuccess = (data: ShopResponse) => {
@@ -56,7 +79,40 @@ export const fetchShopList =
     try {
       const res = await apiEndpoint.shops.getShops(page, order)
       setTimeout(() => {
-        dispatch(shopRequestSuccess(res.data))
+        dispatch(shopRequestSuccess(res.data.values, res.data.totalCount, page))
+      }, 1500)
+    } catch (e) {
+      history.push('/error')
+    }
+  }
+
+export const searchShopsToLocation =
+  (
+    page: number,
+    areaId: number,
+    prefectureId?: number,
+    cityId?: number
+  ): ThunkAction<void, RootState, null, Action> =>
+  async (dispatch) => {
+    dispatch(shopRequestStart())
+    try {
+      const res = await apiEndpoint.shops.shopsSearchToLocation(
+        page,
+        areaId,
+        prefectureId,
+        cityId
+      )
+      setTimeout(() => {
+        dispatch(
+          shopSearchSuccess(
+            res.data.values,
+            res.data.totalCount,
+            page,
+            areaId,
+            prefectureId,
+            cityId
+          )
+        )
       }, 1500)
     } catch (e) {
       history.push('/error')
@@ -80,5 +136,6 @@ export type ShopAction =
   | ReturnType<typeof shopRequestStart>
   | ReturnType<typeof fetchAllSuccess>
   | ReturnType<typeof shopRequestSuccess>
+  | ReturnType<typeof shopSearchSuccess>
   | ReturnType<typeof shopGetSuccess>
   | ReturnType<typeof shopRequestFailure>

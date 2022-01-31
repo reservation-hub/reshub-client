@@ -12,6 +12,8 @@ import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
 import MainTemplate from '@/components/Template/MainTemplate'
 import Section from '@/components/Template/Section'
+import history from '@/utils/routers/history'
+import { PATHS } from '@/constants/paths'
 
 const Main = ({
   match,
@@ -55,6 +57,7 @@ const Main = ({
             <SearchBox
               control={control}
               classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
+              searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
             />
           </div>
         </div>
@@ -64,10 +67,10 @@ const Main = ({
             <Box boxClass='h-[20rem] mb-4' title='ランキング'></Box>
             <Box title='店舗一覧' boxClass='lg:mb-0 mb-4'>
               <SalonList
-                item={shops.values}
-                totalPage={shops.totalCount}
+                item={shops}
                 page={currentPage}
                 loading={loading}
+                loadMore={() => console.log('test')}
               />
             </Box>
           </div>
