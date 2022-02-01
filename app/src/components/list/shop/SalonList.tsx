@@ -4,6 +4,7 @@ import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
+import Box from '@/components/Template/Box'
 
 export interface ISalonListProps extends IListProps {
   loadMore(page: number): void | undefined
@@ -17,13 +18,13 @@ const SalonList = ({
   loadMore,
   more
 }: ISalonListProps) => {
-  const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
+  const rowItems = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
   }))
 
   return (
-    <>
+    <Box title='店舗一覧'>
       {useInfinite ? (
         <InfiniteScroll
           loadMore={loadMore}
@@ -32,19 +33,30 @@ const SalonList = ({
           initialLoad={false}
           loader={<CardLoading key={0} />}
         >
-          {rowItems?.map((v: any, i: number) => (
-            <ShopItem key={i} item={v} />
-          ))}
+          <ShopItem
+            cell={[
+              { type: 'header', key: 'name' },
+              { type: 'body', key: 'address' }
+            ]}
+            items={rowItems}
+          />
         </InfiniteScroll>
       ) : (
         <>
-          {loading && <CardLoading />}
-          {item?.map((v: ShopForList, i: number) =>
-            loading ? <CardLoading key={v.id} /> : <ShopItem key={i} item={v} />
+          {loading ? (
+            <CardLoading />
+          ) : (
+            <ShopItem
+              cell={[
+                { type: 'header', key: 'name' },
+                { type: 'body', key: 'address' }
+              ]}
+              items={rowItems}
+            />
           )}
         </>
       )}
-    </>
+    </Box>
   )
 }
 export default SalonList

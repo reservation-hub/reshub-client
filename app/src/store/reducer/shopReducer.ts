@@ -3,22 +3,22 @@
 //----------------------------------
 import { ShopState, SHOPS_TYPE } from '@store/types/shopTypes'
 import { ShopAction } from '@store/actions/shopAction'
-import {
-  ShopListResponse,
-  ShopResponse
-} from '@utils/api/request-response-types/Shop'
 import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import {
+  SalonListResponse,
+  SalonResponse
+} from '@/utils/api/request-response-types/client/Shop'
 
 const initialState: ShopState = {
   loading: false,
-  fetchAll: {} as ShopListResponse,
+  fetchIndex: {} as SalonListResponse,
   shops: [] as ShopForList[],
   totalCount: 0,
   page: 0,
   areaId: 0,
   prefectureId: 0,
   cityId: 0,
-  shop: {} as ShopResponse,
+  shop: {} as SalonResponse,
   msg: ''
 }
 
@@ -29,11 +29,11 @@ const shopReducer = (state = initialState, action: ShopAction) => {
         ...state,
         loading: true
       }
-    case SHOPS_TYPE.FETCH_ALL:
+    case SHOPS_TYPE.FETCH_INDEX_SUCCESS:
       return {
         ...state,
         loading: false,
-        fetchAll: action.payload
+        fetchIndex: action.payload
       }
     case SHOPS_TYPE.REQUEST_SUCCESS:
       return {

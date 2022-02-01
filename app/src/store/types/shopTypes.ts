@@ -3,14 +3,14 @@
 //----------------------------------
 import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
 import {
-  ShopListResponse,
-  ShopResponse
-} from '@utils/api/request-response-types/Shop'
+  SalonListResponse,
+  SalonResponse
+} from '@/utils/api/request-response-types/client/Shop'
 import { DefaultState } from '../store'
 
 export const SHOPS_TYPE = {
   REQUEST_START: 'SHOP_REQUEST_START',
-  FETCH_ALL: 'SHOP_FETCH_ALL',
+  FETCH_INDEX_SUCCESS: 'SHOP_FETCH_INDEX_SUCCESS',
   REQUEST_SUCCESS: 'SHOP_REQUEST_SUCCESS',
   SEARCH_SUCCESS: 'SHOP_SEARCH_SUCCESS',
   GET_SUCCESS: 'SHOP_GET_SUCCESS',
@@ -18,12 +18,12 @@ export const SHOPS_TYPE = {
 } as const
 
 export type ShopState = DefaultState & {
-  fetchAll: ShopListResponse
+  fetchIndex: SalonListResponse
   shops: ShopForList[]
   totalCount: number
   page: number
   areaId: number
   prefectureId: number | undefined
   cityId: number | undefined
-  shop: ShopResponse
+  shop: SalonResponse
 }

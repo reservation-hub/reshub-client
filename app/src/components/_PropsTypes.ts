@@ -1,5 +1,6 @@
 import React from 'react'
 import { Control } from 'react-hook-form'
+import { IPaginateProps } from './common/Paginate'
 
 export type OptionsType = {
   label: string
@@ -42,4 +43,10 @@ export interface InputProps extends ClassesAndChildren {
   onChange?: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | { value: unknown }
   >
+}
+
+export interface IListDetailProps<T> extends IPaginateProps {
+  cell: { type?: string; column?: string; key: keyof T }[]
+  items?: T[]
+  item?: T
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-import Box from '@/components/Template/Box'
 import { Route, RouteComponentProps, Switch } from 'react-router-dom'
 import { PATHS } from '@/constants/paths'
 import SalonList from '@/components/list/shop/SalonList'
@@ -16,6 +15,7 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
 import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
 import history from '@/utils/routers/history'
+import { OrderBy } from '@/utils/api/request-response-types/client/Common'
 
 const Salon = ({ match }: RouteComponentProps) => {
   const dispatch = useDispatch()
@@ -31,7 +31,8 @@ const Salon = ({ match }: RouteComponentProps) => {
   const { loadMore, more, page } = useInfiniteScroll<ShopForList>(shops)
 
   useEffect(() => {
-    if (match.isExact) dispatch(fetchShopList(page, 'desc'))
+    if (match.isExact)
+      dispatch(fetchShopList({ page: page, order: OrderBy.DESC, take: 10 }))
   }, [dispatch, page, match.isExact])
 
   return (
@@ -61,23 +62,26 @@ const Salon = ({ match }: RouteComponentProps) => {
             </div>
           </div>
 
-          <Box title='店舗一覧'>
-            <SalonList
-              item={shops}
-              loading={loading}
-              useInfinite
-              loadMore={loadMore}
-              more={more}
-            />
-          </Box>
+          <SalonList
+            item={shops}
+            loading={loading}
+            useInfinite
+            loadMore={loadMore}
+            more={more}
+          />
         </SubTemplate>
       </Route>
 
       <MainTemplate>
         <Route path={`${PATHS.SHOPS}/detail/:id`} component={Detail} />
+        <Route
+          path={`${PATHS.SHOPS}/(area|days|keyword|tags|rankings)`}
+        >
+          test
+        </Route>
       </MainTemplate>
     </Switch>
   )
 }
 
-export default Salon
+export default React.memo(Salon)

@@ -7,19 +7,21 @@ import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import history from '@utils/routers/history'
-import {
-  ShopListResponse,
-  ShopResponse
-} from '@utils/api/request-response-types/Shop'
 import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import {
+  SalonListByAreaQuery,
+  SalonListQuery,
+  SalonListResponse,
+  SalonResponse
+} from '@/utils/api/request-response-types/client/Shop'
 
 // リクエストを始まる
 const shopRequestStart = () => {
   return typedAction(SHOPS_TYPE.REQUEST_START)
 }
 
-const fetchAllSuccess = (data: ShopListResponse) => {
-  return typedAction(SHOPS_TYPE.FETCH_ALL, data)
+const fetchIndexSuccess = (data: SalonListResponse) => {
+  return typedAction(SHOPS_TYPE.FETCH_INDEX_SUCCESS, data)
 }
 
 const shopRequestSuccess = (
@@ -48,7 +50,7 @@ const shopSearchSuccess = (
   })
 }
 
-const shopGetSuccess = (data: ShopResponse) => {
+const shopGetSuccess = (data: SalonResponse) => {
   return typedAction(SHOPS_TYPE.GET_SUCCESS, data)
 }
 
@@ -57,12 +59,15 @@ const shopRequestFailure = (msg: string) => {
   return typedAction(SHOPS_TYPE.REQUEST_FAILURE, msg)
 }
 
-export const fetchAllItems =
-  (): ThunkAction<void, RootState, null, Action> => async (dispatch) => {
+export const fetchIndexList =
+  (queryParams: SalonListQuery): ThunkAction<void, RootState, null, Action> =>
+  async (dispatch) => {
     dispatch(shopRequestStart())
     try {
-      const res = await apiEndpoint.shops.fetchAll()
-      dispatch(fetchAllSuccess(res.data))
+      const res = await apiEndpoint.shops.getShops(queryParams)
+      setTimeout(() => {
+        dispatch(fetchIndexSuccess(res.data))
+      }, 1500)
     } catch {
       history.push('/error')
     }
@@ -70,16 +75,19 @@ export const fetchAllItems =
 
 // 全てのお店データを読み込む
 export const fetchShopList =
-  (
-    page: number,
-    order: 'asc' | 'desc'
-  ): ThunkAction<void, RootState, null, Action> =>
+  (queryParams: SalonListQuery): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(shopRequestStart())
     try {
-      const res = await apiEndpoint.shops.getShops(page, order)
+      const res = await apiEndpoint.shops.getShops(queryParams)
       setTimeout(() => {
-        dispatch(shopRequestSuccess(res.data.values, res.data.totalCount, page))
+        dispatch(
+          shopRequestSuccess(
+            res.data.values,
+            res.data.totalCount,
+            Number(queryParams?.page)
+          )
+        )
       }, 1500)
     } catch (e) {
       history.push('/error')
@@ -88,29 +96,21 @@ export const fetchShopList =
 
 export const searchShopsToLocation =
   (
-    page: number,
-    areaId: number,
-    prefectureId?: number,
-    cityId?: number
+    queryParams: SalonListByAreaQuery
   ): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(shopRequestStart())
     try {
-      const res = await apiEndpoint.shops.shopsSearchToLocation(
-        page,
-        areaId,
-        prefectureId,
-        cityId
-      )
+      const res = await apiEndpoint.shops.shopsSearchToLocation(queryParams)
       setTimeout(() => {
         dispatch(
           shopSearchSuccess(
             res.data.values,
             res.data.totalCount,
-            page,
-            areaId,
-            prefectureId,
-            cityId
+            Number(queryParams.page),
+            queryParams.areaId,
+            Number(queryParams.prefectureId),
+            Number(queryParams.cityId)
           )
         )
       }, 1500)
@@ -134,7 +134,7 @@ export const getOneShop =
 
 export type ShopAction =
   | ReturnType<typeof shopRequestStart>
-  | ReturnType<typeof fetchAllSuccess>
+  | ReturnType<typeof fetchIndexSuccess>
   | ReturnType<typeof shopRequestSuccess>
   | ReturnType<typeof shopSearchSuccess>
   | ReturnType<typeof shopGetSuccess>

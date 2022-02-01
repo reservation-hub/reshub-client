@@ -1,19 +1,17 @@
 import React from 'react'
 import TableRow from './TableRow'
 import history from '@utils/routers/history'
-import Paginate, { IPaginateProps } from './Paginate'
+import Paginate from './Paginate'
+import { IListDetailProps } from '../_PropsTypes'
 
-interface ITableProps<T> extends IPaginateProps {
-  cell: { column: string; key: keyof T }[]
-  row: T[] | undefined
-  index?: number
+interface ITableProps<T> extends IListDetailProps<T> {
   url?: string
   subParams?: boolean
 }
 
 const Table = <T extends Record<string, any>>({
   cell,
-  row,
+  items,
   url,
   subParams,
   totalPage,
@@ -37,7 +35,7 @@ const Table = <T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody className='text-[1.6rem] text-center'>
-          {row?.map((item, index) => (
+          {items?.map((item, index) => (
             <TableRow key={index}>
               {cell.map((field, index) => (
                 <td

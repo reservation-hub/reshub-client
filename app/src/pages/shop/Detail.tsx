@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Section from '@/components/Template/Section'
 import { RouteComponentProps } from 'react-router-dom'
 import { MatchParams } from '@components/_PropsTypes'
@@ -8,14 +8,41 @@ import H1 from '@/components/common/H1'
 import { RootState } from '@/store/store'
 import Button from '@/components/common/Button'
 import history from '@/utils/routers/history'
+import Box from '@/components/Template/Box'
+import ShopDetail from '@/components/detail/shop/ShopDetail'
+import { DetailMenuItem, SECTION_TYPE } from '@/constants/detail'
 
 const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   const { id } = match.params
-  const convertId = Number(id)
   const { shop } = useSelector((state: RootState) => state.shop)
-
   const dispatch = useDispatch()
-  console.log(shop)
+  const convertId = Number(id)
+
+  const [sectionType, setSectionType] =
+    useState<keyof typeof SECTION_TYPE>('INDEX')
+
+  const menuItem: DetailMenuItem[] = [
+    {
+      label: 'サロン情報',
+      slug: SECTION_TYPE.INDEX,
+      click: () => setSectionType('INDEX')
+    },
+    {
+      label: 'メニュー',
+      slug: SECTION_TYPE.MENU,
+      click: () => setSectionType('MENU')
+    },
+    {
+      label: 'スタイリスト',
+      slug: SECTION_TYPE.STYLIST,
+      click: () => setSectionType('STYLIST')
+    },
+    {
+      label: '口コミ',
+      slug: SECTION_TYPE.REVIEW,
+      click: () => setSectionType('REVIEW')
+    }
+  ]
 
   useEffect(() => {
     dispatch(getOneShop(convertId))
@@ -23,7 +50,8 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
 
   return (
     <Section classes='lg:w-[100rem] w-full h-full mx-auto'>
-      <div className='w-full h-[13rem] bg-gray-100 rounded-tl-lg rounded-tr-lg'>
+      <ShopDetail item={shop} menuItem={menuItem} sectionType={sectionType} />
+      {/* <div className='w-full h-[13rem] bg-gray-100 rounded-tl-lg rounded-tr-lg'>
         <div className='flex justify-between items-center p-5'>
           <div className='flex items-center'>
             <img
@@ -33,7 +61,11 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
             />
             <div className='pl-5 grid'>
               <H1>{shop.name}</H1>
-              <span>{shop.prefectureName}{shop.cityName}</span>
+              <span>
+                {shop.prefectureName}
+                {shop.cityName}
+                {shop.address}
+              </span>
             </div>
           </div>
           <div className=''>
@@ -43,13 +75,17 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
               </Button>
             </div>
             <div className='mt-3'>
-              <Button onClick={() => history.goBack()} classes='w-[15rem] bg-secondary-main p-2 rounded-lg text-primary border-none'>
+              <Button
+                onClick={() => history.goBack()}
+                classes='w-[15rem] bg-secondary-main p-2 rounded-lg text-primary border-none'
+              >
                 戻る
               </Button>
             </div>
           </div>
         </div>
       </div>
+
       <div className='w-full h-24 border'>
         <ul className='flex justify-between items-center p-5'>
           <li>サロン情報</li>
@@ -58,6 +94,30 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
           <li>口コミ</li>
         </ul>
       </div>
+
+      <div className='w-full border mt-10'>
+        <div className='w-full'>DESCRIPTION</div>
+
+        <div className='w-full my-10'>
+          <Box title='所属スタイリスト'>
+            <div className='flex justify-between'>
+              {shop.stylists?.map((v, i) => (
+                <div key={i}>{v.name}</div>
+              ))}
+            </div>
+          </Box>
+        </div>
+
+        <div className='w-full my-10'>
+          <Box title='当店のメニュー'>
+            <div className='flex justify-between'>
+              {shop.menu?.map((v, i) => (
+                <div key={i}>{v.name}</div>
+              ))}
+            </div>
+          </Box>
+        </div>
+      </div> */}
     </Section>
   )
 }
