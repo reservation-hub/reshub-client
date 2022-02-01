@@ -1,10 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/constants/paths'
+import history from './history'
 
 const MainRouter = () => {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
         {ROUTER_PATHS.map((router, index) => (
           <Route

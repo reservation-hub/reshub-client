@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-import Box from '@/components/Template/Box'
-import { Route, Switch } from 'react-router-dom'
+import { Route, RouteComponentProps, Switch } from 'react-router-dom'
 import { PATHS } from '@/constants/paths'
 import SalonList from '@/components/list/shop/SalonList'
 import { fetchShopList } from '@/store/actions/shopAction'
@@ -13,11 +12,14 @@ import SubTemplate from '@/components/Template/SubTemplate'
 import MainTemplate from '@/components/Template/MainTemplate'
 import Button from '@/components/common/Button'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
+import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import history from '@/utils/routers/history'
+import { OrderBy } from '@/utils/api/request-response-types/client/Common'
 
-const Salon = () => {
+const Salon = ({ match }: RouteComponentProps) => {
   const dispatch = useDispatch()
   const { shops, loading } = useSelector((state: RootState) => state.shop)
-  const [correct, setCorrect] = useState<'asc' | 'desc'>('desc')
   const [open, setOpen] = useState<boolean>(false)
 
   const {
@@ -26,9 +28,12 @@ const Salon = () => {
     formState: { errors }
   } = useForm({})
 
+  const { loadMore, more, page } = useInfiniteScroll<ShopForList>(shops)
+
   useEffect(() => {
-    dispatch(fetchShopList(1, correct))
-  }, [dispatch, correct])
+    if (match.isExact)
+      dispatch(fetchShopList({ page: page, order: OrderBy.DESC, take: 5 }))
+  }, [dispatch, page, match.isExact])
 
   return (
     <Switch>
@@ -43,37 +48,38 @@ const Salon = () => {
             </Button>
             {open && <SearchBox control={control} />}
           </div>
+
           <div className='h-auto lg:fixed right-[22rem] lg:flex hidden justify-center'>
             <div className='lg:w-[40rem] lg:mt-14 mb-5'>
-              <SearchBox control={control} buttonClass='w-full' />
-              <Button
-                onClick={() => {
-                  correct === 'desc' ? setCorrect('asc') : setCorrect('desc')
-                }}
-                classes='mt-10 w-full bg-primary p-2 text-secondary-light'
-              >
-                並び替え
-              </Button>
-              <footer className='text-gray-main'>
+              <SearchBox
+                control={control}
+                buttonClass='w-full'
+                searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
+              />
+              <footer className='text-gray-main mt-5'>
                 <span>Copyright© 2021 Reshub All rights reserved</span>
               </footer>
             </div>
           </div>
-          <Box title='店舗一覧'>
-            <SalonList
-              item={shops.values ? shops.values : []}
-              loading={loading}
-              useInfinite
-            />
-          </Box>
+
+          <SalonList
+            item={shops}
+            loading={loading}
+            useInfinite
+            loadMore={loadMore}
+            more={more}
+          />
         </SubTemplate>
       </Route>
 
       <MainTemplate>
-        <Route path={`${PATHS.SHOPS}/:id`} component={Detail} />
+        <Route path={`${PATHS.SHOPS}/detail/:id`} component={Detail} />
+        <Route path={`${PATHS.SHOPS}/(area|days|keyword|tags|rankings)`}>
+          test
+        </Route>
       </MainTemplate>
     </Switch>
   )
 }
 
-export default Salon
+export default React.memo(Salon)

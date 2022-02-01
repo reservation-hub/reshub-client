@@ -4,46 +4,61 @@ import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
-import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
-import { baseEndpoint } from '@/utils/api/apiEndpoint'
+import Box from '@/components/Template/Box'
 
-const SalonList = ({ item, loading, useInfinite }: IListProps) => {
-  const rowItems: ShopForList[] = item?.map((shop: ShopForList) => ({
+export interface ISalonListProps extends IListProps {
+  loadMore(page: number): void | undefined
+  more?: boolean
+}
+
+const SalonList = ({
+  item,
+  loading,
+  useInfinite,
+  loadMore,
+  more
+}: ISalonListProps) => {
+  const rowItems = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
   }))
 
-  const { loadMore, more, list } = useInfiniteScroll(
-    rowItems,
-    baseEndpoint.shops
-  )
-
   return (
-    <>
+    <Box title='店舗一覧'>
       {useInfinite ? (
         <InfiniteScroll
           loadMore={loadMore}
           pageStart={0}
           hasMore={more}
+          initialLoad={false}
           loader={<CardLoading key={0} />}
         >
-          {list?.map((v, i) => (
-            <ShopItem key={i} item={v} />
-          ))}
+          <ShopItem
+            cell={[
+              { type: 'header', key: 'name' },
+              { type: 'body', key: 'address' },
+              { type: 'footer', key: 'tags' }
+            ]}
+            items={rowItems}
+          />
         </InfiniteScroll>
       ) : (
         <>
-          {loading && <CardLoading />}
-          {rowItems?.map((item, i) =>
-            loading ? (
-              <CardLoading key={item.id} />
-            ) : (
-              <ShopItem key={i} item={item} />
-            )
+          {loading ? (
+            <CardLoading />
+          ) : (
+            <ShopItem
+              cell={[
+                { type: 'header', key: 'name' },
+                { type: 'body', key: 'address' },
+                { type: 'footer', key: 'tags' }
+              ]}
+              items={rowItems}
+            />
           )}
         </>
       )}
-    </>
+    </Box>
   )
 }
 export default SalonList

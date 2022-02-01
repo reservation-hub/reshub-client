@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { fetchShopList } from '@store/actions/shopAction'
+import { fetchIndexList, fetchShopList } from '@store/actions/shopAction'
 import { TCurrentPage } from '@components/list/_PropsType'
 import SalonList from '@components/list/shop/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +12,9 @@ import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
 import MainTemplate from '@/components/Template/MainTemplate'
 import Section from '@/components/Template/Section'
+import history from '@/utils/routers/history'
+import { PATHS } from '@/constants/paths'
+import { OrderBy } from '@/utils/api/request-response-types/client/Common'
 
 const Main = ({
   match,
@@ -20,8 +23,6 @@ const Main = ({
   const dispatch = useDispatch()
   const currentPage = location?.state?.currentPage ?? 1
   const [page] = useState<number>(currentPage)
-  const [correct] = useState<boolean>(true)
-  const order: 'asc' | 'desc' = correct ? 'desc' : 'asc'
 
   const {
     control,
@@ -30,16 +31,17 @@ const Main = ({
   } = useForm({})
 
   const contestSection =
-    'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5 lg:p-0 p-5 lg:flex lg:justify-between'
+    'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5 lg:flex lg:justify-between'
 
   const searchSection =
     'lg:w-[100rem] w-full md:flex justify-between lg:mx-auto px-5 pt-4 lg:p-0'
 
-  const { shops, loading } = useSelector((state: RootState) => state.shop)
+  const { fetchIndex, loading } = useSelector((state: RootState) => state.shop)
 
   useEffect(() => {
-    if (match.isExact) dispatch(fetchShopList(page, order))
-  }, [page, dispatch, currentPage, match.isExact, order])
+    if (match.isExact)
+      dispatch(fetchIndexList({ page: page, order: OrderBy.DESC, take: 5 }))
+  }, [page, dispatch, currentPage, match.isExact])
 
   return (
     <MainTemplate>
@@ -55,21 +57,20 @@ const Main = ({
             <SearchBox
               control={control}
               classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
+              searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
             />
           </div>
         </div>
 
         <div className={contestSection}>
-          <div className='lg:w-[60rem] w-full h-full'>
+          <div className='lg:w-[60rem] w-full h-full lg:mb-0 mb-5'>
             <Box boxClass='h-[20rem] mb-4' title='ランキング'></Box>
-            <Box title='店舗一覧' boxClass='lg:mb-0 mb-4'>
-              <SalonList
-                item={shops.values}
-                totalPage={shops.totalCount}
-                page={currentPage}
-                loading={loading}
-              />
-            </Box>
+            <SalonList
+              item={fetchIndex.values}
+              page={currentPage}
+              loading={loading}
+              loadMore={() => console.log('test')}
+            />
           </div>
           <div className='lg:w-[38rem] w-full text-center'>
             <Box boxClass='mb-4' title='キャンペーン'>
