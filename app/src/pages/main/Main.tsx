@@ -40,7 +40,7 @@ const Main = ({
 
   useEffect(() => {
     if (match.isExact)
-      dispatch(fetchIndexList({ page: page, order: OrderBy.DESC }))
+      dispatch(fetchIndexList({ page: page, order: OrderBy.DESC, take: 5 }))
   }, [page, dispatch, currentPage, match.isExact])
 
   return (

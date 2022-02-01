@@ -1,5 +1,5 @@
 import { LocationState, LOCATION_TYPE } from '@/store/types/locationTypes'
-import { locationAction } from '@store/actions/locationAction'
+import { locationAction } from '@/store/actions/locationAction'
 import {
   AreaPrefecturesResponse,
   PrefectureCitiesResponse

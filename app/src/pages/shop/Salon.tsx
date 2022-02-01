@@ -32,7 +32,7 @@ const Salon = ({ match }: RouteComponentProps) => {
 
   useEffect(() => {
     if (match.isExact)
-      dispatch(fetchShopList({ page: page, order: OrderBy.DESC, take: 10 }))
+      dispatch(fetchShopList({ page: page, order: OrderBy.DESC, take: 5 }))
   }, [dispatch, page, match.isExact])
 
   return (
@@ -74,9 +74,7 @@ const Salon = ({ match }: RouteComponentProps) => {
 
       <MainTemplate>
         <Route path={`${PATHS.SHOPS}/detail/:id`} component={Detail} />
-        <Route
-          path={`${PATHS.SHOPS}/(area|days|keyword|tags|rankings)`}
-        >
+        <Route path={`${PATHS.SHOPS}/(area|days|keyword|tags|rankings)`}>
           test
         </Route>
       </MainTemplate>

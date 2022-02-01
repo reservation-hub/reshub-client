@@ -10,7 +10,7 @@ const DataTable = <T extends Record<string, any>>({
   const dd =
     'flex-1 text-[1.4rem] m-0 p-4 border-b-0 border-l-0 border bg-secondary-main'
   return (
-    <div className='w-[51rem] h-full border-b text-[1.6rem]'>
+    <div className='w-full h-full border-b text-[1.6rem]'>
       {cell?.map((value, index) => (
         <div className='flex' key={index}>
           <dt className={dt}>{value.column}</dt>

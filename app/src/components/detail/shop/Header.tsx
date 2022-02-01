@@ -4,6 +4,7 @@ import H1 from '@/components/common/H1'
 import { PATHS } from '@/constants/paths'
 import history from '@/utils/routers/history'
 import { IShopDetailProps } from './ShopDetail'
+import Tag from '@/components/common/Tag'
 
 const Header = ({ item }: IShopDetailProps) => {
   return (
@@ -22,6 +23,11 @@ const Header = ({ item }: IShopDetailProps) => {
             {item?.cityName}
             {item?.address}
           </span>
+          <div className='flex flex-wrap'>
+            {item?.tags?.map((v: Record<string, any>, i: number) => (
+              <Tag key={i}>{v?.slug}</Tag>
+            ))}
+          </div>
         </div>
       </div>
 

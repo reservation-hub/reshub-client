@@ -4,11 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { MatchParams } from '@components/_PropsTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOneShop } from '@/store/actions/shopAction'
-import H1 from '@/components/common/H1'
 import { RootState } from '@/store/store'
-import Button from '@/components/common/Button'
-import history from '@/utils/routers/history'
-import Box from '@/components/Template/Box'
 import ShopDetail from '@/components/detail/shop/ShopDetail'
 import { DetailMenuItem, SECTION_TYPE } from '@/constants/detail'
 
@@ -49,7 +45,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   }, [dispatch])
 
   return (
-    <Section classes='lg:w-[100rem] w-full h-full mx-auto'>
+    <Section classes='lg:w-[100rem] w-full mx-auto'>
       <ShopDetail item={shop} menuItem={menuItem} sectionType={sectionType} />
       {/* <div className='w-full h-[13rem] bg-gray-100 rounded-tl-lg rounded-tr-lg'>
         <div className='flex justify-between items-center p-5'>

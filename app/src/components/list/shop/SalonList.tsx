@@ -36,7 +36,8 @@ const SalonList = ({
           <ShopItem
             cell={[
               { type: 'header', key: 'name' },
-              { type: 'body', key: 'address' }
+              { type: 'body', key: 'address' },
+              { type: 'footer', key: 'tags' }
             ]}
             items={rowItems}
           />
@@ -49,7 +50,8 @@ const SalonList = ({
             <ShopItem
               cell={[
                 { type: 'header', key: 'name' },
-                { type: 'body', key: 'address' }
+                { type: 'body', key: 'address' },
+                { type: 'footer', key: 'tags' }
               ]}
               items={rowItems}
             />

@@ -5,6 +5,7 @@ import Card from '@/components/Template/Card'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@/constants/paths'
 import { IListDetailProps } from '@components/_PropsTypes'
+import Tag from '@/components/common/Tag'
 
 const ShopItem = <T extends Record<string, any>>({
   cell,
@@ -16,10 +17,13 @@ const ShopItem = <T extends Record<string, any>>({
   return (
     <section className='px-5 pt-5 pb-2 h-full'>
       {items?.map((item, i) => (
-        <Card key={i} classes='w-full h-[20rem] border mb-5' shadow>
-          <Link className='cursor-pointer' to={`/salon/detail/${item['id']}`}>
-            {cell.map((field, i) => (
-              <React.Fragment key={i}>
+        <Card key={i} classes='w-full border mb-5' shadow>
+          {cell.map((field, i) => (
+            <React.Fragment key={i}>
+              <Link
+                className='cursor-pointer'
+                to={`/salon/detail/${item['id']}`}
+              >
                 {field.type === 'header' && (
                   <div className='border-b-2 px-5 flex items-center justify-between'>
                     <SubTitle text={item[field.key]} />
@@ -43,14 +47,29 @@ const ShopItem = <T extends Record<string, any>>({
                     </div>
                   </div>
                 )}
-              </React.Fragment>
-            ))}
-          </Link>
-          <div className='flex justify-end px-5'>
-            <Link to={PATHS.RESERVATION} className={goToShopDetailButton}>
-              空席確認・予約
-            </Link>
-          </div>
+              </Link>
+
+              <div className='flex justify-between items-center mb-5'>
+                {field.type === 'footer' && (
+                  <>
+                    <div className='flex flex-wrap max-w-lg pl-5'>
+                      {item[field.key]?.map((v: any, i: number) => (
+                        <Tag key={i}>{v?.slug}</Tag>
+                      ))}
+                    </div>
+                    <div className='px-5'>
+                      <Link
+                        to={PATHS.RESERVATION}
+                        className={goToShopDetailButton}
+                      >
+                        空席確認・予約
+                      </Link>
+                    </div>
+                  </>
+                )}
+              </div>
+            </React.Fragment>
+          ))}
         </Card>
       ))}
     </section>
