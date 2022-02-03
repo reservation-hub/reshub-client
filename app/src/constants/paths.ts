@@ -22,7 +22,6 @@ export const PATHS = {
   MAIN: '/',
   SHOPS: '/salon',
   REVIEW: '/review',
-  CATALOG: '/catalog',
   USER: '/mypage',
   RESERVATION: '/reservation',
   LOGIN: '/login',
@@ -35,7 +34,6 @@ export const ROUTER_PATHS: TRouter[] = [
   { path: PATHS.MAIN, exact: true, component: Main },
   { path: PATHS.SHOPS, exact: false, component: Salon },
   { path: PATHS.REVIEW, exact: false },
-  { path: PATHS.CATALOG, exact: false },
   { path: PATHS.LOGIN, exact: false, component: Login },
   { path: PATHS.SIGNUP, exact: false },
   { path: PATHS.ERROR, exact: false, component: Error }
@@ -48,14 +46,11 @@ export const PRIVATE_PATHS: TRouter[] = [
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [
   { path: PATHS.SHOPS, text: '美容室' },
-  { path: PATHS.CATALOG, text: 'カタログ' },
-  { path: `${PATHS.RESERVATION}`, text: '予約管理' },
   { path: `${PATHS.USER}`, text: 'マイページ' },
   { path: PATHS.LOGOUT, text: 'ログアウト' }
 ]
 
 export const PUBLIC_MENU: { path: string; text: string }[] = [
   { path: PATHS.SHOPS, text: '美容室' },
-  { path: PATHS.CATALOG, text: 'カタログ' },
   { path: PATHS.LOGIN, text: 'ログイン' }
 ]

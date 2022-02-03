@@ -8,7 +8,6 @@ import { IListDetailProps } from '@components/_PropsTypes'
 import Tag from '@components/common/Tag'
 
 const ShopItem = <T extends Record<string, any>>({
-  cell,
   items
 }: IListDetailProps<T>) => {
   const goToShopDetailButton =
@@ -18,58 +17,36 @@ const ShopItem = <T extends Record<string, any>>({
     <section className='px-5 pt-5 pb-2 h-full'>
       {items?.map((item, i) => (
         <Card key={i} classes='w-full border mb-5' shadow>
-          {cell.map((field, i) => (
-            <React.Fragment key={i}>
-              <Link
-                className='cursor-pointer'
-                to={`/salon/detail/${item['id']}`}
-              >
-                {field.type === 'header' && (
-                  <div className='border-b-2 px-5 flex items-center justify-between'>
-                    <SubTitle text={item[field.key]} />
-                    <span>rating and reviews</span>
-                  </div>
-                )}
+          <Link className='cursor-pointer' to={`/salon/detail/${item['id']}`}>
+            <div className='border-b-2 px-5 flex items-center justify-between'>
+              <SubTitle text={item?.name} />
+              <span>rating/({item.reviewsCount})</span>
+            </div>
 
-                {field.type === 'body' && (
-                  <div className='flex px-5 py-3 w-full'>
-                    <div className='w-[10rem] h-[10rem] border-2'>
-                      <img
-                        src='img/salon.jpeg'
-                        alt=''
-                        className='w-full h-full'
-                      />
-                    </div>
-                    <div className='px-5 grid'>
-                      <span className='lg:text-[1.8rem]'>description</span>
-                      <span>{item[field.key]}</span>
-                      <ShopInfo item={item} />
-                    </div>
-                  </div>
-                )}
-              </Link>
-
-              <div className='flex justify-between items-center mb-5'>
-                {field.type === 'footer' && (
-                  <>
-                    <div className='flex flex-wrap max-w-lg pl-5'>
-                      {item[field.key]?.map((v: any, i: number) => (
-                        <Tag key={i}>{v?.slug}</Tag>
-                      ))}
-                    </div>
-                    <div className='px-5'>
-                      <Link
-                        to={PATHS.RESERVATION}
-                        className={goToShopDetailButton}
-                      >
-                        空席確認・予約
-                      </Link>
-                    </div>
-                  </>
-                )}
+            <div className='flex px-5 py-3 w-full'>
+              <div className='w-[10rem] h-[10rem] border-2'>
+                <img src='img/salon.jpeg' alt='' className='w-full h-full' />
               </div>
-            </React.Fragment>
-          ))}
+              <div className='px-5 grid'>
+                <span className='lg:text-[1.8rem]'>description</span>
+                <span>{item?.address}</span>
+                <ShopInfo item={item} />
+              </div>
+            </div>
+          </Link>
+
+          <div className='flex justify-between items-center mb-5'>
+            <div className='flex flex-wrap max-w-lg pl-5'>
+              {item?.tags?.map((v: any, i: number) => (
+                <Tag key={i}>{v?.slug}</Tag>
+              ))}
+            </div>
+            <div className='px-5'>
+              <Link to={PATHS.RESERVATION} className={goToShopDetailButton}>
+                空席確認・予約
+              </Link>
+            </div>
+          </div>
         </Card>
       ))}
     </section>

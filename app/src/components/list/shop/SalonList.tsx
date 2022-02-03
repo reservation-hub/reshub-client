@@ -1,10 +1,10 @@
 import React from 'react'
 import { IListProps } from '@components/list/_PropsType'
-import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
+import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
 
 export interface ISalonListProps extends IListProps {
   loadMore(page: number): void | undefined
@@ -36,6 +36,7 @@ const SalonList = ({
           <ShopItem
             cell={[
               { type: 'header', key: 'name' },
+              { type: 'header', key: 'reviewsCount' },
               { type: 'body', key: 'address' },
               { type: 'footer', key: 'tags' }
             ]}

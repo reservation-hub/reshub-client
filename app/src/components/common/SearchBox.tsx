@@ -11,8 +11,7 @@ import { ClassesAndChildren } from '../_PropsTypes'
 export interface ISearchBarProps extends ClassesAndChildren {
   search?: () => void
   searchFromArea?: () => void
-  searchFromStation?: () => void
-  searchFromRanking?: () => void
+  searchFromTags?: () => void
   searchFromDays?: () => void
   control?: Control<any>
   buttonClass?: string
@@ -21,7 +20,7 @@ export interface ISearchBarProps extends ClassesAndChildren {
 const SearchBox = ({
   search,
   searchFromArea,
-  searchFromRanking,
+  searchFromTags,
   searchFromDays,
   control,
   classes,
@@ -58,8 +57,8 @@ const SearchBox = ({
           <li className={buttonClass ? `${buttonClass} mb-5` : 'mb-5'}>
             <IconButton
               icon
-              onClick={searchFromRanking}
-              text='ランキングから探す'
+              onClick={searchFromTags}
+              text='タグから探す'
               classes={hoverButton}
             >
               <BiCrown className={buttonIcons} />
@@ -80,7 +79,7 @@ const SearchBox = ({
       <form className={searchInputBox}>
         <Input
           name='keyword'
-          placeholder='サロン名・エリアなど'
+          placeholder='サロン名'
           autoComplete='off'
           classes='w-full h-[4.3rem]'
           inputClasses='border-none h-[4.1rem]'
