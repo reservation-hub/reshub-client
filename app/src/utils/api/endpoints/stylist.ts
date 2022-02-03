@@ -4,18 +4,17 @@
 import instance from '@utils/api'
 import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
+import { StylistResponse } from '@utils/api/request-response-types/Shop'
 import {
-  StylistListResponse,
-  StylistResponse
-} from '@utils/api/request-response-types/Shop'
+  SalonStylistListQuery,
+  SalonStylistListResponse
+} from '../request-response-types/client/Shop'
 
 export const fetchAll = async (
-  shopId: number,
-  page: number,
-  order: 'asc' | 'desc'
-): Promise<AxiosResponse<StylistListResponse>> => {
-  return await instance.get<StylistListResponse>(
-    `${baseEndpoint.shops}/${shopId}/stylists?page=${page}&order=${order}`
+  queryParams: SalonStylistListQuery
+): Promise<AxiosResponse<SalonStylistListResponse>> => {
+  return await instance.get<SalonStylistListResponse>(
+    `${baseEndpoint.shops}/${queryParams.shopId}/stylists?page=${queryParams?.page}&order=${queryParams?.order}&take=${queryParams?.take}`
   )
 }
 

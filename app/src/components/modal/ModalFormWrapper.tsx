@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import Button from '../common/Button'
-import { IModalFormProps } from './_PropsType'
+import { IModalFormProps } from '../form/_PropsType'
 
 const ModalFormWrapper = <T extends Record<string, any>>({
   children,

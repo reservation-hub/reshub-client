@@ -3,11 +3,11 @@
 //----------------------------------
 import { ShopState, SHOPS_TYPE } from '@store/types/shopTypes'
 import { ShopAction } from '@store/actions/shopAction'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
   SalonListResponse,
   SalonResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 
 const initialState: ShopState = {
   loading: false,

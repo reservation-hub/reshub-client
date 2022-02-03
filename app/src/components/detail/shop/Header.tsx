@@ -1,10 +1,10 @@
 import React from 'react'
-import Button from '@/components/common/Button'
-import H1 from '@/components/common/H1'
-import { PATHS } from '@/constants/paths'
-import history from '@/utils/routers/history'
+import Button from '@components/common/Button'
+import H1 from '@components/common/H1'
+import { PATHS } from '@constants/paths'
+import history from '@utils/routers/history'
 import { IShopDetailProps } from './ShopDetail'
-import Tag from '@/components/common/Tag'
+import Tag from '@components/common/Tag'
 
 const Header = ({ item }: IShopDetailProps) => {
   return (

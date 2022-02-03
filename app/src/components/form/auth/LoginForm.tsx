@@ -8,7 +8,7 @@ import Input from '@components/common/Input'
 import ErrorMessage from '@components/common/ErrorMessage'
 import Button from '@components/common/Button'
 import { FcGoogle } from 'react-icons/fc'
-import ModalFormWrapper from '../ModalFormWrapper'
+import ModalFormWrapper from '../../modal/ModalFormWrapper'
 
 export interface IAuthFormProps<T> extends IModalFormProps<T> {
   googleHandler?: (

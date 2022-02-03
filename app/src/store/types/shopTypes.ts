@@ -1,11 +1,11 @@
 //----------------------------------
 // redux action types お店管理
 //----------------------------------
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
   SalonListResponse,
   SalonResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 import { DefaultState } from '../store'
 
 export const SHOPS_TYPE = {

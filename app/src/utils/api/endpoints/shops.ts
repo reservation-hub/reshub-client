@@ -45,13 +45,7 @@ export const shopsSearchToLocation = async (
   queryParams: SalonListByAreaQuery
 ): Promise<AxiosResponse<SalonListResponse>> => {
   return await instance.get<SalonListResponse>(
-    `${baseEndpoint.shops}/search/area/?page=${queryParams?.page}&areaId=${
-      queryParams?.areaId
-    }${
-      queryParams?.prefectureId
-        ? `&prefectureId=${queryParams?.prefectureId}`
-        : ''
-    }${queryParams?.cityId ? `&cityId=${queryParams?.cityId}` : ''}`
+    `${baseEndpoint.shops}/search/area/?page=${queryParams?.page}&areaId=${queryParams?.areaId}&prefectureId=${queryParams?.prefectureId}&cityId=${queryParams?.cityId}`
   )
 }
 

@@ -1,11 +1,11 @@
 import React from 'react'
-import SubTitle from '@/components/common/SubTitle'
-import ShopInfo from '@/components/list/shop/ShopInfo'
-import Card from '@/components/Template/Card'
+import SubTitle from '@components/common/SubTitle'
+import ShopInfo from '@components/list/shop/ShopInfo'
+import Card from '@components/Template/Card'
 import { Link } from 'react-router-dom'
-import { PATHS } from '@/constants/paths'
+import { PATHS } from '@constants/paths'
 import { IListDetailProps } from '@components/_PropsTypes'
-import Tag from '@/components/common/Tag'
+import Tag from '@components/common/Tag'
 
 const ShopItem = <T extends Record<string, any>>({
   cell,

@@ -7,13 +7,13 @@ import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import history from '@utils/routers/history'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
   SalonListByAreaQuery,
   SalonListQuery,
   SalonListResponse,
   SalonResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 
 // リクエストを始まる
 const shopRequestStart = () => {
@@ -126,7 +126,9 @@ export const getOneShop =
     dispatch(shopRequestStart())
     try {
       const res = await apiEndpoint.shops.getShop(id)
-      dispatch(shopGetSuccess(res.data))
+      setTimeout(() => {
+        dispatch(shopGetSuccess(res.data))
+      }, 1500)
     } catch (e) {
       history.push('/error')
     }

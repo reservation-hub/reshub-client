@@ -1,6 +1,6 @@
-import Button from '@/components/common/Button'
-import Box from '@/components/Template/Box'
-import { MenuForList } from '@/utils/api/request-response-types/client/models/Menu'
+import Button from '@components/common/Button'
+import Box from '@components/Template/Box'
+import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
 import React from 'react'
 import { IInDetailListProps } from '../_PropsType'
 

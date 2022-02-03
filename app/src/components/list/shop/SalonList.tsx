@@ -4,7 +4,7 @@ import { ShopForList } from '@utils/api/request-response-types/models/Shop'
 import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
-import Box from '@/components/Template/Box'
+import Box from '@components/Template/Box'
 
 export interface ISalonListProps extends IListProps {
   loadMore(page: number): void | undefined

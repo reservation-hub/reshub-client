@@ -10,11 +10,11 @@ import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
 import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
-import MainTemplate from '@/components/Template/MainTemplate'
-import Section from '@/components/Template/Section'
-import history from '@/utils/routers/history'
-import { PATHS } from '@/constants/paths'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
+import MainTemplate from '@components/Template/MainTemplate'
+import Section from '@components/Template/Section'
+import history from '@utils/routers/history'
+import { PATHS } from '@constants/paths'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
 
 const Main = ({
   match,

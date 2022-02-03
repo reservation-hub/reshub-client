@@ -9,7 +9,7 @@ import NavMenu from '../common/NavMenu'
 import { PRIVATE_MENU, PUBLIC_MENU } from '@constants/paths'
 import { logout } from '@store/actions/authAction'
 import Cookies from 'js-cookie'
-import { RootState } from '@/store/store'
+import { RootState } from '@store/store'
 
 export interface INavBarProps extends IModalProps {
   loading?: boolean

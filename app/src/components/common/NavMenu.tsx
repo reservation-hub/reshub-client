@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Button from './Button'
 import { INavBarProps } from '@components/Template/NavBar'
-import { PATHS } from '@/constants/paths'
+import { PATHS } from '@constants/paths'
 
 const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
   return (
