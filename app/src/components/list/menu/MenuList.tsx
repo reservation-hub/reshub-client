@@ -1,8 +1,9 @@
+import React from 'react'
+import Card from '@/components/Template/Card'
 import Button from '@components/common/Button'
 import Box from '@components/Template/Box'
 import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
-import React from 'react'
-import { IInDetailListProps } from '../_PropsType'
+import { IInDetailListProps } from '@components/list/_PropsType'
 
 const MenuList = ({
   item,
@@ -17,7 +18,7 @@ const MenuList = ({
     <Box title={boxText}>
       <div className='px-5 pb-1'>
         {item?.map((v: MenuForList, i: number) => (
-          <div key={i} className='flex justify-between border p-5 my-5'>
+          <Card key={i} shadow classes='flex justify-between border p-5 my-5 rounded-lg'>
             <div key={i} className='flex'>
               <img src='/img/menu.jpeg' alt='' className='w-28 h-28' />
 
@@ -37,7 +38,7 @@ const MenuList = ({
                 </Button>
               </div>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
       {inDetailPage && (
