@@ -61,7 +61,7 @@ export const loginStart =
         password
       })
       const token = user.data.token
-
+      console.log(token)
       Cookies.set('sessionToken', token, { expires: 1 })
       setAuthToken(token)
 
