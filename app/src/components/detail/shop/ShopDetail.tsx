@@ -7,12 +7,16 @@ import MenuList from '@components/list/menu/MenuList'
 import DataTable from '@components/common/DataTable'
 import { loadavg } from 'os'
 
-export interface IShopDetailProps extends IListProps {
+export interface IShopDetailProps<T> extends IListProps<T> {
   menuItem?: DetailMenuItem[]
   sectionType?: keyof typeof SECTION_TYPE
 }
 
-const ShopDetail = ({ item, menuItem, loading }: IShopDetailProps) => {
+const ShopDetail = <T extends SalonResponse>({
+  item,
+  menuItem,
+  loading
+}: IShopDetailProps<T>) => {
   type SalonDetail = SalonResponse & {
     businessTime: string
     seats: string
@@ -25,7 +29,7 @@ const ShopDetail = ({ item, menuItem, loading }: IShopDetailProps) => {
     address: `${item?.prefectureName}${item?.cityName}${item?.address || ''}`,
     businessTime: `${item?.startTime} - ${item?.endTime}`,
     seats: `${item?.seats}席`
-  } as SalonDetail
+  } as unknown as SalonDetail
 
   return (
     <div className='mt-10 text-primary-dark'>

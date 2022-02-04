@@ -4,6 +4,7 @@ import Error from '@pages/error/Error'
 import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
 import MyPage from '@/pages/user/MyPage'
+import { Shop } from '@/pages/shop/ShopIndex'
 
 export type TStaticContext = {
   statusCode?: number | undefined
@@ -32,7 +33,7 @@ export const PATHS = {
 
 export const ROUTER_PATHS: TRouter[] = [
   { path: PATHS.MAIN, exact: true, component: Main },
-  { path: PATHS.SHOPS, exact: false, component: Salon },
+  { path: PATHS.SHOPS, exact: false, component: Shop },
   { path: PATHS.REVIEW, exact: false },
   { path: PATHS.LOGIN, exact: false, component: Login },
   { path: PATHS.SIGNUP, exact: false },

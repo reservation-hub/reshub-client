@@ -11,10 +11,13 @@ import { getUser } from '@/store/actions/userAction'
 
 const MyPage = () => {
   const dispatch = useDispatch()
-  const { auth, user } = useSelector((state: RootState) => ({
-    auth: state.auth,
-    user: state.user
-  }), shallowEqual)
+  const { auth, user } = useSelector(
+    (state: RootState) => ({
+      auth: state.auth,
+      user: state.user
+    }),
+    shallowEqual
+  )
 
   useEffect(() => {
     dispatch(getUser())

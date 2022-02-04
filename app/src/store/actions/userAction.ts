@@ -37,8 +37,8 @@ const userRequestFailure = (msg: string) => {
   return typedAction(USER_TYPE.REQUEST_FAILURE, msg)
 }
 
-export const getUser = (): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const getUser =
+  (): ThunkAction<void, RootState, null, Action> => async (dispatch) => {
     dispatch(userRequestStart())
     try {
       const res = await apiEndpoint.users.getUser()

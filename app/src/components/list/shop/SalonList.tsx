@@ -6,18 +6,18 @@ import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
 import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
 
-export interface ISalonListProps extends IListProps {
+export interface ISalonListProps<T> extends IListProps<T> {
   loadMore(page: number): void | undefined
   more?: boolean
 }
 
-const SalonList = ({
+const SalonList = <T extends ShopForList[]>({
   item,
   loading,
   useInfinite,
   loadMore,
   more
-}: ISalonListProps) => {
+}: ISalonListProps<T>) => {
   const rowItems = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`
@@ -33,31 +33,10 @@ const SalonList = ({
           initialLoad={false}
           loader={<CardLoading key={0} />}
         >
-          <ShopItem
-            cell={[
-              { type: 'header', key: 'name' },
-              { type: 'header', key: 'reviewsCount' },
-              { type: 'body', key: 'address' },
-              { type: 'footer', key: 'tags' }
-            ]}
-            items={rowItems}
-          />
+          <ShopItem item={rowItems} />
         </InfiniteScroll>
       ) : (
-        <>
-          {loading ? (
-            <CardLoading />
-          ) : (
-            <ShopItem
-              cell={[
-                { type: 'header', key: 'name' },
-                { type: 'body', key: 'address' },
-                { type: 'footer', key: 'tags' }
-              ]}
-              items={rowItems}
-            />
-          )}
-        </>
+        <>{loading ? <CardLoading /> : <ShopItem item={rowItems} />}</>
       )}
     </Box>
   )

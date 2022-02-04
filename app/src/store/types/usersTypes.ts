@@ -13,6 +13,8 @@ export const USER_TYPE = {
   REQUEST_FAILURE: 'CLIENT_REQUEST_FAILURE'
 } as const
 
-export type UsersState = DefaultState & {
-  user: UserResponse
-}
+export type UsersState = Readonly<
+  DefaultState & {
+    user: UserResponse
+  }
+>

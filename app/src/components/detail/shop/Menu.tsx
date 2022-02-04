@@ -2,7 +2,10 @@ import React from 'react'
 import Button from '@components/common/Button'
 import { IShopDetailProps } from './ShopDetail'
 
-const Menu = ({ menuItem, sectionType }: IShopDetailProps) => {
+const Menu = <T extends any>({
+  menuItem,
+  sectionType
+}: IShopDetailProps<T>) => {
   return (
     <div className='w-full h-24 mt-2 flex items-center'>
       <ul className='flex justify-between items-center w-full px-1'>

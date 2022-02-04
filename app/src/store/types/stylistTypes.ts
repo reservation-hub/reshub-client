@@ -8,9 +8,11 @@ export const STYLIST_TYPE = {
   REQUEST_FAILURE: 'STYLIST_REQUEST_FAILURE'
 } as const
 
-export type StylistState = DefaultState & {
-  stylists: StylistForList[]
-  totalCount: number
-  page?: number
-  shopId: number
-}
+export type StylistState = Readonly<
+  DefaultState & {
+    stylists: StylistForList[]
+    totalCount: number
+    page?: number
+    shopId: number
+  }
+>

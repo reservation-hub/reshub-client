@@ -17,13 +17,15 @@ export const SHOPS_TYPE = {
   REQUEST_FAILURE: 'SHOP_REQUEST_FAILURE'
 } as const
 
-export type ShopState = DefaultState & {
-  fetchIndex: SalonListResponse
-  shops: ShopForList[]
-  totalCount: number
-  page: number
-  areaId: number
-  prefectureId: number | undefined
-  cityId: number | undefined
-  shop: SalonResponse
-}
+export type ShopState = Readonly<
+  DefaultState & {
+    fetchIndex: SalonListResponse
+    shops: ShopForList[]
+    totalCount: number
+    page: number
+    areaId: number
+    prefectureId: number | undefined
+    cityId: number | undefined
+    shop: SalonResponse
+  }
+>

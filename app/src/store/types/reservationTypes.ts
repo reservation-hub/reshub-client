@@ -14,7 +14,9 @@ export const RESERVATION_TYPE = {
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 } as const
 
-export type ReservationState = DefaultState & {
-  reservations: ReservationListResponse
-  reservation: ReservationResponse
-}
+export type ReservationState = Readonly<
+  DefaultState & {
+    reservations: ReservationListResponse
+    reservation: ReservationResponse
+  }
+>

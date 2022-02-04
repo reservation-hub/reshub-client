@@ -14,16 +14,25 @@ import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import StylistList from '@components/list/stylist/StylistList'
 import { fetchAllMenu } from '@/store/actions/menuAction'
 import MenuList from '@/components/list/menu/MenuList'
+import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
+import MainTemplate from '@/components/Template/MainTemplate'
 
 const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   const { id } = match.params
-  const { shop, stylist, menu } = useSelector((state: RootState) => ({
-    shop: state.shop.shop,
-    stylist: state.stylist,
-    menu: state.menus
-  }), shallowEqual)
   const dispatch = useDispatch()
   const convertId = Number(id)
+
+  const { shop, stylist, menu } = useSelector(
+    (state: RootState) => ({
+      shop: state.shop.shop,
+      stylist: state.stylist,
+      menu: state.menus
+    }),
+    shallowEqual
+  )
+
+  const infiniteScrollToStylistList = useInfiniteScroll(stylist.stylists)
+  const infiniteScrollToMenus = useInfiniteScroll(menu.menus)
 
   const [sectionType, setSectionType] =
     useState<keyof typeof SECTION_TYPE>('INDEX')
@@ -58,7 +67,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
       dispatch(
         fetchAllStylist({
           shopId: convertId,
-          page: 1,
+          page: infiniteScrollToStylistList.page,
           order: OrderBy.ASC
         })
       )
@@ -66,7 +75,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
       dispatch(
         fetchAllMenu({
           shopId: convertId,
-          page: 1,
+          page: infiniteScrollToMenus.page,
           order: OrderBy.ASC
         })
       )
@@ -74,31 +83,37 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   }, [dispatch, sectionType])
 
   return (
-    <Section classes='lg:w-[100rem] w-full mx-auto'>
-      <div className='h-full'>
-        <div className='w-full bg-primary rounded-tl-lg rounded-tr-lg text-secondary-main'>
-          <Header item={shop} />
-          <Menu menuItem={menuItem} sectionType={sectionType} />
+    <MainTemplate>
+      <Section classes='lg:w-[100rem] w-full mx-auto'>
+        <div className='h-full'>
+          <div className='w-full bg-primary rounded-tl-lg rounded-tr-lg text-secondary-main'>
+            <Header item={shop} />
+            <Menu menuItem={menuItem} sectionType={sectionType} />
+          </div>
+          {sectionType === SECTION_TYPE.INDEX ? (
+            <ShopDetail
+              item={shop}
+              menuItem={menuItem}
+              sectionType={sectionType}
+            />
+          ) : sectionType === SECTION_TYPE.MENU ? (
+            <div className='my-10'>
+              <MenuList item={menu.menus} boxText='メニュー一覧' />
+            </div>
+          ) : sectionType === SECTION_TYPE.STYLIST ? (
+            <div className='my-10'>
+              <StylistList
+                item={stylist.stylists}
+                loading={stylist.loading}
+                boxText='スタイリスト一覧'
+              />
+            </div>
+          ) : (
+            <div>test haha3</div>
+          )}
         </div>
-        {sectionType === SECTION_TYPE.INDEX ? (
-          <ShopDetail
-            item={shop}
-            menuItem={menuItem}
-            sectionType={sectionType}
-          />
-        ) : sectionType === SECTION_TYPE.MENU ? (
-          <div className='my-10'>
-            <MenuList item={menu.menus} boxText='メニュー一覧' />
-          </div>
-        ) : sectionType === SECTION_TYPE.STYLIST ? (
-          <div className='my-10'>
-            <StylistList item={stylist.stylists} loading={stylist.loading} boxText='スタイリスト一覧' />
-          </div>
-        ) : (
-          <div>test haha3</div>
-        )}
-      </div>
-    </Section>
+      </Section>
+    </MainTemplate>
   )
 }
 

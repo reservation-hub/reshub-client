@@ -5,12 +5,12 @@ import Box from '@components/Template/Box'
 import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
 import { IInDetailListProps } from '@components/list/_PropsType'
 
-const MenuList = ({
+const MenuList = <T extends Record<string, any>>({
   item,
   boxText,
   inDetailPage,
   gotoSection
-}: IInDetailListProps) => {
+}: IInDetailListProps<T>) => {
   const showAllButton =
     'flex justify-end p-5 border-none text-gray-main cursor-pointer text-[1.4rem]'
 

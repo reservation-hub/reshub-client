@@ -11,7 +11,9 @@ export const AUTH_TYPE = {
   LOGOUT_SUCCESS: 'LOGOUT_REQUEST_SUCCESS'
 } as const
 
-export type AuthState = DefaultState & {
-  isAuthenticated: boolean
-  user: UserForAuth
-}
+export type AuthState = Readonly<
+  DefaultState & {
+    isAuthenticated: boolean
+    user: UserForAuth
+  }
+>
