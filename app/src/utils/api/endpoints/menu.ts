@@ -4,18 +4,17 @@
 import instance from '@utils/api'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
 import { AxiosResponse } from 'axios'
+import { MenuResponse } from '@request-response-types/Shop'
 import {
-  MenuListResponse,
-  MenuResponse
-} from '@utils/api/request-response-types/Shop'
+  SalonMenuListQuery,
+  SalonMenuListResponse
+} from '@request-response-types/client/Shop'
 
 export const fetchAll = async (
-  shopId: number,
-  page: number,
-  order?: string
-): Promise<AxiosResponse<MenuListResponse>> => {
-  return await instance.get<MenuListResponse>(
-    `${baseEndpoint.shops}/${shopId}/menu?page=${page}&order=${order}`
+  queryParams: SalonMenuListQuery
+): Promise<AxiosResponse<SalonMenuListResponse>> => {
+  return await instance.get<SalonMenuListResponse>(
+    `${baseEndpoint.shops}/${queryParams.shopId}/menus?page=${queryParams.page}&order=${queryParams.order}&take=${queryParams.take}`
   )
 }
 
@@ -24,7 +23,7 @@ export const getMenu = async (
   menuId: number
 ): Promise<AxiosResponse<MenuResponse>> => {
   return await instance.get<MenuResponse>(
-    `${baseEndpoint.shops}/${shopId}/menu/${menuId}`
+    `${baseEndpoint.shops}/${shopId}/menus/${menuId}`
   )
 }
 

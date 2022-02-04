@@ -3,7 +3,7 @@ import { AiFillGithub } from 'react-icons/all'
 
 const Footer = () => {
   return (
-    <footer className='w-full h-[9rem] bottom-0 relative items-center flex bg-primary lg:p-0 p-5'>
+    <footer className='w-full h-36 mt-64 items-center flex bg-primary lg:p-0 p-5'>
       <div className='w-[100rem] mx-auto flex justify-between'>
         <span className='lg:text-[2rem] text-secondary-main'>
           Copyright© 2021 Reshub All rights reserved

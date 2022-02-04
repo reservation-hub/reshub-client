@@ -3,6 +3,7 @@ import shop from './shopReducer'
 import auth from './authReducer'
 import location from './locationReducer'
 import stylist from './stylistReducer'
+import menus from './menuReducer'
 import storage from 'redux-persist/lib/storage'
 import persistReducer from 'redux-persist/es/persistReducer'
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, auth),
   shop,
   location,
-  stylist
+  stylist,
+  menus
 })
 
 export default rootReducer

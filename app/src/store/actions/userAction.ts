@@ -7,11 +7,11 @@ import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import history from '@utils/routers/history'
+import { UserResponse } from '@utils/api/request-response-types/User'
 import {
-  UpdateUserQuery,
-  UserResponse
-} from '@utils/api/request-response-types/User'
-import { InsertUserQuery } from '@request-response-types/client/User'
+  InsertUserQuery,
+  UpdateUserQuery
+} from '@request-response-types/client/User'
 
 const userRequestStart = () => {
   return typedAction(USER_TYPE.REQUEST_START)
@@ -64,13 +64,16 @@ export const createUser =
   }
 
 export const patchUser =
-  (userData: UpdateUserQuery): ThunkAction<void, RootState, null, Action> =>
+  (
+    id: number,
+    userData: UpdateUserQuery
+  ): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(userRequestStart())
     try {
-      const res = await apiEndpoint.users.patchUser(userData)
+      const res = await apiEndpoint.users.patchUser(id, userData)
       dispatch(userPatchSuccess(res.data))
-      history.push(`/mypage/${userData.id}`)
+      history.push(`/mypage/${id}`)
     } catch (e: any) {
       const error = e.response.data
       dispatch(userRequestFailure(error))

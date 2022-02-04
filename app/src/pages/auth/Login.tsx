@@ -23,18 +23,18 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
   } = useForm<LoginSchema>({
     mode: 'onSubmit',
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: '', password: '' }
+    defaultValues: { username: '', password: '' }
   })
 
   const section =
-    errors.email && errors.password
+    errors.username && errors.password
       ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[45rem] rounded-lg'
-      : errors.email || errors.password
+      : errors.username || errors.password
       ? 'bg-secondary-main md:w-[65rem] w-[39rem] h-[43rem] rounded-lg'
       : 'bg-secondary-main md:w-[65rem] w-[39rem] h-[41rem] rounded-lg'
 
   const hasError = {
-    email: errors?.email,
+    username: errors?.username,
     password: errors?.password,
     invalid: msg
   }
@@ -42,7 +42,7 @@ const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
   const onSubmit: SubmitHandler<LoginSchema> = useCallback(
     (value) => {
       try {
-        dispatch(loginStart(value.email, value.password))
+        dispatch(loginStart(value.username, value.password))
       } finally {
         onClose()
       }

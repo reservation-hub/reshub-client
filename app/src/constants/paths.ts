@@ -43,7 +43,7 @@ export const ROUTER_PATHS: TRouter[] = [
 
 export const PRIVATE_PATHS: TRouter[] = [
   { path: PATHS.USER, exact: false, component: MyPage },
-  { path: PATHS.RESERVATION, exact: false },
+  { path: PATHS.RESERVATION, exact: false }
 ]
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [

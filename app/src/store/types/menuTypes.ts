@@ -1,7 +1,6 @@
-import {
-  MenuListResponse,
-  MenuResponse
-} from '@utils/api/request-response-types/Shop'
+import { Menu } from '@/utils/api/request-response-types/client/models/Menu'
+import { SalonMenuListResponse } from '@/utils/api/request-response-types/client/Shop'
+import { MenuResponse } from '@utils/api/request-response-types/Shop'
 import { DefaultState } from '../store'
 
 export const MENU_TYPE = {
@@ -12,6 +11,9 @@ export const MENU_TYPE = {
 } as const
 
 export type MenuState = DefaultState & {
-  menus: MenuListResponse
-  menu: MenuResponse
+  menus: Menu[]
+  totalCount: number
+  page?: number
+  shopId: number
+  // menu: MenuResponse
 }

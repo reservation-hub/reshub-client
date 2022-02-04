@@ -9,7 +9,7 @@ const MainRouter = () => {
     <Router history={history}>
       <Switch>
         {PRIVATE_PATHS.map((router, index) => (
-          <PrivateRouter 
+          <PrivateRouter
             key={index}
             path={router.path}
             exact={router.exact}

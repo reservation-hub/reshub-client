@@ -22,7 +22,12 @@ const stylistReducer = (state = initialState, action: StylistAction) => {
       return {
         ...state,
         loading: false,
-        stylists: state.stylists.filter((value) => value.shopId === action.payload.shopId).concat(action.payload.data),
+        stylists:
+          action.payload.totalCount > 10
+            ? state.stylists
+                .filter((value) => value.shopId === action.payload.shopId)
+                .concat(action.payload.data)
+            : action.payload.data,
         totalCount: action.payload.totalCount,
         page: action.payload.page,
         shopId: action.payload.shopId
