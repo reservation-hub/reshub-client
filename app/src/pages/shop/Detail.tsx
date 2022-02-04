@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Section from '@components/Template/Section'
 import { RouteComponentProps } from 'react-router-dom'
 import { MatchParams } from '@components/_PropsTypes'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getOneShop } from '@store/actions/shopAction'
 import { RootState } from '@store/store'
 import ShopDetail from '@components/detail/shop/ShopDetail'
@@ -21,7 +21,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
     shop: state.shop.shop,
     stylist: state.stylist,
     menu: state.menus
-  }))
+  }), shallowEqual)
   const dispatch = useDispatch()
   const convertId = Number(id)
 
@@ -92,7 +92,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
           </div>
         ) : sectionType === SECTION_TYPE.STYLIST ? (
           <div className='my-10'>
-            <StylistList item={stylist.stylists} boxText='スタイリスト一覧' />
+            <StylistList item={stylist.stylists} loading={stylist.loading} boxText='スタイリスト一覧' />
           </div>
         ) : (
           <div>test haha3</div>

@@ -4,17 +4,15 @@
 import instance from '@utils/api'
 import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
-import { UserResponse } from '@utils/api/request-response-types/User'
 import {
   InsertUserQuery,
   UpdateUserPasswordQuery,
-  UpdateUserQuery
+  UpdateUserQuery,
+  UserResponse
 } from '@request-response-types/client/User'
 
-export const getUser = async (
-  id: number
-): Promise<AxiosResponse<UserResponse>> => {
-  return await instance.get<UserResponse>(`${baseEndpoint.users}`)
+export const getUser = async (): Promise<AxiosResponse<UserResponse>> => {
+  return await instance.get<UserResponse>(`${baseEndpoint.users}/`)
 }
 
 export const createUser = async (

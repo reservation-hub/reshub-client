@@ -1,14 +1,24 @@
 import React, { useEffect } from 'react'
 import MainTemplate from '@/components/Template/MainTemplate'
 import { RootState } from '@/store/store'
-import { useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { PATHS } from '@/constants/paths'
 import Section from '@/components/Template/Section'
 import MyPageTop from '@/components/detail/user/MyPageTop'
+import apiEndpoint from '@/utils/api/apiEndpoint'
+import { getUser } from '@/store/actions/userAction'
 
 const MyPage = () => {
-  const { user } = useSelector((state: RootState) => state.auth)
+  const dispatch = useDispatch()
+  const { auth, user } = useSelector((state: RootState) => ({
+    auth: state.auth,
+    user: state.user
+  }), shallowEqual)
+
+  useEffect(() => {
+    dispatch(getUser())
+  }, [dispatch])
 
   return (
     <MainTemplate>
@@ -16,7 +26,7 @@ const MyPage = () => {
         <Route exact path={PATHS.USER}>
           <Section>
             <div className='w-[100rem] h-full mx-auto'>
-              <span className='mb-2'>こんにちは{user.id}さん</span>
+              <span className='mb-2'>こんにちは{auth.user.id}さん</span>
               <MyPageTop />
             </div>
           </Section>

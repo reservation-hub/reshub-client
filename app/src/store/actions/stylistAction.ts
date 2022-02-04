@@ -41,14 +41,16 @@ export const fetchAllStylist =
     dispatch(stylistRequestStart())
     try {
       const res = await apiEndpoint.stylist.fetchAll(queryParams)
-      dispatch(
-        stylistRequestSuccess(
-          res.data.values,
-          res.data.totalCount,
-          queryParams.shopId,
-          queryParams?.page
+      setTimeout(() => {
+        dispatch(
+          stylistRequestSuccess(
+            res.data.values,
+            res.data.totalCount,
+            queryParams.shopId,
+            queryParams?.page
+          )
         )
-      )
+      }, 1500)
     } catch {
       history.push('/error')
     }

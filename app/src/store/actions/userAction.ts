@@ -7,10 +7,10 @@ import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import history from '@utils/routers/history'
-import { UserResponse } from '@utils/api/request-response-types/User'
 import {
   InsertUserQuery,
-  UpdateUserQuery
+  UpdateUserQuery,
+  UserResponse
 } from '@request-response-types/client/User'
 
 const userRequestStart = () => {
@@ -21,28 +21,27 @@ const userRequestSuccess = (data: UserResponse) => {
   return typedAction(USER_TYPE.REQUEST_SUCCESS, data)
 }
 
-const userSignupSuccess = (data: string) => {
-  return typedAction(USER_TYPE.SIGNUP_SUCCESS, data)
+const userSignupSuccess = (msg: string) => {
+  return typedAction(USER_TYPE.SIGNUP_SUCCESS, msg)
 }
 
-const userPatchSuccess = (data: string) => {
-  return typedAction(USER_TYPE.EDIT_SUCCESS, data)
+const userPatchSuccess = (msg: string) => {
+  return typedAction(USER_TYPE.EDIT_SUCCESS, msg)
 }
 
 const userDeleteSuccess = (msg: string) => {
   return typedAction(USER_TYPE.DELETE_SUCCESS, msg)
 }
 
-const userRequestFailure = (err: string) => {
-  return typedAction(USER_TYPE.REQUEST_FAILURE, err)
+const userRequestFailure = (msg: string) => {
+  return typedAction(USER_TYPE.REQUEST_FAILURE, msg)
 }
 
-export const getOneUser =
-  (id: number): ThunkAction<void, RootState, null, Action> =>
+export const getUser = (): ThunkAction<void, RootState, null, Action> =>
   async (dispatch) => {
     dispatch(userRequestStart())
     try {
-      const res = await apiEndpoint.users.getUser(id)
+      const res = await apiEndpoint.users.getUser()
       dispatch(userRequestSuccess(res.data))
     } catch (e: any) {
       history.push('/error')

@@ -5,13 +5,14 @@ import StylistList from '@components/list/stylist/StylistList'
 import { IListProps } from '@components/list/_PropsType'
 import MenuList from '@components/list/menu/MenuList'
 import DataTable from '@components/common/DataTable'
+import { loadavg } from 'os'
 
 export interface IShopDetailProps extends IListProps {
   menuItem?: DetailMenuItem[]
   sectionType?: keyof typeof SECTION_TYPE
 }
 
-const ShopDetail = ({ item, menuItem }: IShopDetailProps) => {
+const ShopDetail = ({ item, menuItem, loading }: IShopDetailProps) => {
   type SalonDetail = SalonResponse & {
     businessTime: string
     seats: string
@@ -36,6 +37,7 @@ const ShopDetail = ({ item, menuItem }: IShopDetailProps) => {
           gotoSection={
             menuItem?.find((v) => v.slug === SECTION_TYPE.STYLIST)?.click
           }
+          loading={loading}
           inDetailPage
           boxText='所属スタイリスト'
         />
