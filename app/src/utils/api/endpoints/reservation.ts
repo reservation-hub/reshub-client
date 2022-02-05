@@ -5,66 +5,75 @@ import instance from '@utils/api'
 import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
-  InsertShopReservationQuery,
-  ReservationListResponse,
   ReservationResponse,
-  UpdateShopReservationQuery
-} from '@utils/api/request-response-types/Shop'
+  UserReservationListQuery,
+  UserReservationListResponse
+} from '../request-response-types/client/User'
+import {
+  SalonAvailabilityQuery,
+  SalonAvailabilityResponse,
+  SalonStylistListForReservationResponse,
+  SalonSetReservationQuery
+} from '../request-response-types/client/Shop'
 
-export const fetchReservations = async (
-  shopId: number,
-  page: number,
-  order?: string
-): Promise<AxiosResponse<ReservationListResponse>> => {
-  return await instance.get<ReservationListResponse>(
-    `${baseEndpoint.shops}/${shopId}/reservation?page=${page}&order=${order}`
+export const getReservation = async (
+  queryParams: SalonAvailabilityQuery
+): Promise<AxiosResponse<SalonAvailabilityResponse>> => {
+  return await instance.get<SalonAvailabilityResponse>(
+    `${baseEndpoint.shops}/${queryParams.shopId}/reservations?reservationDate=${queryParams.params.reservationDate}`
   )
 }
 
-export const getReservation = async (
-  shopId: number,
+export const getStylistReservation = async (
+  shopId: number
+): Promise<AxiosResponse<SalonStylistListForReservationResponse>> => {
+  return await instance.get<SalonStylistListForReservationResponse>(
+    `${baseEndpoint.shops}/${shopId}/stylists/reservation`
+  )
+}
+
+export const getUserReservations = async (
+  queryParams?: UserReservationListQuery
+): Promise<AxiosResponse<UserReservationListResponse>> => {
+  return await instance.get<UserReservationListResponse>(
+    `${baseEndpoint.users}/reservations?page=${queryParams?.page}&order=${queryParams?.order}&take=${queryParams?.take}`
+  )
+}
+
+export const getUserReservation = async (
   reservationId: number
 ): Promise<AxiosResponse<ReservationResponse>> => {
   return await instance.get<ReservationResponse>(
-    `${baseEndpoint.shops}/${shopId}/reservation/${reservationId}`
+    `${baseEndpoint.users}/reservations/${reservationId}`
+  )
+}
+
+export const deleteUserReservation = async (
+  reservationId: number
+): Promise<AxiosResponse<string>> => {
+  return await instance.delete<string>(
+    `${baseEndpoint.users}/reservations/${reservationId}`
   )
 }
 
 export const createReservation = async (
-  resData: InsertShopReservationQuery
+  queryParams: SalonSetReservationQuery
 ): Promise<AxiosResponse<string>> => {
   return await instance.post<string>(
-    `${baseEndpoint.shops}/${resData.shopId}/reservation`,
+    `${baseEndpoint.shops}/${queryParams.shopId}/reservation`,
     {
-      ...resData
+      ...queryParams.params
     }
   )
 }
 
-export const patchReservation = async (
-  resData: UpdateShopReservationQuery
-): Promise<AxiosResponse<string>> => {
-  return await instance.patch<string>(
-    `${baseEndpoint.shops}/${resData.shopId}/reservation/${resData.reservationId}`,
-    { ...resData }
-  )
-}
-
-export const deleteReservation = async (
-  shopId: number,
-  id: number
-): Promise<AxiosResponse<string>> => {
-  return await instance.delete<string>(
-    `${baseEndpoint.shops}/${shopId}/reservation/${id}`
-  )
-}
-
 const reservation = {
-  fetchReservations,
   getReservation,
+  getStylistReservation,
+  getUserReservations,
+  getUserReservation,
   createReservation,
-  patchReservation,
-  deleteReservation
+  deleteUserReservation
 }
 
 export default reservation

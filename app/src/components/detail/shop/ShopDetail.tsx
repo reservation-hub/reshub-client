@@ -5,7 +5,6 @@ import StylistList from '@components/list/stylist/StylistList'
 import { IListProps } from '@components/list/_PropsType'
 import MenuList from '@components/list/menu/MenuList'
 import DataTable from '@components/common/DataTable'
-import { loadavg } from 'os'
 
 export interface IShopDetailProps<T> extends IListProps<T> {
   menuItem?: DetailMenuItem[]

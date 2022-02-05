@@ -5,18 +5,17 @@ import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
 import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { UseInfiniteScroll } from '@/utils/hooks/useInfiniteScroll'
 
 export interface ISalonListProps<T> extends IListProps<T> {
-  loadMore(page: number): void | undefined
-  more?: boolean
+  useInfiniteScroll: UseInfiniteScroll
 }
 
 const SalonList = <T extends ShopForList[]>({
   item,
   loading,
   useInfinite,
-  loadMore,
-  more
+  useInfiniteScroll
 }: ISalonListProps<T>) => {
   const rowItems = item?.map((shop: ShopForList) => ({
     ...shop,
@@ -27,9 +26,9 @@ const SalonList = <T extends ShopForList[]>({
     <Box title='店舗一覧'>
       {useInfinite ? (
         <InfiniteScroll
-          loadMore={loadMore}
+          loadMore={useInfiniteScroll?.loadMore}
           pageStart={0}
-          hasMore={more}
+          hasMore={useInfiniteScroll?.more}
           initialLoad={false}
           loader={<CardLoading key={0} />}
         >

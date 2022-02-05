@@ -5,133 +5,162 @@ import { ThunkAction } from 'redux-thunk'
 import { RootState, typedAction } from '@store/store'
 import { RESERVATION_TYPE } from '@store/types/reservationTypes'
 import {
-  InsertShopReservationQuery,
-  ReservationListResponse,
+  SalonAvailabilityQuery,
+  SalonAvailabilityResponse,
+  SalonSetReservationQuery,
+  SalonStylistListForReservationResponse
+} from '@/utils/api/request-response-types/client/Shop'
+import {
   ReservationResponse,
-  UpdateShopReservationQuery
-} from '@utils/api/request-response-types/Shop'
+  UserReservationListQuery,
+  UserReservationListResponse
+} from '@/utils/api/request-response-types/client/User'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)
 }
 
-const reservationsRequestSuccess = (data: ReservationListResponse) => {
-  return typedAction(RESERVATION_TYPE.REQUSET_SUCCESS, data)
+const getShopReservationSuccess = (data: SalonAvailabilityResponse) => {
+  return typedAction(RESERVATION_TYPE.SHOP_RESERVATION, data)
 }
 
-const reservationGetSuccess = (data: ReservationResponse) => {
-  return typedAction(RESERVATION_TYPE.GET_ONE_SUCCESS, data)
+const getStylistReservationSuccess = (
+  data: SalonStylistListForReservationResponse
+) => {
+  return typedAction(RESERVATION_TYPE.STYLIST_RESERVATION, {
+    data: data.values,
+    totalCount: data.totalCount
+  })
 }
 
-const reservationAddSuccess = (data: string) => {
-  return typedAction(RESERVATION_TYPE.ADD_SUCCESS, data)
+const getUserReservationsSuccess = (
+  data: UserReservationListResponse,
+  page?: number
+) => {
+  return typedAction(RESERVATION_TYPE.USER_RESERVATIONS, {
+    data: data.values,
+    totalCount: data.totalCount,
+    page
+  })
 }
 
-const reservationPatchSuccess = (data: string) => {
+const getUserReservationSuccess = (data: ReservationResponse) => {
+  return typedAction(RESERVATION_TYPE.USER_RESERVATION, data)
+}
+
+const createReservationSuccess = (data: string) => {
+  return typedAction(RESERVATION_TYPE.CREATE_RESERVATION, data)
+}
+
+const patchReservationSuccess = (data: string) => {
   return typedAction(RESERVATION_TYPE.PATCH_SUCCESS, data)
 }
 
-const reservationDeleteSuccess = (data: string) => {
-  return typedAction(RESERVATION_TYPE.DELETE_SUCCESS, data)
+const deleteReservationSuccess = (data: string) => {
+  return typedAction(RESERVATION_TYPE.DELETE_RESERVATION, data)
 }
 
 const reservationRequestFailure = (msg: string) => {
   return typedAction(RESERVATION_TYPE.REQUEST_FAILURE, msg)
 }
 
-export const fetchReservations =
-  (
-    shopId: number,
-    page: number,
-    order?: string
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const getReservation = (
+  queryParams: SalonAvailabilityQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
     dispatch(reservationRequestStart())
     try {
-      const res = await apiEndpoint.reservation.fetchReservations(
-        shopId,
-        page,
-        order
-      )
-      dispatch(reservationsRequestSuccess(res.data))
+      const res = await apiEndpoint.reservation.getReservation(queryParams)
+      dispatch(getShopReservationSuccess(res.data))
     } catch {
       history.push('/error')
     }
   }
+}
 
-export const getReservation =
-  (
-    shopId: number,
-    reservationId: number
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const getStylistReservation = (
+  shopId: number
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
     dispatch(reservationRequestStart)
     try {
-      const res = await apiEndpoint.reservation.getReservation(
-        shopId,
-        reservationId
-      )
-      dispatch(reservationGetSuccess(res.data))
+      const res = await apiEndpoint.reservation.getStylistReservation(shopId)
+      dispatch(getStylistReservationSuccess(res.data))
     } catch {
       history.push('/error')
     }
   }
+}
 
-export const createReservation =
-  (
-    reservationData: InsertShopReservationQuery
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const getUserReservations = (
+  queryParams?: UserReservationListQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(reservationRequestStart())
+    try {
+      const res = await apiEndpoint.reservation.getUserReservations(queryParams)
+      dispatch(getUserReservationsSuccess(res.data, queryParams?.page))
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
+export const getUserReservation = (
+  reservationId: number
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(reservationRequestStart())
+    try {
+      const res = await apiEndpoint.reservation.getUserReservation(
+        reservationId
+      )
+      dispatch(getUserReservationSuccess(res.data))
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
+export const createReservation = (
+  reservationData: SalonSetReservationQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
     dispatch(reservationRequestStart())
     try {
       const res = await apiEndpoint.reservation.createReservation(
         reservationData
       )
-      dispatch(reservationAddSuccess(res.data))
-      history.push('/reservation', { currentPage: 1 })
+      dispatch(createReservationSuccess(res.data))
     } catch (e: any) {
       const err = e.reseponse.data
       dispatch(reservationRequestFailure(err))
     }
   }
+}
 
-export const patchReservation =
-  (
-    reservationData: UpdateShopReservationQuery
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const deleteUserReservation = (
+  shopId: number
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
     dispatch(reservationRequestStart())
     try {
-      const res = await apiEndpoint.reservation.patchReservation(
-        reservationData
-      )
-      dispatch(reservationPatchSuccess(res.data))
-      history.push(`/reservation/${reservationData.reservationId}`)
+      const res = await apiEndpoint.reservation.deleteUserReservation(shopId)
+      dispatch(createReservationSuccess(res.data))
     } catch (e: any) {
-      const err = e.response.data
+      const err = e.reseponse.data
       dispatch(reservationRequestFailure(err))
     }
   }
-
-export const deleteReservation =
-  (shopId: number, id: number): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
-    dispatch(reservationRequestStart())
-    try {
-      const res = await apiEndpoint.reservation.deleteReservation(shopId, id)
-      dispatch(reservationDeleteSuccess(res.data))
-      history.push('/reservation', { currentPage: 1 })
-    } catch (e: any) {
-      const err = e.response.data
-      dispatch(reservationRequestFailure(err))
-    }
-  }
+}
 
 export type ReservationAction =
   | ReturnType<typeof reservationRequestStart>
-  | ReturnType<typeof reservationsRequestSuccess>
-  | ReturnType<typeof reservationGetSuccess>
-  | ReturnType<typeof reservationAddSuccess>
-  | ReturnType<typeof reservationPatchSuccess>
-  | ReturnType<typeof reservationDeleteSuccess>
+  | ReturnType<typeof getShopReservationSuccess>
+  | ReturnType<typeof getStylistReservationSuccess>
+  | ReturnType<typeof getUserReservationsSuccess>
+  | ReturnType<typeof getUserReservationSuccess>
+  | ReturnType<typeof createReservationSuccess>
+  | ReturnType<typeof patchReservationSuccess>
+  | ReturnType<typeof deleteReservationSuccess>
   | ReturnType<typeof reservationRequestFailure>

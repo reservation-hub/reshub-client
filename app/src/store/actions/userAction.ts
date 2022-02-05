@@ -12,6 +12,8 @@ import {
   UpdateUserQuery,
   UserResponse
 } from '@request-response-types/client/User'
+import Cookies from 'js-cookie'
+import setAuthToken from '@/utils/api/setAuthToken'
 
 const userRequestStart = () => {
   return typedAction(USER_TYPE.REQUEST_START)
@@ -55,10 +57,21 @@ export const createUser =
     try {
       const res = await apiEndpoint.users.createUser(userData)
       dispatch(userSignupSuccess(res.data))
-      history.push('/')
+
+      if (res.data) {
+        const loginUser = await apiEndpoint.authenticated.localLogin({
+          username: userData.username,
+          password: userData.password
+        })
+
+        Cookies.set('sessionToken', loginUser.data.token, { expires: 1 })
+        setAuthToken(loginUser.data.token)
+      }
     } catch (e: any) {
       const error = e.response.data
       dispatch(userRequestFailure(error))
+    } finally {
+      history.push('/welcome')
     }
   }
 
@@ -72,7 +85,7 @@ export const patchUser =
     try {
       const res = await apiEndpoint.users.patchUser(id, userData)
       dispatch(userPatchSuccess(res.data))
-      history.push(`/mypage/${id}`)
+      history.push(`/mypage`)
     } catch (e: any) {
       const error = e.response.data
       dispatch(userRequestFailure(error))

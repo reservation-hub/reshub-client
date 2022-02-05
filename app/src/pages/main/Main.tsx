@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
-import { fetchIndexList, fetchShopList } from '@store/actions/shopAction'
-import { TCurrentPage } from '@components/list/_PropsType'
+import React, { useEffect } from 'react'
+import { fetchShopList } from '@store/actions/shopAction'
 import SalonList from '@components/list/shop/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
 import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
-import { MatchParams } from '@components/_PropsTypes'
 import { useForm } from 'react-hook-form'
 import MainTemplate from '@components/Template/MainTemplate'
 import Section from '@components/Template/Section'
 import history from '@utils/routers/history'
 import { PATHS } from '@constants/paths'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
 
-const Main = ({
-  match,
-  location
-}: RouteComponentProps<MatchParams, any, TCurrentPage>) => {
+const Main = () => {
   const dispatch = useDispatch()
-  const currentPage = location?.state?.currentPage ?? 1
-  const [page] = useState<number>(currentPage)
 
   const {
     control,
@@ -30,18 +23,18 @@ const Main = ({
     formState: { errors }
   } = useForm({})
 
-  const contestSection =
-    'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5 lg:flex lg:justify-between'
+  const contestSection = 'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5'
 
   const searchSection =
     'lg:w-[100rem] w-full md:flex justify-between lg:mx-auto px-5 pt-4 lg:p-0'
 
-  const { fetchIndex, loading } = useSelector((state: RootState) => state.shop)
+  const { shop } = useSelector((state: RootState) => state)
+
+  const { loadMore, page, more } = useInfiniteScroll(shop.shops)
 
   useEffect(() => {
-    if (match.isExact)
-      dispatch(fetchIndexList({ page: page, order: OrderBy.DESC, take: 5 }))
-  }, [page, dispatch, currentPage, match.isExact])
+    dispatch(fetchShopList({ page: page, order: OrderBy.DESC, take: 5 }))
+  }, [page, dispatch])
 
   return (
     <MainTemplate>
@@ -58,31 +51,21 @@ const Main = ({
               control={control}
               classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
               searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
+              searchFromTags={() => history.push(`${PATHS.SHOPS}/tags`)}
+              searchFromDays={() => history.push(`${PATHS.SHOPS}/days`)}
             />
           </div>
         </div>
 
         <div className={contestSection}>
-          <div className='lg:w-[60rem] w-full h-full lg:mb-0 mb-5'>
+          <div className='h-full lg:mb-0 mb-5'>
             <Box boxClass='h-[20rem] mb-4' title='ランキング'></Box>
             <SalonList
-              item={fetchIndex.values}
-              page={currentPage}
-              loading={loading}
-              loadMore={() => console.log('test')}
+              item={shop.shops}
+              loading={shop.loading}
+              useInfiniteScroll={{ loadMore, page, more }}
+              useInfinite={shop.totalCount > 5}
             />
-          </div>
-          <div className='lg:w-[38rem] w-full text-center'>
-            <Box boxClass='mb-4' title='キャンペーン'>
-              <div className='p-5'>
-                <span>準備中です。</span>
-              </div>
-            </Box>
-            <Box title='運営からのお知らせ'>
-              <div className='p-5'>
-                <span>準備中です。</span>
-              </div>
-            </Box>
           </div>
         </div>
       </Section>
