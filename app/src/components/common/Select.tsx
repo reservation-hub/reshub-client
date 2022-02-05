@@ -4,7 +4,7 @@ import { PickerProps } from '../_PropsTypes'
 import ErrorMessage from './ErrorMessage'
 import Select from 'react-select'
 
-export interface ISelectorProps extends PickerProps {
+export interface SelectorProps extends PickerProps {
   defaultValue?: string
   classNamePrefix?: string
 }
@@ -20,7 +20,7 @@ const Selector = ({
   value,
   errorText,
   classNamePrefix
-}: ISelectorProps) => {
+}: SelectorProps) => {
   const { field } = useController({ control, name })
 
   return (

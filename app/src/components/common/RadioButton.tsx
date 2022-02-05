@@ -3,7 +3,7 @@ import '@styles/global.css'
 import { useController } from 'react-hook-form'
 import { InputProps } from '../_PropsTypes'
 
-export interface IRadioButtonProps extends InputProps {
+export interface RadioButtonProps extends InputProps {
   data: Record<string, any>
 }
 
@@ -13,7 +13,7 @@ const RadioButton = ({
   label,
   classes,
   control
-}: IRadioButtonProps) => {
+}: RadioButtonProps) => {
   const { field } = useController({ control, name })
   return (
     <div className={`${classes} text-[1.6rem]`}>

@@ -1,10 +1,10 @@
 import { UseInfiniteScroll } from '@/utils/hooks/useInfiniteScroll'
 
-export interface IListProps<T> extends IUseInfiniteProps<T> {
+export interface ListProps<T> extends UseInfiniteProps<T> {
   loading?: boolean
 }
 
-export interface IUseInfiniteProps<T> extends Items<T> {
+export interface UseInfiniteProps<T> extends Items<T> {
   useInfiniteScroll: UseInfiniteScroll
 }
 

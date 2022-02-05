@@ -1,5 +1,5 @@
 import React from 'react'
-import { IListProps } from '@components/list/_PropsType'
+import { ListProps } from '@components/list/_PropsType'
 import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
@@ -9,7 +9,7 @@ import { ShopForList } from '@/utils/api/request-response-types/client/models/Sh
 const SalonList = <T extends ShopForList[]>({
   item,
   useInfiniteScroll
-}: IListProps<T>) => {
+}: ListProps<T>) => {
   const rowItems = item?.map((shop: ShopForList) => ({
     ...shop,
     address: `${shop.prefectureName}${shop.cityName}${shop.address || ''}`

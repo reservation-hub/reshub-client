@@ -6,6 +6,7 @@ import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
   SalonListByAreaQuery,
+  SalonListByNameQuery,
   SalonListQuery,
   SalonListResponse,
   SalonResponse
@@ -29,19 +30,17 @@ export const getShop = async (
   return await instance.get<SalonResponse>(`${baseEndpoint.shops}/${id}`)
 }
 
-export const shopsSearchToKeyword = async (
-  keyword: string,
-  page?: number,
-  order?: 'asc' | 'desc'
+export const searchToShopsName = async (
+  queryParams: SalonListByNameQuery
 ): Promise<AxiosResponse<SalonListResponse>> => {
   return await instance.get<SalonListResponse>(
-    baseEndpoint.shops + page
-      ? `/search/?keyword=${keyword}&page=${page}&order=${order}`
-      : `/search/?keyword=${keyword}`
+    baseEndpoint.shops + queryParams.page
+      ? `${baseEndpoint.shops}/search/name?name=${queryParams.name}&page=${queryParams.page}&order=${queryParams.order}`
+      : `${baseEndpoint.shops}/search/name?name=${queryParams.name}`
   )
 }
 
-export const shopsSearchToLocation = async (
+export const searchToShopsLocation = async (
   queryParams: SalonListByAreaQuery
 ): Promise<AxiosResponse<SalonListResponse>> => {
   return await instance.get<SalonListResponse>(
@@ -61,7 +60,8 @@ const shops = {
   fetchAll,
   getShops,
   getShop,
-  shopsSearchToLocation
+  searchToShopsLocation,
+  searchToShopsName
 }
 
 export default shops

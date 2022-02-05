@@ -3,11 +3,11 @@ import Button from '@components/common/Button'
 import H1 from '@components/common/H1'
 import { PATHS } from '@constants/paths'
 import history from '@utils/routers/history'
-import { IShopDetailProps } from './ShopDetail'
+import { ShopDetailProps } from './ShopDetail'
 import Tag from '@components/common/Tag'
 import { SalonResponse } from '@/utils/api/request-response-types/client/Shop'
 
-const Header = <T extends SalonResponse>({ item }: IShopDetailProps<T>) => {
+const Header = <T extends SalonResponse>({ item }: ShopDetailProps<T>) => {
   return (
     <div className='flex justify-between items-center p-5'>
       <div className='flex items-center'>

@@ -10,7 +10,7 @@ import Button from '@components/common/Button'
 import { FcGoogle } from 'react-icons/fc'
 import ModalFormWrapper from '../../modal/ModalFormWrapper'
 
-export interface IAuthFormProps<T> extends IModalFormProps<T> {
+export interface AuthFormProps<T> extends IModalFormProps<T> {
   googleHandler?: (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => void
@@ -23,7 +23,7 @@ const LoginForm = <T extends any>({
   subModalHandler,
   error,
   control
-}: IAuthFormProps<T>) => {
+}: AuthFormProps<T>) => {
   const googleButton =
     'w-full h-[4rem] flex items-center text-center text-secondary-main bg-primary hover:text-secondary-dark'
   const localButton =

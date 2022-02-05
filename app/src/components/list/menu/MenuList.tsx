@@ -2,9 +2,9 @@ import React from 'react'
 import Card from '@/components/Template/Card'
 import Button from '@components/common/Button'
 import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
-import { IListProps } from '@components/list/_PropsType'
+import { ListProps } from '@components/list/_PropsType'
 
-const MenuList = <T extends Record<string, any>>({ item }: IListProps<T>) => {
+const MenuList = <T extends Record<string, any>>({ item }: ListProps<T>) => {
   return (
     <div className='px-5 pb-1'>
       {item?.map((v: MenuForList, i: number) => (

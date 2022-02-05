@@ -1,9 +1,5 @@
 import React from 'react'
-import { ClassesAndChildren, TextProps } from '@components/_PropsTypes'
-
-export interface ISubTitleProps extends ClassesAndChildren {
-  subTitle?: string
-}
+import { TextProps } from '@components/_PropsTypes'
 
 const SubTitle = ({ text, classes }: TextProps) => {
   return <span className={`${classes} text-[2.4rem]`}>{text}</span>

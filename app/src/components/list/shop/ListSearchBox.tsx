@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { PATHS } from '@constants/paths'
 import history from '@utils/routers/history'
-import SearchBox, { ISearchBarProps } from '@/components/common/SearchBox'
+import SearchBox, { SearchBarProps } from '@/components/common/SearchBox'
 import Button from '@/components/common/Button'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
-const ListSearchBox = ({ control }: ISearchBarProps) => {
+const ListSearchBox = ({ control, search }: SearchBarProps) => {
   const [open, setOpen] = useState<boolean>(false)
 
   return (
@@ -28,6 +28,7 @@ const ListSearchBox = ({ control }: ISearchBarProps) => {
             searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
             searchFromTags={() => history.push(`${PATHS.SHOPS}/tags`)}
             searchFromDays={() => history.push(`${PATHS.SHOPS}/days`)}
+            search={search}
           />
           <footer className='text-gray-main mt-5'>
             <span>Copyright© 2021 Reshub All rights reserved</span>

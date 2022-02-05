@@ -23,9 +23,10 @@ export type ShopState = Readonly<
     shops: ShopForList[]
     totalCount: number
     page: number
-    areaId: number
-    prefectureId: number | undefined
-    cityId: number | undefined
+    areaId?: number
+    prefectureId?: number
+    cityId?: number
+    name?: string
     shop: SalonResponse
   }
 >

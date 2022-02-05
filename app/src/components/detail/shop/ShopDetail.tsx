@@ -1,14 +1,12 @@
 import React from 'react'
 import { DetailMenuItem, SECTION_TYPE } from '@constants/detail'
 import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
-import StylistList from '@components/list/stylist/StylistList'
-import { IListProps, Items } from '@components/list/_PropsType'
-import MenuList from '@components/list/menu/MenuList'
+import { Items } from '@components/list/_PropsType'
 import DataTable from '@components/common/DataTable'
 import Box from '@/components/Template/Box'
-import StylistItem from '@/components/list/stylist/StylistItme'
+import StylistItem from '@/components/list/stylist/StylistItem'
 
-export interface IShopDetailProps<T> extends Items<T> {
+export interface ShopDetailProps<T> extends Items<T> {
   menuItem?: DetailMenuItem[]
   sectionType?: keyof typeof SECTION_TYPE
 }
@@ -17,7 +15,7 @@ const ShopDetail = <T extends SalonResponse>({
   item,
   menuItem,
   loading
-}: IShopDetailProps<T>) => {
+}: ShopDetailProps<T>) => {
   type SalonDetail = SalonResponse & {
     businessTime: string
     seats: string

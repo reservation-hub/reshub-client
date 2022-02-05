@@ -1,20 +1,20 @@
 import React from 'react'
 import Box from '@/components/Template/Box'
-import { IListProps, Items } from '@/components/list/_PropsType'
+import { Items } from '@/components/list/_PropsType'
 import DataTable from '@/components/common/DataTable'
 import { MypageSubItems, UserDetail } from '@/pages/user/MyPage'
 import Card from '@/components/Template/Card'
 import ReservationItem from '@/components/list/reservation/ReservationItem'
 import SubTitle from '@/components/common/SubTitle'
 
-export interface IMypageTopProps<T> extends Items<T> {
+export interface MypageTopProps<T> extends Items<T> {
   subItems?: MypageSubItems
 }
 
 const MypageTop = <T extends UserDetail>({
   item,
   subItems
-}: IMypageTopProps<T>) => {
+}: MypageTopProps<T>) => {
   return (
     <div className='mt-5 w-[69%]'>
       <Box title='会員情報' boxClass='mb-4'>

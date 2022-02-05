@@ -1,11 +1,11 @@
 import LinkCard from '@/components/common/LinkCard'
 import { PATHS } from '@/constants/paths'
 import React from 'react'
-import { IListProps } from '../_PropsType'
+import { ListProps } from '../_PropsType'
 
 const VisitedItem = <T extends { id: string; name: string }>({
   item
-}: IListProps<T>) => {
+}: ListProps<T>) => {
   return (
     <LinkCard
       url={`${PATHS.SHOPS}/detail/${item?.id}`}

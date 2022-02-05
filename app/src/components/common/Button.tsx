@@ -1,12 +1,12 @@
 import React from 'react'
 import { ClassesAndChildren } from '@components/_PropsTypes'
 
-export interface IButtonProps extends ClassesAndChildren {
+export interface ButtonProps extends ClassesAndChildren {
   disabled?: boolean
   onClick?: () => void
 }
 
-const Button = ({ children, classes, onClick, disabled }: IButtonProps) => {
+const Button = ({ children, classes, onClick, disabled }: ButtonProps) => {
   return (
     <>
       <button

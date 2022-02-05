@@ -10,6 +10,7 @@ import history from '@utils/routers/history'
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
   SalonListByAreaQuery,
+  SalonListByNameQuery,
   SalonListQuery,
   SalonListResponse,
   SalonResponse
@@ -36,9 +37,10 @@ const shopSearchSuccess = (
   data: ShopForList[],
   totalCount: number,
   page: number,
-  areaId: number,
+  areaId?: number,
   prefectureId?: number,
-  cityId?: number
+  cityId?: number,
+  name?: string
 ) => {
   return typedAction(SHOPS_TYPE.SEARCH_SUCCESS, {
     data,
@@ -46,7 +48,8 @@ const shopSearchSuccess = (
     page,
     areaId,
     prefectureId,
-    cityId
+    cityId,
+    name
   })
 }
 
@@ -94,6 +97,30 @@ export const fetchShopList =
     }
   }
 
+export const searchToShopsName = (
+  queryParams: SalonListByNameQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(shopRequestStart())
+    try {
+      const res = await apiEndpoint.shops.searchToShopsName(queryParams)
+      dispatch(
+        shopSearchSuccess(
+          res.data.values,
+          res.data.totalCount,
+          Number(queryParams.page),
+          undefined,
+          undefined,
+          undefined,
+          queryParams.name
+        )
+      )
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
 export const searchShopsToLocation =
   (
     queryParams: SalonListByAreaQuery
@@ -101,7 +128,7 @@ export const searchShopsToLocation =
   async (dispatch) => {
     dispatch(shopRequestStart())
     try {
-      const res = await apiEndpoint.shops.shopsSearchToLocation(queryParams)
+      const res = await apiEndpoint.shops.searchToShopsLocation(queryParams)
       setTimeout(() => {
         dispatch(
           shopSearchSuccess(
