@@ -64,7 +64,6 @@ const Main = () => {
               item={shop.shops}
               loading={shop.loading}
               useInfiniteScroll={{ loadMore, page, more }}
-              useInfinite={shop.totalCount > 5}
             />
           </div>
         </div>

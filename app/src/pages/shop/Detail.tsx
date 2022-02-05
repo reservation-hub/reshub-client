@@ -16,6 +16,7 @@ import { fetchAllMenu } from '@/store/actions/menuAction'
 import MenuList from '@/components/list/menu/MenuList'
 import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
 import MainTemplate from '@/components/Template/MainTemplate'
+import Box from '@/components/Template/Box'
 
 const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   const { id } = match.params
@@ -80,7 +81,11 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
         })
       )
     }
-  }, [dispatch, sectionType])
+  }, [
+    sectionType,
+    infiniteScrollToStylistList.page,
+    infiniteScrollToMenus.page
+  ])
 
   return (
     <MainTemplate>
@@ -98,15 +103,26 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
             />
           ) : sectionType === SECTION_TYPE.MENU ? (
             <div className='my-10'>
-              <MenuList item={menu.menus} boxText='メニュー一覧' />
+              <Box title={`${shop.name}のメニュー`}>
+                <MenuList
+                  item={menu.menus}
+                  loading={menu.loading}
+                  useInfiniteScroll={infiniteScrollToMenus}
+                />
+              </Box>
             </div>
           ) : sectionType === SECTION_TYPE.STYLIST ? (
             <div className='my-10'>
-              <StylistList
-                item={stylist.stylists}
-                loading={stylist.loading}
-                boxText='スタイリスト一覧'
-              />
+              <div className='text-rose-500 mb-5'>
+                {stylist.totalCount}人のスタイリストがいます
+              </div>
+              <Box title={`${shop.name}のスタイリスト`}>
+                <StylistList
+                  item={stylist.stylists}
+                  loading={stylist.loading}
+                  useInfiniteScroll={infiniteScrollToStylistList}
+                />
+              </Box>
             </div>
           ) : (
             <div>test haha3</div>

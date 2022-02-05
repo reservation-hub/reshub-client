@@ -2,11 +2,13 @@ import React from 'react'
 import { DetailMenuItem, SECTION_TYPE } from '@constants/detail'
 import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
 import StylistList from '@components/list/stylist/StylistList'
-import { IListProps } from '@components/list/_PropsType'
+import { IListProps, Items } from '@components/list/_PropsType'
 import MenuList from '@components/list/menu/MenuList'
 import DataTable from '@components/common/DataTable'
+import Box from '@/components/Template/Box'
+import StylistItem from '@/components/list/stylist/StylistItme'
 
-export interface IShopDetailProps<T> extends IListProps<T> {
+export interface IShopDetailProps<T> extends Items<T> {
   menuItem?: DetailMenuItem[]
   sectionType?: keyof typeof SECTION_TYPE
 }
@@ -20,6 +22,9 @@ const ShopDetail = <T extends SalonResponse>({
     businessTime: string
     seats: string
   }
+
+  const showAllButton =
+    'flex justify-end p-5 border-none text-gray-main cursor-pointer text-[1.4rem]'
 
   const detailItem = {
     ...item,
@@ -35,26 +40,36 @@ const ShopDetail = <T extends SalonResponse>({
       <div className='w-full'>DESCRIPTION</div>
 
       <div className='my-10'>
-        <StylistList
-          item={detailItem?.stylists}
-          gotoSection={
-            menuItem?.find((v) => v.slug === SECTION_TYPE.STYLIST)?.click
-          }
-          loading={loading}
-          inDetailPage
-          boxText='所属スタイリスト'
-        />
+        <Box title={`${item?.name}のスタイリスト`}>
+          <StylistItem key={0} item={item?.stylists} />
+          <div
+            className={showAllButton}
+            onClick={
+              menuItem?.find((v) => v.slug === SECTION_TYPE.STYLIST)?.click
+            }
+          >
+            全てのスタイリストを見る
+          </div>
+        </Box>
       </div>
 
       <div className='my-10'>
-        <MenuList
+        <Box title={`${item?.name}のおすすめメニュー`}>
+          <div
+            className={showAllButton}
+            onClick={menuItem?.find((v) => v.slug === SECTION_TYPE.MENU)?.click}
+          >
+            全てのメニューを見る
+          </div>
+        </Box>
+        {/* <MenuList
           item={detailItem?.menus}
           gotoSection={
             menuItem?.find((v) => v.slug === SECTION_TYPE.MENU)?.click
           }
           inDetailPage
           boxText='当店のメニュー'
-        />
+        /> */}
       </div>
 
       <div className='my-10'>

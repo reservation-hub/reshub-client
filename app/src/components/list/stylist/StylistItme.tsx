@@ -3,13 +3,13 @@ import Card from '@components/Template/Card'
 import { StylistForList } from '@utils/api/request-response-types/client/models/Stylist'
 import { BiUserCircle } from 'react-icons/bi'
 import Button from '@components/common/Button'
-import { IListProps } from '@components/list/_PropsType'
+import { Items } from '@components/list/_PropsType'
 import Skeleton from '@/components/common/Skeleton'
 
 const StylistItem = <T extends StylistForList[]>({
   item,
   loading
-}: IListProps<T>) => {
+}: Items<T>) => {
   return (
     <div className='flex flex-wrap justify-between px-5 pb-5 text-[1.4rem]'>
       {item?.map((v, i) => (

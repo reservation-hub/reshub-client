@@ -1,17 +1,20 @@
-import { IPaginateProps } from '@components/common/Paginate'
+import { UseInfiniteScroll } from '@/utils/hooks/useInfiniteScroll'
 
-export interface IListProps<T> extends IPaginateProps {
-  item?: T
+export interface IListProps<T> extends IUseInfiniteProps<T> {
   loading?: boolean
-  useInfinite?: boolean
 }
 
-export interface IInDetailListProps<T> extends IListProps<T> {
+export interface IUseInfiniteProps<T> extends Items<T> {
+  useInfiniteScroll: UseInfiniteScroll
+}
+
+export interface Items<T> {
+  item?: T
+  loading?: boolean
+}
+
+export interface IInDetailListProps<T> extends Items<T> {
   boxText?: string
   inDetailPage?: boolean
   gotoSection?: () => void
-}
-
-export type TCurrentPage = {
-  currentPage: number
 }

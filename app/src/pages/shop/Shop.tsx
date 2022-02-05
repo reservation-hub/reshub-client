@@ -38,7 +38,6 @@ const Shop = () => {
       <SalonList
         item={shop.shops}
         loading={shop.loading}
-        useInfinite
         useInfiniteScroll={{ loadMore, page, more }}
       />
     </SubTemplate>

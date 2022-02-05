@@ -6,13 +6,11 @@ import {
   ReservationForList,
   ReservationStatus
 } from '@/utils/api/request-response-types/client/models/Reservation'
-import { IListProps } from '@components/list/_PropsType'
+import { Items } from '@components/list/_PropsType'
 import useConvertStatus from '@/utils/hooks/useConvertStatus'
 import useConvertTime from '@utils/hooks/useConvertTime'
 
-const ReservationItem = <T extends ReservationForList>({
-  item
-}: IListProps<T>) => {
+const ReservationItem = <T extends ReservationForList>({ item }: Items<T>) => {
   const statusColor =
     item?.status === ReservationStatus.RESERVED
       ? 'bg-yellow-400'
