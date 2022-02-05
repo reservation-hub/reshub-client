@@ -2,9 +2,9 @@ import React from 'react'
 import TableRow from './TableRow'
 import history from '@utils/routers/history'
 import Paginate from './Paginate'
-import { IListDetailProps } from '../_PropsTypes'
+import { ListDetailProps } from '../_PropsTypes'
 
-interface ITableProps<T> extends IListDetailProps<T> {
+interface TableProps<T> extends ListDetailProps<T> {
   url?: string
   subParams?: boolean
 }
@@ -19,7 +19,7 @@ const Table = <T extends Record<string, any>>({
   pageChangeHandler,
   usePaginate,
   classes
-}: ITableProps<T>): React.ReactElement => {
+}: TableProps<T>): React.ReactElement => {
   const styled = 'w-full bg-secondary-main rounded p-[10rem] mb-5'
 
   return (

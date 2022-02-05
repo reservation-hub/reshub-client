@@ -3,11 +3,11 @@
 //----------------------------------
 import { ShopState, SHOPS_TYPE } from '@store/types/shopTypes'
 import { ShopAction } from '@store/actions/shopAction'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
   SalonListResponse,
   SalonResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 
 const initialState: ShopState = {
   loading: false,
@@ -18,6 +18,7 @@ const initialState: ShopState = {
   areaId: 0,
   prefectureId: 0,
   cityId: 0,
+  name: '',
   shop: {} as SalonResponse,
   msg: ''
 }
@@ -52,7 +53,8 @@ const shopReducer = (state = initialState, action: ShopAction) => {
         page: action.payload.page,
         areaId: action.payload.areaId,
         prefectureId: action.payload.prefectureId,
-        cityId: action.payload.cityId
+        cityId: action.payload.cityId,
+        name: action.payload.name
       }
     case SHOPS_TYPE.GET_SUCCESS:
       return {

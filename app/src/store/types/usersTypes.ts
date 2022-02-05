@@ -1,10 +1,7 @@
 //----------------------------------
 // redux action types お店管理
 //----------------------------------
-import {
-  UserListResponse,
-  UserResponse
-} from '@utils/api/request-response-types/User'
+import { UserResponse } from '@/utils/api/request-response-types/client/User'
 import { DefaultState } from '../store'
 
 export const USER_TYPE = {
@@ -16,7 +13,8 @@ export const USER_TYPE = {
   REQUEST_FAILURE: 'CLIENT_REQUEST_FAILURE'
 } as const
 
-export type UsersState = DefaultState & {
-  users: UserListResponse
-  user: UserResponse
-}
+export type UsersState = Readonly<
+  DefaultState & {
+    user: UserResponse
+  }
+>

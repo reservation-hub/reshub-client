@@ -1,9 +1,7 @@
 import React from 'react'
-import Button from './Button'
-import { ClassesAndChildren } from '@components/_PropsTypes'
+import Button, { ButtonProps } from './Button'
 
-export interface IIconhButtonProps extends ClassesAndChildren {
-  onClick?: () => void
+export interface IconButtonProps extends ButtonProps {
   icon?: boolean
   text?: string
 }
@@ -14,7 +12,7 @@ const IconButton = ({
   text,
   children,
   classes
-}: IIconhButtonProps) => {
+}: IconButtonProps) => {
   return (
     <div className={classes}>
       <Button

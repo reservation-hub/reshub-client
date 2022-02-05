@@ -15,7 +15,7 @@ const persistConfig = {
   key: 'root',
   timeout: 500,
   storage,
-  blacklist: ['auth', 'dashboard', 'location', 'shop', 'user']
+  blacklist: ['auth', 'location', 'shop', 'user', 'stylist']
 }
 
 const middleware =

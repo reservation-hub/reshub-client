@@ -1,5 +1,11 @@
 import { useState } from 'react'
 
+export type UseInfiniteScroll = {
+  loadMore: () => void
+  more: boolean
+  page: number
+}
+
 const useInfiniteScroll = <V>(values: V[]) => {
   const [page, setPage] = useState<number>(1)
   const [more, setMore] = useState<boolean>(true)

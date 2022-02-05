@@ -1,11 +1,11 @@
 //----------------------------------
 // redux action types お店管理
 //----------------------------------
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
   SalonListResponse,
   SalonResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 import { DefaultState } from '../store'
 
 export const SHOPS_TYPE = {
@@ -17,13 +17,16 @@ export const SHOPS_TYPE = {
   REQUEST_FAILURE: 'SHOP_REQUEST_FAILURE'
 } as const
 
-export type ShopState = DefaultState & {
-  fetchIndex: SalonListResponse
-  shops: ShopForList[]
-  totalCount: number
-  page: number
-  areaId: number
-  prefectureId: number | undefined
-  cityId: number | undefined
-  shop: SalonResponse
-}
+export type ShopState = Readonly<
+  DefaultState & {
+    fetchIndex: SalonListResponse
+    shops: ShopForList[]
+    totalCount: number
+    page: number
+    areaId?: number
+    prefectureId?: number
+    cityId?: number
+    name?: string
+    shop: SalonResponse
+  }
+>

@@ -13,15 +13,16 @@ function App() {
   const refreshToken: string = Cookies.get('refreshToken') ?? ''
   setAuthToken(sessionToken)
 
-  if (!authToken && !sessionToken && !refreshToken) {
-    history.push('/auth')
-  }
+  // if (!authToken && !sessionToken && !refreshToken) {
+  //   history.push('/auth')
+  // }
 
   useEffect(() => {
     if (!authToken && !sessionToken && refreshToken) {
       dispatch(silentLogin())
     }
   }, [dispatch, sessionToken, authToken, refreshToken])
+
   return <MainRouter />
 }
 

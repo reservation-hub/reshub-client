@@ -5,15 +5,14 @@ import instance from '@utils/api'
 import { AxiosResponse } from 'axios'
 import { baseEndpoint } from '@utils/api/apiEndpoint'
 import {
+  InsertUserQuery,
+  UpdateUserPasswordQuery,
   UpdateUserQuery,
   UserResponse
-} from '@utils/api/request-response-types/User'
-import { InsertUserQuery } from '@request-response-types/client/User'
+} from '@request-response-types/client/User'
 
-export const getUser = async (
-  id: number
-): Promise<AxiosResponse<UserResponse>> => {
-  return await instance.get<UserResponse>(`${baseEndpoint.users}/${id}`)
+export const getUser = async (): Promise<AxiosResponse<UserResponse>> => {
+  return await instance.get<UserResponse>(`${baseEndpoint.users}/`)
 }
 
 export const createUser = async (
@@ -25,10 +24,11 @@ export const createUser = async (
 }
 
 export const patchUser = async (
+  id: number,
   userData: UpdateUserQuery
 ): Promise<AxiosResponse<string>> => {
-  return await instance.patch<string>(`${baseEndpoint.users}/${userData.id}`, {
-    ...userData.params
+  return await instance.patch<string>(`${baseEndpoint.users}/${id}`, {
+    ...userData
   })
 }
 
@@ -38,11 +38,21 @@ export const deleteUser = async (
   return await instance.delete<string>(`${baseEndpoint.users}/${id}`)
 }
 
+export const changePassword = async (
+  password: UpdateUserPasswordQuery
+): Promise<AxiosResponse<string>> => {
+  return await instance.patch<string>(
+    `${baseEndpoint.users}/password`,
+    password
+  )
+}
+
 const users = {
   getUser,
   createUser,
   patchUser,
-  deleteUser
+  deleteUser,
+  changePassword
 }
 
 export default users

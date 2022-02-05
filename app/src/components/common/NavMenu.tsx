@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Button from './Button'
-import { INavBarProps } from '@components/Template/NavBar'
-import { PATHS } from '@/constants/paths'
+import { NavBarProps } from '@components/Template/NavBar'
+import { PATHS } from '@constants/paths'
 
-const NavMenu = ({ loading, onClose, menuItem }: INavBarProps) => {
+const NavMenu = ({ loading, onClose, menuItem }: NavBarProps) => {
   return (
     <div className='flex text-secondary-main mt-1 md:items-center'>
       {menuItem?.map((values, index) => (

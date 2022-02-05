@@ -45,7 +45,7 @@ export interface InputProps extends ClassesAndChildren {
   >
 }
 
-export interface IListDetailProps<T> extends IPaginateProps {
+export interface ListDetailProps<T> extends IPaginateProps {
   cell: { type?: string; column?: string; key: keyof T }[]
   items?: T[]
   item?: T

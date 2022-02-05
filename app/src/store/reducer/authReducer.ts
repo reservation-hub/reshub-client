@@ -1,7 +1,7 @@
 //----------------------------------
 // redux reducer ユーザー印証
 //----------------------------------
-import { AuthState, AUTH_TYPE } from '@store/types/authTypes'
+import { AuthState, AUTH_TYPE } from '@/store/types/authTypes'
 import { AuthAction } from '@store/actions/authAction'
 import { UserForAuth } from '@utils/api/request-response-types/models/User'
 

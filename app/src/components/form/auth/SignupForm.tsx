@@ -3,7 +3,7 @@ import Button from '@components/common/Button'
 import Input from '@components/common/Input'
 import { IModalFormProps } from '@components/form/_PropsType'
 import { SignupSchema } from './authValidation'
-import ModalFormWrapper from '../ModalFormWrapper'
+import ModalFormWrapper from '../../modal/ModalFormWrapper'
 
 const SignupForm = <T extends SignupSchema>({
   control,

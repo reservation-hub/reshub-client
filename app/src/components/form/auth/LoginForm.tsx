@@ -8,9 +8,9 @@ import Input from '@components/common/Input'
 import ErrorMessage from '@components/common/ErrorMessage'
 import Button from '@components/common/Button'
 import { FcGoogle } from 'react-icons/fc'
-import ModalFormWrapper from '../ModalFormWrapper'
+import ModalFormWrapper from '../../modal/ModalFormWrapper'
 
-export interface IAuthFormProps<T> extends IModalFormProps<T> {
+export interface AuthFormProps<T> extends IModalFormProps<T> {
   googleHandler?: (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => void
@@ -23,12 +23,12 @@ const LoginForm = <T extends any>({
   subModalHandler,
   error,
   control
-}: IAuthFormProps<T>) => {
+}: AuthFormProps<T>) => {
   const googleButton =
     'w-full h-[4rem] flex items-center text-center text-secondary-main bg-primary hover:text-secondary-dark'
   const localButton =
     'w-full h-[4rem] mt-7 mb-6 bg-primary text-secondary-main hover:text-secondary-dark'
-
+  console.log(error)
   return (
     <ModalFormWrapper
       pageType='login'
@@ -37,14 +37,14 @@ const LoginForm = <T extends any>({
       subModalHandler={subModalHandler}
     >
       <Input
-        id='email'
-        name='email'
+        id='username'
+        name='username'
         autoComplete='off'
-        label='メールアドレス'
+        label='ユーザー名'
         classes='mt-2 mb-3'
         control={control}
-        error={error?.email}
-        errorText={error?.email?.message}
+        error={error?.username}
+        errorText={error?.username?.message}
         fullWidth
       />
       <Input
