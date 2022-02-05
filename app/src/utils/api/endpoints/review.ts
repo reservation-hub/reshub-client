@@ -65,4 +65,4 @@ const review = {
   deleteReview
 }
 
-export default review;
+export default review

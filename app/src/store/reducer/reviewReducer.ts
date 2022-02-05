@@ -1,7 +1,7 @@
-import review from "@/utils/api/endpoints/review";
-import { Review } from "@/utils/api/request-response-types/client/models/Review";
-import { ReviewAction } from "../actions/reviewAction";
-import { ReviewState, REVIEW_TYPE } from "../types/reviewTypes";
+import review from '@/utils/api/endpoints/review'
+import { Review } from '@/utils/api/request-response-types/client/models/Review'
+import { ReviewAction } from '../actions/reviewAction'
+import { ReviewState, REVIEW_TYPE } from '../types/reviewTypes'
 
 const initialState: ReviewState = {
   loading: false,
@@ -23,7 +23,10 @@ const reviewReducer = (state = initialState, action: ReviewAction) => {
       return {
         ...state,
         loading: false,
-        reviews: action.payload.totalCount > 10 ? state.reviews.concat(action.payload.data) : action.payload.data,
+        reviews:
+          action.payload.totalCount > 10
+            ? state.reviews.concat(action.payload.data)
+            : action.payload.data,
         totalCount: action.payload.totalCount,
         page: action.payload.page
       }
@@ -56,7 +59,7 @@ const reviewReducer = (state = initialState, action: ReviewAction) => {
         ...state,
         loading: false,
         msg: action.payload
-      }  
+      }
     default:
       return state
   }

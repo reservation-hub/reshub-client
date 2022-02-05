@@ -1,18 +1,28 @@
-import apiEndpoint from "@/utils/api/apiEndpoint"
-import { Review } from "@/utils/api/request-response-types/client/models/Review"
-import { SalonReviewDeleteQuery, SalonReviewInsertQuery, SalonReviewListQuery, SalonReviewListResponse, SalonReviewUpdateQuery } from "@/utils/api/request-response-types/client/Shop"
-import history from "@/utils/routers/history"
-import { Action } from "redux"
-import { ThunkAction } from "redux-thunk"
-import { RootState, typedAction } from "../store"
-import { REVIEW_TYPE } from "../types/reviewTypes"
+import apiEndpoint from '@/utils/api/apiEndpoint'
+import { Review } from '@/utils/api/request-response-types/client/models/Review'
+import {
+  SalonReviewDeleteQuery,
+  SalonReviewInsertQuery,
+  SalonReviewListQuery,
+  SalonReviewListResponse,
+  SalonReviewUpdateQuery
+} from '@/utils/api/request-response-types/client/Shop'
+import history from '@/utils/routers/history'
+import { Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+import { RootState, typedAction } from '../store'
+import { REVIEW_TYPE } from '../types/reviewTypes'
 
 const reviewRequestStart = () => {
   return typedAction(REVIEW_TYPE.REQUEST_START)
 }
 
 const getReviewsSuccess = (data: SalonReviewListResponse, page?: number) => {
-  return typedAction(REVIEW_TYPE.GET_REVIEWS, { data: data.values, totalCount: data.totalCount, page })
+  return typedAction(REVIEW_TYPE.GET_REVIEWS, {
+    data: data.values,
+    totalCount: data.totalCount,
+    page
+  })
 }
 
 const getReviewSuccess = (data: Review) => {
@@ -106,9 +116,7 @@ export const deleteReview = (
   }
 }
 
-
-
-export type ReviewAction = 
+export type ReviewAction =
   | ReturnType<typeof reviewRequestStart>
   | ReturnType<typeof getReviewsSuccess>
   | ReturnType<typeof getReviewSuccess>

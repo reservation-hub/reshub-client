@@ -1,5 +1,5 @@
-import { Review } from "@/utils/api/request-response-types/client/models/Review"
-import { DefaultState } from "../store"
+import { Review } from '@/utils/api/request-response-types/client/models/Review'
+import { DefaultState } from '../store'
 
 export const REVIEW_TYPE = {
   REQUEST_START: 'REVIEW_REQUEST_START',
@@ -11,9 +11,11 @@ export const REVIEW_TYPE = {
   REQUEST_FAILURE: 'REVIEW_REQUEST_FAILURE'
 } as const
 
-export type ReviewState = Readonly<DefaultState & {
-  reviews: Review[]
-  review: Review
-  totalCount: number
-  page?: number
-}>
+export type ReviewState = Readonly<
+  DefaultState & {
+    reviews: Review[]
+    review: Review
+    totalCount: number
+    page?: number
+  }
+>
