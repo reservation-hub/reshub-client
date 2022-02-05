@@ -6,6 +6,7 @@ import location from '@utils/api/endpoints/location'
 import reservation from '@utils/api/endpoints/reservation'
 import stylist from '@utils/api/endpoints/stylist'
 import menu from '@utils/api/endpoints/menu'
+import review from '@utils/api/endpoints/review'
 
 //-----------------------------------------------
 // get method
@@ -30,6 +31,7 @@ const apiEndpoint = {
   reservation,
   stylist,
   menu,
+  review,
   instance
 }
 

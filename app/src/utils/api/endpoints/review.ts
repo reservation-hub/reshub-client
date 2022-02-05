@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios'
 import instance from '..'
 import { baseEndpoint } from '../apiEndpoint'
+import { Review } from '../request-response-types/client/models/Review'
 import {
-  ReviewParams,
   SalonReviewDeleteQuery,
   SalonReviewInsertQuery,
   SalonReviewListQuery,
@@ -25,8 +25,8 @@ export const getReviews = async (
 export const getReview = async (
   shopId: number,
   reviewId: number
-): Promise<AxiosResponse<SalonReviewListResponse>> => {
-  return await instance.get<SalonReviewListResponse>(
+): Promise<AxiosResponse<Review>> => {
+  return await instance.get<Review>(
     `${baseEndpoint.shops}/${shopId}/reviews/${reviewId}`
   )
 }
@@ -56,3 +56,13 @@ export const deleteReview = async (
     `${baseEndpoint.shops}/${queryParams.shopId}/reviews/${queryParams.reviewId}`
   )
 }
+
+const review = {
+  getReviews,
+  getReview,
+  createReview,
+  patchReview,
+  deleteReview
+}
+
+export default review;
