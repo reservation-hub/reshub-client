@@ -1,8 +1,8 @@
-import { PATHS } from '@/constants/paths'
-import { ReservationForList } from '@/utils/api/request-response-types/client/models/Reservation'
-import { StylistListForReservation } from '@/utils/api/request-response-types/client/models/Stylist'
-import { SalonAvailabilityResponse } from '@/utils/api/request-response-types/client/Shop'
-import { ReservationResponse } from '@/utils/api/request-response-types/client/User'
+import { PATHS } from '@constants/paths'
+import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation'
+import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
+import { SalonAvailabilityResponse } from '@utils/api/request-response-types/client/Shop'
+import { ReservationResponse } from '@utils/api/request-response-types/client/User'
 import { ReservationAction } from '@store/actions/reservationAction'
 import { ReservationState, RESERVATION_TYPE } from '@store/types/reservationTypes'
 

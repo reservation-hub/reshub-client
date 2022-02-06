@@ -1,6 +1,6 @@
 import React from 'react';
-import SubTitle from '@/components/common/SubTitle';
-import { ReservationForList } from '@/utils/api/request-response-types/client/models/Reservation';
+import SubTitle from '@components/common/SubTitle';
+import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation';
 import { Items } from '../_PropsType';
 
 const ReservationInfo = <T extends ReservationForList>({ item, classes }: Items<T>) => {

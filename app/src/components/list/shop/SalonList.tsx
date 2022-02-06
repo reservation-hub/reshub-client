@@ -4,7 +4,7 @@ import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 
 const SalonList = <T extends ShopForList[]>({
   item,

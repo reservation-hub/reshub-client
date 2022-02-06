@@ -13,7 +13,7 @@ import {
   UserResponse
 } from '@request-response-types/client/User'
 import Cookies from 'js-cookie'
-import setAuthToken from '@/utils/api/setAuthToken'
+import setAuthToken from '@utils/api/setAuthToken'
 
 const userRequestStart = () => {
   return typedAction(USER_TYPE.REQUEST_START)

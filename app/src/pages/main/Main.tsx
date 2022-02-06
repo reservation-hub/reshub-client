@@ -11,7 +11,7 @@ import MainTemplate from '@components/Template/MainTemplate'
 import history from '@utils/routers/history'
 import { PATHS } from '@constants/paths'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
-import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
+import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 
 const Main = () => {
   const dispatch = useDispatch()

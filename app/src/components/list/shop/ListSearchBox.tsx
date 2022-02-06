@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { PATHS } from '@constants/paths'
 import history from '@utils/routers/history'
-import SearchBox, { SearchBarProps } from '@/components/common/SearchBox'
-import Button from '@/components/common/Button'
+import SearchBox, { SearchBarProps } from '@components/common/SearchBox'
+import Button from '@components/common/Button'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 const ListSearchBox = ({ control, search }: SearchBarProps) => {

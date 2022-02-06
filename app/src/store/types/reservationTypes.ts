@@ -1,7 +1,7 @@
-import { ReservationForList } from '@/utils/api/request-response-types/client/models/Reservation'
-import { StylistListForReservation } from '@/utils/api/request-response-types/client/models/Stylist'
-import { SalonAvailabilityResponse } from '@/utils/api/request-response-types/client/Shop'
-import { ReservationResponse } from '@/utils/api/request-response-types/client/User'
+import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation'
+import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
+import { SalonAvailabilityResponse } from '@utils/api/request-response-types/client/Shop'
+import { ReservationResponse } from '@utils/api/request-response-types/client/User'
 import { DefaultState } from '../store'
 
 export const RESERVATION_TYPE = {

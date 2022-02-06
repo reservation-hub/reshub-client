@@ -9,12 +9,12 @@ import {
   SalonAvailabilityResponse,
   SalonSetReservationQuery,
   SalonStylistListForReservationResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 import {
   ReservationResponse,
   UserReservationListQuery,
   UserReservationListResponse
-} from '@/utils/api/request-response-types/client/User'
+} from '@utils/api/request-response-types/client/User'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)

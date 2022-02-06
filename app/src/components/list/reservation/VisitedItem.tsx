@@ -1,5 +1,5 @@
-import LinkCard from '@/components/common/LinkCard'
-import { PATHS } from '@/constants/paths'
+import LinkCard from '@components/common/LinkCard'
+import { PATHS } from '@constants/paths'
 import React from 'react'
 import { ListProps } from '../_PropsType'
 

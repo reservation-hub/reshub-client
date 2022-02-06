@@ -1,7 +1,6 @@
-import review from '@/utils/api/endpoints/review'
-import { Review } from '@/utils/api/request-response-types/client/models/Review'
-import { ReviewAction } from '../actions/reviewAction'
-import { ReviewState, REVIEW_TYPE } from '../types/reviewTypes'
+import { Review } from '@utils/api/request-response-types/client/models/Review'
+import { ReviewAction } from '@store/actions/reviewAction'
+import { ReviewState, REVIEW_TYPE } from '@store/types/reviewTypes'
 
 const initialState: ReviewState = {
   loading: false,

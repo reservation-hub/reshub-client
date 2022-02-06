@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
-import MainTemplate from '@/components/Template/MainTemplate'
-import { RootState } from '@/store/store'
+import MainTemplate from '@components/Template/MainTemplate'
+import { RootState } from '@store/store'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { getUser } from '@/store/actions/userAction'
-import { getUserReservations } from '@/store/actions/reservationAction'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
-import { UserResponse } from '@/utils/api/request-response-types/client/User'
-import MypageMenu from '@/components/detail/user/MypageMenu'
+import { getUser } from '@store/actions/userAction'
+import { getUserReservations } from '@store/actions/reservationAction'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import { UserResponse } from '@utils/api/request-response-types/client/User'
+import MypageMenu from '@components/detail/user/MypageMenu'
 import {
   ReservationForList,
   ReservationStatus
-} from '@/utils/api/request-response-types/client/models/Reservation'
-import MypageTop from '@/components/detail/user/MypageTop'
+} from '@utils/api/request-response-types/client/models/Reservation'
+import MypageTop from '@components/detail/user/MypageTop'
 
 export type UserDetail = UserResponse & {
   kanaName: string

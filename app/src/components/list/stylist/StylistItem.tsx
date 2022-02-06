@@ -1,10 +1,10 @@
 import React from 'react'
-import CardTemplate from '@/components/Template/CardTemplate'
+import CardTemplate from '@components/Template/CardTemplate'
 import { StylistForList } from '@utils/api/request-response-types/client/models/Stylist'
 import { BiUserCircle } from 'react-icons/bi'
 import Button from '@components/common/Button'
 import { Items } from '@components/list/_PropsType'
-import Skeleton from '@/components/common/Skeleton'
+import Skeleton from '@components/common/Skeleton'
 
 const StylistItem = <T extends StylistForList[]>({
   item,

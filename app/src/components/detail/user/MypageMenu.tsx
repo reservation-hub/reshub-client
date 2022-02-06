@@ -1,4 +1,4 @@
-import { MYPAGE_MENU } from '@/constants/paths'
+import { MYPAGE_MENU } from '@constants/paths'
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 

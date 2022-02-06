@@ -1,6 +1,6 @@
 import { StylistForList } from '@utils/api/request-response-types/client/models/Stylist'
-import { StylistAction } from '../actions/stylistAction'
-import { StylistState, STYLIST_TYPE } from '../types/stylistTypes'
+import { StylistAction } from '@store/actions/stylistAction'
+import { StylistState, STYLIST_TYPE } from '@store/types/stylistTypes'
 
 const initialState: StylistState = {
   loading: false,

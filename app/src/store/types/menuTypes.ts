@@ -1,4 +1,4 @@
-import { Menu } from '@/utils/api/request-response-types/client/models/Menu'
+import { Menu } from '@utils/api/request-response-types/client/models/Menu'
 import { DefaultState } from '../store'
 
 export const MENU_TYPE = {

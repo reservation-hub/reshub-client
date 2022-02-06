@@ -1,4 +1,4 @@
-import { Review } from '@/utils/api/request-response-types/client/models/Review'
+import { Review } from '@utils/api/request-response-types/client/models/Review'
 import { DefaultState } from '../store'
 
 export const REVIEW_TYPE = {

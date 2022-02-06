@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import {
   ReservationForList,
   ReservationStatus
-} from '@/utils/api/request-response-types/client/models/Reservation'
+} from '@utils/api/request-response-types/client/models/Reservation'
 import { Items } from '@components/list/_PropsType'
-import useConvertStatus from '@/utils/hooks/useConvertStatus'
+import useConvertStatus from '@utils/hooks/useConvertStatus'
 import useConvertTime from '@utils/hooks/useConvertTime'
-import CardTemplate from '@/components/Template/CardTemplate'
-import Button from '@/components/common/Button'
-import ModalOverlay from '@/components/modal/ModalOverlay'
-import ModalAlert from '@/components/modal/ModalAlert'
-import { useModal } from '@/utils/hooks/useModal'
+import CardTemplate from '@components/Template/CardTemplate'
+import Button from '@components/common/Button'
+import ModalOverlay from '@components/modal/ModalOverlay'
+import ModalAlert from '@components/modal/ModalAlert'
+import { useModal } from '@utils/hooks/useModal'
 import ReservationInfo from './ReservationInfo'
 
 export interface ReservationItemProps<T> extends Items<T> {

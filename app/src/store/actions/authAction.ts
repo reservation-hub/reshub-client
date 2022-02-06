@@ -1,7 +1,7 @@
 //----------------------------------
 // redux action ユーザー印証管理関数
 //----------------------------------
-import { AUTH_TYPE } from '@/store/types/authTypes'
+import { AUTH_TYPE } from '@store/types/authTypes'
 import { RootState, typedAction } from '@store/store'
 import { GoogleLoginResponse } from 'react-google-login'
 import { ThunkAction } from 'redux-thunk'

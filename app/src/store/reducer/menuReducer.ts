@@ -1,6 +1,6 @@
-import { Menu } from '@/utils/api/request-response-types/client/models/Menu'
-import { MenuAction } from '../actions/menuAction'
-import { MenuState, MENU_TYPE } from '../types/menuTypes'
+import { Menu } from '@utils/api/request-response-types/client/models/Menu'
+import { MenuAction } from '@store/actions/menuAction'
+import { MenuState, MENU_TYPE } from '@store/types/menuTypes'
 
 const initialState: MenuState = {
   loading: false,
