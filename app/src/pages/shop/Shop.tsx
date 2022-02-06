@@ -1,18 +1,20 @@
 import React, { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import SubTemplate from '@components/Template/SubTemplate'
-import ListSearchBox from '@/components/list/shop/ListSearchBox'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
-import SalonList from '@/components/list/shop/SalonList'
+import ListSearchBox from '@components/list/shop/ListSearchBox'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import SalonList from '@components/list/shop/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchShopList, searchToShopsName } from '@/store/actions/shopAction'
-import { RootState } from '@/store/store'
-import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
+import { fetchShopList, searchToShopsName } from '@store/actions/shopAction'
+import { RootState } from '@store/store'
+import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import {
   searchToShopsNameSchema,
   SearchToShopsNameSchema
-} from '@/components/form/shop/searchSchema'
+} from '@components/form/shop/searchSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import history from '@utils/routers/history'
+import { PATHS } from '@constants/paths'
 
 const Shop = () => {
   const dispatch = useDispatch()
@@ -23,7 +25,6 @@ const Shop = () => {
   const {
     control,
     handleSubmit,
-    watch,
     formState: { errors }
   } = useForm<SearchToShopsNameSchema>({
     mode: 'onSubmit',
@@ -35,20 +36,21 @@ const Shop = () => {
 
   const onSubmit: SubmitHandler<SearchToShopsNameSchema> = useCallback(
     (value) => {
-      console.log('tets')
-      dispatch(
-        searchToShopsName({
-          page: page,
-          order: OrderBy.DESC,
-          take: 10,
-          name: value.keyword
-        })
-      )
+      // dispatch(
+      //   searchToShopsName({
+      //     page: page,
+      //     order: OrderBy.DESC,
+      //     take: 10,
+      //     name: value.keyword
+      //   })
+      // )
+      history.push(`${PATHS.SHOPS}/keyword/${value.keyword}`, {
+        keyword: value.keyword
+      })
     },
     [dispatch]
   )
 
-  console.log(watch())
   useEffect(() => {
     dispatch(
       fetchShopList({

@@ -3,8 +3,8 @@ import { DetailMenuItem, SECTION_TYPE } from '@constants/detail'
 import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
 import { Items } from '@components/list/_PropsType'
 import DataTable from '@components/common/DataTable'
-import Box from '@/components/Template/Box'
-import StylistItem from '@/components/list/stylist/StylistItem'
+import Box from '@components/Template/Box'
+import StylistItem from '@components/list/stylist/StylistItem'
 
 export interface ShopDetailProps<T> extends Items<T> {
   menuItem?: DetailMenuItem[]

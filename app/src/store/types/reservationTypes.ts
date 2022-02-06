@@ -1,7 +1,7 @@
-import { ReservationForList } from '@/utils/api/request-response-types/client/models/Reservation'
-import { StylistListForReservation } from '@/utils/api/request-response-types/client/models/Stylist'
-import { SalonAvailabilityResponse } from '@/utils/api/request-response-types/client/Shop'
-import { ReservationResponse } from '@/utils/api/request-response-types/client/User'
+import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation'
+import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
+import { SalonAvailabilityResponse } from '@utils/api/request-response-types/client/Shop'
+import { ReservationResponse } from '@utils/api/request-response-types/client/User'
 import { DefaultState } from '../store'
 
 export const RESERVATION_TYPE = {
@@ -11,7 +11,7 @@ export const RESERVATION_TYPE = {
   USER_RESERVATIONS: 'USER_RESERVATIONS_GET_SUCCESS',
   USER_RESERVATION: 'USER_RESERVATION_GET_SUCCESS',
   CREATE_RESERVATION: 'RESERVATION_CREATE_SUCCESS',
-  PATCH_SUCCESS: 'PATCH_SUCCESS',
+  PATCH_RESERVATION: 'PATCH_SUCCESS',
   DELETE_RESERVATION: 'RESERVATION_DELETE_SUCCESS',
   REQUEST_FAILURE: 'RESERVATION_REQUEST_FAILURE'
 } as const

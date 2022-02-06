@@ -9,12 +9,12 @@ import {
   SalonAvailabilityResponse,
   SalonSetReservationQuery,
   SalonStylistListForReservationResponse
-} from '@/utils/api/request-response-types/client/Shop'
+} from '@utils/api/request-response-types/client/Shop'
 import {
   ReservationResponse,
   UserReservationListQuery,
   UserReservationListResponse
-} from '@/utils/api/request-response-types/client/User'
+} from '@utils/api/request-response-types/client/User'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)
@@ -53,7 +53,7 @@ const createReservationSuccess = (data: string) => {
 }
 
 const patchReservationSuccess = (data: string) => {
-  return typedAction(RESERVATION_TYPE.PATCH_SUCCESS, data)
+  return typedAction(RESERVATION_TYPE.PATCH_RESERVATION, data)
 }
 
 const deleteReservationSuccess = (data: string) => {
@@ -140,15 +140,17 @@ export const createReservation = (
 }
 
 export const deleteUserReservation = (
-  shopId: number
+  reservationId: number
 ): ThunkAction<void, RootState, null, Action> => {
   return async (dispatch) => {
     dispatch(reservationRequestStart())
     try {
-      const res = await apiEndpoint.reservation.deleteUserReservation(shopId)
-      dispatch(createReservationSuccess(res.data))
+      const res = await apiEndpoint.reservation.deleteUserReservation(
+        reservationId
+      )
+      dispatch(deleteReservationSuccess(res.data))
     } catch (e: any) {
-      const err = e.reseponse.data
+      const err = e
       dispatch(reservationRequestFailure(err))
     }
   }

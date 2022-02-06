@@ -9,9 +9,6 @@ const StylistList = <T extends StylistForList[]>({
   loading,
   useInfiniteScroll
 }: ListProps<T>) => {
-  const showAllButton =
-    'flex justify-end p-5 border-none text-gray-main cursor-pointer text-[1.4rem]'
-
   return (
     <>
       <InfiniteScroll

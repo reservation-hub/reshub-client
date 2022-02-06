@@ -8,9 +8,9 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createUser } from '@store/actions/userAction'
 import SignupForm from '@components/form/auth/SignupForm'
-import { ILoginPorps } from './Login'
+import { LoginPorps } from './Login'
 
-const Signup = ({ onClose, subModalHandler }: ILoginPorps) => {
+const Signup = ({ onClose, subModalHandler }: LoginPorps) => {
   const dispatch = useDispatch()
 
   const {

@@ -1,7 +1,7 @@
 //----------------------------------
 // redux action types お店管理
 //----------------------------------
-import { UserResponse } from '@/utils/api/request-response-types/client/User'
+import { UserResponse } from '@utils/api/request-response-types/client/User'
 import { DefaultState } from '../store'
 
 export const USER_TYPE = {

@@ -4,7 +4,7 @@ import ShopItem from '@components/list/shop/ShopItem'
 import CardLoading from './CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 
 const SalonList = <T extends ShopForList[]>({
   item,
@@ -18,9 +18,9 @@ const SalonList = <T extends ShopForList[]>({
   return (
     <Box title='店舗一覧'>
       <InfiniteScroll
-        loadMore={useInfiniteScroll?.loadMore}
+        loadMore={useInfiniteScroll.loadMore}
         pageStart={0}
-        hasMore={useInfiniteScroll?.more}
+        hasMore={useInfiniteScroll.more}
         initialLoad={false}
         loader={<CardLoading key={0} />}
       >

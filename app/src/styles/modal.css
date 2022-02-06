@@ -1,6 +1,6 @@
 .modal-overlay {
   background: rgba(0,0,0,0.2);
-  @apply w-full h-full z-[9999] absolute overflow-hidden inset-0 animate-fade-in-down;
+  @apply w-full h-screen z-[9999] absolute overflow-hidden inset-0 animate-fade-in-down;
 }
 
 .modal-container {

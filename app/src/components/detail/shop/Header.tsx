@@ -5,7 +5,7 @@ import { PATHS } from '@constants/paths'
 import history from '@utils/routers/history'
 import { ShopDetailProps } from './ShopDetail'
 import Tag from '@components/common/Tag'
-import { SalonResponse } from '@/utils/api/request-response-types/client/Shop'
+import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
 
 const Header = <T extends SalonResponse>({ item }: ShopDetailProps<T>) => {
   return (

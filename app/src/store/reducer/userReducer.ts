@@ -1,6 +1,6 @@
-import { UserResponse } from '@/utils/api/request-response-types/client/User'
-import { UserAction } from '../actions/userAction'
-import { UsersState, USER_TYPE } from '../types/usersTypes'
+import { UserResponse } from '@utils/api/request-response-types/client/User'
+import { UserAction } from '@store/actions/userAction'
+import { UsersState, USER_TYPE } from '@store/types/usersTypes'
 
 const initialState: UsersState = {
   loading: false,

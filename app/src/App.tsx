@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import Cookies from 'js-cookie'
 import { silentLogin } from '@store/actions/authAction'
 import setAuthToken from '@utils/api/setAuthToken'
-import history from './utils/routers/history'
 
 function App() {
   const dispatch = useDispatch()
@@ -12,10 +11,6 @@ function App() {
   const authToken: string = Cookies.get('authToken') ?? ''
   const refreshToken: string = Cookies.get('refreshToken') ?? ''
   setAuthToken(sessionToken)
-
-  // if (!authToken && !sessionToken && !refreshToken) {
-  //   history.push('/auth')
-  // }
 
   useEffect(() => {
     if (!authToken && !sessionToken && refreshToken) {

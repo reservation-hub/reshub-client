@@ -1,5 +1,5 @@
 import React from 'react'
-import CardTemplate from '@/components/Template/CardTemplate'
+import CardTemplate from '@components/Template/CardTemplate'
 import Button from '@components/common/Button'
 import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
 import { ListProps } from '@components/list/_PropsType'

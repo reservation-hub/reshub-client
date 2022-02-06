@@ -3,14 +3,14 @@ import GoogleLogin, {
   GoogleLoginResponse,
   GoogleLoginResponseOffline
 } from 'react-google-login'
-import { IModalFormProps } from '@components/form/_PropsType'
+import { ModalFormProps } from '@components/form/_PropsType'
 import Input from '@components/common/Input'
 import ErrorMessage from '@components/common/ErrorMessage'
 import Button from '@components/common/Button'
 import { FcGoogle } from 'react-icons/fc'
 import ModalFormWrapper from '../../modal/ModalFormWrapper'
 
-export interface AuthFormProps<T> extends IModalFormProps<T> {
+export interface AuthFormProps<T> extends ModalFormProps<T> {
   googleHandler?: (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => void
@@ -28,7 +28,6 @@ const LoginForm = <T extends any>({
     'w-full h-[4rem] flex items-center text-center text-secondary-main bg-primary hover:text-secondary-dark'
   const localButton =
     'w-full h-[4rem] mt-7 mb-6 bg-primary text-secondary-main hover:text-secondary-dark'
-  console.log(error)
   return (
     <ModalFormWrapper
       pageType='login'

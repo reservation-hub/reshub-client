@@ -4,8 +4,9 @@ import { ThunkAction } from 'redux-thunk'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import { Action } from 'redux'
 import history from '@utils/routers/history'
-import { Menu } from '@/utils/api/request-response-types/client/models/Menu'
-import { SalonMenuListQuery } from '@/utils/api/request-response-types/client/Shop'
+import { Menu } from '@utils/api/request-response-types/client/models/Menu'
+import { SalonMenuListQuery } from '@utils/api/request-response-types/client/Shop'
+import { PopularMenusResponse } from '@/utils/api/request-response-types/client/Menu'
 
 const menuRequsetStart = () => {
   return typedAction(MENU_TYPE.REQUEST_START)
@@ -17,7 +18,7 @@ const fetchAllSuccess = (
   shopId: number,
   page?: number
 ) => {
-  return typedAction(MENU_TYPE.REQUEST_SUCCESS, {
+  return typedAction(MENU_TYPE.GET_MENUS, {
     data,
     totalCount,
     shopId,
@@ -25,19 +26,18 @@ const fetchAllSuccess = (
   })
 }
 
-// const getSuccess = (data: MenuResponse) => {
-//   return typedAction(MENU_TYPE.GET_SUCCESS, data)
-// }
+const getPopularMenuSuccess = (data: PopularMenusResponse) => {
+  return typedAction(MENU_TYPE.GET_POPULAR_MENU, data)
+}
 
 const requestFailure = (data: string) => {
   return typedAction(MENU_TYPE.REQUEST_FAILURE, data)
 }
 
-export const fetchAllMenu =
-  (
-    queryParams: SalonMenuListQuery
-  ): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const fetchAllMenu = (
+  queryParams: SalonMenuListQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
     dispatch(menuRequsetStart())
     try {
       const res = await apiEndpoint.menu.fetchAll(queryParams)
@@ -53,24 +53,27 @@ export const fetchAllMenu =
       history.push('/error')
     }
   }
+}
 
-// export const getMenu =
-//   (
-//     shopId: number,
-//     menuId: number
-//   ): ThunkAction<void, RootState, null, Action> =>
-//   async (dispatch) => {
-//     dispatch(menuRequsetStart())
-//     try {
-//       const res = await apiEndpoint.menu.getMenu(shopId, menuId)
-//       dispatch(getSuccess(res.data))
-//     } catch {
-//       history.push('/error')
-//     }
-//   }
+export const getPopularMenu = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  Action
+> => {
+  return async (dispatch) => {
+    dispatch(menuRequsetStart())
+    try {
+      const res = await apiEndpoint.menu.getPopularMenu()
+      dispatch(getPopularMenuSuccess(res.data))
+    } catch (e: any) {
+      console.log(e.response)
+    }
+  }
+}
 
 export type MenuAction =
   | ReturnType<typeof menuRequsetStart>
   | ReturnType<typeof fetchAllSuccess>
-  // | ReturnType<typeof getSuccess>
+  | ReturnType<typeof getPopularMenuSuccess>
   | ReturnType<typeof requestFailure>

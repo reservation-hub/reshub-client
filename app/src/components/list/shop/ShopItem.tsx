@@ -1,15 +1,15 @@
 import React from 'react'
 import SubTitle from '@components/common/SubTitle'
-import CardTemplate from '@/components/Template/CardTemplate'
+import CardTemplate from '@components/Template/CardTemplate'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import Tag from '@components/common/Tag'
-import { ShopForList } from '@/utils/api/request-response-types/client/models/Shop'
+import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import { Items } from '../_PropsType'
-import IconText from '@/components/common/IconText'
+import IconText from '@components/common/IconText'
 import { AiOutlineClockCircle, AiOutlinePhone } from 'react-icons/ai'
 import { IoCut } from 'react-icons/io5'
-import Image from '@/components/common/Image'
+import Image from '@components/common/Image'
 
 const ShopItem = <T extends ShopForList[]>({ item }: Items<T>) => {
   const goToShopDetailButton =

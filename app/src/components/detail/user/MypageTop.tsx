@@ -1,16 +1,16 @@
 import React from 'react'
-import Box from '@/components/Template/Box'
-import { Items } from '@/components/list/_PropsType'
-import DataTable from '@/components/common/DataTable'
-import { MypageSubItems, UserDetail } from '@/pages/user/MyPage'
-import CardTemplate from '@/components/Template/CardTemplate'
-import ReservationItem from '@/components/list/reservation/ReservationItem'
-import SubTitle from '@/components/common/SubTitle'
+import Box from '@components/Template/Box'
+import { Items } from '@components/list/_PropsType'
+import DataTable from '@components/common/DataTable'
+import { MypageSubItems, UserDetail } from '@pages/user/MyPage'
+import CardTemplate from '@components/Template/CardTemplate'
+import ReservationItem from '@components/list/reservation/ReservationItem'
+import SubTitle from '@components/common/SubTitle'
 import { Link } from 'react-router-dom'
-import { PATHS } from '@/constants/paths'
-import EmptyData from '@/components/common/EmptyData'
-import Image from '@/components/common/Image'
-import Button from '@/components/common/Button'
+import { PATHS } from '@constants/paths'
+import EmptyData from '@components/common/EmptyData'
+import Image from '@components/common/Image'
+import Button from '@components/common/Button'
 
 export interface MypageTopProps<T> extends Items<T> {
   subItems?: MypageSubItems
@@ -21,17 +21,19 @@ const MypageTop = <T extends UserDetail>({
   subItems
 }: MypageTopProps<T>) => {
   return (
-    <div className='mt-5 w-[69%]'>
-      <Box title='会員情報' boxClass='mb-4'>
+    <div className='lg:w-[69rem] w-full'>
+      <span className='text-gray-main'>こんにちは{item?.username}さん</span>
+      <Box title='会員情報' boxClass='my-4'>
         <DataTable
           cell={[
             { column: 'メールアドレス', key: 'email' },
+            { column: 'ユーザー名', key: 'username' },
             { column: 'お名前（カナ）', key: 'kanaName' },
             { column: '性別', key: 'gender' },
             { column: '生年月日', key: 'birthday' }
           ]}
           item={item}
-          classes='bg-primary text-secondary-main w-[20rem]'
+          classes='bg-primary text-secondary-main lg:w-[20rem] w-[10rem]'
         />
       </Box>
       <Box title='予約一覧' boxClass='mb-4 pb-5'>
@@ -39,10 +41,8 @@ const MypageTop = <T extends UserDetail>({
           <EmptyData text='予約' />
         ) : (
           <>
-            {subItems?.reservation.map((v, i) => (
-              <ReservationItem key={i} item={v} />
-            ))}
-            <div className='flex justify-end pr-5 text-gray-main'>
+            <ReservationItem item={subItems?.reservation} />
+            <div className='flex justify-end pr-5 text-gray-main lg:m-0 mt-4'>
               <Link to={`${PATHS.USER}/reservations`}>全ての予約を見る</Link>
             </div>
           </>

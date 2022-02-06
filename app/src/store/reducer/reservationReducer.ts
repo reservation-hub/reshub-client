@@ -1,9 +1,13 @@
-import { ReservationForList } from '@/utils/api/request-response-types/client/models/Reservation'
-import { StylistListForReservation } from '@/utils/api/request-response-types/client/models/Stylist'
-import { SalonAvailabilityResponse } from '@/utils/api/request-response-types/client/Shop'
-import { ReservationResponse } from '@/utils/api/request-response-types/client/User'
-import { ReservationAction } from '../actions/reservationAction'
-import { ReservationState, RESERVATION_TYPE } from '../types/reservationTypes'
+import { PATHS } from '@constants/paths'
+import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation'
+import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
+import { SalonAvailabilityResponse } from '@utils/api/request-response-types/client/Shop'
+import { ReservationResponse } from '@utils/api/request-response-types/client/User'
+import { ReservationAction } from '@store/actions/reservationAction'
+import {
+  ReservationState,
+  RESERVATION_TYPE
+} from '@store/types/reservationTypes'
 
 const initialState: ReservationState = {
   loading: false,
@@ -43,10 +47,10 @@ const reservationReducer = (
       return {
         ...state,
         loading: false,
-        userReservations:
-          action.payload.totalCount > 5 && action.payload.data.length >= 5
-            ? state.userReservations.concat(action.payload.data)
-            : action.payload.data,
+        userReservations: action.payload.data,
+        // location.pathname === `${PATHS.USER}/reservations`
+        //   ? state.userReservations.concat(action.payload.data)
+        //   : action.payload.data,
         totalCount: action.payload.totalCount,
         page: action.payload.page
       }
@@ -56,7 +60,7 @@ const reservationReducer = (
         loading: false,
         userReservation: action.payload
       }
-    case RESERVATION_TYPE.CREATE_RESERVATION:
+    case RESERVATION_TYPE.DELETE_RESERVATION:
       return {
         ...state,
         loading: false,

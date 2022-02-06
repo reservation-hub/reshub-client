@@ -6,11 +6,11 @@ const DataTable = <T extends Record<string, any>>({
   item,
   classes
 }: ListDetailProps<T>) => {
-  const dt = `${classes} font-bold border-r-0 p-4 border-b-0 border-primary bg-table-header`
+  const dt = `${classes} font-bold border-r-0 p-4 border-b-0 border-primary bg-table-header lg:text-[1.6rem] text-[1.2rem] whitespace-nowrap`
   const dd =
-    'flex-1 text-[1.4rem] m-0 p-4 border-b-0 border-l-0 border bg-secondary-main'
+    'flex-1 lg:text-[1.4rem] text-[1.2rem]  whitespace-nowrap m-0 p-4 border-b-0 border-l-0 border bg-secondary-main'
   return (
-    <div className='w-full h-full border-b text-[1.6rem]'>
+    <div className='w-full h-full border-b'>
       {cell?.map((value, index) => (
         <div className='flex' key={index}>
           <dt className={dt}>{value.column}</dt>

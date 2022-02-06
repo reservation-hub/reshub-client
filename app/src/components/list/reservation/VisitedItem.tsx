@@ -1,7 +1,7 @@
-import LinkCard from '@/components/common/LinkCard'
-import { PATHS } from '@/constants/paths'
+import LinkCard from '@components/common/LinkCard'
+import { PATHS } from '@constants/paths'
 import React from 'react'
-import { ListProps } from '../_PropsType'
+import { ListProps } from '@components/list/_PropsType'
 
 const VisitedItem = <T extends { id: string; name: string }>({
   item

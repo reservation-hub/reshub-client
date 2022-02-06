@@ -1,5 +1,5 @@
 import Skeleton from '@components/common/Skeleton'
-import CardTemplate from '@/components/Template/CardTemplate'
+import CardTemplate from '@components/Template/CardTemplate'
 import React from 'react'
 
 const CardLoading = () => {

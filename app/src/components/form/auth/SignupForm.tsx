@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@components/common/Button'
 import Input from '@components/common/Input'
-import { IModalFormProps } from '@components/form/_PropsType'
+import { ModalFormProps } from '@components/form/_PropsType'
 import { SignupSchema } from './authValidation'
 import ModalFormWrapper from '../../modal/ModalFormWrapper'
 
@@ -11,7 +11,7 @@ const SignupForm = <T extends SignupSchema>({
   submitHandler,
   modalHandler,
   subModalHandler
-}: IModalFormProps<T>) => {
+}: ModalFormProps<T>) => {
   const localButton =
     'w-full h-[4rem] mt-7 mb-6 bg-primary text-secondary-main hover:text-secondary-dark'
 

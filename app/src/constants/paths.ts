@@ -2,9 +2,8 @@ import Login from '@pages/auth/Login'
 import Error from '@pages/error/Error'
 import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
-import MyPage from '@/pages/user/MyPage'
-import { Shop } from '@/pages/shop/ShopIndex'
-import { User } from '@/pages/user/UserIndex'
+import { Shop } from '@pages/shop/ShopIndex'
+import { User } from '@pages/user/UserIndex'
 
 export type TStaticContext = {
   statusCode?: number | undefined

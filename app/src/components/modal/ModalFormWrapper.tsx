@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import Button from '../common/Button'
-import { IModalFormProps } from '../form/_PropsType'
+import { ModalFormProps } from '../form/_PropsType'
 
 const ModalFormWrapper = <T extends Record<string, any>>({
   children,
@@ -9,7 +9,7 @@ const ModalFormWrapper = <T extends Record<string, any>>({
   submitHandler,
   modalHandler,
   subModalHandler
-}: IModalFormProps<T>) => {
+}: ModalFormProps<T>) => {
   return (
     <div className='w-full h-full text-gray-main md:flex'>
       <div className='md:h-full bg-primary flex items-center md:justify-items-start justify-between md:p-10 p-5 rounded-tl-lg rounded-bl-lg'>

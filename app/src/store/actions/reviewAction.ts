@@ -1,13 +1,13 @@
-import apiEndpoint from '@/utils/api/apiEndpoint'
-import { Review } from '@/utils/api/request-response-types/client/models/Review'
+import apiEndpoint from '@utils/api/apiEndpoint'
+import { Review } from '@utils/api/request-response-types/client/models/Review'
 import {
   SalonReviewDeleteQuery,
   SalonReviewInsertQuery,
   SalonReviewListQuery,
   SalonReviewListResponse,
   SalonReviewUpdateQuery
-} from '@/utils/api/request-response-types/client/Shop'
-import history from '@/utils/routers/history'
+} from '@utils/api/request-response-types/client/Shop'
+import history from '@utils/routers/history'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { RootState, typedAction } from '../store'

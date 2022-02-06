@@ -1,8 +1,12 @@
 import React from 'react'
-import { PATHS } from '@/constants/paths'
+import { PATHS } from '@constants/paths'
 import { Route, Switch } from 'react-router-dom'
 import MyPage from './MyPage'
 import Error from '@pages/error/Error'
+import MyReservation from './MyReservation'
+import MyReviews from './MyReviews'
+import MyInformationEdit from './MyInformationEdit'
+import MyPasswordChange from './MyPasswordChange'
 
 const UserIndex = () => {
   return (
@@ -10,11 +14,13 @@ const UserIndex = () => {
       <Route exact path={PATHS.USER} component={MyPage} />
       <Route path={`${PATHS.USER}/(edit|reservations|reviews|changePassword)`}>
         {location.pathname === `${PATHS.USER}/edit` ? (
-          <div>hoge</div>
+          <MyInformationEdit />
         ) : location.pathname === `${PATHS.USER}/reservations` ? (
-          <div>hogehoge</div>
+          <MyReservation />
+        ) : location.pathname === `${PATHS.USER}/reviews` ? (
+          <MyReviews />
         ) : (
-          <div>fuga</div>
+          <MyPasswordChange />
         )}
       </Route>
       <Route path={`${PATHS.USER}/(edit|reservations)/:id`} />

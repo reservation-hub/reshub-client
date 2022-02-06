@@ -1,8 +1,8 @@
 import React from 'react'
-import { IModalProps } from '@components/modal/_PropsType'
+import { ModalProps } from '@components/modal/_PropsType'
 import '@styles/modal.css'
 
-const ModalOverlay = ({ open, onClose, children }: IModalProps) => {
+const ModalOverlay = ({ open, onClose, children }: ModalProps) => {
   return (
     <>
       {open && (

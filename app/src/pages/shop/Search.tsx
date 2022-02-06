@@ -1,6 +1,10 @@
 import React from 'react'
-
-const Search = () => {
+import { RouteComponentProps } from 'react-router-dom'
+type Test = {
+  keyword: string
+}
+const Search = ({ match }: RouteComponentProps<Test>) => {
+  console.log(match)
   return <div></div>
 }
 
