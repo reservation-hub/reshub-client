@@ -1,6 +1,6 @@
 import React from 'react'
 import SubTitle from '@components/common/SubTitle'
-import Card from '@components/Template/Card'
+import CardTemplate from '@/components/Template/CardTemplate'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import Tag from '@components/common/Tag'
@@ -18,7 +18,11 @@ const ShopItem = <T extends ShopForList[]>({ item }: Items<T>) => {
   return (
     <section className='px-5 pt-5 pb-2 h-full'>
       {item?.map((item, i) => (
-        <Card key={i} classes='w-full border mb-5 text-primary-dark' shadow>
+        <CardTemplate
+          key={i}
+          classes='w-full border mb-5 text-primary-dark'
+          shadow
+        >
           <Link className='cursor-pointer' to={`/salon/detail/${item.id}`}>
             <div className='border-b-2 px-5 flex items-center justify-between'>
               <SubTitle text={item?.name} />
@@ -70,7 +74,7 @@ const ShopItem = <T extends ShopForList[]>({ item }: Items<T>) => {
               </Link>
             </div>
           </div>
-        </Card>
+        </CardTemplate>
       ))}
     </section>
   )
