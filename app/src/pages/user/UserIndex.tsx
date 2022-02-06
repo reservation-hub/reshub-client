@@ -3,6 +3,7 @@ import { PATHS } from '@/constants/paths'
 import { Route, Switch } from 'react-router-dom'
 import MyPage from './MyPage'
 import Error from '@pages/error/Error'
+import MyReservation from './MyReservation'
 
 const UserIndex = () => {
   return (
@@ -12,7 +13,7 @@ const UserIndex = () => {
         {location.pathname === `${PATHS.USER}/edit` ? (
           <div>hoge</div>
         ) : location.pathname === `${PATHS.USER}/reservations` ? (
-          <div>hogehoge</div>
+          <MyReservation />
         ) : (
           <div>fuga</div>
         )}

@@ -17,10 +17,12 @@ const ReservationItem = <T extends ReservationForList>({ item }: Items<T>) => {
       : item?.status === ReservationStatus.COMPLETED
       ? 'bg-green-400'
       : 'bg-error-light'
+  
+  const textSize = 'lg:text-[1.6rem] text-[1.2rem]'
 
   return (
     <LinkCard
-      classes='m-5 border rounded-lg'
+      classes='lg:m-5 mt-4 border rounded-lg'
       url={`${PATHS.USER}/reservations/${item?.id}`}
       shadow
     >
@@ -28,7 +30,7 @@ const ReservationItem = <T extends ReservationForList>({ item }: Items<T>) => {
         <div>
           <SubTitle text={item?.shopName} />
           <div className='flex items-center'>
-            <div className='mr-5 mt-4 text-gray-main'>
+            <div className={`${textSize} mr-5 mt-4 text-gray-main`}>
               <p>予約したメニュー</p>
               <hr />
               <p className='text-primary-dark'>{item?.menuName}</p>
@@ -42,7 +44,7 @@ const ReservationItem = <T extends ReservationForList>({ item }: Items<T>) => {
         </div>
 
         <div className='grid h-full'>
-          <span className='text-gray-main'>
+          <span className={`${textSize} text-gray-main`}>
             予約日:
             <span className='text-primary-dark'>
               {useConvertTime('ymdhm', item?.reservationDate)}

@@ -57,6 +57,7 @@ export const PUBLIC_MENU: { path: string; text: string }[] = [
 ]
 
 export const MYPAGE_MENU: { path: string; text: string }[] = [
+  { path: `${PATHS.USER}`, text: 'マイページトップ' },
   { path: `${PATHS.USER}/reservations`, text: '予約履歴' },
   { path: `${PATHS.USER}/reviews`, text: '口コミ履歴' },
   { path: `${PATHS.USER}/edit`, text: '会員情報編集' },

@@ -72,16 +72,14 @@ const MyPage = () => {
 
   return (
     <MainTemplate>
-      <Section classes='w-[100rem] mx-auto'>
-        <span className='mb-2 text-gray-main'>
-          こんにちは{user.user.username}さん
-        </span>
-        <div className='flex'>
-          <MypageMenu />
+      {/* <span className='mb-2 text-gray-main'>
+        こんにちは{user.user.username}さん
+      </span> */}
+      <div className='lg:flex'>
+        <MypageMenu />
 
-          <MypageTop item={rowItem} subItems={subItems} />
-        </div>
-      </Section>
+        <MypageTop item={rowItem} subItems={subItems} />
+      </div>
     </MainTemplate>
   )
 }

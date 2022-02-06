@@ -21,7 +21,7 @@ const MypageTop = <T extends UserDetail>({
   subItems
 }: MypageTopProps<T>) => {
   return (
-    <div className='mt-5 w-[69%]'>
+    <div className='mt-5 lg:w-[69rem] w-full'>
       <Box title='会員情報' boxClass='mb-4'>
         <DataTable
           cell={[
@@ -31,7 +31,7 @@ const MypageTop = <T extends UserDetail>({
             { column: '生年月日', key: 'birthday' }
           ]}
           item={item}
-          classes='bg-primary text-secondary-main w-[20rem]'
+          classes='bg-primary text-secondary-main lg:w-[20rem] w-[10rem]'
         />
       </Box>
       <Box title='予約一覧' boxClass='mb-4 pb-5'>
@@ -42,7 +42,7 @@ const MypageTop = <T extends UserDetail>({
             {subItems?.reservation.map((v, i) => (
               <ReservationItem key={i} item={v} />
             ))}
-            <div className='flex justify-end pr-5 text-gray-main'>
+            <div className='flex justify-end pr-5 text-gray-main lg:m-0 mt-4'>
               <Link to={`${PATHS.USER}/reservations`}>全ての予約を見る</Link>
             </div>
           </>
