@@ -53,7 +53,7 @@ const createReservationSuccess = (data: string) => {
 }
 
 const patchReservationSuccess = (data: string) => {
-  return typedAction(RESERVATION_TYPE.PATCH_SUCCESS, data)
+  return typedAction(RESERVATION_TYPE.PATCH_RESERVATION, data)
 }
 
 const deleteReservationSuccess = (data: string) => {

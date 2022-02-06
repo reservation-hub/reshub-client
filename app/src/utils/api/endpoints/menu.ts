@@ -9,6 +9,7 @@ import {
   SalonMenuListQuery,
   SalonMenuListResponse
 } from '@request-response-types/client/Shop'
+import { PopularMenusResponse } from '@request-response-types/client/Menu'
 
 export const fetchAll = async (
   queryParams: SalonMenuListQuery
@@ -27,9 +28,16 @@ export const getMenu = async (
   )
 }
 
+export const getPopularMenu = async (): Promise<
+  AxiosResponse<PopularMenusResponse>
+> => {
+  return await instance.get<PopularMenusResponse>('/client/menus/popular')
+}
+
 const menu = {
   fetchAll,
-  getMenu
+  getMenu,
+  getPopularMenu
 }
 
 export default menu

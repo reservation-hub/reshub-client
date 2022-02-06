@@ -12,7 +12,7 @@ import Header from '@components/detail/shop/Header'
 import { fetchAllStylist } from '@store/actions/stylistAction'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import StylistList from '@components/list/stylist/StylistList'
-import { fetchAllMenu } from '@store/actions/menuAction'
+import { fetchAllMenu, getPopularMenu } from '@store/actions/menuAction'
 import MenuList from '@components/list/menu/MenuList'
 import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import MainTemplate from '@components/Template/MainTemplate'
@@ -64,6 +64,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   useEffect(() => {
     if (sectionType === SECTION_TYPE.INDEX) {
       dispatch(getOneShop(convertId))
+      dispatch(getPopularMenu())
     } else if (sectionType === SECTION_TYPE.STYLIST) {
       dispatch(
         fetchAllStylist({
@@ -86,6 +87,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
     infiniteScrollToStylistList.page,
     infiniteScrollToMenus.page
   ])
+  console.log(menu.popularMenu)
 
   return (
     <MainTemplate>

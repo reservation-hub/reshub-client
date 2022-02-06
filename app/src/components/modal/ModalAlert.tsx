@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 import Button from '../common/Button'
 import { ModalProps } from './_PropsType'
 
