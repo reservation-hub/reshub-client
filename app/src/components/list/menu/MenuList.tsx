@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '@/components/Template/Card'
+import CardTemplate from '@/components/Template/CardTemplate'
 import Button from '@components/common/Button'
 import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
 import { ListProps } from '@components/list/_PropsType'
@@ -8,7 +8,7 @@ const MenuList = <T extends Record<string, any>>({ item }: ListProps<T>) => {
   return (
     <div className='px-5 pb-1'>
       {item?.map((v: MenuForList, i: number) => (
-        <Card
+        <CardTemplate
           key={i}
           shadow
           classes='flex justify-between border p-5 my-5 rounded-lg'
@@ -32,7 +32,7 @@ const MenuList = <T extends Record<string, any>>({ item }: ListProps<T>) => {
               </Button>
             </div>
           </div>
-        </Card>
+        </CardTemplate>
       ))}
     </div>
   )

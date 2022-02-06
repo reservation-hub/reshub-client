@@ -1,6 +1,6 @@
 import { MYPAGE_MENU } from '@/constants/paths'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const MypageMenu = () => {
   return (
@@ -10,7 +10,9 @@ const MypageMenu = () => {
           {MYPAGE_MENU.map((v, i) => (
             <React.Fragment key={i}>
               <li key={i} className='p-3'>
-                <Link to={v.path}>{v.text}</Link>
+                <NavLink to={v.path} activeClassName='bg-primary'>
+                  {v.text}
+                </NavLink>
               </li>
               {i !== 3 && <hr />}
             </React.Fragment>

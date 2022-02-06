@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '@components/Template/Card'
+import CardTemplate from '@/components/Template/CardTemplate'
 import { StylistForList } from '@utils/api/request-response-types/client/models/Stylist'
 import { BiUserCircle } from 'react-icons/bi'
 import Button from '@components/common/Button'
@@ -15,7 +15,7 @@ const StylistItem = <T extends StylistForList[]>({
       {item?.map((v, i) => (
         <React.Fragment key={i}>
           {loading ? (
-            <Card
+            <CardTemplate
               key={i}
               shadow
               classes='grid justify-center mt-5 p-5 rounded-lg border w-[17rem]'
@@ -28,9 +28,9 @@ const StylistItem = <T extends StylistForList[]>({
               <Button classes='mt-4 rounded-lg border-none'>
                 <Skeleton classes='w-40 h-8' />
               </Button>
-            </Card>
+            </CardTemplate>
           ) : (
-            <Card
+            <CardTemplate
               key={i}
               shadow
               classes='grid justify-center mt-5 p-5 rounded-lg border w-[17rem]'
@@ -43,7 +43,7 @@ const StylistItem = <T extends StylistForList[]>({
               <Button classes='bg-primary text-secondary-light mt-4 rounded-lg border-none'>
                 指名して予約
               </Button>
-            </Card>
+            </CardTemplate>
           )}
         </React.Fragment>
       ))}

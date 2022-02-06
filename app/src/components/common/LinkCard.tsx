@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Card from '../Template/Card'
+import Card from '../Template/CardTemplate'
 import { HasURL } from '../_PropsTypes'
 
 export interface LinkCardProps extends HasURL {
