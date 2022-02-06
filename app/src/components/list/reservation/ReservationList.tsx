@@ -2,11 +2,10 @@ import React from 'react'
 import Box from '@components/Template/Box'
 import { UserReservationListResponse } from '@utils/api/request-response-types/client/User'
 import InfiniteScroll from 'react-infinite-scroller'
-import { ListProps } from '../_PropsType'
+import { ListProps } from '@components/list/_PropsType'
 import ReservationItem from './ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
-import { useModal } from '@utils/hooks/useModal'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void

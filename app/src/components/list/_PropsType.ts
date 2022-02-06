@@ -1,5 +1,5 @@
 import { UseInfiniteScroll } from '@utils/hooks/useInfiniteScroll'
-import { ClassesAndChildren } from '../_PropsTypes';
+import { ClassesAndChildren } from '../_PropsTypes'
 
 export interface ListProps<T> extends UseInfiniteProps<T> {
   loading?: boolean

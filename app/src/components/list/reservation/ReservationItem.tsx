@@ -31,8 +31,10 @@ const ReservationItem = <T extends ReservationForList[]>({
         <>
           <CardTemplate classes='lg:m-5 mt-4 border rounded-lg' key={i} shadow>
             <div className='flex justify-between p-5 pt-2'>
-
-              <ReservationInfo item={v} classes={`${textSize} mr-5 mt-4 text-gray-main`} />
+              <ReservationInfo
+                item={v}
+                classes={`${textSize} mr-5 mt-4 text-gray-main`}
+              />
 
               <div className='grid h-full'>
                 <span className={`${textSize} text-gray-main`}>

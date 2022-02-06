@@ -44,7 +44,9 @@ const Shop = () => {
       //     name: value.keyword
       //   })
       // )
-      history.push(`${PATHS.SHOPS}/keyword/${value.keyword}`, { keyword: value.keyword })
+      history.push(`${PATHS.SHOPS}/keyword/${value.keyword}`, {
+        keyword: value.keyword
+      })
     },
     [dispatch]
   )

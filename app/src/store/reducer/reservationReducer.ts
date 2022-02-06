@@ -4,7 +4,10 @@ import { StylistListForReservation } from '@utils/api/request-response-types/cli
 import { SalonAvailabilityResponse } from '@utils/api/request-response-types/client/Shop'
 import { ReservationResponse } from '@utils/api/request-response-types/client/User'
 import { ReservationAction } from '@store/actions/reservationAction'
-import { ReservationState, RESERVATION_TYPE } from '@store/types/reservationTypes'
+import {
+  ReservationState,
+  RESERVATION_TYPE
+} from '@store/types/reservationTypes'
 
 const initialState: ReservationState = {
   loading: false,

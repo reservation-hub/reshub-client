@@ -1,9 +1,12 @@
-import React from 'react';
-import SubTitle from '@components/common/SubTitle';
-import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation';
-import { Items } from '../_PropsType';
+import React from 'react'
+import SubTitle from '@components/common/SubTitle'
+import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation'
+import { Items } from '@components/list/_PropsType'
 
-const ReservationInfo = <T extends ReservationForList>({ item, classes }: Items<T>) => {
+const ReservationInfo = <T extends ReservationForList>({
+  item,
+  classes
+}: Items<T>) => {
   return (
     <div>
       <SubTitle text={item?.shopName} />
@@ -26,7 +29,6 @@ const ReservationInfo = <T extends ReservationForList>({ item, classes }: Items<
       </div>
     </div>
   )
-};
+}
 
-export default ReservationInfo;
-
+export default ReservationInfo

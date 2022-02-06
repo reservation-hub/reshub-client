@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import MypageMenu from '@components/detail/user/MypageMenu'
 import { RootState } from '@store/store'
 import { useDispatch, useSelector } from 'react-redux'

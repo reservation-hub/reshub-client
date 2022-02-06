@@ -9,7 +9,10 @@ const ShopIndex = () => {
   return (
     <Switch>
       <Route exact path={PATHS.SHOPS} component={Shop} />
-      <Route path={`${PATHS.SHOPS}/(area|days|keyword|tags)`} component={Search} />
+      <Route
+        path={`${PATHS.SHOPS}/(area|days|keyword|tags)`}
+        component={Search}
+      />
       <Route path={`${PATHS.SHOPS}/detail/:id`} component={Detail} />
     </Switch>
   )
