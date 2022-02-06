@@ -3,7 +3,6 @@ import MainTemplate from '@/components/Template/MainTemplate'
 import { RootState } from '@/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import Section from '@/components/Template/Section'
-import MypageTop from '@/components/detail/user/MypageTop'
 import { getUser } from '@/store/actions/userAction'
 import { getUserReservations } from '@/store/actions/reservationAction'
 import { OrderBy } from '@/utils/api/request-response-types/client/Common'
@@ -13,6 +12,7 @@ import {
   ReservationForList,
   ReservationStatus
 } from '@/utils/api/request-response-types/client/models/Reservation'
+import MypageTop from '@/components/detail/user/MypageTop'
 
 export type UserDetail = UserResponse & {
   kanaName: string
