@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import MypageMenu from '@/components/detail/user/MypageMenu'
 import { RootState } from '@/store/store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +15,7 @@ const MyReservation = () => {
   const dispatch = useDispatch()
 
   const { reservation } = useSelector((state: RootState) => state)
+  
   const { loadMore, more, page } = useInfiniteScroll(
     reservation.userReservations
   )
@@ -26,12 +27,7 @@ const MyReservation = () => {
 
   const cancelReservation = useCallback(
     (reservationId: number) => {
-      console.log(
-        'r.id',
-        reservation.userReservations.find((v) => v)?.id,
-        reservationId
-      )
-      // dispatch(deleteUserReservation(reservationId))
+      dispatch(deleteUserReservation(reservationId))
     },
     [dispatch]
   )
@@ -44,7 +40,7 @@ const MyReservation = () => {
         take: 10
       })
     )
-  }, [dispatch, page])
+  }, [dispatch, page, cancelReservation])
 
   return (
     <SubTemplate>

@@ -13,6 +13,8 @@ import {
   SearchToShopsNameSchema
 } from '@/components/form/shop/searchSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import history from '@/utils/routers/history'
+import { PATHS } from '@/constants/paths'
 
 const Shop = () => {
   const dispatch = useDispatch()
@@ -34,14 +36,15 @@ const Shop = () => {
 
   const onSubmit: SubmitHandler<SearchToShopsNameSchema> = useCallback(
     (value) => {
-      dispatch(
-        searchToShopsName({
-          page: page,
-          order: OrderBy.DESC,
-          take: 10,
-          name: value.keyword
-        })
-      )
+      // dispatch(
+      //   searchToShopsName({
+      //     page: page,
+      //     order: OrderBy.DESC,
+      //     take: 10,
+      //     name: value.keyword
+      //   })
+      // )
+      history.push(`${PATHS.SHOPS}/keyword/${value.keyword}`, { keyword: value.keyword })
     },
     [dispatch]
   )

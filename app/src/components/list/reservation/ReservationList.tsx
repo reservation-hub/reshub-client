@@ -6,12 +6,10 @@ import { ListProps } from '../_PropsType'
 import ReservationItem from './ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@/constants/paths'
-import ModalOverlay from '@/components/modal/ModalOverlay'
 import { useModal } from '@/utils/hooks/useModal'
-import ModalAlert from '@/components/modal/ModalAlert'
 
 export interface ReservationListProps<T> extends ListProps<T> {
-  cancelReservation?: (id: number) => void
+  cancelReservation: (reservationId: number) => void
 }
 
 const ReservationList = <T extends UserReservationListResponse>({
@@ -19,8 +17,6 @@ const ReservationList = <T extends UserReservationListResponse>({
   useInfiniteScroll,
   cancelReservation
 }: ReservationListProps<T>) => {
-  const { open, modalHandler } = useModal(false)
-
   return (
     <div className='w-[69rem] z-10'>
       <Link to={PATHS.USER} className=''>
@@ -38,7 +34,6 @@ const ReservationList = <T extends UserReservationListResponse>({
           <ReservationItem
             item={item?.values}
             cancelReservation={cancelReservation}
-            useModal={{ open, modalHandler }}
           />
         </InfiniteScroll>
       </Box>

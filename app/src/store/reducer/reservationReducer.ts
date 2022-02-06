@@ -3,8 +3,8 @@ import { ReservationForList } from '@/utils/api/request-response-types/client/mo
 import { StylistListForReservation } from '@/utils/api/request-response-types/client/models/Stylist'
 import { SalonAvailabilityResponse } from '@/utils/api/request-response-types/client/Shop'
 import { ReservationResponse } from '@/utils/api/request-response-types/client/User'
-import { ReservationAction } from '../actions/reservationAction'
-import { ReservationState, RESERVATION_TYPE } from '../types/reservationTypes'
+import { ReservationAction } from '@store/actions/reservationAction'
+import { ReservationState, RESERVATION_TYPE } from '@store/types/reservationTypes'
 
 const initialState: ReservationState = {
   loading: false,

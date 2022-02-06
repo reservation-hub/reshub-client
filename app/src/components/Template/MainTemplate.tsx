@@ -5,11 +5,12 @@ import { ClassesAndChildren } from '@components/_PropsTypes'
 import Section from './Section'
 
 const MainTemplate = ({ children }: ClassesAndChildren) => {
-  console.log(location.pathname)
   const sectionStyle =
     location.pathname === '/' ? '' : 'lg:flex lg:w-[100rem] w-full mx-auto'
+
+  console.log(location)
   return (
-    <main className='bg-secondary-light w-full h-screen overflow-auto'>
+    <main className='bg-secondary-light w-full h-full overflow-auto'>
       <Header />
       <Section classes={sectionStyle}>{children}</Section>
       <Footer />

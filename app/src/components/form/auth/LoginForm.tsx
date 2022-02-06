@@ -28,7 +28,6 @@ const LoginForm = <T extends any>({
     'w-full h-[4rem] flex items-center text-center text-secondary-main bg-primary hover:text-secondary-dark'
   const localButton =
     'w-full h-[4rem] mt-7 mb-6 bg-primary text-secondary-main hover:text-secondary-dark'
-  console.log(error)
   return (
     <ModalFormWrapper
       pageType='login'
