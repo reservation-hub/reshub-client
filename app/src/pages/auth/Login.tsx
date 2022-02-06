@@ -6,13 +6,13 @@ import LoginForm from '@components/form/auth/LoginForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { loginSchema, LoginSchema } from '@components/form/auth/authValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IModalProps } from '@components/modal/_PropsType'
+import { ModalProps } from '@components/modal/_PropsType'
 
-export interface ILoginPorps extends IModalProps {
+export interface LoginPorps extends ModalProps {
   subModalHandler: () => void
 }
 
-const Login = ({ onClose, subModalHandler }: ILoginPorps) => {
+const Login = ({ onClose, subModalHandler }: LoginPorps) => {
   const { msg } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
 

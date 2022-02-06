@@ -140,15 +140,17 @@ export const createReservation = (
 }
 
 export const deleteUserReservation = (
-  shopId: number
+  reservationId: number
 ): ThunkAction<void, RootState, null, Action> => {
   return async (dispatch) => {
     dispatch(reservationRequestStart())
     try {
-      const res = await apiEndpoint.reservation.deleteUserReservation(shopId)
-      dispatch(createReservationSuccess(res.data))
+      const res = await apiEndpoint.reservation.deleteUserReservation(
+        reservationId
+      )
+      dispatch(deleteReservationSuccess(res.data))
     } catch (e: any) {
-      const err = e.reseponse.data
+      const err = e
       dispatch(reservationRequestFailure(err))
     }
   }

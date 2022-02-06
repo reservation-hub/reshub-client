@@ -4,14 +4,14 @@ import Signup from '@pages/auth/Signup'
 import { useModal } from '@utils/hooks/useModal'
 import ModalOverlay from '@components/modal/ModalOverlay'
 import { useDispatch, useSelector } from 'react-redux'
-import { IModalProps } from '@components/modal/_PropsType'
+import { ModalProps } from '@components/modal/_PropsType'
 import NavMenu from '../common/NavMenu'
 import { PRIVATE_MENU, PUBLIC_MENU } from '@constants/paths'
 import { logout } from '@store/actions/authAction'
 import Cookies from 'js-cookie'
 import { RootState } from '@store/store'
 
-export interface NavBarProps extends IModalProps {
+export interface NavBarProps extends ModalProps {
   loading?: boolean
   menuItem?: { path: string; text: string }[]
 }

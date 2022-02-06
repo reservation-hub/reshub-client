@@ -21,11 +21,13 @@ const MypageTop = <T extends UserDetail>({
   subItems
 }: MypageTopProps<T>) => {
   return (
-    <div className='mt-5 lg:w-[69rem] w-full'>
-      <Box title='会員情報' boxClass='mb-4'>
+    <div className='lg:w-[69rem] w-full'>
+      <span className='text-gray-main'>こんにちは{item?.username}さん</span>
+      <Box title='会員情報' boxClass='my-4'>
         <DataTable
           cell={[
             { column: 'メールアドレス', key: 'email' },
+            { column: 'ユーザー名', key: 'username' },
             { column: 'お名前（カナ）', key: 'kanaName' },
             { column: '性別', key: 'gender' },
             { column: '生年月日', key: 'birthday' }
@@ -39,9 +41,7 @@ const MypageTop = <T extends UserDetail>({
           <EmptyData text='予約' />
         ) : (
           <>
-            {subItems?.reservation.map((v, i) => (
-              <ReservationItem key={i} item={v} />
-            ))}
+            <ReservationItem item={subItems?.reservation} />
             <div className='flex justify-end pr-5 text-gray-main lg:m-0 mt-4'>
               <Link to={`${PATHS.USER}/reservations`}>全ての予約を見る</Link>
             </div>

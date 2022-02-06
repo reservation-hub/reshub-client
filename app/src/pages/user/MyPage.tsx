@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import MainTemplate from '@/components/Template/MainTemplate'
 import { RootState } from '@/store/store'
-import { useDispatch, useSelector } from 'react-redux'
-import Section from '@/components/Template/Section'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getUser } from '@/store/actions/userAction'
 import { getUserReservations } from '@/store/actions/reservationAction'
 import { OrderBy } from '@/utils/api/request-response-types/client/Common'
@@ -30,10 +29,13 @@ export type MypageSubItems = {
 const MyPage = () => {
   const dispatch = useDispatch()
 
-  const { user, reservation } = useSelector((state: RootState) => ({
-    user: state.user,
-    reservation: state.reservation
-  }))
+  const { user, reservation } = useSelector(
+    (state: RootState) => ({
+      user: state.user,
+      reservation: state.reservation
+    }),
+    shallowEqual
+  )
 
   const rowItem = {
     ...user.user,
@@ -51,30 +53,19 @@ const MyPage = () => {
       }))
   }
 
-  console.log(subItems)
-
-  const fetchAll = async () => {
-    return await Promise.all([
-      dispatch(getUser()),
+  useEffect(() => {
+    dispatch(getUser()),
       dispatch(
         getUserReservations({
           page: 1,
-          order: OrderBy.DESC,
+          order: OrderBy.ASC,
           take: 3
         })
       )
-    ])
-  }
-
-  useEffect(() => {
-    fetchAll()
-  }, [])
+  }, [dispatch])
 
   return (
     <MainTemplate>
-      {/* <span className='mb-2 text-gray-main'>
-        こんにちは{user.user.username}さん
-      </span> */}
       <div className='lg:flex'>
         <MypageMenu />
 

@@ -18,9 +18,9 @@ const SalonList = <T extends ShopForList[]>({
   return (
     <Box title='店舗一覧'>
       <InfiniteScroll
-        loadMore={useInfiniteScroll?.loadMore}
+        loadMore={useInfiniteScroll.loadMore}
         pageStart={0}
-        hasMore={useInfiniteScroll?.more}
+        hasMore={useInfiniteScroll.more}
         initialLoad={false}
         loader={<CardLoading key={0} />}
       >

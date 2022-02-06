@@ -23,7 +23,6 @@ const Shop = () => {
   const {
     control,
     handleSubmit,
-    watch,
     formState: { errors }
   } = useForm<SearchToShopsNameSchema>({
     mode: 'onSubmit',
@@ -35,7 +34,6 @@ const Shop = () => {
 
   const onSubmit: SubmitHandler<SearchToShopsNameSchema> = useCallback(
     (value) => {
-      console.log('tets')
       dispatch(
         searchToShopsName({
           page: page,
@@ -48,7 +46,6 @@ const Shop = () => {
     [dispatch]
   )
 
-  console.log(watch())
   useEffect(() => {
     dispatch(
       fetchShopList({
