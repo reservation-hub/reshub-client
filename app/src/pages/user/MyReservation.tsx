@@ -8,7 +8,7 @@ import {
 } from '@store/actions/reservationAction'
 import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
-import ReservationList from '@components/list/reservation/ReservationList'
+import ReservationList from '@/components/user/list/ReservationList'
 import SubTemplate from '@components/Template/SubTemplate'
 
 const MyReservation = () => {

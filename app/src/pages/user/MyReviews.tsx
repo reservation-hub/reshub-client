@@ -11,7 +11,9 @@ import ReviewList from '@components/list/review/ReviewList'
 const MyReviews = () => {
   const dispatch = useDispatch()
   const { review } = useSelector((state: RootState) => state)
-  const { loadMore, more, page } = useInfiniteScroll(review.userReviews)
+  const { loadMore, more, page } = useInfiniteScroll(
+    review.userReviewsTotalCount
+  )
   const rowItems = {
     values: review.userReviews,
     totalCount: review.userReviewsTotalCount
@@ -19,7 +21,6 @@ const MyReviews = () => {
 
   const deleteUserReview = useCallback(
     (reviewId: number, shopId: number) => {
-      console.log('shop ID in my reviews', shopId)
       dispatch(deleteReview({ reviewId, shopId }))
     },
     [dispatch]

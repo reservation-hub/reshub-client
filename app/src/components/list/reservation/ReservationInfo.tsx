@@ -16,6 +16,18 @@ const ReservationInfo = ({
   cancelReservation
 }: LongCardListProps) => {
   const { open, modalHandler } = useModal(false)
+  const reservationStatusClass = (
+    status?: keyof typeof ReservationStatus
+  ): string => {
+    switch (status) {
+      case ReservationStatus.CANCELLED:
+        return 'bg-error-light w-[16.5rem] mt-16'
+      case ReservationStatus.COMPLETED:
+        return 'bg-green-400 w-[16.5rem] mt-16'
+      default:
+        return 'bg-yellow-400'
+    }
+  }
 
   return (
     <>
@@ -40,13 +52,9 @@ const ReservationInfo = ({
 
         <div className='grid'>
           <span
-            className={`${
-              reservationStatus === ReservationStatus.RESERVED
-                ? 'bg-yellow-400'
-                : reservationStatus === ReservationStatus.COMPLETED
-                ? 'bg-green-400 w-[16.5rem] mt-16'
-                : 'bg-error-light w-[16.5rem] mt-16'
-            } rounded-lg p-1 text-center text-secondary-light`}
+            className={`${reservationStatusClass(
+              reservationStatus
+            )} rounded-lg p-1 text-center text-secondary-light`}
           >
             {useConvertStatus(reservationStatus)}
           </span>
