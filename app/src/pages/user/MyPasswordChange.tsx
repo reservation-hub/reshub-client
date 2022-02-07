@@ -1,4 +1,4 @@
-import MypageMenu from '@components/detail/user/MypageMenu'
+import MypageMenu from '@/components/user/detail/MypageMenu'
 import MainTemplate from '@components/Template/MainTemplate'
 import React from 'react'
 

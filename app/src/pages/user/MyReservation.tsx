@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import MypageMenu from '@components/detail/user/MypageMenu'
+import MypageMenu from '@/components/user/detail/MypageMenu'
 import { RootState } from '@store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import {
