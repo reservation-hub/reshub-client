@@ -10,6 +10,8 @@ import {
   ReservationStatus
 } from '@utils/api/request-response-types/client/models/Reservation'
 import MypageTop from '@components/detail/user/MypageTop'
+import { getUserReservationsIndex } from '@/store/actions/reservationAction'
+import { OrderBy } from '@/utils/api/request-response-types/client/Common'
 
 export type UserDetail = UserResponse & {
   kanaName: string
@@ -35,7 +37,7 @@ const MyPage = () => {
   } as UserDetail
 
   const subItems: MypageSubItems = {
-    reservation: reservation.userReservations,
+    reservation: reservation.fetchUserIndex,
     visitedShop: reservation.userReservations
       .filter((v) => v.status === ReservationStatus.COMPLETED)
       .map((v) => ({
@@ -47,6 +49,13 @@ const MyPage = () => {
 
   useEffect(() => {
     dispatch(getUser())
+    dispatch(
+      getUserReservationsIndex({
+        page: 1,
+        order: OrderBy.ASC,
+        take: 3
+      })
+    )
   }, [dispatch])
 
   return (

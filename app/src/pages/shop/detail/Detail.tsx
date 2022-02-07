@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Section from '@components/Template/Section'
 import { RouteComponentProps } from 'react-router-dom'
 import { MatchParams } from '@components/_PropsTypes'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getOneShop } from '@store/actions/shopAction'
 import { RootState } from '@store/store'
 import ShopDetail from '@components/shop/detail/ShopDetail'
@@ -98,11 +97,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
         ) : sectionType === SECTION_TYPE.MENU ? (
           <div className='my-10'>
             <Box title={`${shop.name}のメニュー`}>
-              <MenuList
-                item={menus.menus}
-                loading={menus.loading}
-                useInfiniteScroll={infiniteScrollToMenus}
-              />
+              <MenuList item={menus.menus} loading={menus.loading} />
             </Box>
           </div>
         ) : sectionType === SECTION_TYPE.STYLIST ? (

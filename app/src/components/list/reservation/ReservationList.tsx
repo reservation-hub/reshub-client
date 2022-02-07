@@ -6,7 +6,7 @@ import { ListProps } from '@components/list/_PropsType'
 import ReservationItem from './ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
-import CardLoading from '../shop/CardLoading'
+import CardLoading from '../../shop/list/ShopCardLoading'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void

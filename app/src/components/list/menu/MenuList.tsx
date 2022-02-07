@@ -2,11 +2,23 @@ import React from 'react'
 import CardTemplate from '@components/Template/CardTemplate'
 import Button from '@components/common/Button'
 import { MenuForList } from '@utils/api/request-response-types/client/models/Menu'
-import { ListProps } from '@components/list/_PropsType'
+import { Items } from '@components/list/_PropsType'
+import history from '@/utils/routers/history'
+import { PATHS } from '@/constants/paths'
+import CheckBox from '@/components/common/CheckBox'
 
-const MenuList = <T extends Record<string, any>>({ item }: ListProps<T>) => {
+export interface test<T> extends Items<T> {
+  useReservationPage?: boolean
+  control?: any
+}
+
+const MenuList = <T extends Record<string, any>>({
+  item,
+  useReservationPage,
+  control
+}: test<T>) => {
   return (
-    <div className='px-5 pb-1'>
+    <div className='pb-1 px-5'>
       {item?.map((v: MenuForList, i: number) => (
         <CardTemplate
           key={i}
@@ -17,7 +29,10 @@ const MenuList = <T extends Record<string, any>>({ item }: ListProps<T>) => {
             <img src='/img/menu.jpeg' alt='' className='w-28 h-28' />
 
             <div className='grid pl-5'>
-              <span>{v.name}</span>
+              <span>
+                {v.name}
+                {v.shopId}
+              </span>
               <span>MENU DESCRIPTION</span>
             </div>
           </div>
@@ -27,9 +42,29 @@ const MenuList = <T extends Record<string, any>>({ item }: ListProps<T>) => {
               <span>¥{v.price.toLocaleString()}</span>
             </div>
             <div className='ml-5'>
-              <Button classes='w-[15rem] h-[3.5rem] rounded-lg bg-primary text-secondary-light'>
-                このメニューで予約
-              </Button>
+              {useReservationPage ? (
+                <form>
+                  <CheckBox
+                    name='menuId'
+                    id={`menu-${v.id}`}
+                    fullWidth
+                    control={control}
+                    value={String(v.id)}
+                    label='このメニューを選択'
+                  />
+                </form>
+              ) : (
+                <Button
+                  onClick={() =>
+                    history.push(`${PATHS.RESERVATION}/${v.shopId}`, {
+                      menuId: v.id
+                    })
+                  }
+                  classes='w-[15rem] h-[3.5rem] rounded-lg bg-primary text-secondary-light'
+                >
+                  このメニューで予約
+                </Button>
+              )}
             </div>
           </div>
         </CardTemplate>

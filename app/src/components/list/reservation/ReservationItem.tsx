@@ -28,8 +28,8 @@ const ReservationItem = <T extends ReservationForList[]>({
   return (
     <>
       {item?.map((v, i) => (
-        <>
-          <CardTemplate classes='lg:m-5 mt-4 border rounded-lg' key={i} shadow>
+        <React.Fragment key={i}>
+          <CardTemplate classes='lg:m-5 mt-4 border rounded-lg' shadow>
             <div className='flex justify-between p-5 pt-2'>
               <ReservationInfo
                 item={v}
@@ -90,7 +90,7 @@ const ReservationItem = <T extends ReservationForList[]>({
               </div>
             </ModalOverlay>
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   )

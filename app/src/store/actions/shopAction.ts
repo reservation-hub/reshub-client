@@ -104,17 +104,19 @@ export const searchToShopsName = (
     dispatch(shopRequestStart())
     try {
       const res = await apiEndpoint.shops.searchToShopsName(queryParams)
-      dispatch(
-        shopSearchSuccess(
-          res.data.values,
-          res.data.totalCount,
-          Number(queryParams.page),
-          undefined,
-          undefined,
-          undefined,
-          queryParams.name
+      setTimeout(() => {
+        dispatch(
+          shopSearchSuccess(
+            res.data.values,
+            res.data.totalCount,
+            Number(queryParams.page),
+            undefined,
+            undefined,
+            undefined,
+            queryParams.name
+          )
         )
-      )
+      }, 1500)
     } catch {
       history.push('/error')
     }

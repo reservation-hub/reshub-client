@@ -45,6 +45,17 @@ const getUserReservationsSuccess = (
   })
 }
 
+const getUserReservationsIndexSuccess = (
+  data: UserReservationListResponse,
+  page?: number
+) => {
+  return typedAction(RESERVATION_TYPE.USER_RESERVATIONS_INDEX, {
+    data: data.values,
+    totalCount: data.totalCount,
+    page
+  })
+}
+
 const getUserReservationSuccess = (data: ReservationResponse) => {
   return typedAction(RESERVATION_TYPE.USER_RESERVATION, data)
 }
@@ -109,6 +120,22 @@ export const getUserReservations = (
   }
 }
 
+export const getUserReservationsIndex = (
+  queryParams?: UserReservationListQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(reservationRequestStart())
+    try {
+      const res = await apiEndpoint.reservation.getUserReservations(queryParams)
+      setTimeout(() => {
+        dispatch(getUserReservationsIndexSuccess(res.data, queryParams?.page))
+      }, 1500)
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
 export const getUserReservation = (
   reservationId: number
 ): ThunkAction<void, RootState, null, Action> => {
@@ -165,6 +192,7 @@ export type ReservationAction =
   | ReturnType<typeof getShopReservationSuccess>
   | ReturnType<typeof getStylistReservationSuccess>
   | ReturnType<typeof getUserReservationsSuccess>
+  | ReturnType<typeof getUserReservationsIndexSuccess>
   | ReturnType<typeof getUserReservationSuccess>
   | ReturnType<typeof createReservationSuccess>
   | ReturnType<typeof patchReservationSuccess>

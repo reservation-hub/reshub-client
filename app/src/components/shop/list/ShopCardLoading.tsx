@@ -2,7 +2,7 @@ import Skeleton from '@components/common/Skeleton'
 import CardTemplate from '@components/Template/CardTemplate'
 import React from 'react'
 
-const CardLoading = ({ count }: { count?: number }) => {
+const ShopCardLoading = ({ count }: { count?: number }) => {
   return (
     <>
       {Array.from({ length: Number(count) }).map((_, i) => (
@@ -36,4 +36,4 @@ const CardLoading = ({ count }: { count?: number }) => {
   )
 }
 
-export default CardLoading
+export default ShopCardLoading
