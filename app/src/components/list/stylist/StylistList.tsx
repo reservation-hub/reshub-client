@@ -4,17 +4,22 @@ import { ListProps } from '@components/list/_PropsType'
 import StylistItem from './StylistItem'
 import InfiniteScroll from 'react-infinite-scroller'
 
+export interface StylistListProps<T> extends ListProps<T> {
+  length?: number
+}
+
 const StylistList = <T extends StylistForList[]>({
   item,
   loading,
-  useInfiniteScroll
-}: ListProps<T>) => {
+  useInfiniteScroll,
+  length
+}: StylistListProps<T>) => {
   return (
     <>
       <InfiniteScroll
         loadMore={useInfiniteScroll.loadMore}
         pageStart={0}
-        hasMore={useInfiniteScroll.more}
+        hasMore={Number(length) > 10 ? useInfiniteScroll.more : false}
         initialLoad={false}
       >
         <StylistItem item={item} loading={loading} />

@@ -12,7 +12,6 @@ export interface SearchBarProps extends ClassesAndChildren {
   search?: FormEventHandler<HTMLFormElement>
   searchFromArea?: () => void
   searchFromTags?: () => void
-  searchFromDays?: () => void
   control?: Control<any>
   buttonClass?: string
 }
@@ -21,7 +20,6 @@ const SearchBox = ({
   search,
   searchFromArea,
   searchFromTags,
-  searchFromDays,
   control,
   classes,
   buttonClass
@@ -62,16 +60,6 @@ const SearchBox = ({
               classes={hoverButton}
             >
               <BiCrown className={buttonIcons} />
-            </IconButton>
-          </li>
-          <li className={buttonClass ? `${buttonClass} mb-5` : 'mb-5'}>
-            <IconButton
-              icon
-              onClick={searchFromDays}
-              text='日付から探す'
-              classes={hoverButton}
-            >
-              <AiOutlineCalendar className={buttonIcons} />
             </IconButton>
           </li>
         </ul>

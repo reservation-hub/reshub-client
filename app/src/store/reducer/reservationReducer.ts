@@ -44,16 +44,16 @@ const reservationReducer = (
         totalCount: action.payload.totalCount
       }
     case RESERVATION_TYPE.USER_RESERVATIONS:
-      return {
+      return Object.assign({}, initialState, {
         ...state,
         loading: false,
-        userReservations: action.payload.data,
-        // location.pathname === `${PATHS.USER}/reservations`
-        //   ? state.userReservations.concat(action.payload.data)
-        //   : action.payload.data,
+        userReservations:
+          location.pathname === `${PATHS.USER}/reservations`
+            ? state.userReservations.concat(action.payload.data)
+            : action.payload.data,
         totalCount: action.payload.totalCount,
         page: action.payload.page
-      }
+      })
     case RESERVATION_TYPE.USER_RESERVATION:
       return {
         ...state,

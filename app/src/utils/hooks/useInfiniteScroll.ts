@@ -6,15 +6,16 @@ export type UseInfiniteScroll = {
   page: number
 }
 
-const useInfiniteScroll = <V>(values: V[]) => {
+const useInfiniteScroll = (values: number) => {
   const [page, setPage] = useState<number>(1)
   const [more, setMore] = useState<boolean>(true)
 
   const loadMore = () => {
     setTimeout(() => {
-      if (values?.length === 0 || values?.length < 5) {
+      if (values === 0 || values < 10) {
         setMore(false)
       }
+
       setPage(page + 1)
     }, 1000)
   }

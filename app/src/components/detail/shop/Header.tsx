@@ -35,7 +35,11 @@ const Header = <T extends SalonResponse>({ item }: ShopDetailProps<T>) => {
       <div>
         <div className='mb-5'>
           <Button
-            onClick={() => history.push(PATHS.RESERVATION)}
+            onClick={() =>
+              history.push(`${PATHS.RESERVATION}/${item?.id}`, {
+                shopId: Number(item?.id)
+              })
+            }
             classes='w-[15rem] p-4 rounded-lg text-secondary-main'
           >
             予約する

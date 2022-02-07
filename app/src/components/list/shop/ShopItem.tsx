@@ -69,7 +69,10 @@ const ShopItem = <T extends ShopForList[]>({ item }: Items<T>) => {
               ))}
             </div>
             <div className='px-5'>
-              <Link to={PATHS.RESERVATION} className={goToShopDetailButton}>
+              <Link
+                to={`${PATHS.RESERVATION}/${item.id}`}
+                className={goToShopDetailButton}
+              >
                 空席確認・予約
               </Link>
             </div>

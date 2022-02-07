@@ -32,8 +32,8 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
     shallowEqual
   )
 
-  const infiniteScrollToStylistList = useInfiniteScroll(stylist.stylists)
-  const infiniteScrollToMenus = useInfiniteScroll(menu.menus)
+  const infiniteScrollToStylistList = useInfiniteScroll(stylist.totalCount)
+  const infiniteScrollToMenus = useInfiniteScroll(menu.totalCount)
 
   const [sectionType, setSectionType] =
     useState<keyof typeof SECTION_TYPE>('INDEX')
@@ -87,50 +87,48 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
     infiniteScrollToStylistList.page,
     infiniteScrollToMenus.page
   ])
-  console.log(menu.popularMenu)
 
   return (
     <MainTemplate>
-      <Section classes='lg:w-[100rem] w-full mx-auto'>
-        <div className='h-full'>
-          <div className='w-full bg-primary rounded-tl-lg rounded-tr-lg text-secondary-main'>
-            <Header item={shop} />
-            <Menu menuItem={menuItem} sectionType={sectionType} />
-          </div>
-          {sectionType === SECTION_TYPE.INDEX ? (
-            <ShopDetail
-              item={shop}
-              menuItem={menuItem}
-              sectionType={sectionType}
-            />
-          ) : sectionType === SECTION_TYPE.MENU ? (
-            <div className='my-10'>
-              <Box title={`${shop.name}のメニュー`}>
-                <MenuList
-                  item={menu.menus}
-                  loading={menu.loading}
-                  useInfiniteScroll={infiniteScrollToMenus}
-                />
-              </Box>
-            </div>
-          ) : sectionType === SECTION_TYPE.STYLIST ? (
-            <div className='my-10'>
-              <div className='text-rose-500 mb-5'>
-                {stylist.totalCount}人のスタイリストがいます
-              </div>
-              <Box title={`${shop.name}のスタイリスト`}>
-                <StylistList
-                  item={stylist.stylists}
-                  loading={stylist.loading}
-                  useInfiniteScroll={infiniteScrollToStylistList}
-                />
-              </Box>
-            </div>
-          ) : (
-            <div>test haha3</div>
-          )}
+      <div className='w-full'>
+        <div className='w-full bg-primary rounded-tl-lg rounded-tr-lg text-secondary-main'>
+          <Header item={shop} />
+          <Menu menuItem={menuItem} sectionType={sectionType} />
         </div>
-      </Section>
+        {sectionType === SECTION_TYPE.INDEX ? (
+          <ShopDetail
+            item={shop}
+            menuItem={menuItem}
+            sectionType={sectionType}
+          />
+        ) : sectionType === SECTION_TYPE.MENU ? (
+          <div className='my-10'>
+            <Box title={`${shop.name}のメニュー`}>
+              <MenuList
+                item={menu.menus}
+                loading={menu.loading}
+                useInfiniteScroll={infiniteScrollToMenus}
+              />
+            </Box>
+          </div>
+        ) : sectionType === SECTION_TYPE.STYLIST ? (
+          <div className='my-10'>
+            <div className='text-rose-500 mb-5'>
+              {stylist.totalCount}人のスタイリストがいます
+            </div>
+            <Box title={`${shop.name}のスタイリスト`}>
+              <StylistList
+                item={stylist.stylists}
+                loading={stylist.loading}
+                useInfiniteScroll={infiniteScrollToStylistList}
+                length={stylist.totalCount}
+              />
+            </Box>
+          </div>
+        ) : (
+          <div>test haha3</div>
+        )}
+      </div>
     </MainTemplate>
   )
 }

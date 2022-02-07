@@ -15,6 +15,7 @@ import {
   UserReservationListQuery,
   UserReservationListResponse
 } from '@utils/api/request-response-types/client/User'
+import { PATHS } from '@/constants/paths'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)
@@ -99,7 +100,9 @@ export const getUserReservations = (
     dispatch(reservationRequestStart())
     try {
       const res = await apiEndpoint.reservation.getUserReservations(queryParams)
-      dispatch(getUserReservationsSuccess(res.data, queryParams?.page))
+      setTimeout(() => {
+        dispatch(getUserReservationsSuccess(res.data, queryParams?.page))
+      }, 1500)
     } catch {
       history.push('/error')
     }
@@ -149,6 +152,7 @@ export const deleteUserReservation = (
         reservationId
       )
       dispatch(deleteReservationSuccess(res.data))
+      history.push(`${PATHS.USER}/reservations`)
     } catch (e: any) {
       const err = e
       dispatch(reservationRequestFailure(err))

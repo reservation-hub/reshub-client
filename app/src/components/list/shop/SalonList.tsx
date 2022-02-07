@@ -8,6 +8,7 @@ import { ShopForList } from '@utils/api/request-response-types/client/models/Sho
 
 const SalonList = <T extends ShopForList[]>({
   item,
+  loading,
   useInfiniteScroll
 }: ListProps<T>) => {
   const rowItems = item?.map((shop: ShopForList) => ({
@@ -17,12 +18,13 @@ const SalonList = <T extends ShopForList[]>({
 
   return (
     <Box title='店舗一覧'>
+      {loading && <CardLoading count={10} />}
       <InfiniteScroll
         loadMore={useInfiniteScroll.loadMore}
         pageStart={0}
         hasMore={useInfiniteScroll.more}
         initialLoad={false}
-        loader={<CardLoading key={0} />}
+        loader={<CardLoading key={0} count={1} />}
       >
         <ShopItem item={rowItems} />
       </InfiniteScroll>

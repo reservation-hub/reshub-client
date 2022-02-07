@@ -16,9 +16,7 @@ const MyReservation = () => {
 
   const { reservation } = useSelector((state: RootState) => state)
 
-  const { loadMore, more, page } = useInfiniteScroll(
-    reservation.userReservations
-  )
+  const { loadMore, more, page } = useInfiniteScroll(reservation.totalCount)
 
   const rowItems = {
     values: reservation.userReservations,
@@ -40,7 +38,9 @@ const MyReservation = () => {
         take: 10
       })
     )
-  }, [dispatch, page, cancelReservation])
+  }, [dispatch, page])
+
+  console.log(reservation.userReservations)
 
   return (
     <SubTemplate>
@@ -49,6 +49,7 @@ const MyReservation = () => {
         <ReservationList
           useInfiniteScroll={{ loadMore, more, page }}
           item={rowItems}
+          loading={reservation.loading}
           cancelReservation={cancelReservation}
         />
       </div>

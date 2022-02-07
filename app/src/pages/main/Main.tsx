@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { fetchShopList } from '@store/actions/shopAction'
+import { fetchIndexList, fetchShopList } from '@store/actions/shopAction'
 import SalonList from '@components/list/shop/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
@@ -29,10 +29,10 @@ const Main = () => {
 
   const { shop } = useSelector((state: RootState) => state)
 
-  const { loadMore, page, more } = useInfiniteScroll(shop.shops)
+  const { loadMore, page, more } = useInfiniteScroll(shop.totalCount)
 
   useEffect(() => {
-    dispatch(fetchShopList({ page: page, order: OrderBy.DESC, take: 5 }))
+    dispatch(fetchIndexList({ page: page, order: OrderBy.DESC, take: 10 }))
   }, [page, dispatch])
 
   return (
@@ -50,7 +50,6 @@ const Main = () => {
             classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
             searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
             searchFromTags={() => history.push(`${PATHS.SHOPS}/tags`)}
-            searchFromDays={() => history.push(`${PATHS.SHOPS}/days`)}
           />
         </div>
       </div>
@@ -59,7 +58,7 @@ const Main = () => {
         <div className='h-full lg:mb-0 mb-5'>
           <Box boxClass='h-[20rem] mb-4' title='ランキング'></Box>
           <SalonList
-            item={shop.shops}
+            item={shop.fetchIndex}
             loading={shop.loading}
             useInfiniteScroll={{ loadMore, page, more }}
           />

@@ -6,6 +6,7 @@ import { ListProps } from '@components/list/_PropsType'
 import ReservationItem from './ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
+import CardLoading from '../shop/CardLoading'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void
@@ -13,6 +14,7 @@ export interface ReservationListProps<T> extends ListProps<T> {
 
 const ReservationList = <T extends UserReservationListResponse>({
   item,
+  loading,
   useInfiniteScroll,
   cancelReservation
 }: ReservationListProps<T>) => {
@@ -23,12 +25,13 @@ const ReservationList = <T extends UserReservationListResponse>({
       </Link>
 
       <Box title={`${item?.totalCount}件の予約がございます`} boxClass='mt-4'>
+        {loading && <CardLoading count={10} />}
         <InfiniteScroll
           loadMore={useInfiniteScroll.loadMore}
           hasMore={useInfiniteScroll.more}
           initialLoad={false}
           pageStart={0}
-          loader={<span key={0}>loading...</span>}
+          loader={<CardLoading key={0} count={1} />}
         >
           <ReservationItem
             item={item?.values}
