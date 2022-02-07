@@ -1,7 +1,7 @@
 import React from 'react'
 import { ListProps } from '@components/list/_PropsType'
 import ShopItem from '@components/list/shop/ShopItem'
-import CardLoading from './CardLoading'
+import CardLoading from '../../list/shop/CardLoading'
 import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'

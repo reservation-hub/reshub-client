@@ -5,10 +5,10 @@ import { MatchParams } from '@components/_PropsTypes'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getOneShop } from '@store/actions/shopAction'
 import { RootState } from '@store/store'
-import ShopDetail from '@components/detail/shop/ShopDetail'
+import ShopDetail from '@components/shop/detail/ShopDetail'
 import { DetailMenuItem, SECTION_TYPE } from '@constants/detail'
-import Menu from '@components/detail/shop/Menu'
-import Header from '@components/detail/shop/Header'
+import Menu from '@components/shop/detail/Menu'
+import Header from '@/components/shop/detail/Header'
 import { fetchAllStylist } from '@store/actions/stylistAction'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import StylistList from '@components/list/stylist/StylistList'
@@ -23,17 +23,10 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   const dispatch = useDispatch()
   const convertId = Number(id)
 
-  const { shop, stylist, menu } = useSelector(
-    (state: RootState) => ({
-      shop: state.shop.shop,
-      stylist: state.stylist,
-      menu: state.menus
-    }),
-    shallowEqual
-  )
+  const { shop, stylist, menus } = useSelector((state: RootState) => state)
 
   const infiniteScrollToStylistList = useInfiniteScroll(stylist.totalCount)
-  const infiniteScrollToMenus = useInfiniteScroll(menu.totalCount)
+  const infiniteScrollToMenus = useInfiniteScroll(menus.totalCount)
 
   const [sectionType, setSectionType] =
     useState<keyof typeof SECTION_TYPE>('INDEX')
@@ -92,21 +85,22 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
     <MainTemplate>
       <div className='w-full'>
         <div className='w-full bg-primary rounded-tl-lg rounded-tr-lg text-secondary-main'>
-          <Header item={shop} />
+          <Header item={shop.shop} />
           <Menu menuItem={menuItem} sectionType={sectionType} />
         </div>
         {sectionType === SECTION_TYPE.INDEX ? (
           <ShopDetail
-            item={shop}
+            item={shop.shop}
             menuItem={menuItem}
             sectionType={sectionType}
+            loading={shop.loading}
           />
         ) : sectionType === SECTION_TYPE.MENU ? (
           <div className='my-10'>
             <Box title={`${shop.name}のメニュー`}>
               <MenuList
-                item={menu.menus}
-                loading={menu.loading}
+                item={menus.menus}
+                loading={menus.loading}
                 useInfiniteScroll={infiniteScrollToMenus}
               />
             </Box>

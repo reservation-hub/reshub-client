@@ -3,8 +3,8 @@ import {
   searchToShopsNameSchema,
   SearchToShopsNameSchema
 } from '@/components/form/shop/searchSchema'
-import ListSearchBox from '@/components/list/shop/ListSearchBox'
-import SalonList from '@/components/list/shop/SalonList'
+import ListSearchBox from '@/components/shop/list/ListSearchBox'
+import SalonList from '@/components/shop/list/SalonList'
 import SubTemplate from '@/components/Template/SubTemplate'
 import { RootState } from '@/store/store'
 import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'

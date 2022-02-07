@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { fetchIndexList, fetchShopList } from '@store/actions/shopAction'
-import SalonList from '@components/list/shop/SalonList'
+import SalonList from '@/components/shop/list/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
 import '@styles/global.css'
