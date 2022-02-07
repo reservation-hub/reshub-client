@@ -3,8 +3,10 @@ import { DefaultState } from '../store'
 
 export const REVIEW_TYPE = {
   REQUEST_START: 'REVIEW_REQUEST_START',
-  GET_REVIEWS: 'REVIEWS_GET_SUCCESS',
-  GET_REVIEW: 'REVIEW_GET_SUCCESS',
+  SHOP_REVIEWS: 'REVIEWS_GET_SUCCESS',
+  SHOP_REVIEW: 'REVIEW_GET_SUCCESS',
+  USER_REVIEWS: 'USER_REVIEWS_GET_SUCCESS',
+  USER_REVIEW: 'USER_REVIEW_GET_SUCCESS',
   CREATE_REVIEW: 'REVIEW_CREATE_SUCCESS',
   PATCH_REVIEW: 'REVIEW_PATCH_SUCCESS',
   DELETE_REVIEW: 'REVIEW_DELETE_SUCCESS',
@@ -13,9 +15,12 @@ export const REVIEW_TYPE = {
 
 export type ReviewState = Readonly<
   DefaultState & {
-    reviews: Review[]
-    review: Review
-    totalCount: number
+    shopReviews: Review[]
+    shopReview: Review
+    shopReviewsTotalCount: number
+    userReviews: Review[]
+    userReview: Review
+    userReviewsTotalCount: number
     page?: number
   }
 >

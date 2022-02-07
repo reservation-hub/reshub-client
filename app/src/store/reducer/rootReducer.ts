@@ -5,6 +5,7 @@ import location from './locationReducer'
 import stylist from './stylistReducer'
 import menus from './menuReducer'
 import user from './userReducer'
+import review from './reviewReducer'
 import reservation from './reservationReducer'
 import storage from 'redux-persist/lib/storage'
 import persistReducer from 'redux-persist/es/persistReducer'
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   stylist,
   menus,
   user,
+  review,
   reservation
 })
 

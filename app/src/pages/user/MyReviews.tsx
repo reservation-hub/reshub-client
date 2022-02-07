@@ -1,14 +1,51 @@
+import React, { useCallback, useEffect } from 'react'
 import MypageMenu from '@components/detail/user/MypageMenu'
-import MainTemplate from '@components/Template/MainTemplate'
-import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@store/store'
+import { getUserReviews, deleteReview } from '@/store/actions/reviewAction'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
+import SubTemplate from '@components/Template/SubTemplate'
+import ReviewList from '@components/list/review/ReviewList'
 
 const MyReviews = () => {
+  const dispatch = useDispatch()
+  const { review } = useSelector((state: RootState) => state)
+  const { loadMore, more, page } = useInfiniteScroll(review.userReviews)
+  const rowItems = {
+    values: review.userReviews,
+    totalCount: review.userReviewsTotalCount
+  }
+
+  const deleteUserReview = useCallback(
+    (reviewId: number, shopId: number) => {
+      console.log('shop ID in my reviews', shopId)
+      dispatch(deleteReview({ reviewId, shopId }))
+    },
+    [dispatch]
+  )
+
+  useEffect(() => {
+    dispatch(
+      getUserReviews({
+        page: page,
+        order: OrderBy.DESC,
+        take: 10
+      })
+    )
+  }, [dispatch, page, getUserReviews])
+
   return (
-    <MainTemplate>
+    <SubTemplate>
       <div className='flex'>
         <MypageMenu />
+        <ReviewList
+          useInfiniteScroll={{ loadMore, more, page }}
+          item={rowItems}
+          deleteReview={deleteUserReview}
+        />
       </div>
-    </MainTemplate>
+    </SubTemplate>
   )
 }
 
