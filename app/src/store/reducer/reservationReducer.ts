@@ -1,4 +1,3 @@
-import { PATHS } from '@constants/paths'
 import { ReservationForList } from '@utils/api/request-response-types/client/models/Reservation'
 import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
 import { SalonAvailabilityResponse } from '@utils/api/request-response-types/client/Shop'
@@ -11,6 +10,7 @@ import {
 
 const initialState: ReservationState = {
   loading: false,
+  fetchUserIndex: [] as ReservationForList[],
   userReservations: [] as ReservationForList[],
   userReservation: {} as ReservationResponse,
   shopReservation: {} as SalonAvailabilityResponse,
@@ -43,17 +43,20 @@ const reservationReducer = (
         stylistReservation: action.payload.data,
         totalCount: action.payload.totalCount
       }
-    case RESERVATION_TYPE.USER_RESERVATIONS:
+    case RESERVATION_TYPE.USER_RESERVATIONS_INDEX:
       return {
         ...state,
+        fetchUserIndex: action.payload.data,
+        totalCount: action.payload.totalCount
+      }
+    case RESERVATION_TYPE.USER_RESERVATIONS:
+      return Object.assign({}, initialState, {
+        ...state,
         loading: false,
-        userReservations: action.payload.data,
-        // location.pathname === `${PATHS.USER}/reservations`
-        //   ? state.userReservations.concat(action.payload.data)
-        //   : action.payload.data,
+        userReservations: state.userReservations.concat(action.payload.data),
         totalCount: action.payload.totalCount,
         page: action.payload.page
-      }
+      })
     case RESERVATION_TYPE.USER_RESERVATION:
       return {
         ...state,

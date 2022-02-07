@@ -8,6 +8,7 @@ export const RESERVATION_TYPE = {
   REQUEST_START: 'RESERVATION_REQUEST_START',
   SHOP_RESERVATION: 'RESERVATION_REQUEST_SUCCESS',
   STYLIST_RESERVATION: 'STYLIST_RESERVATION_GET_SUCCESS',
+  USER_RESERVATIONS_INDEX: 'USER_RESERVATIONS_INDEX_GET_SUCCESS',
   USER_RESERVATIONS: 'USER_RESERVATIONS_GET_SUCCESS',
   USER_RESERVATION: 'USER_RESERVATION_GET_SUCCESS',
   CREATE_RESERVATION: 'RESERVATION_CREATE_SUCCESS',
@@ -20,6 +21,7 @@ export type ReservationState = Readonly<
   DefaultState & {
     shopReservation: SalonAvailabilityResponse
     stylistReservation: StylistListForReservation[]
+    fetchUserIndex: ReservationForList[]
     userReservations: ReservationForList[]
     userReservation: ReservationResponse
     totalCount: number

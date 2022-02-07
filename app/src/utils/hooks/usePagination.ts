@@ -1,16 +1,14 @@
-import React, { SetStateAction } from 'react'
-import history from '@utils/routers/history'
+import { useState } from 'react'
 
-const usePagination = (
-  pageType: string,
-  page: number,
-  setPage: React.Dispatch<SetStateAction<number>>
-) => {
-  return (data: Record<string, any>) => {
+const usePagination = (currentPage: number) => {
+  const [page, setPage] = useState<number>(currentPage)
+
+  const pageHandler = (data: Record<string, any>) => {
     const pageNum: number = data['selected']
     setPage(pageNum + 1)
-    history.push(`/${pageType}?p=${page}`, { currentPage: pageNum + 1 })
   }
+
+  return { pageHandler, page }
 }
 
 export default usePagination

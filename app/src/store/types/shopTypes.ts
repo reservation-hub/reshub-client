@@ -2,10 +2,7 @@
 // redux action types お店管理
 //----------------------------------
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
-import {
-  SalonListResponse,
-  SalonResponse
-} from '@utils/api/request-response-types/client/Shop'
+import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
 import { DefaultState } from '../store'
 
 export const SHOPS_TYPE = {
@@ -19,8 +16,9 @@ export const SHOPS_TYPE = {
 
 export type ShopState = Readonly<
   DefaultState & {
-    fetchIndex: SalonListResponse
+    fetchIndex: ShopForList[]
     shops: ShopForList[]
+    searchToName: ShopForList[]
     totalCount: number
     page: number
     areaId?: number

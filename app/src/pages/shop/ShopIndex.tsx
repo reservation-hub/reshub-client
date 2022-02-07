@@ -1,9 +1,9 @@
 import { PATHS } from '@constants/paths'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Detail from './Detail'
+import Detail from './detail/Detail'
+import Shop from './list/Shop'
 import Search from './Search'
-import Shop from './Shop'
 
 const ShopIndex = () => {
   return (

@@ -3,14 +3,12 @@ import Box from '@components/Template/Box'
 import { Items } from '@components/list/_PropsType'
 import DataTable from '@components/common/DataTable'
 import { MypageSubItems, UserDetail } from '@pages/user/MyPage'
-import CardTemplate from '@components/Template/CardTemplate'
-import ReservationItem from '@components/list/reservation/ReservationItem'
-import SubTitle from '@components/common/SubTitle'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import EmptyData from '@components/common/EmptyData'
-import Image from '@components/common/Image'
-import Button from '@components/common/Button'
+import CardList from '@/components/list/CardList'
+import LongCardList from '@/components/list/LongCardList'
+import useConvertTime from '@/utils/hooks/useConvertTime'
 
 export interface MypageTopProps<T> extends Items<T> {
   subItems?: MypageSubItems
@@ -41,7 +39,22 @@ const MypageTop = <T extends UserDetail>({
           <EmptyData text='予約' />
         ) : (
           <>
-            <ReservationItem item={subItems?.reservation} />
+            {subItems?.reservation.map((v, i) => (
+              <LongCardList
+                key={i}
+                name={v.shopName}
+                headerSectionText={`予約日: ${useConvertTime(
+                  'ymdhm',
+                  v.reservationDate
+                )}`}
+                menuName={v.menuName}
+                stylistName={v.stylistName}
+                reservationId={v.id}
+                reservationStatus={v.status}
+                link='#'
+                pageType='RESERVATION_LIST'
+              />
+            ))}
             <div className='flex justify-end pr-5 text-gray-main lg:m-0 mt-4'>
               <Link to={`${PATHS.USER}/reservations`}>全ての予約を見る</Link>
             </div>
@@ -52,18 +65,10 @@ const MypageTop = <T extends UserDetail>({
         {subItems?.visitedShop.length === 0 ? (
           <EmptyData text='履歴' />
         ) : (
-          <div className='flex flex-wrap justify-between px-5 pb-5'>
-            <CardTemplate classes='grid justify-center mt-5 p-5 rounded-lg border w-[17rem]'>
-              <div className='grid items-center justify-center text-center'>
-                <Image imagePath='img/salon.jpeg' classes='w-40 h-40 mx-auto' />
-                <SubTitle text='TEST' classes='px-5' />
-                <Button classes='bg-primary text-secondary-light mt-4 p-2 rounded-lg border-none text-[1.3rem]'>
-                  このサロンで予約する
-                </Button>
-              </div>
-            </CardTemplate>
-            <CardTemplate classes='p-5 h-[10rem]'>test</CardTemplate>
-            <CardTemplate classes='p-5 h-[10rem]'>test</CardTemplate>
+          <div className='flex flex-wrap justify-between px-5 pb-5 text-[1.4rem]'>
+            {subItems?.visitedShop.map((v, i) => (
+              <CardList key={i} img='img/salon.jpeg' name={v.name} />
+            ))}
           </div>
         )}
       </Box>

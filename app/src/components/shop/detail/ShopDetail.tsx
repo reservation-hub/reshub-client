@@ -4,7 +4,8 @@ import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
 import { Items } from '@components/list/_PropsType'
 import DataTable from '@components/common/DataTable'
 import Box from '@components/Template/Box'
-import StylistItem from '@components/list/stylist/StylistItem'
+import CardList from '@/components/list/CardList'
+import CardLoading from '@/components/list/CardLoading'
 
 export interface ShopDetailProps<T> extends Items<T> {
   menuItem?: DetailMenuItem[]
@@ -39,7 +40,24 @@ const ShopDetail = <T extends SalonResponse>({
 
       <div className='my-10'>
         <Box title={`${item?.name}のスタイリスト`}>
-          <StylistItem key={0} item={item?.stylists} />
+          <div className='flex flex-wrap justify-between px-5 pb-5 text-[1.4rem]'>
+            {loading ? (
+              <CardLoading count={5} price />
+            ) : (
+              <>
+                {item?.stylists?.map((v, i) => (
+                  <CardList
+                    key={i}
+                    icon
+                    name={v.name}
+                    price={v.price}
+                    buttonText='指名して予約'
+                  />
+                ))}
+              </>
+            )}
+          </div>
+
           <div
             className={showAllButton}
             onClick={

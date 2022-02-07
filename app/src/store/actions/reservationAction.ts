@@ -15,6 +15,7 @@ import {
   UserReservationListQuery,
   UserReservationListResponse
 } from '@utils/api/request-response-types/client/User'
+import { PATHS } from '@/constants/paths'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)
@@ -38,6 +39,17 @@ const getUserReservationsSuccess = (
   page?: number
 ) => {
   return typedAction(RESERVATION_TYPE.USER_RESERVATIONS, {
+    data: data.values,
+    totalCount: data.totalCount,
+    page
+  })
+}
+
+const getUserReservationsIndexSuccess = (
+  data: UserReservationListResponse,
+  page?: number
+) => {
+  return typedAction(RESERVATION_TYPE.USER_RESERVATIONS_INDEX, {
     data: data.values,
     totalCount: data.totalCount,
     page
@@ -99,7 +111,25 @@ export const getUserReservations = (
     dispatch(reservationRequestStart())
     try {
       const res = await apiEndpoint.reservation.getUserReservations(queryParams)
-      dispatch(getUserReservationsSuccess(res.data, queryParams?.page))
+      setTimeout(() => {
+        dispatch(getUserReservationsSuccess(res.data, queryParams?.page))
+      }, 1500)
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
+export const getUserReservationsIndex = (
+  queryParams?: UserReservationListQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(reservationRequestStart())
+    try {
+      const res = await apiEndpoint.reservation.getUserReservations(queryParams)
+      setTimeout(() => {
+        dispatch(getUserReservationsIndexSuccess(res.data, queryParams?.page))
+      }, 1500)
     } catch {
       history.push('/error')
     }
@@ -149,6 +179,7 @@ export const deleteUserReservation = (
         reservationId
       )
       dispatch(deleteReservationSuccess(res.data))
+      history.push(`${PATHS.USER}/reservations`)
     } catch (e: any) {
       const err = e
       dispatch(reservationRequestFailure(err))
@@ -161,6 +192,7 @@ export type ReservationAction =
   | ReturnType<typeof getShopReservationSuccess>
   | ReturnType<typeof getStylistReservationSuccess>
   | ReturnType<typeof getUserReservationsSuccess>
+  | ReturnType<typeof getUserReservationsIndexSuccess>
   | ReturnType<typeof getUserReservationSuccess>
   | ReturnType<typeof createReservationSuccess>
   | ReturnType<typeof patchReservationSuccess>

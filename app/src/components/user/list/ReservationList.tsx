@@ -3,9 +3,11 @@ import Box from '@components/Template/Box'
 import { UserReservationListResponse } from '@utils/api/request-response-types/client/User'
 import InfiniteScroll from 'react-infinite-scroller'
 import { ListProps } from '@components/list/_PropsType'
-import ReservationItem from './ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
+import CardLoading from '../../shop/list/ShopCardLoading'
+import LongCardList from '../../list/LongCardList'
+import useConvertTime from '@/utils/hooks/useConvertTime'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void
@@ -13,6 +15,7 @@ export interface ReservationListProps<T> extends ListProps<T> {
 
 const ReservationList = <T extends UserReservationListResponse>({
   item,
+  loading,
   useInfiniteScroll,
   cancelReservation
 }: ReservationListProps<T>) => {
@@ -23,17 +26,31 @@ const ReservationList = <T extends UserReservationListResponse>({
       </Link>
 
       <Box title={`${item?.totalCount}件の予約がございます`} boxClass='mt-4'>
+        {loading && <CardLoading count={10} />}
         <InfiniteScroll
           loadMore={useInfiniteScroll.loadMore}
           hasMore={useInfiniteScroll.more}
           initialLoad={false}
           pageStart={0}
-          loader={<span key={0}>loading...</span>}
+          loader={<CardLoading key={0} count={1} />}
         >
-          <ReservationItem
-            item={item?.values}
-            cancelReservation={cancelReservation}
-          />
+          {item?.values.map((v, i) => (
+            <LongCardList
+              key={i}
+              name={v.shopName}
+              headerSectionText={`予約日: ${useConvertTime(
+                'ymdhm',
+                v.reservationDate
+              )}`}
+              menuName={v.menuName}
+              stylistName={v.stylistName}
+              reservationId={v.id}
+              reservationStatus={v.status}
+              cancelReservation={cancelReservation}
+              link='#'
+              pageType='RESERVATION_LIST'
+            />
+          ))}
         </InfiniteScroll>
       </Box>
     </div>

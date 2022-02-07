@@ -1,3 +1,3 @@
-li {
+。li {
   @apply mr-[.5rem] border rounded text-primary cursor-pointer bg-secondary-main;
 }

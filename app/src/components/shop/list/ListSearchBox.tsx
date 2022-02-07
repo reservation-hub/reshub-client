@@ -27,7 +27,6 @@ const ListSearchBox = ({ control, search }: SearchBarProps) => {
             buttonClass='w-full'
             searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
             searchFromTags={() => history.push(`${PATHS.SHOPS}/tags`)}
-            searchFromDays={() => history.push(`${PATHS.SHOPS}/days`)}
             search={search}
           />
           <footer className='text-gray-main mt-5'>

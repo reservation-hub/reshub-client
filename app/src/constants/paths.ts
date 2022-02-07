@@ -4,6 +4,7 @@ import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
 import { Shop } from '@pages/shop/ShopIndex'
 import { User } from '@pages/user/UserIndex'
+import { Reservation } from '@/pages/reservation/ReservationIndex'
 
 export type TStaticContext = {
   statusCode?: number | undefined
@@ -41,7 +42,7 @@ export const ROUTER_PATHS: TRouter[] = [
 
 export const PRIVATE_PATHS: TRouter[] = [
   { path: PATHS.USER, exact: false, component: User },
-  { path: PATHS.RESERVATION, exact: false }
+  { path: PATHS.RESERVATION, exact: false, component: Reservation }
 ]
 
 export const PRIVATE_MENU: { path: string; text: string }[] = [

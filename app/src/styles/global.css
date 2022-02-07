@@ -17,3 +17,12 @@ body {
 .box-center {
   @apply left-2/4 top-2/4 transform translate-x-[-50%] translate-y-[-50%] fixed
 }
+
+
+input[type=checkbox] {
+  /* display: none; */
+}
+
+.labels {
+  @apply w-full p-1 inline-block cursor-pointer text-center rounded-lg;
+}

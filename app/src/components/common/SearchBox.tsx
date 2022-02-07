@@ -1,6 +1,6 @@
 import React, { FormEventHandler } from 'react'
 import Button from '@components/common/Button'
-import { AiOutlineCalendar, AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch } from 'react-icons/ai'
 import { IoLocationOutline } from 'react-icons/io5'
 import { BiCrown } from 'react-icons/bi'
 import Input from '@components/common/Input'
@@ -12,16 +12,14 @@ export interface SearchBarProps extends ClassesAndChildren {
   search?: FormEventHandler<HTMLFormElement>
   searchFromArea?: () => void
   searchFromTags?: () => void
-  searchFromDays?: () => void
   control?: Control<any>
   buttonClass?: string
 }
-//md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]
+
 const SearchBox = ({
   search,
   searchFromArea,
   searchFromTags,
-  searchFromDays,
   control,
   classes,
   buttonClass
@@ -62,16 +60,6 @@ const SearchBox = ({
               classes={hoverButton}
             >
               <BiCrown className={buttonIcons} />
-            </IconButton>
-          </li>
-          <li className={buttonClass ? `${buttonClass} mb-5` : 'mb-5'}>
-            <IconButton
-              icon
-              onClick={searchFromDays}
-              text='日付から探す'
-              classes={hoverButton}
-            >
-              <AiOutlineCalendar className={buttonIcons} />
             </IconButton>
           </li>
         </ul>
