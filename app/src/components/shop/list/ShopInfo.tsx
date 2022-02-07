@@ -2,14 +2,9 @@ import React from 'react'
 import IconText from '@/components/common/IconText'
 import { AiOutlineClockCircle, AiOutlinePhone } from 'react-icons/ai'
 import { IoCut } from 'react-icons/io5'
+import { LongCardListProps } from '@/components/list/LongCardList'
 
-export interface ShopInfoProps {
-  time?: string
-  tel?: string
-  price?: number
-}
-
-const ShopInfo = ({ time, tel, price }: ShopInfoProps) => {
+const ShopInfo = ({ time, tel, price }: LongCardListProps) => {
   return (
     <div className='flex flex-wrap items-center'>
       <IconText icon text={time} classes='mr-5'>

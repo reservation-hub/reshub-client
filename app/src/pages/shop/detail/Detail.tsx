@@ -12,10 +12,10 @@ import { fetchAllStylist } from '@store/actions/stylistAction'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import StylistList from '@components/list/stylist/StylistList'
 import { fetchAllMenu, getPopularMenu } from '@store/actions/menuAction'
-import MenuList from '@components/list/menu/MenuList'
 import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import MainTemplate from '@components/Template/MainTemplate'
 import Box from '@components/Template/Box'
+import MenuList from '@/components/menu/list/MenuList'
 
 const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
   const { id } = match.params
@@ -97,7 +97,7 @@ const Detail = ({ match }: RouteComponentProps<MatchParams>) => {
         ) : sectionType === SECTION_TYPE.MENU ? (
           <div className='my-10'>
             <Box title={`${shop.name}のメニュー`}>
-              <MenuList item={menus.menus} loading={menus.loading} />
+              <MenuList item={menus.menus} />
             </Box>
           </div>
         ) : sectionType === SECTION_TYPE.STYLIST ? (

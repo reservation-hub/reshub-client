@@ -24,7 +24,7 @@ const Box = ({
           {title}
         </span>
       </div>
-      {children}
+      <section className='p-5'>{children}</section>
     </div>
   )
 }

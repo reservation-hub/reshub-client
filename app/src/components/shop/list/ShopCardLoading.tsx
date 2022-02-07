@@ -1,13 +1,13 @@
+import React from 'react'
 import Skeleton from '@components/common/Skeleton'
 import CardTemplate from '@components/Template/CardTemplate'
-import React from 'react'
 
 const ShopCardLoading = ({ count }: { count?: number }) => {
   return (
     <>
       {Array.from({ length: Number(count) }).map((_, i) => (
-        <section className='p-5' key={i}>
-          <CardTemplate classes='w-full h-[20rem]' shadow>
+        <section className='pb-5 ' key={i}>
+          <CardTemplate classes='w-full border h-[20rem]' shadow>
             <div className='border-b-2 px-5 flex items-center justify-between py-1'>
               <Skeleton classes='lg:w-[20rem] w-[10rem] h-[3rem]' />
               <Skeleton classes='w-[14rem] lg:h-[2.5rem] h-[1.5rem]' />

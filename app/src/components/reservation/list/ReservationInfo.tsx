@@ -5,7 +5,7 @@ import { useModal } from '@/utils/hooks/useModal'
 import Button from '@/components/common/Button'
 import ModalOverlay from '@/components/modal/ModalOverlay'
 import ModalAlert from '@/components/modal/ModalAlert'
-import { LongCardListProps } from '../LongCardList'
+import { LongCardListProps } from '../../list/LongCardList'
 
 const ReservationInfo = ({
   reservationId,
@@ -86,7 +86,7 @@ const ReservationInfo = ({
               buttonText='削除'
             >
               この予約を
-                <span className='text-error-main'>キャンセル</span>
+              <span className='text-error-main'>キャンセル</span>
               しますか?
               <p className='lg:text-[1.4rem] text-[1.2rem]'>
                 ※<span className='text-error-main'>キャンセル</span>

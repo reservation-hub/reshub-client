@@ -80,6 +80,8 @@ const Reservation = ({
     }
   ]
 
+  console.log(watch())
+
   return (
     <>
       <MainTemplate>
