@@ -1,5 +1,5 @@
 import React from 'react'
-import MainTemplate from '@/components/Template/MainTemplate'
+import MainTemplate from '@components/Template/MainTemplate'
 import { RouteComponentProps } from 'react-router-dom'
 import StepProgressBar from 'react-step-progress'
 import { ProgressStep } from 'react-step-progress/dist/models'
@@ -9,12 +9,12 @@ import StepOne from './stepPage/StepOne'
 import {
   reservationSchema,
   ReservationSchema
-} from '@/components/reservation/reservationSchema'
+} from '@components/reservation/reservationSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import StepTwo from './stepPage/StepTwo'
-import ReservationHeader from '@/components/reservation/ReservationHeader'
-import ErrorMessage from '@/components/common/ErrorMessage'
-import Footer from '@/components/Template/Footer'
+import ReservationHeader from '@components/reservation/ReservationHeader'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Footer from '@components/Template/Footer'
 
 type ShopIdParams = {
   shopId: string

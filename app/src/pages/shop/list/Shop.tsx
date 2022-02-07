@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import SubTemplate from '@components/Template/SubTemplate'
-import ListSearchBox from '@/components/shop/list/ListSearchBox'
+import ListSearchBox from '@components/shop/list/ListSearchBox'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
-import SalonList from '@/components/shop/list/SalonList'
+import SalonList from '@components/shop/list/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchShopList } from '@store/actions/shopAction'
 import { RootState } from '@store/store'
@@ -13,8 +13,8 @@ import {
   SearchToShopsNameSchema
 } from '@components/form/shop/searchSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PATHS } from '@/constants/paths'
-import history from '@/utils/routers/history'
+import { PATHS } from '@constants/paths'
+import history from '@utils/routers/history'
 
 const Shop = () => {
   const dispatch = useDispatch()

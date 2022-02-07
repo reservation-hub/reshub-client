@@ -2,19 +2,19 @@ import React, { useEffect } from 'react'
 import {
   searchToShopsNameSchema,
   SearchToShopsNameSchema
-} from '@/components/form/shop/searchSchema'
-import ListSearchBox from '@/components/shop/list/ListSearchBox'
-import SalonList from '@/components/shop/list/SalonList'
-import SubTemplate from '@/components/Template/SubTemplate'
-import { RootState } from '@/store/store'
-import useInfiniteScroll from '@/utils/hooks/useInfiniteScroll'
+} from '@components/form/shop/searchSchema'
+import ListSearchBox from '@components/shop/list/ListSearchBox'
+import SalonList from '@components/shop/list/SalonList'
+import SubTemplate from '@components/Template/SubTemplate'
+import { RootState } from '@store/store'
+import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
-import { searchToShopsName } from '@/store/actions/shopAction'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
-import { PATHS } from '@/constants/paths'
+import { searchToShopsName } from '@store/actions/shopAction'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import { PATHS } from '@constants/paths'
 type Test = {
   keyword: string
 }

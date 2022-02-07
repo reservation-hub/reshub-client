@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import CardLoading from '../../shop/list/ShopCardLoading'
 import LongCardList from '../../list/LongCardList'
-import useConvertTime from '@/utils/hooks/useConvertTime'
+import useConvertTime from '@utils/hooks/useConvertTime'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void

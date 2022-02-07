@@ -1,6 +1,6 @@
-import Skeleton from '@/components/common/Skeleton'
-import CardLoading from '@/components/list/CardLoading'
-import Box from '@/components/Template/Box'
+import Skeleton from '@components/common/Skeleton'
+import CardLoading from '@components/list/CardLoading'
+import Box from '@components/Template/Box'
 import React from 'react'
 
 const ShopDetailSkeleton = () => {

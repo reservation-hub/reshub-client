@@ -6,9 +6,9 @@ import { MypageSubItems, UserDetail } from '@pages/user/MyPage'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import EmptyData from '@components/common/EmptyData'
-import CardList from '@/components/list/CardList'
-import LongCardList from '@/components/list/LongCardList'
-import useConvertTime from '@/utils/hooks/useConvertTime'
+import CardList from '@components/list/CardList'
+import LongCardList from '@components/list/LongCardList'
+import useConvertTime from '@utils/hooks/useConvertTime'
 
 export interface MypageTopProps<T> extends Items<T> {
   subItems?: MypageSubItems

@@ -1,7 +1,7 @@
 import {
   UserReviewListQuery,
   UserReviewUpdateQuery
-} from '@/utils/api/request-response-types/client/User'
+} from '@utils/api/request-response-types/client/User'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import { Review } from '@utils/api/request-response-types/client/models/Review'
 import {

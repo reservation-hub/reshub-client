@@ -1,8 +1,8 @@
 import React from 'react'
-import IconText from '@/components/common/IconText'
+import IconText from '@components/common/IconText'
 import { AiOutlineClockCircle, AiOutlinePhone } from 'react-icons/ai'
 import { IoCut } from 'react-icons/io5'
-import { LongCardListProps } from '@/components/list/LongCardList'
+import { LongCardListProps } from '@components/list/LongCardList'
 
 const ShopInfo = ({ time, tel, price }: LongCardListProps) => {
   return (

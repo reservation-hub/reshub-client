@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
-import { RootState } from '@/store/store'
+import { RootState } from '@store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import {
   getReservation,
   getStylistReservation
-} from '@/store/actions/reservationAction'
+} from '@store/actions/reservationAction'
 import { StepProps } from './StepOne'
-import { fetchAllStylist } from '@/store/actions/stylistAction'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
-import CardList from '@/components/list/CardList'
-import Box from '@/components/Template/Box'
-import CardLoading from '@/components/list/CardLoading'
-import Paginate from '@/components/common/Paginate'
-import usePagination from '@/utils/hooks/usePagination'
+import { fetchAllStylist } from '@store/actions/stylistAction'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import CardList from '@components/list/CardList'
+import Box from '@components/Template/Box'
+import CardLoading from '@components/list/CardLoading'
+import Paginate from '@components/common/Paginate'
+import usePagination from '@utils/hooks/usePagination'
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
-import { fetchAllMenu } from '@/store/actions/menuAction'
-import { RootState } from '@/store/store'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
+import { fetchAllMenu } from '@store/actions/menuAction'
+import { RootState } from '@store/store'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import { useDispatch, useSelector } from 'react-redux'
 import { Control } from 'react-hook-form'
-import Box from '@/components/Template/Box'
-import usePagination from '@/utils/hooks/usePagination'
-import Paginate from '@/components/common/Paginate'
-import MenuList from '@/components/menu/list/MenuList'
-import LongCardList from '@/components/list/LongCardList'
+import Box from '@components/Template/Box'
+import usePagination from '@utils/hooks/usePagination'
+import Paginate from '@components/common/Paginate'
+import MenuList from '@components/menu/list/MenuList'
+import LongCardList from '@components/list/LongCardList'
 
 export interface StepProps {
   shopId: string

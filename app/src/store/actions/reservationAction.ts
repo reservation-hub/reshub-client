@@ -15,7 +15,7 @@ import {
   UserReservationListQuery,
   UserReservationListResponse
 } from '@utils/api/request-response-types/client/User'
-import { PATHS } from '@/constants/paths'
+import { PATHS } from '@constants/paths'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)

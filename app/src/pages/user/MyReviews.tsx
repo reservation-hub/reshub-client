@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect } from 'react'
-import MypageMenu from '@/components/user/detail/MypageMenu'
+import MypageMenu from '@components/user/detail/MypageMenu'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
-import { getUserReviews, deleteReview } from '@/store/actions/reviewAction'
+import { getUserReviews, deleteReview } from '@store/actions/reviewAction'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import SubTemplate from '@components/Template/SubTemplate'
-import ReviewList from '@/components/review/list/ReviewList'
+import ReviewList from '@components/review/list/ReviewList'
 
 const MyReviews = () => {
   const dispatch = useDispatch()
