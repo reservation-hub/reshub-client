@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import MenuList from '@components/list/menu/MenuList'
 import { Control } from 'react-hook-form'
 import Box from '@/components/Template/Box'
+import usePagination from '@/utils/hooks/usePagination'
+import Paginate from '@/components/common/Paginate'
 
 export interface StepProps {
   shopId: string
@@ -14,6 +16,7 @@ export interface StepProps {
 
 const StepOne = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
+  const { pageHandler, page } = usePagination(1)
 
   const { menus } = useSelector((state: RootState) => state)
 
@@ -21,16 +24,23 @@ const StepOne = ({ shopId, control }: StepProps) => {
     dispatch(
       fetchAllMenu({
         shopId: Number(shopId),
-        page: 1,
+        page: page,
         order: OrderBy.DESC
       })
     )
   }, [])
 
   return (
-    <Box title='メニュー選択'>
-      <MenuList item={menus.menus} useReservationPage control={control} />
-    </Box>
+    <>
+      <Box title='メニュー選択'>
+        <MenuList item={menus.menus} useReservationPage control={control} />
+      </Box>
+      <Paginate
+        totalPage={menus.totalCount}
+        page={page}
+        pageChangeHandler={pageHandler}
+      />
+    </>
   )
 }
 

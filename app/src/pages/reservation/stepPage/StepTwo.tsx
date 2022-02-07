@@ -12,10 +12,13 @@ import { OrderBy } from '@/utils/api/request-response-types/client/Common'
 import CardList from '@/components/list/CardList'
 import Box from '@/components/Template/Box'
 import CardLoading from '@/components/list/CardLoading'
+import Paginate from '@/components/common/Paginate'
+import usePagination from '@/utils/hooks/usePagination'
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
   const { reservation, stylist } = useSelector((state: RootState) => state)
+  const { pageHandler, page } = usePagination(1)
 
   const day = dayjs().format('YYYY-MM-DD')
 
@@ -40,28 +43,35 @@ const StepTwo = ({ shopId, control }: StepProps) => {
   }, [])
 
   return (
-    <Box title='スタイリスト選択' boxClass='pb-4'>
-      <div className='flex flex-wrap w-full justify-between px-5 mb-5'>
-        {stylist.loading ? (
-          <CardLoading price count={10} />
-        ) : (
-          <>
-            {stylist.stylists.map((v, i) => (
-              <CardList
-                key={i}
-                icon
-                useReservationForm
-                control={control}
-                name={v.name}
-                price={v.price}
-                id={v.id}
-                buttonText='選択'
-              />
-            ))}
-          </>
-        )}
-      </div>
-    </Box>
+    <>
+      <Box title='スタイリスト選択' boxClass='pb-4'>
+        <div className='flex flex-wrap w-full justify-between px-5 mb-5'>
+          {stylist.loading ? (
+            <CardLoading price count={10} />
+          ) : (
+            <>
+              {stylist.stylists.map((v, i) => (
+                <CardList
+                  key={i}
+                  icon
+                  useReservationForm
+                  control={control}
+                  name={v.name}
+                  price={v.price}
+                  id={v.id}
+                  buttonText='選択'
+                />
+              ))}
+            </>
+          )}
+        </div>
+      </Box>
+      <Paginate
+        totalPage={stylist.totalCount}
+        page={page}
+        pageChangeHandler={pageHandler}
+      />
+    </>
   )
 }
 

@@ -18,13 +18,13 @@ const Paginate = ({ totalPage, page, pageChangeHandler }: PaginateProps) => {
       pageRangeDisplayed={10}
       breakLabel='...'
       initialPage={Number(page) - 1}
-      previousLabel='<'
-      nextLabel='>'
+      previousLabel='戻る'
+      nextLabel='次へ'
       activeClassName='bg-primary text-secondary-main'
-      containerClassName='h-[4rem] w-[4rem] text-center leading-[4rem] flex'
+      containerClassName='h-[4rem] w-[4rem] text-center leading-[4rem] flex mt-5'
       pageLinkClassName='w-[4rem] inline-block'
-      previousLinkClassName='w-[4rem] inline-block'
-      nextLinkClassName='w-[4rem] inline-block'
+      previousLinkClassName='w-[4rem] inline-block text-primary'
+      nextLinkClassName='w-[4rem] inline-block text-primary'
       breakLinkClassName='w-[4rem] inline-block'
       onPageChange={pageChangeHandler}
     />

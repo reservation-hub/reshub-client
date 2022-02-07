@@ -12,7 +12,6 @@ const MainTemplate = ({ children }: ClassesAndChildren) => {
     <main className='bg-secondary-light w-full h-full overflow-auto'>
       <Header />
       <Section classes={sectionStyle}>{children}</Section>
-      <Footer />
     </main>
   )
 }

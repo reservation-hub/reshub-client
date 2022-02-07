@@ -3,10 +3,11 @@ import Box from '@components/Template/Box'
 import { UserReservationListResponse } from '@utils/api/request-response-types/client/User'
 import InfiniteScroll from 'react-infinite-scroller'
 import { ListProps } from '@components/list/_PropsType'
-import ReservationItem from './ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import CardLoading from '../../shop/list/ShopCardLoading'
+import LongCardList from '../LongCardList'
+import useConvertTime from '@/utils/hooks/useConvertTime'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void
@@ -33,10 +34,23 @@ const ReservationList = <T extends UserReservationListResponse>({
           pageStart={0}
           loader={<CardLoading key={0} count={1} />}
         >
-          <ReservationItem
-            item={item?.values}
-            cancelReservation={cancelReservation}
-          />
+          {item?.values.map((v, i) => (
+            <LongCardList
+              key={i}
+              name={v.shopName}
+              headerSectionText={`予約日: ${useConvertTime(
+                'ymdhm',
+                v.reservationDate
+              )}`}
+              menuName={v.menuName}
+              stylistName={v.stylistName}
+              reservationId={v.id}
+              reservationStatus={v.status}
+              cancelReservation={cancelReservation}
+              link='#'
+              pageType='RESERVATION_LIST'
+            />
+          ))}
         </InfiniteScroll>
       </Box>
     </div>

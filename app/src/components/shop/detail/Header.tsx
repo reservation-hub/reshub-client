@@ -37,7 +37,7 @@ const Header = <T extends SalonResponse>({ item }: ShopDetailProps<T>) => {
           <Button
             onClick={() =>
               history.push(`${PATHS.RESERVATION}/${item?.id}`, {
-                shopId: Number(item?.id)
+                shopName: item?.name
               })
             }
             classes='w-[15rem] p-4 rounded-lg text-secondary-main'

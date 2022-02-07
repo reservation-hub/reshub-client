@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import MainTemplate from '@/components/Template/MainTemplate'
 import { RouteComponentProps } from 'react-router-dom'
 import StepProgressBar from 'react-step-progress'
@@ -12,12 +12,16 @@ import {
 } from '@/components/reservation/reservationSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import StepTwo from './stepPage/StepTwo'
+import ReservationHeader from '@/components/reservation/ReservationHeader'
+import ErrorMessage from '@/components/common/ErrorMessage'
+import Footer from '@/components/Template/Footer'
 
 type ShopIdParams = {
   shopId: string
 }
 
 type ReservationState = {
+  shopName?: string
   menuId?: string
   stylistId?: string
 }
@@ -77,24 +81,27 @@ const Reservation = ({
   ]
 
   return (
-    <MainTemplate>
-      <div className='w-full'>
-        <div className='bg-primary text-white p-5'>test reservation</div>
-        <StepProgressBar
-          steps={steps}
-          startingStep={0}
-          onSubmit={() => console.log('test')}
-          nextBtnName='次へ'
-          previousBtnName='戻る'
-          wrapperClass='mt-4'
-          progressClass='w-[100rem]'
-          labelClass='text-[1.4rem] w-[20rem]'
-          contentClass='mt-14'
-          primaryBtnClass='w-[20rem] text-center bg-primary text-secondary-light border-none'
-          secondaryBtnClass='w-[20rem] text-center'
-        />
-      </div>
-    </MainTemplate>
+    <>
+      <MainTemplate>
+        <div className='w-full'>
+          <ReservationHeader text={`${location.state?.shopName}`} />
+          <StepProgressBar
+            steps={steps}
+            startingStep={0}
+            onSubmit={() => console.log('test')}
+            nextBtnName='次へ'
+            previousBtnName='戻る'
+            wrapperClass='mt-4'
+            progressClass='w-[100rem]'
+            labelClass='text-[1.4rem] w-[20rem]'
+            contentClass='mt-14'
+            primaryBtnClass='w-[20rem] text-center bg-primary text-secondary-light border-none'
+            secondaryBtnClass='w-[20rem] text-center'
+          />
+        </div>
+      </MainTemplate>
+      <Footer classes='mt-36' />
+    </>
   )
 }
 

@@ -3,11 +3,12 @@ import Box from '@components/Template/Box'
 import { Items } from '@components/list/_PropsType'
 import DataTable from '@components/common/DataTable'
 import { MypageSubItems, UserDetail } from '@pages/user/MyPage'
-import ReservationItem from '@components/list/reservation/ReservationItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
 import EmptyData from '@components/common/EmptyData'
 import CardList from '@/components/list/CardList'
+import LongCardList from '@/components/list/LongCardList'
+import useConvertTime from '@/utils/hooks/useConvertTime'
 
 export interface MypageTopProps<T> extends Items<T> {
   subItems?: MypageSubItems
@@ -38,7 +39,22 @@ const MypageTop = <T extends UserDetail>({
           <EmptyData text='予約' />
         ) : (
           <>
-            <ReservationItem item={subItems?.reservation} />
+            {subItems?.reservation.map((v, i) => (
+              <LongCardList
+                key={i}
+                name={v.shopName}
+                headerSectionText={`予約日: ${useConvertTime(
+                  'ymdhm',
+                  v.reservationDate
+                )}`}
+                menuName={v.menuName}
+                stylistName={v.stylistName}
+                reservationId={v.id}
+                reservationStatus={v.status}
+                link='#'
+                pageType='RESERVATION_LIST'
+              />
+            ))}
             <div className='flex justify-end pr-5 text-gray-main lg:m-0 mt-4'>
               <Link to={`${PATHS.USER}/reservations`}>全ての予約を見る</Link>
             </div>
