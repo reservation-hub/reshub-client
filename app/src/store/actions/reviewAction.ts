@@ -1,3 +1,4 @@
+import { UserReviewListQuery, UserReviewUpdateQuery } from '@/utils/api/request-response-types/client/User'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import { Review } from '@utils/api/request-response-types/client/models/Review'
 import {
@@ -17,16 +18,28 @@ const reviewRequestStart = () => {
   return typedAction(REVIEW_TYPE.REQUEST_START)
 }
 
-const getReviewsSuccess = (data: SalonReviewListResponse, page?: number) => {
-  return typedAction(REVIEW_TYPE.GET_REVIEWS, {
+const getShopReviewsSuccess = (data: SalonReviewListResponse, page?: number) => {
+  return typedAction(REVIEW_TYPE.SHOP_REVIEWS, {
     data: data.values,
     totalCount: data.totalCount,
     page
   })
 }
 
-const getReviewSuccess = (data: Review) => {
-  return typedAction(REVIEW_TYPE.GET_REVIEW, data)
+const getShopReviewSuccess = (data: Review) => {
+  return typedAction(REVIEW_TYPE.SHOP_REVIEW, data)
+}
+
+const getUserReviewsSuccess = (data: SalonReviewListResponse, page?: number) => {
+  return typedAction(REVIEW_TYPE.USER_REVIEWS, {
+    data: data.values,
+    totalCount: data.totalCount,
+    page
+  })
+}
+
+const getUserReviewSuccess = (data: Review) => {
+  return typedAction(REVIEW_TYPE.USER_REVIEW, data)
 }
 
 const createReviewSuccess = (msg: string) => {
@@ -45,21 +58,21 @@ const reviewRequestFailure = (msg: string) => {
   return typedAction(REVIEW_TYPE.REQUEST_FAILURE, msg)
 }
 
-export const getReviews = (
+export const getShopReviews = (
   queryParams: SalonReviewListQuery
 ): ThunkAction<void, RootState, null, Action> => {
   return async (dispatch) => {
     dispatch(reviewRequestStart())
     try {
       const res = await apiEndpoint.review.getReviews(queryParams)
-      dispatch(getReviewsSuccess(res.data, queryParams?.page))
+      dispatch(getShopReviewsSuccess(res.data, queryParams?.page))
     } catch {
       history.push('/error')
     }
   }
 }
 
-export const getReview = (
+export const getShopReview = (
   shopId: number,
   reviewId: number
 ): ThunkAction<void, RootState, null, Action> => {
@@ -67,7 +80,36 @@ export const getReview = (
     dispatch(reviewRequestStart())
     try {
       const res = await apiEndpoint.review.getReview(shopId, reviewId)
-      dispatch(getReviewSuccess(res.data))
+      dispatch(getShopReviewSuccess(res.data))
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
+export const getUserReviews = (
+  queryParams: UserReviewListQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(reviewRequestStart())
+    try {
+      const res = await apiEndpoint.users.getReviews(queryParams)
+      
+      dispatch(getUserReviewsSuccess(res.data, queryParams?.page))
+    } catch {
+      history.push('/error')
+    }
+  }
+}
+
+export const getUserReview = (
+  reviewId: number
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
+    dispatch(reviewRequestStart())
+    try {
+      const res = await apiEndpoint.users.getReview(reviewId)
+      dispatch(getUserReviewSuccess(res.data))
     } catch {
       history.push('/error')
     }
@@ -108,6 +150,7 @@ export const deleteReview = (
   return async (dispatch) => {
     dispatch(reviewRequestStart())
     try {
+      console.log('delete review query', queryParams)
       const res = await apiEndpoint.review.deleteReview(queryParams)
       dispatch(deleteReviewSuccess(res.data))
     } catch (e: any) {
@@ -118,8 +161,10 @@ export const deleteReview = (
 
 export type ReviewAction =
   | ReturnType<typeof reviewRequestStart>
-  | ReturnType<typeof getReviewsSuccess>
-  | ReturnType<typeof getReviewSuccess>
+  | ReturnType<typeof getShopReviewsSuccess>
+  | ReturnType<typeof getShopReviewSuccess>
+  | ReturnType<typeof getUserReviewsSuccess>
+  | ReturnType<typeof getUserReviewSuccess>
   | ReturnType<typeof createReviewSuccess>
   | ReturnType<typeof patchReviewSuccess>
   | ReturnType<typeof deleteReviewSuccess>

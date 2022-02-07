@@ -8,7 +8,12 @@ import {
   InsertUserQuery,
   UpdateUserPasswordQuery,
   UpdateUserQuery,
-  UserResponse
+  UserResponse,
+  UserReviewListQuery,
+  UserReviewListResponse,
+  UserReviewUpdateQuery,
+  ReviewResponse,
+  UserReviewDeleteQuery
 } from '@request-response-types/client/User'
 
 export const getUser = async (): Promise<AxiosResponse<UserResponse>> => {
@@ -47,12 +52,30 @@ export const changePassword = async (
   )
 }
 
+export const getReviews = async (
+  query?: UserReviewListQuery
+): Promise<AxiosResponse<UserReviewListResponse>> => {
+  return await instance.get<UserReviewListResponse>(
+    `${baseEndpoint.users}/reviews?page=${query?.page}&order=${query?.order}&take=${query?.take}`
+  )
+}
+
+export const getReview = async (
+  reviewId: number
+): Promise<AxiosResponse<ReviewResponse>> => {
+  return await instance.get<ReviewResponse>(
+    `${baseEndpoint.users}/reviews/${reviewId}`
+  )
+}
+
 const users = {
   getUser,
   createUser,
   patchUser,
   deleteUser,
-  changePassword
+  changePassword,
+  getReviews,
+  getReview,
 }
 
 export default users

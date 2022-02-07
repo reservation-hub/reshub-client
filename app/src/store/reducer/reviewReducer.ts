@@ -5,9 +5,12 @@ import { ReviewState, REVIEW_TYPE } from '@store/types/reviewTypes'
 const initialState: ReviewState = {
   loading: false,
   msg: '',
-  reviews: [] as Review[],
-  review: {} as Review,
-  totalCount: 0,
+  shopReviews: [] as Review[],
+  shopReview: {} as Review,
+  shopReviewsTotalCount: 0,
+  userReviews: [] as Review[],
+  userReview: {} as Review,
+  userReviewsTotalCount: 0,
   page: 0
 }
 
@@ -18,20 +21,39 @@ const reviewReducer = (state = initialState, action: ReviewAction) => {
         ...state,
         loading: false
       }
-    case REVIEW_TYPE.GET_REVIEWS:
+    case REVIEW_TYPE.SHOP_REVIEWS:
       return {
         ...state,
         loading: false,
-        reviews:
+        shopReviews:
           action.payload.totalCount > 10
-            ? state.reviews.concat(action.payload.data)
+            ? state.shopReviews.concat(action.payload.data)
             : action.payload.data,
-        totalCount: action.payload.totalCount,
+        shopReviewsTotalCount: action.payload.totalCount,
         page: action.payload.page
       }
-    case REVIEW_TYPE.GET_REVIEW:
+    case REVIEW_TYPE.SHOP_REVIEW:
       return {
         ...state,
+        shopReview: action.payload,
+        loading: false,
+        review: action.payload
+      }
+    case REVIEW_TYPE.USER_REVIEWS:
+      return {
+        ...state,
+        loading: false,
+        userReviews:
+          action.payload.totalCount > 10
+            ? state.userReviews.concat(action.payload.data)
+            : action.payload.data,
+        userReviewsTotalCount: action.payload.totalCount,
+        page: action.payload.page
+      }
+    case REVIEW_TYPE.USER_REVIEW:
+      return {
+        ...state,
+        userReview: action.payload,
         loading: false,
         review: action.payload
       }
