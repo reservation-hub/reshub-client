@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import {  Review, ReviewScore } from '@utils/api/request-response-types/client/models/Review'
+import {
+  Review,
+  ReviewScore
+} from '@utils/api/request-response-types/client/models/Review'
 import { Items } from '@components/list/_PropsType'
 import CardTemplate from '@components/Template/CardTemplate'
 import Button from '@components/common/Button'
@@ -19,6 +22,7 @@ const ReviewItem = <T extends Review[]>({
   const textSize = 'lg:text-[1.6rem] text-[1rem]'
   const { open, modalHandler } = useModal(false)
   const [reviewId, setReviewId] = useState<number>()
+  const [shopId, setShopId] = useState<number>()
   const scoreClass = (score: ReviewScore): string => {
     switch (score) {
       case ReviewScore.one:
@@ -37,25 +41,24 @@ const ReviewItem = <T extends Review[]>({
     <>
       {item?.map((v, i) => (
         <>
-          {`shop id: ${v.shopId}`}
-          {`client id: ${v.clientId}`}
-          {`review id: ${v.id}`}
           <CardTemplate classes='lg:m-5 mt-4 border rounded-lg' key={i} shadow>
             <div className='grid p-5 pt-2'>
               <div className='flex justify-between'>
                 <SubTitle text={v.shopName} />
                 <div className=''>
-                  <span className={textSize}>
-                    満足度：
-                  </span>
+                  <span className={textSize}>満足度：</span>
                   <span
-                    className={`${scoreClass(v.score)} mt-3 rounded-lg p-1 text-center text-secondary-light`}
+                    className={`${scoreClass(
+                      v.score
+                    )} mt-3 rounded-lg px-6 mr-6 py-1 text-center text-secondary-light`}
                   >
                     {v.score}
                   </span>
                   <Button
-                    classes='mt-3 p-1 border-none bg-error-main text-secondary-light rounded-lg'
-                    onClick={() => (modalHandler(), setReviewId(v.id))}
+                    classes='mt-3 py-1 px-6 border-none bg-error-main text-secondary-light rounded-lg'
+                    onClick={() => (
+                      modalHandler(), setReviewId(v.id), setShopId(v.shopId)
+                    )}
                   >
                     削除
                   </Button>
@@ -79,11 +82,13 @@ const ReviewItem = <T extends Review[]>({
                   onClose={modalHandler}
                   submitHandler={() =>
                     deleteReview &&
-                    (deleteReview(Number(reviewId), Number(v.shopId)), modalHandler())
+                    (deleteReview(Number(reviewId), Number(shopId)),
+                    modalHandler())
                   }
                   buttonText='削除'
                 >
-                  {v.shopId}この口コミを<span className='text-error-main'>削除</span>
+                  {shopId}この口コミを
+                  <span className='text-error-main'>削除</span>
                   しますか?
                 </ModalAlert>
               </div>

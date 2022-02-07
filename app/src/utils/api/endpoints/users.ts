@@ -75,7 +75,7 @@ const users = {
   deleteUser,
   changePassword,
   getReviews,
-  getReview,
+  getReview
 }
 
 export default users

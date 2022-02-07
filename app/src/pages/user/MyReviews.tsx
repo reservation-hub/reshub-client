@@ -11,9 +11,7 @@ import ReviewList from '@components/list/review/ReviewList'
 const MyReviews = () => {
   const dispatch = useDispatch()
   const { review } = useSelector((state: RootState) => state)
-  const { loadMore, more, page } = useInfiniteScroll(
-    review.userReviews
-  )
+  const { loadMore, more, page } = useInfiniteScroll(review.userReviews)
   const rowItems = {
     values: review.userReviews,
     totalCount: review.userReviewsTotalCount

@@ -1,4 +1,7 @@
-import { UserReviewListQuery, UserReviewUpdateQuery } from '@/utils/api/request-response-types/client/User'
+import {
+  UserReviewListQuery,
+  UserReviewUpdateQuery
+} from '@/utils/api/request-response-types/client/User'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import { Review } from '@utils/api/request-response-types/client/models/Review'
 import {
@@ -18,7 +21,10 @@ const reviewRequestStart = () => {
   return typedAction(REVIEW_TYPE.REQUEST_START)
 }
 
-const getShopReviewsSuccess = (data: SalonReviewListResponse, page?: number) => {
+const getShopReviewsSuccess = (
+  data: SalonReviewListResponse,
+  page?: number
+) => {
   return typedAction(REVIEW_TYPE.SHOP_REVIEWS, {
     data: data.values,
     totalCount: data.totalCount,
@@ -30,7 +36,10 @@ const getShopReviewSuccess = (data: Review) => {
   return typedAction(REVIEW_TYPE.SHOP_REVIEW, data)
 }
 
-const getUserReviewsSuccess = (data: SalonReviewListResponse, page?: number) => {
+const getUserReviewsSuccess = (
+  data: SalonReviewListResponse,
+  page?: number
+) => {
   return typedAction(REVIEW_TYPE.USER_REVIEWS, {
     data: data.values,
     totalCount: data.totalCount,
@@ -94,7 +103,7 @@ export const getUserReviews = (
     dispatch(reviewRequestStart())
     try {
       const res = await apiEndpoint.users.getReviews(queryParams)
-      
+
       dispatch(getUserReviewsSuccess(res.data, queryParams?.page))
     } catch {
       history.push('/error')

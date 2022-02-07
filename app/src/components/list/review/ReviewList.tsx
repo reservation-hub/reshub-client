@@ -30,10 +30,7 @@ const ReviewList = <T extends UserReviewListResponse>({
           pageStart={0}
           loader={<span key={0}>loading...</span>}
         >
-          <ReviewItem
-            item={item?.values}
-            deleteReview={deleteReview}
-          />
+          <ReviewItem item={item?.values} deleteReview={deleteReview} />
         </InfiniteScroll>
       </Box>
     </div>
