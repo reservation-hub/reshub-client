@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ReservationStatus } from '@/utils/api/request-response-types/client/models/Reservation'
 import useConvertStatus from '@/utils/hooks/useConvertStatus'
 import { useModal } from '@/utils/hooks/useModal'
@@ -85,8 +85,9 @@ const ReservationInfo = ({
               }
               buttonText='削除'
             >
-              この予約を<span className='text-error-main'>キャンセル</span>
-              しますか?{reservationId}
+              この予約を
+                <span className='text-error-main'>キャンセル</span>
+              しますか?
               <p className='lg:text-[1.4rem] text-[1.2rem]'>
                 ※<span className='text-error-main'>キャンセル</span>
                 すると取り消しできませんのでご注意ください。
