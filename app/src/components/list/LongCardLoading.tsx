@@ -1,10 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const LongCardLoading = () => {
-  return (
-    <div></div>
-  )
-};
+  return <div></div>
+}
 
-export default LongCardLoading;
-
+export default LongCardLoading
