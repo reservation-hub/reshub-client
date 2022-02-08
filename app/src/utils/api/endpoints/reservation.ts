@@ -20,8 +20,7 @@ export const getReservation = async (
   queryParams: SalonAvailabilityQuery
 ): Promise<AxiosResponse<SalonAvailabilityResponse>> => {
   return await instance.get<SalonAvailabilityResponse>(
-    `${baseEndpoint.shops}/${queryParams.shopId}/reservations`,
-    { params: { ...queryParams.params } }
+    `${baseEndpoint.shops}/${queryParams.shopId}/reservations?reservationDate=${queryParams.reservationDate}`
   )
 }
 
