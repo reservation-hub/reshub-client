@@ -26,3 +26,16 @@ input[type=checkbox] {
 .labels {
   @apply w-full p-1 inline-block cursor-pointer text-center rounded-lg;
 }
+
+.appointment {
+  @apply min-w-[13.7rem] min-h-[4rem];
+  background-color: antiquewhite;
+}
+
+.appointment__time {
+  @apply text-[1.4rem];
+}
+
+.appointment-picker__col__name {
+  @apply min-w-[5rem];
+}

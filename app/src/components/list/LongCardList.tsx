@@ -79,8 +79,7 @@ const LongCardList = ({
 }: LongCardListProps) => {
   const descStyle =
     pageType === 'SHOP_LIST' ? 'text-pink-500' : 'text-primary-dark'
-  const buttonPosition =
-    pageType === 'SHOP_LIST' ? 'justify-between' : 'justify-end'
+
   return (
     <CardTemplate shadow classes='w-full border mb-5 text-primary-dark'>
       <Link to={String(link)}>

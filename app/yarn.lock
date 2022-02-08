@@ -9738,6 +9738,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-appointment-picker@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-appointment-picker/-/react-appointment-picker-3.2.0.tgz#75f6e0db8ae611822544419e533a21a7511e1f4d"
+  integrity sha512-EAcja53zIgM/7AeQsVxFGlW3B43TVadLazQjiWWv7IYvU9STou5bk5xm1DWkqSB5m84idohE+iG260MRzIZSdA==
+
 react-big-calendar@^0.38.7:
   version "0.38.7"
   resolved "https://registry.yarnpkg.com/react-big-calendar/-/react-big-calendar-0.38.7.tgz#a52eef28a3dfcaf27b143ca6d03111da124a10b8"
