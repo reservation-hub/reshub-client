@@ -46,20 +46,34 @@ const StepTwo = ({ shopId, control }: StepProps) => {
 
   const workDay = ['月', '火', '水', '金', '木', '土', '日']
   const day = dayjs().format('YYYY-MM-DD')
-  const stylistDay = String(reservation.stylistReservation.find((v) => v.id === 1684)?.days)
-  const findReservation = reservation.shopReservation.values?.find((v) => v.stylistId === 1684)?.reservationStartDate
+  const stylistDay = String(
+    reservation.stylistReservation.find((v) => v.id === 1684)?.days
+  )
+  const findReservation = reservation.shopReservation.values?.find(
+    (v) => v.stylistId === 1684
+  )?.reservationStartDate
   const reservationDate = reservation.shopReservation.values?.map((v) => ({
     reservationStart: v.reservationStartDate,
     reservationEnd: v.reservationEndDate
   }))
 
-  const test = workDay.filter(v => stylistDay.includes(v))
+  const test = workDay.filter((v) => stylistDay.includes(v))
 
-  console.log(findReservation, reservationDate?.filter((v) => v.reservationStart === findReservation), test)
-  
-  const stylistWorkDay = stylistDay ? workDay.map((v) => useRange(10, 31).map(v => ({
-    id: v, number: v, isReserved: v === 10 || v === 11
-  }))) : []
+  console.log(
+    findReservation,
+    reservationDate?.filter((v) => v.reservationStart === findReservation),
+    test
+  )
+
+  const stylistWorkDay = stylistDay
+    ? workDay.map((v) =>
+        useRange(10, 31).map((v) => ({
+          id: v,
+          number: v,
+          isReserved: v === 10 || v === 11
+        }))
+      )
+    : []
 
   // workDay.filter(v => stylistDay.includes(v)).map(v => useRange(10, 31).map((v, i) => ({
   //   id: v, number: i, isReserved: i === 0 || i === 1
@@ -68,7 +82,12 @@ const StepTwo = ({ shopId, control }: StepProps) => {
   console.log(stylistWorkDay, reservationDate)
   console.log()
 
-  console.log('stylist reservation', reservation.stylistReservation, 'shop reservation', reservation.shopReservation)
+  console.log(
+    'stylist reservation',
+    reservation.stylistReservation,
+    'shop reservation',
+    reservation.shopReservation
+  )
 
   useEffect(() => {
     dispatch(
