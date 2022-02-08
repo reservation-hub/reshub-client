@@ -80,7 +80,7 @@ const Reservation = ({
     }
   ]
 
-  console.log(watch())
+  console.log('WATCH', watch())
 
   return (
     <>

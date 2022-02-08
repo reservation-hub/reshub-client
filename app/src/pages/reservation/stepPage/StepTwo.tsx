@@ -19,13 +19,6 @@ import ReservationCalendar from '@/components/reservation/ReservationCalendar'
 import { ScheduleDays } from '@/utils/api/request-response-types/models/Common'
 import days from '@constants/days'
 
-type TestType = {
-  id?: number
-  stylistId?: number
-  reservationStartDay?: string
-  reservationEndDay?: string
-}
-
 export type AppointmentAttributes = {
   id?: string | number
   number: string | number
@@ -36,71 +29,87 @@ export type AppointmentAttributes = {
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
-  const { reservation, stylist } = useSelector((state: RootState) => state)
+  const { reservation, stylist, menus } = useSelector((state: RootState) => state)
   const { pageHandler, page } = usePagination(1)
   const reservationDate = new Date()
-  const calendarDays = Array(7).fill('').map((cd, i) => days[reservationDate.getDay() + i])
+  const calendarDays = Array(7).fill('').map((cd, i) => days[(reservationDate.getDay() + i) % 7])
   const useRange = (from: number, to: number, step = 1): number[] => {
     const arr = []
     for (let i = from; i <= to; i += step) arr.push(i)
     return arr
   }
-  const stylistDay = String(
-    reservation.stylistReservation.find((v) => v.id === 2478)?.days
-  )
-  const findReservation = reservation.shopReservation.values?.find(
-    (v) => v.stylistId === 2478
-  )?.reservationStartDate
   const reservationDates = reservation.shopReservation.values?.map((v) => ({
+    id: v.id,
     reservationStart: v.reservationStartDate,
-    reservationEnd: v.reservationEndDate
+    reservationEnd: v.reservationEndDate,
+    stylistId: v.stylistId
   }))
 
-  const stylistWorkDays = days.filter(v => stylistDay.includes(v))
+  const selectedStylistId = 2478
+  const stylistForThisReservation = reservation.stylistReservation.find(s => s.id === selectedStylistId)
+  console.log('STYLIST FOR THIS RESERVATION', stylistForThisReservation)
+  console.log(reservation.shopReservation)
+
+  // TODO change this to actual duration of selected menu
+  const sampleDuration = 60
+
+  // TODO change this to actual shop seats
+  const shopSeats = 1
+  
+  const stylistReservationIds = reservationDates && reservationDates.filter(rd => rd.stylistId === selectedStylistId).map(rd => rd.id)
+  console.log('stylist reservation ids : ', stylistReservationIds)
   
 
-  console.log(
-    'TEST', 
-    reservation.shopReservation,
-    findReservation,
-    reservationDates?.filter((v) => v.reservationStart === findReservation),
-    stylistWorkDays
-  )
-
-  const calendarValues = stylistDay
-    ? calendarDays.map((v, index) =>
-        {
-          let hour = 9
-          return useRange(9, 32).map((v) => {
-            const date = new Date(
-              reservationDate.getFullYear(),
-              reservationDate.getMonth(),
-              reservationDate.getDate() + index,
-              v % 2 === 0 ? hour++ : hour,
-              v % 2 === 0 ? 30 : 0,
-              0
-            )
-            return {
-              id: v,
-              number: v,
-              isReserved: v === 10 || v === 11,
-              date,
-              
-            }
+  const calendarValues = calendarDays.map((dayOfTheWeek, index) =>
+    {
+      let hour = 9
+      return useRange(9, 32).map((v) => {
+        const startDate = new Date(
+          reservationDate.getFullYear(),
+          reservationDate.getMonth(),
+          reservationDate.getDate() + index,
+          v % 2 === 0 ? hour++ : hour,
+          v % 2 === 0 ? 30 : 0,
+          0
+        )
+        const endDate = new Date(startDate.getTime() + (sampleDuration * 60 * 1000))
+        let isReserved = false
+        let conflictingReservations: { id: number, reservationStart: string, reservationEnd: string, stylistId?: number }[] = []
+        if (reservationDates) {
+          conflictingReservations = reservationDates.filter(rd => {
+            const existingReservationStart = new Date(rd.reservationStart)
+            const existingReservationEnd = new Date(rd.reservationEnd)
+            return (existingReservationStart <= startDate && startDate < existingReservationEnd ) ||
+              (existingReservationStart < endDate && endDate <= existingReservationEnd)
           })
         }
-      )
-    : []
+        if (conflictingReservations.length >= shopSeats) {
+          isReserved = true
+        }
 
-  
-  console.log(calendarValues, reservationDates)
-  console.log(
-    'stylist reservation',
-    reservation.stylistReservation,
-    'shop reservation',
-    reservation.shopReservation
+        let stylistReserved = false
+        if (stylistForThisReservation) {
+          if (conflictingReservations.length) {
+            stylistReserved = conflictingReservations.some(cr => cr.stylistId === stylistForThisReservation.id)
+          }
+          
+          if (!stylistForThisReservation.days.includes(dayOfTheWeek as ScheduleDays)) {
+            stylistReserved = true
+          }
+          
+        }
+
+        return {
+          id: v,
+          number: v,
+          isReserved: v === 9 || v === 10 || isReserved || stylistReserved,
+          startDate,
+        }
+      })
+    }
   )
 
+  
   useEffect(() => {
     dispatch(
       getReservation({
