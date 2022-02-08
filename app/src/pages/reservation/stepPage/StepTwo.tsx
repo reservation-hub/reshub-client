@@ -27,9 +27,7 @@ const StepTwo = ({ shopId, control }: StepProps) => {
     dispatch(
       getReservation({
         shopId: Number(shopId),
-        params: {
-          reservationDate: day
-        }
+        reservationDate: day
       })
     )
     dispatch(getStylistReservation(Number(shopId)))
