@@ -17,13 +17,7 @@ import usePagination from '@utils/hooks/usePagination'
 import { AppointmentPicker } from 'react-appointment-picker'
 import ReservationCalendar from '@/components/reservation/ReservationCalendar'
 import { ScheduleDays } from '@/utils/api/request-response-types/models/Common'
-
-type TestType = {
-  id?: number
-  stylistId?: number
-  reservationStartDay?: string
-  reservationEndDay?: string
-}
+import days from '@constants/days'
 
 export type AppointmentAttributes = {
   id?: string | number
@@ -35,65 +29,110 @@ export type AppointmentAttributes = {
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
-  const { reservation, stylist } = useSelector((state: RootState) => state)
+  const { reservation, stylist, menus } = useSelector(
+    (state: RootState) => state
+  )
   const { pageHandler, page } = usePagination(1)
-
+  const reservationDate = new Date()
+  const calendarDays = Array(7)
+    .fill('')
+    .map((cd, i) => days[(reservationDate.getDay() + i) % 7])
   const useRange = (from: number, to: number, step = 1): number[] => {
     const arr = []
     for (let i = from; i <= to; i += step) arr.push(i)
     return arr
   }
-
-  const workDay = ['月', '火', '水', '金', '木', '土', '日']
-  const day = dayjs().format('YYYY-MM-DD')
-  const stylistDay = String(
-    reservation.stylistReservation.find((v) => v.id === 1684)?.days
-  )
-  const findReservation = reservation.shopReservation.values?.find(
-    (v) => v.stylistId === 1684
-  )?.reservationStartDate
-  const reservationDate = reservation.shopReservation.values?.map((v) => ({
+  const reservationDates = reservation.shopReservation.values?.map((v) => ({
+    id: v.id,
     reservationStart: v.reservationStartDate,
-    reservationEnd: v.reservationEndDate
+    reservationEnd: v.reservationEndDate,
+    stylistId: v.stylistId
   }))
 
-  const test = workDay.filter((v) => stylistDay.includes(v))
-
-  console.log(
-    findReservation,
-    reservationDate?.filter((v) => v.reservationStart === findReservation),
-    test
+  const selectedStylistId = 2478
+  const stylistForThisReservation = reservation.stylistReservation.find(
+    (s) => s.id === selectedStylistId
   )
+  console.log('STYLIST FOR THIS RESERVATION', stylistForThisReservation)
+  console.log(reservation.shopReservation)
 
-  const stylistWorkDay = stylistDay
-    ? workDay.map((v) =>
-        useRange(10, 31).map((v) => ({
-          id: v,
-          number: v,
-          isReserved: v === 10 || v === 11
-        }))
+  // TODO change this to actual duration of selected menu
+  const sampleDuration = 60
+
+  // TODO change this to actual shop seats
+  const shopSeats = 1
+
+  const stylistReservationIds =
+    reservationDates &&
+    reservationDates
+      .filter((rd) => rd.stylistId === selectedStylistId)
+      .map((rd) => rd.id)
+  console.log('stylist reservation ids : ', stylistReservationIds)
+
+  const calendarValues = calendarDays.map((dayOfTheWeek, index) => {
+    let hour = 9
+    return useRange(9, 32).map((v) => {
+      const startDate = new Date(
+        reservationDate.getFullYear(),
+        reservationDate.getMonth(),
+        reservationDate.getDate() + index,
+        v % 2 === 0 ? hour++ : hour,
+        v % 2 === 0 ? 30 : 0,
+        0
       )
-    : []
+      const endDate = new Date(startDate.getTime() + sampleDuration * 60 * 1000)
+      let isReserved = false
+      let conflictingReservations: {
+        id: number
+        reservationStart: string
+        reservationEnd: string
+        stylistId?: number
+      }[] = []
+      if (reservationDates) {
+        conflictingReservations = reservationDates.filter((rd) => {
+          const existingReservationStart = new Date(rd.reservationStart)
+          const existingReservationEnd = new Date(rd.reservationEnd)
+          return (
+            (existingReservationStart <= startDate &&
+              startDate < existingReservationEnd) ||
+            (existingReservationStart < endDate &&
+              endDate <= existingReservationEnd)
+          )
+        })
+      }
+      if (conflictingReservations.length >= shopSeats) {
+        isReserved = true
+      }
 
-  // workDay.filter(v => stylistDay.includes(v)).map(v => useRange(10, 31).map((v, i) => ({
-  //   id: v, number: i, isReserved: i === 0 || i === 1
-  // }))) : []
+      let stylistReserved = false
+      if (stylistForThisReservation) {
+        if (conflictingReservations.length) {
+          stylistReserved = conflictingReservations.some(
+            (cr) => cr.stylistId === stylistForThisReservation.id
+          )
+        }
 
-  console.log(stylistWorkDay, reservationDate)
-  console.log()
+        if (
+          !stylistForThisReservation.days.includes(dayOfTheWeek as ScheduleDays)
+        ) {
+          stylistReserved = true
+        }
+      }
 
-  console.log(
-    'stylist reservation',
-    reservation.stylistReservation,
-    'shop reservation',
-    reservation.shopReservation
-  )
+      return {
+        id: v,
+        number: v,
+        isReserved: v === 9 || v === 10 || isReserved || stylistReserved,
+        startDate
+      }
+    })
+  })
 
   useEffect(() => {
     dispatch(
       getReservation({
         shopId: Number(shopId),
-        reservationDate: day
+        reservationDate: dayjs(reservationDate).format('YYYY-MM-DD')
       })
     )
     dispatch(getStylistReservation(Number(shopId)))
@@ -136,7 +175,7 @@ const StepTwo = ({ shopId, control }: StepProps) => {
         pageChangeHandler={pageHandler}
       />
 
-      <ReservationCalendar days={stylistWorkDay} />
+      <ReservationCalendar days={calendarValues} />
     </>
   )
 }

@@ -159,7 +159,6 @@ export const deleteReview = (
   return async (dispatch) => {
     dispatch(reviewRequestStart())
     try {
-      console.log('delete review query', queryParams)
       const res = await apiEndpoint.review.deleteReview(queryParams)
       dispatch(deleteReviewSuccess(res.data))
     } catch (e: any) {
