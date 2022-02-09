@@ -2,13 +2,17 @@
 // redux action types お店管理
 //----------------------------------
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
-import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
+import {
+  SalonResponse,
+  SalonScheduleResponse
+} from '@utils/api/request-response-types/client/Shop'
 import { DefaultState } from '../store'
 
 export const SHOPS_TYPE = {
   REQUEST_START: 'SHOP_REQUEST_START',
   FETCH_INDEX_SUCCESS: 'SHOP_FETCH_INDEX_SUCCESS',
   REQUEST_SUCCESS: 'SHOP_REQUEST_SUCCESS',
+  GET_SCHEDULE: 'SHOP_SCHEDULE_GET_SUCCESS',
   SEARCH_SUCCESS: 'SHOP_SEARCH_SUCCESS',
   GET_SUCCESS: 'SHOP_GET_SUCCESS',
   REQUEST_FAILURE: 'SHOP_REQUEST_FAILURE'
@@ -19,6 +23,7 @@ export type ShopState = Readonly<
     fetchIndex: ShopForList[]
     shops: ShopForList[]
     searchToName: ShopForList[]
+    schedule: SalonScheduleResponse
     totalCount: number
     page: number
     areaId?: number

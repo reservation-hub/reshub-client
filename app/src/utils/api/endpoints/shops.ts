@@ -9,8 +9,10 @@ import {
   SalonListByNameQuery,
   SalonListQuery,
   SalonListResponse,
-  SalonResponse
-} from '../request-response-types/client/Shop'
+  SalonResponse,
+  SalonScheduleQuery,
+  SalonScheduleResponse
+} from '@request-response-types/client/Shop'
 
 export const fetchAll = async () => {
   return await instance.get(`${baseEndpoint.shops}/`)
@@ -21,6 +23,14 @@ export const getShops = async (
 ): Promise<AxiosResponse<SalonListResponse>> => {
   return await instance.get<SalonListResponse>(
     `${baseEndpoint.shops}?page=${queryParams?.page}&order=${queryParams?.order}&take=${queryParams?.take}`
+  )
+}
+
+export const getShopSchedule = async (
+  queryParams: SalonScheduleQuery
+): Promise<AxiosResponse<SalonScheduleResponse>> => {
+  return await instance.get<SalonScheduleResponse>(
+    `${baseEndpoint.shops}/${queryParams.shopId}/schedule`
   )
 }
 
@@ -60,6 +70,7 @@ const shops = {
   fetchAll,
   getShops,
   getShop,
+  getShopSchedule,
   searchToShopsLocation,
   searchToShopsName
 }

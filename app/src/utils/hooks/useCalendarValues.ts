@@ -1,17 +1,24 @@
-import React from 'react'
+import { useEffect } from 'react'
 import dayjs from 'dayjs'
-import { ReservationForAvailabilityList } from '../api/request-response-types/client/models/Reservation'
-import { StylistListForReservation } from '../api/request-response-types/client/models/Stylist'
-import { ScheduleDays } from '../api/request-response-types/models/Common'
+import { ReservationForAvailabilityList } from '@utils/api/request-response-types/client/models/Reservation'
+import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
+import { ScheduleDays } from '@utils/api/request-response-types/models/Common'
 import days from '@/constants/days'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSalonSchedule } from '@/store/actions/shopAction'
+import { RootState } from '@/store/store'
 
 export const useCalendarValues = (
   salonReservation: ReservationForAvailabilityList[],
   selectedStylistId: number | null,
   menuDuration: number,
   salonSeats: number,
+  shopId: number,
   stylistForThisReservation?: StylistListForReservation
 ) => {
+  const { shop } = useSelector((state: RootState) => state)
+  const dispatch = useDispatch()
+
   const reservationDate = dayjs().toDate()
 
   const calendarDays = Array(7)
@@ -93,11 +100,20 @@ export const useCalendarValues = (
       return {
         id: v,
         number: v,
-        isReserved: v === 9 || v === 10 || isReserved || stylistReserved,
+        isReserved:
+          v === 9 ||
+          v === 10 ||
+          isReserved ||
+          stylistReserved ||
+          !shop.schedule.days.includes(dayOfTheWeek as ScheduleDays),
         startDate
       }
     })
   }
+
+  useEffect(() => {
+    dispatch(getSalonSchedule({ shopId: shopId }))
+  }, [])
 
   return {
     convertToValues,

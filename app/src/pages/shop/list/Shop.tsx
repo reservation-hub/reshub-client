@@ -5,7 +5,7 @@ import ListSearchBox from '@components/shop/list/ListSearchBox'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import SalonList from '@components/shop/list/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchShopList } from '@store/actions/shopAction'
+import { getShops } from '@store/actions/shopAction'
 import { RootState } from '@store/store'
 import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 import {
@@ -45,7 +45,7 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(
-      fetchShopList({
+      getShops({
         page: page,
         order: OrderBy.DESC,
         take: 10

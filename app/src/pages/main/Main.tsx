@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { fetchIndexList } from '@store/actions/shopAction'
+import { getShopsForIndex } from '@store/actions/shopAction'
 import SalonList from '@components/shop/list/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
@@ -32,7 +32,7 @@ const Main = () => {
   const { loadMore, page, more } = useInfiniteScroll(shop.totalCount)
 
   useEffect(() => {
-    dispatch(fetchIndexList({ page: page, order: OrderBy.DESC, take: 10 }))
+    dispatch(getShopsForIndex({ page: page, order: OrderBy.DESC, take: 10 }))
   }, [page, dispatch])
 
   return (

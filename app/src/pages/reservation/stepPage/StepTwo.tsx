@@ -18,7 +18,7 @@ import { SelectedStylistValue } from '@/components/reservation/_PropsTypes'
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
 
-  const { reservation } = useSelector((state: RootState) => state)
+  const { reservation, shop } = useSelector((state: RootState) => state)
 
   const [selectedStylist, setSelectedStylist] = useState<SelectedStylistValue>({
     stylistId: null,
@@ -26,6 +26,8 @@ const StepTwo = ({ shopId, control }: StepProps) => {
   })
 
   Cookies.set('selectedStylist', selectedStylist)
+
+  console.log(shop.schedule, Array(shop.schedule.days))
 
   const stylistForThisReservation = reservation.stylistReservation.find(
     (s) => s.id === selectedStylist.stylistId
@@ -35,15 +37,14 @@ const StepTwo = ({ shopId, control }: StepProps) => {
 
   const duration = parse.menuDuration ?? 60
 
-  const shopSeats = selectedStylist.stylistId
-    ? 1
-    : reservation.shopReservation.seats
+  const shopSeats = selectedStylist.stylistId ? 1 : shop.schedule.seats
 
   const { convertToValues, reservationDate, calendarDays } = useCalendarValues(
     reservation.shopReservation.values,
     Number(selectedStylist.stylistId),
     duration,
     shopSeats,
+    Number(shopId),
     stylistForThisReservation
   )
 
