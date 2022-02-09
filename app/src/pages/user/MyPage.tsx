@@ -32,8 +32,8 @@ const MyPage = () => {
   const { user, reservation } = useSelector((state: RootState) => state)
 
   const rowItem = {
-    ...user.user,
-    kanaName: `${user.user?.firstNameKana} ${user.user?.lastNameKana}`
+    ...user.user.user,
+    kanaName: `${user.user.user?.firstNameKana} ${user.user.user?.lastNameKana}`
   } as UserDetail
 
   const subItems: MypageSubItems = {

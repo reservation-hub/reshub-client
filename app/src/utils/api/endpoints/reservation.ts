@@ -60,7 +60,7 @@ export const createReservation = async (
   queryParams: SalonSetReservationQuery
 ): Promise<AxiosResponse<string>> => {
   return await instance.post<string>(
-    `${baseEndpoint.shops}/${queryParams.shopId}/reservation`,
+    `${baseEndpoint.shops}/${queryParams.shopId}/reservations`,
     {
       ...queryParams.params
     }

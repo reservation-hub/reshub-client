@@ -22,7 +22,7 @@ const MyInformationEdit = () => {
     resolver: zodResolver(userSchema),
     mode: 'onSubmit',
     defaultValues: {
-      username: user.user.username && '',
+      username: user.user.user.username && '',
       firstNameKana: '',
       lastNameKana: '',
       firstNameKanji: '',

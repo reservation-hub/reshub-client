@@ -10,6 +10,7 @@ import {
   RemoveCallback
 } from '@components/reservation/_PropsTypes'
 import { InputProps } from '@components/_PropsTypes'
+import Cookies from 'js-cookie'
 
 export interface ReservationCalendarProps extends InputProps {
   days: AppointmentAttributes[][]
@@ -32,7 +33,7 @@ const ReservationCalendar = ({
   }: ContinuousAddCase): void => {
     if (removeCb) removeCb(params!.day, params!.number)
     const startDate = days.find((v) => v)?.find((s) => s?.id === id)?.startDate
-
+    Cookies.set('reservationDate', dayjs(startDate).format('YYYY-MM-DD HH:mm'))
     field.onChange(dayjs(startDate).format('YYYY-MM-DD HH:mm:ss'))
 
     addCb(day, number, time, id)

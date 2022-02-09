@@ -13,29 +13,35 @@ import CardLoading from '@components/list/CardLoading'
 import ReservationCalendar from '@/components/reservation/ReservationCalendar'
 import { useCalendarValues } from '@/utils/hooks/useCalendarValues'
 import Cookies from 'js-cookie'
+import { SelectedStylistValue } from '@/components/reservation/_PropsTypes'
 
-const StepTwo = ({ shopId, control, setState }: StepProps) => {
+const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
 
   const { reservation } = useSelector((state: RootState) => state)
 
-  const [selectedStylistId, setSelectedStylistId] = useState<number | null>(
-    null
-  )
+  const [selectedStylist, setSelectedStylist] = useState<SelectedStylistValue>({
+    stylistId: null,
+    stylistName: ''
+  })
+
+  Cookies.set('selectedStylist', selectedStylist)
 
   const stylistForThisReservation = reservation.stylistReservation.find(
-    (s) => s.id === selectedStylistId
+    (s) => s.id === selectedStylist.stylistId
   )
 
   const parse = JSON.parse(String(Cookies.get('selectedMenu')))
 
   const duration = parse.menuDuration ?? 60
 
-  const shopSeats = selectedStylistId ? 1 : reservation.shopReservation.seats
+  const shopSeats = selectedStylist.stylistId
+    ? 1
+    : reservation.shopReservation.seats
 
   const { convertToValues, reservationDate, calendarDays } = useCalendarValues(
     reservation.shopReservation.values,
-    selectedStylistId,
+    Number(selectedStylist.stylistId),
     duration,
     shopSeats,
     stylistForThisReservation
@@ -73,7 +79,7 @@ const StepTwo = ({ shopId, control, setState }: StepProps) => {
                   price={v.price}
                   id={v.id}
                   buttonText='選択'
-                  setState={setSelectedStylistId}
+                  setState={setSelectedStylist}
                 />
               ))}
             </>

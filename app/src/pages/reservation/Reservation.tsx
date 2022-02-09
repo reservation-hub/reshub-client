@@ -17,11 +17,6 @@ import Footer from '@components/Template/Footer'
 import { useDispatch } from 'react-redux'
 import { createReservation } from '@/store/actions/reservationAction'
 import StepThree from './stepPage/StepThree'
-import {
-  SelectedMenuValue,
-  SelectedStylistValue
-} from '@/components/reservation/_PropsTypes'
-import Cookies from 'js-cookie'
 
 type ShopIdParams = {
   shopId: string
@@ -40,22 +35,9 @@ const Reservation = ({
   const { shopId } = match.params
   const menuId = location.state?.menuId
   const stylistId = location.state?.stylistId
+  const [pageType, setPageType] = useState<'step' | 'complete'>('step')
 
   const dispatch = useDispatch()
-
-  const [selectedMenu, setSelectedMenu] = useState<SelectedMenuValue>({
-    menuName: '',
-    menuPrice: null,
-    menuDuration: null
-  })
-
-  const [selectedStylist, setSelectedStylist] = useState<SelectedStylistValue>({
-    stylistId: null,
-    stylistName: ''
-  })
-
-  Cookies.set('selectedMenu', selectedMenu)
-  Cookies.set('selectedStylist', selectedStylist)
 
   const { control, watch, handleSubmit } = useForm<ReservationSchema>({
     resolver: zodResolver(reservationSchema),
@@ -78,6 +60,7 @@ const Reservation = ({
         }
       })
     )
+    setPageType('complete')
   }, [])
 
   const step1Validator = () => {
@@ -94,27 +77,21 @@ const Reservation = ({
     {
       label: 'メニュー選択',
       name: 'step 1',
-      content: (
-        <StepOne shopId={shopId} control={control} setState={setSelectedMenu} />
-      ),
+      content: <StepOne shopId={shopId} control={control} />,
       validator: step1Validator
     },
     {
       label: 'スタイリスト/日付選択',
       name: 'step 2',
-      content: (
-        <StepTwo
-          shopId={shopId}
-          control={control}
-          setState={setSelectedStylist}
-        />
-      ),
+      content: <StepTwo shopId={shopId} control={control} />,
       validator: step2Validator
     },
     {
       label: '予約内容確認',
       name: 'step 3',
-      content: <StepThree reservationDate={String(watch('reservationDate'))} shopName={location.state?.shopName} />
+      content: (
+        <StepThree shopName={location.state?.shopName} pageType={pageType} />
+      )
     }
   ]
 
@@ -123,20 +100,27 @@ const Reservation = ({
       <MainTemplate>
         <div className='w-full'>
           <ReservationHeader text={`${location.state?.shopName}`} />
-          <StepProgressBar
-            steps={steps}
-            startingStep={0}
-            onSubmit={handleSubmit(onSubmit)}
-            nextBtnName='次へ'
-            previousBtnName='戻る'
-            wrapperClass='mt-4'
-            progressClass='w-[100rem]'
-            labelClass='text-[1.4rem] w-[20rem]'
-            contentClass='mt-14'
-            primaryBtnClass='w-[20rem] text-center bg-primary text-secondary-light border-none'
-            secondaryBtnClass='w-[20rem] text-center'
-            submitBtnName='予約確定'
-          />
+          {pageType === 'step' ? (
+            <StepProgressBar
+              steps={steps}
+              startingStep={0}
+              onSubmit={handleSubmit(onSubmit)}
+              nextBtnName='次へ'
+              previousBtnName='戻る'
+              wrapperClass='mt-4'
+              progressClass='w-[100rem]'
+              labelClass='text-[1.4rem] w-[20rem]'
+              contentClass='mt-14'
+              primaryBtnClass='w-[20rem] text-center bg-primary text-secondary-light border-none'
+              secondaryBtnClass='w-[20rem] text-center'
+              submitBtnName='予約確定'
+            />
+          ) : (
+            <StepThree
+              pageType={pageType}
+              shopName={location.state?.shopName}
+            />
+          )}
         </div>
       </MainTemplate>
       <Footer classes='mt-36' />

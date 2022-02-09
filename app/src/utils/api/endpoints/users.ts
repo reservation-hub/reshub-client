@@ -14,8 +14,12 @@ import {
   UserResponsesWithReservationDetails
 } from '@request-response-types/client/User'
 
-export const getUser = async (): Promise<AxiosResponse<UserResponsesWithReservationDetails>> => {
-  return await instance.get<UserResponsesWithReservationDetails>(`${baseEndpoint.users}/`)
+export const getUser = async (): Promise<
+  AxiosResponse<UserResponsesWithReservationDetails>
+> => {
+  return await instance.get<UserResponsesWithReservationDetails>(
+    `${baseEndpoint.users}/`
+  )
 }
 
 export const createUser = async (

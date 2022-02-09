@@ -163,7 +163,7 @@ export const createReservation = (
       )
       dispatch(createReservationSuccess(res.data))
     } catch (e: any) {
-      const err = e.reseponse.data
+      const err = e.response
       dispatch(reservationRequestFailure(err))
     }
   }

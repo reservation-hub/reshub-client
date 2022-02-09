@@ -3,6 +3,7 @@ import { BiUserCircle } from 'react-icons/bi'
 import Button from '../common/Button'
 import CheckBox from '../common/CheckBox'
 import Image from '../common/Image'
+import { SelectedStylistValue } from '../reservation/_PropsTypes'
 import CardTemplate from '../Template/CardTemplate'
 
 export interface CardListProps {
@@ -14,7 +15,7 @@ export interface CardListProps {
   name?: string
   price?: number
   buttonText?: string
-  setState?: React.Dispatch<React.SetStateAction<any>>
+  setState?: React.Dispatch<React.SetStateAction<SelectedStylistValue>>
 }
 
 const CardList = ({
@@ -48,11 +49,12 @@ const CardList = ({
         <div>
           <CheckBox
             name='stylistId'
-            id={`stylist-${name}`}
+            id={name}
             control={control}
             value={String(id)}
             label={buttonText}
             setState={setState}
+            placeholder={String(price)}
             classes='border rounded-lg p-1'
           />
         </div>

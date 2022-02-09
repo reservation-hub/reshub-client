@@ -1,9 +1,14 @@
+import React, { useCallback } from 'react'
 import DataTable from '@/components/common/DataTable'
-import { getUser } from '@/store/actions/userAction'
-import { RootState } from '@/store/store'
+import Box from '@/components/Template/Box'
 import Cookies from 'js-cookie'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  SelectedMenuValue,
+  SelectedStylistValue
+} from '@/components/reservation/_PropsTypes'
+import Button from '@/components/common/Button'
+import history from '@/utils/routers/history'
+import { PATHS } from '@/constants/paths'
 
 export interface ReservationData {
   name?: string
@@ -11,53 +16,84 @@ export interface ReservationData {
   menuName?: string
   stylistName?: string
   reservationDate?: string
-  price?: string
+  menuPrice?: string
+  stylistPrice?: string
+  totalPrice?: string
 }
 
 export interface StepThreeProps {
-  reservationDate: string
+  pageType?: 'step' | 'complete'
   shopName?: string
 }
 
-const StepThree = ({ reservationDate, shopName }: StepThreeProps) => {
-  const dispatch = useDispatch()
-  const { user } = useSelector((state: RootState) => state)
-  const menu: { menuName: string; menuDuration: number; menuPrice: number } =
-    JSON.parse(String(Cookies.get('selectedMenu')))
+const StepThree = ({ shopName, pageType }: StepThreeProps) => {
+  const menu: SelectedMenuValue = JSON.parse(
+    String(Cookies.get('selectedMenu'))
+  )
+  const stylist: SelectedStylistValue = JSON.parse(
+    String(Cookies.get('selectedStylist'))
+  )
+  const reservationDate = Cookies.get('reservationDate')
+
+  const totalPrice = stylist.stylistPrice
+    ? Number(stylist.stylistPrice) + Number(menu.menuPrice)
+    : Number(menu.menuPrice)
 
   const rowItem = {
-    name: user.user.user.username,
     shopName: shopName,
-    stylistName: '指名なし',
+    stylistName: stylist.stylistName || '指名なし',
+    stylistPrice: `${Number(stylist.stylistPrice).toLocaleString()}￥` || '0￥',
     menuName: menu.menuName,
-    price: `${menu.menuPrice.toLocaleString()}￥`,
-    reservationDate: reservationDate
+    menuPrice: `${menu.menuPrice?.toLocaleString()}￥`,
+    reservationDate: reservationDate,
+    totalPrice: `${totalPrice.toLocaleString()}￥`
   } as ReservationData
 
-  useEffect(() => {
-    dispatch(getUser())
+  const goToList = useCallback(() => {
+    Cookies.remove('selectedMenu'),
+      Cookies.remove('selectedStylist'),
+      Cookies.remove('reservationDate'),
+      history.push(PATHS.SHOPS)
   }, [])
 
   return (
     <>
-      <div className='mb-10 text-error-dark font-bold grid justify-end text-right'>
-        <p>
-          まだ予約は完了しておりません。
-          下の「予約確定」ボタンを押してください。
-        </p>
-      </div>
-      <DataTable
-        cell={[
-          { column: 'お客様名', key: 'name' },
-          { column: '店舗名', key: 'shopName' },
-          { column: 'メニュー名', key: 'menuName' },
-          { column: 'スタイリスト名', key: 'stylistName' },
-          { column: '来店日', key: 'reservationDate' },
-          { column: 'お支払い金額', key: 'price' }
-        ]}
-        item={rowItem}
-        classes='bg-primary text-secondary-light w-[20rem]'
-      />
+      {pageType === 'step' ? (
+        <div className='mb-8 text-error-dark font-bold grid justify-end text-right'>
+          <p>
+            まだ予約は完了しておりません。
+            下の「予約確定」ボタンを押してください。
+          </p>
+        </div>
+      ) : (
+        <div className='mb-8 text-center text-gray-main'>
+          <p>ご予約いただき誠にありがとうございます。</p>
+          <p>以下の内容でご予約預かりました。</p>
+        </div>
+      )}
+      <Box title='予約内容'>
+        <DataTable
+          cell={[
+            { column: '店舗名', key: 'shopName' },
+            { column: '来店日', key: 'reservationDate' },
+            { column: 'メニュー名', key: 'menuName' },
+            { column: 'メニュー価格', key: 'menuPrice' },
+            { column: 'スタイリスト名', key: 'stylistName' },
+            { column: '指名料', key: 'stylistPrice' },
+            { column: '総お支払い金額', key: 'totalPrice' }
+          ]}
+          item={rowItem}
+          classes='bg-primary text-secondary-light w-[20rem]'
+        />
+      </Box>
+      {pageType === 'complete' && (
+        <Button
+          onClick={goToList}
+          classes='border-none font-bold text-gray-main text-center mt-10 w-full'
+        >
+          リストに戻る
+        </Button>
+      )}
     </>
   )
 }

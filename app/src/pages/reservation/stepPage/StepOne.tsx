@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { fetchAllMenu } from '@store/actions/menuAction'
 import { RootState } from '@store/store'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
@@ -12,21 +12,26 @@ import {
   SelectedMenuValue,
   SelectedStylistValue
 } from '@/components/reservation/_PropsTypes'
+import Cookies from 'js-cookie'
 
 export interface StepProps {
   shopId: string
   control: Control<any>
-  menuDuration?: number | null
-  setState?: React.Dispatch<
-    React.SetStateAction<SelectedMenuValue & SelectedStylistValue>
-  >
 }
 
-const StepOne = ({ shopId, control, setState }: StepProps) => {
+const StepOne = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
   const { pageHandler, page } = usePagination(1)
 
   const { menus } = useSelector((state: RootState) => state)
+
+  const [selectedMenu, setSelectedMenu] = useState<SelectedMenuValue>({
+    menuName: '',
+    menuPrice: null,
+    menuDuration: null
+  })
+
+  Cookies.set('selectedMenu', selectedMenu)
 
   useEffect(() => {
     dispatch(
@@ -50,7 +55,7 @@ const StepOne = ({ shopId, control, setState }: StepProps) => {
             name={v.name}
             price={v.price}
             duration={v.duration}
-            setState={setState}
+            setState={setSelectedMenu}
             img
             imgPath='/img/menu.jpeg'
             imgClasses='w-28 h-28'

@@ -34,6 +34,7 @@ export interface SelectedMenuValue {
 export interface SelectedStylistValue {
   stylistId?: number | null
   stylistName?: string
+  stylistPrice?: string
 }
 
 export interface AddedAppointment {
