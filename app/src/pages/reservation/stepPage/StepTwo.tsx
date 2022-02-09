@@ -27,8 +27,6 @@ const StepTwo = ({ shopId, control }: StepProps) => {
 
   Cookies.set('selectedStylist', selectedStylist)
 
-  console.log(shop.schedule, Array(shop.schedule.days))
-
   const stylistForThisReservation = reservation.stylistReservation.find(
     (s) => s.id === selectedStylist.stylistId
   )
@@ -51,8 +49,6 @@ const StepTwo = ({ shopId, control }: StepProps) => {
   const calendarValues = calendarDays.map((dayOfTheWeek, index) =>
     convertToValues(dayOfTheWeek, index)
   )
-
-  console.log(calendarValues)
 
   useEffect(() => {
     dispatch(

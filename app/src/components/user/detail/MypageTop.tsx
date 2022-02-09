@@ -35,11 +35,11 @@ const MypageTop = <T extends UserDetail>({
         />
       </Box>
       <Box title='予約一覧' boxClass='mb-4 pb-5'>
-        {subItems?.reservation.length === 0 ? (
+        {subItems?.reservation?.length === 0 ? (
           <EmptyData text='予約' />
         ) : (
           <>
-            {subItems?.reservation.map((v, i) => (
+            {subItems?.reservation?.map((v, i) => (
               <LongCardList
                 key={i}
                 name={v.shopName}
@@ -62,12 +62,12 @@ const MypageTop = <T extends UserDetail>({
         )}
       </Box>
       <Box title='以前予約したことがあるサロン'>
-        {subItems?.visitedShop.length === 0 ? (
+        {subItems?.visitedShop?.length === 0 ? (
           <EmptyData text='履歴' />
         ) : (
           <div className='flex flex-wrap justify-between px-5 pb-5 text-[1.4rem]'>
-            {subItems?.visitedShop.map((v, i) => (
-              <CardList key={i} img='img/salon.jpeg' name={v.name} />
+            {subItems?.visitedShop?.map((v, i) => (
+              <CardList key={i} img='img/salon.jpeg' name={v.shopName} />
             ))}
           </div>
         )}

@@ -40,8 +40,6 @@ const MyReservation = () => {
     )
   }, [dispatch, page])
 
-  console.log(reservation.userReservations)
-
   return (
     <SubTemplate>
       <div className='flex'>
