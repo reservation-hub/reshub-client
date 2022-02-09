@@ -1,17 +1,24 @@
-import React from 'react'
+import { useEffect } from 'react'
 import dayjs from 'dayjs'
-import { ReservationForAvailabilityList } from '../api/request-response-types/client/models/Reservation'
-import { StylistListForReservation } from '../api/request-response-types/client/models/Stylist'
-import { ScheduleDays } from '../api/request-response-types/models/Common'
-import days from '@/constants/days'
+import { ReservationForAvailabilityList } from '@utils/api/request-response-types/client/models/Reservation'
+import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
+import { ScheduleDays } from '@utils/api/request-response-types/models/Common'
+import days from '@constants/days'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSalonSchedule } from '@store/actions/shopAction'
+import { RootState } from '@store/store'
 
 export const useCalendarValues = (
   salonReservation: ReservationForAvailabilityList[],
   selectedStylistId: number | null,
   menuDuration: number,
   salonSeats: number,
+  shopId: number,
   stylistForThisReservation?: StylistListForReservation
 ) => {
+  const { shop } = useSelector((state: RootState) => state)
+  const dispatch = useDispatch()
+
   const reservationDate = dayjs().toDate()
 
   const calendarDays = Array(7)
@@ -38,9 +45,16 @@ export const useCalendarValues = (
       .filter((reservations) => reservations.stylistId === selectedStylistId)
       .map((reservations) => reservations.id)
 
+  const getShopTime = (time: string): number => {
+    return Number(time?.substring(0, 2) + time?.substring(3, 5))
+  }
+
+  const shopStartTime = getShopTime(shop.schedule.startTime)
+  const shopEndTime = getShopTime(shop.schedule.endTime)
+
   const convertToValues = (dayOfTheWeek: string, index: number) => {
     let hour = 9
-    return range(9, 31).map((v) => {
+    return range(9, 38).map((v) => {
       const startDate = new Date(
         reservationDate.getFullYear(),
         reservationDate.getMonth(),
@@ -51,6 +65,13 @@ export const useCalendarValues = (
       )
 
       const endDate = new Date(startDate.getTime() + menuDuration * 60 * 1000)
+
+      const startTime =
+        Number(dayjs(startDate).format('HH') + dayjs(startDate).format('mm')) <
+        shopStartTime
+      const closeTime =
+        Number(dayjs(startDate).format('HH') + dayjs(startDate).format('mm')) >
+        shopEndTime
 
       let isReserved = false
       let conflictingReservations: {
@@ -93,11 +114,20 @@ export const useCalendarValues = (
       return {
         id: v,
         number: v,
-        isReserved: v === 9 || v === 10 || isReserved || stylistReserved,
+        isReserved:
+          startTime ||
+          closeTime ||
+          isReserved ||
+          stylistReserved ||
+          !shop.schedule.days?.includes(dayOfTheWeek as ScheduleDays),
         startDate
       }
     })
   }
+
+  useEffect(() => {
+    dispatch(getSalonSchedule({ shopId: shopId }))
+  }, [])
 
   return {
     convertToValues,

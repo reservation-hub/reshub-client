@@ -10,15 +10,15 @@ import { StepProps } from './StepOne'
 import CardList from '@components/list/CardList'
 import Box from '@components/Template/Box'
 import CardLoading from '@components/list/CardLoading'
-import ReservationCalendar from '@/components/reservation/ReservationCalendar'
-import { useCalendarValues } from '@/utils/hooks/useCalendarValues'
+import ReservationCalendar from '@components/reservation/ReservationCalendar'
+import { useCalendarValues } from '@utils/hooks/useCalendarValues'
 import Cookies from 'js-cookie'
-import { SelectedStylistValue } from '@/components/reservation/_PropsTypes'
+import { SelectedStylistValue } from '@components/reservation/_PropsTypes'
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
 
-  const { reservation } = useSelector((state: RootState) => state)
+  const { reservation, shop } = useSelector((state: RootState) => state)
 
   const [selectedStylist, setSelectedStylist] = useState<SelectedStylistValue>({
     stylistId: null,
@@ -35,15 +35,14 @@ const StepTwo = ({ shopId, control }: StepProps) => {
 
   const duration = parse.menuDuration ?? 60
 
-  const shopSeats = selectedStylist.stylistId
-    ? 1
-    : reservation.shopReservation.seats
+  const shopSeats = selectedStylist.stylistId ? 1 : shop.schedule.seats
 
   const { convertToValues, reservationDate, calendarDays } = useCalendarValues(
     reservation.shopReservation.values,
     Number(selectedStylist.stylistId),
     duration,
     shopSeats,
+    Number(shopId),
     stylistForThisReservation
   )
 

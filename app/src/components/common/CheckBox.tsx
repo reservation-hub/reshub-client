@@ -24,7 +24,6 @@ const CheckBox = ({
   const changeHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const target = e.target
-      console.log(target)
       if (target.checked) {
         field.onChange(target.value)
         setState &&

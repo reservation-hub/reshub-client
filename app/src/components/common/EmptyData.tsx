@@ -3,7 +3,7 @@ import { TextProps } from '../_PropsTypes'
 
 const EmptyData = ({ text }: TextProps) => {
   return (
-    <div className='text-center w-full p-10 bg-gray-200 text-primary-dark'>
+    <div className='text-center w-full p-10 text-primary-dark'>
       <span>表示する{text}がありません。</span>
     </div>
   )

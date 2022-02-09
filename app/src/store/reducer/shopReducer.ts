@@ -4,13 +4,17 @@
 import { ShopState, SHOPS_TYPE } from '@store/types/shopTypes'
 import { ShopAction } from '@store/actions/shopAction'
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
-import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
+import {
+  SalonResponse,
+  SalonScheduleResponse
+} from '@utils/api/request-response-types/client/Shop'
 
 const initialState: ShopState = {
   loading: false,
   fetchIndex: [] as ShopForList[],
   shops: [] as ShopForList[],
   searchToName: [] as ShopForList[],
+  schedule: {} as SalonScheduleResponse,
   totalCount: 0,
   page: 0,
   areaId: 0,
@@ -33,6 +37,12 @@ const shopReducer = (state = initialState, action: ShopAction) => {
         ...state,
         loading: false,
         fetchIndex: state.fetchIndex.concat(action.payload.values)
+      }
+    case SHOPS_TYPE.GET_SCHEDULE:
+      return {
+        ...state,
+        loading: false,
+        schedule: action.payload
       }
     case SHOPS_TYPE.REQUEST_SUCCESS:
       return Object.assign({}, initialState, {

@@ -1,5 +1,5 @@
-import { VALID_REGEX, VALID_TEXT } from '@/constants/validation'
-import { Gender } from '@/utils/api/request-response-types/client/models/User'
+import { VALID_REGEX, VALID_TEXT } from '@constants/validation'
+import { Gender } from '@utils/api/request-response-types/client/models/User'
 import { z } from 'zod'
 
 export const userSchema = z.object({

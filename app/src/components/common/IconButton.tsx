@@ -15,10 +15,7 @@ const IconButton = ({
 }: IconButtonProps) => {
   return (
     <div className={classes}>
-      <Button
-        onClick={onClick}
-        classes='lg:w-[20rem] w-[16rem] h-[4.5rem] border-none'
-      >
+      <Button onClick={onClick} classes='w-full h-[4.5rem] border-none'>
         <span className='flex items-center p-3'>
           {icon && children}
           {text}

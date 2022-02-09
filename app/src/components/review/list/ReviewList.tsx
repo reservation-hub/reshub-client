@@ -6,6 +6,7 @@ import { ListProps } from '@components/list/_PropsType'
 import ReviewItem from './ReviewItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
+import EmptyData from '@components/common/EmptyData'
 
 export interface ReviewListProps<T> extends ListProps<T> {
   deleteReview: (reviewId: number, shopId: number) => void
@@ -23,15 +24,19 @@ const ReviewList = <T extends UserReviewListResponse>({
       </Link>
 
       <Box title={`${item?.totalCount}件の口コミがございます`} boxClass='mt-4'>
-        <InfiniteScroll
-          loadMore={useInfiniteScroll.loadMore}
-          hasMore={useInfiniteScroll.more}
-          initialLoad={false}
-          pageStart={0}
-          loader={<span key={0}>loading...</span>}
-        >
-          <ReviewItem item={item?.values} deleteReview={deleteReview} />
-        </InfiniteScroll>
+        {item?.values?.length === 0 ? (
+          <EmptyData text='口コミ' />
+        ) : (
+          <InfiniteScroll
+            loadMore={useInfiniteScroll.loadMore}
+            hasMore={useInfiniteScroll.more}
+            initialLoad={false}
+            pageStart={0}
+            loader={<span key={0}>loading...</span>}
+          >
+            <ReviewItem item={item?.values} deleteReview={deleteReview} />
+          </InfiniteScroll>
+        )}
       </Box>
     </div>
   )
