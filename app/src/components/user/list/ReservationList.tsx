@@ -8,7 +8,7 @@ import { PATHS } from '@constants/paths'
 import CardLoading from '@components/shop/list/ShopCardLoading'
 import LongCardList from '@components/list/LongCardList'
 import useConvertTime from '@utils/hooks/useConvertTime'
-import EmptyData from '@/components/common/EmptyData'
+import EmptyData from '@components/common/EmptyData'
 
 export interface ReservationListProps<T> extends ListProps<T> {
   cancelReservation: (reservationId: number) => void

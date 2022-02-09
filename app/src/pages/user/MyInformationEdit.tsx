@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
 import MypageMenu from '@components/user/detail/MypageMenu'
 import MainTemplate from '@components/Template/MainTemplate'
-import UserEditForm from '@/components/user/form/UserEditForm'
+import UserEditForm from '@components/user/form/UserEditForm'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser, patchUser } from '@/store/actions/userAction'
-import { userSchema, UserSchema } from '@/components/user/userSchema'
+import { getUser, patchUser } from '@store/actions/userAction'
+import { userSchema, UserSchema } from '@components/user/userSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RootState } from '@/store/store'
+import { RootState } from '@store/store'
 
 const MyInformationEdit = () => {
   const dispatch = useDispatch()

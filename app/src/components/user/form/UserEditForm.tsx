@@ -1,9 +1,9 @@
 import React from 'react'
-import Input from '@/components/common/Input'
-import FormWrapper from '@/components/form/FormWrapper'
-import { FormProps } from '@/components/form/_PropsType'
-import Box from '@/components/Template/Box'
-import { PATHS } from '@/constants/paths'
+import Input from '@components/common/Input'
+import FormWrapper from '@components/form/FormWrapper'
+import { FormProps } from '@components/form/_PropsType'
+import Box from '@components/Template/Box'
+import { PATHS } from '@constants/paths'
 import { Link } from 'react-router-dom'
 
 const UserEditForm = <T extends Record<string, any>>({

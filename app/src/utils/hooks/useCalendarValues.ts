@@ -3,10 +3,10 @@ import dayjs from 'dayjs'
 import { ReservationForAvailabilityList } from '@utils/api/request-response-types/client/models/Reservation'
 import { StylistListForReservation } from '@utils/api/request-response-types/client/models/Stylist'
 import { ScheduleDays } from '@utils/api/request-response-types/models/Common'
-import days from '@/constants/days'
+import days from '@constants/days'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSalonSchedule } from '@/store/actions/shopAction'
-import { RootState } from '@/store/store'
+import { getSalonSchedule } from '@store/actions/shopAction'
+import { RootState } from '@store/store'
 
 export const useCalendarValues = (
   salonReservation: ReservationForAvailabilityList[],

@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react'
-import DataTable from '@/components/common/DataTable'
-import Box from '@/components/Template/Box'
+import DataTable from '@components/common/DataTable'
+import Box from '@components/Template/Box'
 import Cookies from 'js-cookie'
 import {
   SelectedMenuValue,
   SelectedStylistValue
-} from '@/components/reservation/_PropsTypes'
-import Button from '@/components/common/Button'
-import history from '@/utils/routers/history'
-import { PATHS } from '@/constants/paths'
+} from '@components/reservation/_PropsTypes'
+import Button from '@components/common/Button'
+import history from '@utils/routers/history'
+import { PATHS } from '@constants/paths'
 
 export interface ReservationData {
   name?: string

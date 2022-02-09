@@ -10,10 +10,10 @@ import { StepProps } from './StepOne'
 import CardList from '@components/list/CardList'
 import Box from '@components/Template/Box'
 import CardLoading from '@components/list/CardLoading'
-import ReservationCalendar from '@/components/reservation/ReservationCalendar'
-import { useCalendarValues } from '@/utils/hooks/useCalendarValues'
+import ReservationCalendar from '@components/reservation/ReservationCalendar'
+import { useCalendarValues } from '@utils/hooks/useCalendarValues'
 import Cookies from 'js-cookie'
-import { SelectedStylistValue } from '@/components/reservation/_PropsTypes'
+import { SelectedStylistValue } from '@components/reservation/_PropsTypes'
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()

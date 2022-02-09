@@ -6,7 +6,7 @@ import { ListProps } from '@components/list/_PropsType'
 import ReviewItem from './ReviewItem'
 import { Link } from 'react-router-dom'
 import { PATHS } from '@constants/paths'
-import EmptyData from '@/components/common/EmptyData'
+import EmptyData from '@components/common/EmptyData'
 
 export interface ReviewListProps<T> extends ListProps<T> {
   deleteReview: (reviewId: number, shopId: number) => void

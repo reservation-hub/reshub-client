@@ -15,7 +15,7 @@ import StepTwo from './stepPage/StepTwo'
 import ReservationHeader from '@components/reservation/ReservationHeader'
 import Footer from '@components/Template/Footer'
 import { useDispatch } from 'react-redux'
-import { createReservation } from '@/store/actions/reservationAction'
+import { createReservation } from '@store/actions/reservationAction'
 import StepThree from './stepPage/StepThree'
 
 type ShopIdParams = {

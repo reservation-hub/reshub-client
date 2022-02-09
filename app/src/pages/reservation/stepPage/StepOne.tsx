@@ -11,7 +11,7 @@ import LongCardList from '@components/list/LongCardList'
 import {
   SelectedMenuValue,
   SelectedStylistValue
-} from '@/components/reservation/_PropsTypes'
+} from '@components/reservation/_PropsTypes'
 import Cookies from 'js-cookie'
 
 export interface StepProps {
