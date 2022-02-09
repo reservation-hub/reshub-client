@@ -10,7 +10,7 @@ import history from '@utils/routers/history'
 import {
   InsertUserQuery,
   UpdateUserQuery,
-  UserResponse
+  UserResponsesWithReservationDetails
 } from '@request-response-types/client/User'
 import Cookies from 'js-cookie'
 import setAuthToken from '@utils/api/setAuthToken'
@@ -19,7 +19,7 @@ const userRequestStart = () => {
   return typedAction(USER_TYPE.REQUEST_START)
 }
 
-const userRequestSuccess = (data: UserResponse) => {
+const userRequestSuccess = (data: UserResponsesWithReservationDetails) => {
   return typedAction(USER_TYPE.REQUEST_SUCCESS, data)
 }
 

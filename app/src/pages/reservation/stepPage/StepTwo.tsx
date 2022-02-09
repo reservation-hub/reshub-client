@@ -7,63 +7,39 @@ import {
   getStylistReservation
 } from '@store/actions/reservationAction'
 import { StepProps } from './StepOne'
-import { fetchAllStylist } from '@store/actions/stylistAction'
-import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import CardList from '@components/list/CardList'
 import Box from '@components/Template/Box'
 import CardLoading from '@components/list/CardLoading'
-import Paginate from '@components/common/Paginate'
-import usePagination from '@utils/hooks/usePagination'
 import ReservationCalendar from '@/components/reservation/ReservationCalendar'
-import days from '@constants/days'
 import { useCalendarValues } from '@/utils/hooks/useCalendarValues'
+import Cookies from 'js-cookie'
 
-export type AppointmentAttributes = {
-  id?: string | number
-  number: string | number
-  isReserved?: boolean
-  isSelected?: boolean
-  periods?: number
-} | null
-
-export type ReservationType = {
-  id: number
-  reservationStart: string
-  reservationEnd: string
-  stylistId?: number
-}
-
-const StepTwo = ({ shopId, control }: StepProps) => {
+const StepTwo = ({ shopId, control, setState }: StepProps) => {
   const dispatch = useDispatch()
+
+  const { reservation } = useSelector((state: RootState) => state)
+
   const [selectedStylistId, setSelectedStylistId] = useState<number | null>(
     null
   )
-
-  const { reservation, stylist } = useSelector((state: RootState) => state)
-  const { pageHandler, page } = usePagination(1)
-
-  console.log(selectedStylistId)
 
   const stylistForThisReservation = reservation.stylistReservation.find(
     (s) => s.id === selectedStylistId
   )
 
-  // TODO change this to actual duration of selected menu
-  const sampleDuration = 60
+  const parse = JSON.parse(String(Cookies.get('selectedMenu')))
+
+  const duration = parse.menuDuration ?? 60
 
   const shopSeats = selectedStylistId ? 1 : reservation.shopReservation.seats
 
-  const { convertToValues, reservationDate } = useCalendarValues(
+  const { convertToValues, reservationDate, calendarDays } = useCalendarValues(
     reservation.shopReservation.values,
     selectedStylistId,
-    sampleDuration,
+    duration,
     shopSeats,
     stylistForThisReservation
   )
-
-  const calendarDays = Array(7)
-    .fill('')
-    .map((_, i) => days[(reservationDate.getDay() + i) % 7])
 
   const calendarValues = calendarDays.map((dayOfTheWeek, index) =>
     convertToValues(dayOfTheWeek, index)
@@ -77,24 +53,17 @@ const StepTwo = ({ shopId, control }: StepProps) => {
       })
     )
     dispatch(getStylistReservation(Number(shopId)))
-    dispatch(
-      fetchAllStylist({
-        shopId: Number(shopId),
-        page: page,
-        order: OrderBy.DESC
-      })
-    )
-  }, [page])
+  }, [])
 
   return (
     <>
       <Box title='スタイリスト選択' boxClass='pb-4'>
         <div className='flex flex-wrap w-full justify-between px-5 mb-5'>
-          {stylist.loading ? (
+          {reservation.loading ? (
             <CardLoading price count={10} />
           ) : (
             <>
-              {stylist.stylists.map((v, i) => (
+              {reservation.stylistReservation.map((v, i) => (
                 <CardList
                   key={i}
                   icon
@@ -111,13 +80,12 @@ const StepTwo = ({ shopId, control }: StepProps) => {
           )}
         </div>
       </Box>
-      <Paginate
-        totalPage={stylist.totalCount}
-        page={page}
-        pageChangeHandler={pageHandler}
-      />
 
-      <ReservationCalendar days={calendarValues} />
+      <ReservationCalendar
+        name='reservationDate'
+        days={calendarValues}
+        control={control}
+      />
     </>
   )
 }

@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { ReservationForAvailabilityList } from '../api/request-response-types/client/models/Reservation'
 import { StylistListForReservation } from '../api/request-response-types/client/models/Stylist'
 import { ScheduleDays } from '../api/request-response-types/models/Common'
+import days from '@/constants/days'
 
 export const useCalendarValues = (
   salonReservation: ReservationForAvailabilityList[],
@@ -12,6 +13,10 @@ export const useCalendarValues = (
   stylistForThisReservation?: StylistListForReservation
 ) => {
   const reservationDate = dayjs().toDate()
+
+  const calendarDays = Array(7)
+    .fill('')
+    .map((_, i) => days[(reservationDate.getDay() + i) % 7])
 
   const range = (from: number, to: number, step = 1): number[] => {
     const arr = []
@@ -35,7 +40,7 @@ export const useCalendarValues = (
 
   const convertToValues = (dayOfTheWeek: string, index: number) => {
     let hour = 9
-    return range(9, 32).map((v) => {
+    return range(9, 31).map((v) => {
       const startDate = new Date(
         reservationDate.getFullYear(),
         reservationDate.getMonth(),
@@ -98,6 +103,7 @@ export const useCalendarValues = (
     convertToValues,
     reservationItems,
     reservationDate,
-    stylistReservationIds
+    stylistReservationIds,
+    calendarDays
   }
 }

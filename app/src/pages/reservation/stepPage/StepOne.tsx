@@ -7,15 +7,22 @@ import { Control } from 'react-hook-form'
 import Box from '@components/Template/Box'
 import usePagination from '@utils/hooks/usePagination'
 import Paginate from '@components/common/Paginate'
-import MenuList from '@components/menu/list/MenuList'
 import LongCardList from '@components/list/LongCardList'
+import {
+  SelectedMenuValue,
+  SelectedStylistValue
+} from '@/components/reservation/_PropsTypes'
 
 export interface StepProps {
   shopId: string
   control: Control<any>
+  menuDuration?: number | null
+  setState?: React.Dispatch<
+    React.SetStateAction<SelectedMenuValue & SelectedStylistValue>
+  >
 }
 
-const StepOne = ({ shopId, control }: StepProps) => {
+const StepOne = ({ shopId, control, setState }: StepProps) => {
   const dispatch = useDispatch()
   const { pageHandler, page } = usePagination(1)
 
@@ -43,6 +50,7 @@ const StepOne = ({ shopId, control }: StepProps) => {
             name={v.name}
             price={v.price}
             duration={v.duration}
+            setState={setState}
             img
             imgPath='/img/menu.jpeg'
             imgClasses='w-28 h-28'

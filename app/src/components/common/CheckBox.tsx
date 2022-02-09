@@ -4,6 +4,7 @@ import { InputProps } from '../_PropsTypes'
 
 export interface CheckBoxProps extends InputProps {
   checkedValue?: string
+  setState?: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 const CheckBox = ({
@@ -13,7 +14,8 @@ const CheckBox = ({
   fullWidth,
   label,
   control,
-  value
+  value,
+  setState
 }: CheckBoxProps) => {
   const { field } = useController({ name, control })
   const [isSelected, setIsSelected] = useState(false)
@@ -24,9 +26,11 @@ const CheckBox = ({
 
       if (target.checked) {
         field.onChange(target.value)
+        setState && setState(Number(target.value))
         setIsSelected(true)
       } else {
-        field.onChange(field.value !== target.value)
+        field.onChange('')
+        setState && setState(null)
         setIsSelected(!isSelected)
       }
     },

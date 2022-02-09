@@ -1,8 +1,8 @@
 //----------------------------------
 // redux action types お店管理
 //----------------------------------
-import { UserResponse } from '@utils/api/request-response-types/client/User'
-import { DefaultState } from '../store'
+import { UserResponsesWithReservationDetails } from '@utils/api/request-response-types/client/User'
+import { DefaultState } from '@store/store'
 
 export const USER_TYPE = {
   REQUEST_START: 'CLIENT_REQUEST_START',
@@ -15,6 +15,6 @@ export const USER_TYPE = {
 
 export type UsersState = Readonly<
   DefaultState & {
-    user: UserResponse
+    user: UserResponsesWithReservationDetails
   }
 >

@@ -14,7 +14,7 @@ export interface CardListProps {
   name?: string
   price?: number
   buttonText?: string
-  setState?: React.Dispatch<React.SetStateAction<number | null>>
+  setState?: React.Dispatch<React.SetStateAction<any>>
 }
 
 const CardList = ({
@@ -45,13 +45,14 @@ const CardList = ({
       </div>
 
       {useReservationForm ? (
-        <div onClick={() => setState && setState(Number(id))}>
+        <div>
           <CheckBox
             name='stylistId'
             id={`stylist-${name}`}
             control={control}
             value={String(id)}
             label={buttonText}
+            setState={setState}
             classes='border rounded-lg p-1'
           />
         </div>

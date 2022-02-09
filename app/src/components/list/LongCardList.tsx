@@ -1,19 +1,18 @@
 import React from 'react'
-import { PATHS } from '@constants/paths'
 import { Tag } from '@utils/api/request-response-types/client/models/Tag'
 import history from '@utils/routers/history'
-import { Link } from 'react-router-dom'
-import Button from '../common/Button'
-import Image from '../common/Image'
-import SubTitle from '../common/SubTitle'
-import Tags from '../common/Tag'
-import CardTemplate from '../Template/CardTemplate'
-import { ClassesAndChildren } from '../_PropsTypes'
-import ReservationInfo from '../reservation/list/ReservationInfo'
-import ShopInfo from '../shop/list/ShopInfo'
+import Button from '@components/common/Button'
+import Image from '@components/common/Image'
+import SubTitle from '@components/common/SubTitle'
+import Tags from '@components/common/Tag'
+import CardTemplate from '@components/Template/CardTemplate'
+import { ClassesAndChildren } from '@components/_PropsTypes'
+import ReservationInfo from '@components/reservation/list/ReservationInfo'
+import ShopInfo from '@components/shop/list/ShopInfo'
 import { ReservationStatus } from '@utils/api/request-response-types/client/models/Reservation'
-import CheckBox from '../common/CheckBox'
+import CheckBox from '@components/common/CheckBox'
 import { Control } from 'react-hook-form'
+import { SelectedMenuValue } from '@components/reservation/_PropsTypes'
 
 export const pageType = {
   RESERVATION_LIST: 'reservationList',
@@ -48,6 +47,7 @@ export interface LongCardListProps extends ClassesAndChildren {
   reservationStatus?: keyof typeof ReservationStatus
   pageType?: keyof typeof pageType
   cancelReservation?: (reservationId: number) => void
+  setState?: React.Dispatch<React.SetStateAction<SelectedMenuValue>>
 }
 
 const LongCardList = ({
@@ -75,14 +75,15 @@ const LongCardList = ({
   control,
   pageType,
   duration,
-  cancelReservation
+  cancelReservation,
+  setState
 }: LongCardListProps) => {
   const descStyle =
     pageType === 'SHOP_LIST' ? 'text-pink-500' : 'text-primary-dark'
 
   return (
     <CardTemplate shadow classes='w-full border mb-5 text-primary-dark'>
-      <Link to={String(link)}>
+      <div className='w-full' onClick={() => link && history.push(link)}>
         <div className='border-b-2 px-5 flex items-center justify-between'>
           <SubTitle text={name} />
           <span>{headerSectionText}</span>
@@ -105,7 +106,7 @@ const LongCardList = ({
             )}
           </div>
         </div>
-      </Link>
+      </div>
 
       <div className='flex justify-between items-center mb-5'>
         {tags && (
@@ -125,7 +126,16 @@ const LongCardList = ({
           {pageType === 'SHOP_LIST' || pageType === 'MENU_LIST' ? (
             <>
               {useReservationForm ? (
-                <form>
+                <div
+                  onClick={() =>
+                    setState &&
+                    setState({
+                      menuDuration: Number(duration),
+                      menuPrice: Number(price),
+                      menuName: name
+                    })
+                  }
+                >
                   <CheckBox
                     name='menuId'
                     id={`menu-${menuId}`}
@@ -134,7 +144,7 @@ const LongCardList = ({
                     value={String(menuId)}
                     label='このメニューを選択'
                   />
-                </form>
+                </div>
               ) : (
                 <Button
                   onClick={() =>
