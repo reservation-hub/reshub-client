@@ -45,9 +45,16 @@ export const useCalendarValues = (
       .filter((reservations) => reservations.stylistId === selectedStylistId)
       .map((reservations) => reservations.id)
 
+  const getShopTime = (time: string): number => {
+    return Number(time?.substring(0, 2) + time?.substring(3, 5))
+  }
+
+  const shopStartTime = getShopTime(shop.schedule.startTime)
+  const shopEndTime = getShopTime(shop.schedule.endTime)
+
   const convertToValues = (dayOfTheWeek: string, index: number) => {
     let hour = 9
-    return range(9, 31).map((v) => {
+    return range(9, 38).map((v) => {
       const startDate = new Date(
         reservationDate.getFullYear(),
         reservationDate.getMonth(),
@@ -58,6 +65,13 @@ export const useCalendarValues = (
       )
 
       const endDate = new Date(startDate.getTime() + menuDuration * 60 * 1000)
+
+      const startTime =
+        Number(dayjs(startDate).format('HH') + dayjs(startDate).format('mm')) <
+        shopStartTime
+      const closeTime =
+        Number(dayjs(startDate).format('HH') + dayjs(startDate).format('mm')) >
+        shopEndTime
 
       let isReserved = false
       let conflictingReservations: {
@@ -101,11 +115,11 @@ export const useCalendarValues = (
         id: v,
         number: v,
         isReserved:
-          v === 9 ||
-          v === 10 ||
+          startTime ||
+          closeTime ||
           isReserved ||
           stylistReserved ||
-          !shop.schedule.days.includes(dayOfTheWeek as ScheduleDays),
+          !shop.schedule.days?.includes(dayOfTheWeek as ScheduleDays),
         startDate
       }
     })

@@ -52,6 +52,8 @@ const StepTwo = ({ shopId, control }: StepProps) => {
     convertToValues(dayOfTheWeek, index)
   )
 
+  console.log(calendarValues)
+
   useEffect(() => {
     dispatch(
       getReservation({
