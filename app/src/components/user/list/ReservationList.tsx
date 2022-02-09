@@ -22,22 +22,20 @@ const ReservationList = <T extends UserReservationListResponse>({
 }: ReservationListProps<T>) => {
   return (
     <div className='w-[69rem] z-10'>
-      <Link to={PATHS.USER}>
-        トップに戻る
-      </Link>
+      <Link to={PATHS.USER}>トップに戻る</Link>
 
       <Box title={`${item?.totalCount}件の予約がございます`} boxClass='mt-4'>
         {loading && <CardLoading count={5} />}
-        {item?.values.length === 0 ? (
-          <EmptyData text='予約' />
-        ) : (
-          <InfiniteScroll
-            loadMore={useInfiniteScroll.loadMore}
-            hasMore={useInfiniteScroll.more}
-            pageStart={0}
-            loader={<CardLoading key={0} count={1} />}
-          >
-            {item?.values.map((v, i) => (
+        <InfiniteScroll
+          loadMore={useInfiniteScroll.loadMore}
+          hasMore={useInfiniteScroll.more}
+          pageStart={0}
+          loader={<CardLoading key={0} count={item?.values?.length} />}
+        >
+          {item?.values.length === 0 ? (
+            <EmptyData text='予約' />
+          ) : (
+            item?.values.map((v, i) => (
               <LongCardList
                 key={i}
                 name={v.shopName}
@@ -53,9 +51,9 @@ const ReservationList = <T extends UserReservationListResponse>({
                 link='#'
                 pageType='RESERVATION_LIST'
               />
-            ))}
-          </InfiniteScroll>
-        )}
+            ))
+          )}
+        </InfiniteScroll>
       </Box>
     </div>
   )

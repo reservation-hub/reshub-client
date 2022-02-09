@@ -6,7 +6,6 @@ import { RootState } from '@store/store'
 import '@styles/global.css'
 import SearchBox from '@components/common/SearchBox'
 import Box from '@components/Template/Box'
-import { useForm } from 'react-hook-form'
 import MainTemplate from '@components/Template/MainTemplate'
 import history from '@utils/routers/history'
 import { PATHS } from '@constants/paths'
@@ -15,12 +14,6 @@ import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
 
 const Main = () => {
   const dispatch = useDispatch()
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({})
 
   const contestSection = 'lg:w-[100rem] w-full h-full mx-auto lg:mt-20 mt-5'
 
@@ -46,9 +39,7 @@ const Main = () => {
             </span>
           </div>
           <SearchBox
-            control={control}
             classes='md:w-[45rem] w-full lg:h-[28.5rem] h-[26rem]'
-            searchFromArea={() => history.push(`${PATHS.SHOPS}/area`)}
             searchFromTags={() => history.push(`${PATHS.SHOPS}/tags`)}
           />
         </div>

@@ -22,13 +22,13 @@ const MyInformationEdit = () => {
     resolver: zodResolver(userSchema),
     mode: 'onSubmit',
     defaultValues: {
-      username: user.user.user && user.user.user.username || '',
-      firstNameKana: user.user.user && user.user.user.firstNameKana || '',
-      lastNameKana: user.user.user && user.user.user.lastNameKana || '',
+      username: (user.user.user && user.user.user.username) || '',
+      firstNameKana: (user.user.user && user.user.user.firstNameKana) || '',
+      lastNameKana: (user.user.user && user.user.user.lastNameKana) || '',
       firstNameKanji: '',
       lastNameKanji: '',
       gender: undefined,
-      birthday: user.user.user && user.user.user.birthday  || ''
+      birthday: (user.user.user && user.user.user.birthday) || ''
     }
   })
 

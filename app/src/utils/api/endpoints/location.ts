@@ -18,7 +18,7 @@ export const getArea = async (
   id: number
 ): Promise<AxiosResponse<AreaPrefecturesResponse>> => {
   return await instance.get<AreaPrefecturesResponse>(
-    `${baseEndpoint.area}/${id}${baseEndpoint.prefecture}`
+    `${baseEndpoint.area}/${id}/prefectures`
   )
 }
 

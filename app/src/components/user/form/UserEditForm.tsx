@@ -13,9 +13,7 @@ const UserEditForm = <T extends Record<string, any>>({
 }: FormProps<T>) => {
   return (
     <div className='w-[69rem] z-10'>
-      <Link to={PATHS.USER}>
-        トップに戻る  
-      </Link>
+      <Link to={PATHS.USER}>トップに戻る</Link>
 
       <Box title='ユーザー情報編集' boxClass='mt-4'>
         <FormWrapper submitHandler={submitHandler} buttonText='修正する'>

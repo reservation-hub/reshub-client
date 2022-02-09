@@ -52,7 +52,7 @@ export const PRIVATE_MENU: { path: string; text: string }[] = [
 ]
 
 export const PUBLIC_MENU: { path: string; text: string }[] = [
-  { path: PATHS.SHOPS, text: '美容室' },
+  { path: `${PATHS.SHOPS}/area`, text: '美容室' },
   { path: PATHS.LOGIN, text: 'ログイン' }
 ]
 
