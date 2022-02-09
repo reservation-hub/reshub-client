@@ -26,7 +26,7 @@ const SalonList = <T extends ShopForList[]>({
         pageStart={0}
         hasMore={useInfiniteScroll.more}
         initialLoad={false}
-        loader={<ShopCardLoading key={0} count={item?.length} />}
+        loader={<ShopCardLoading key={0} count={1} />}
       >
         {rowItems?.length === 0 ? (
           <div className='w-[55rem]'>
@@ -47,7 +47,7 @@ const SalonList = <T extends ShopForList[]>({
               buttonLink={`${PATHS.RESERVATION}/${v.id}`}
               buttonText='空席確認・予約'
               tel='090-1234-1234'
-              imgPath='img/salon.jpeg'
+              imgPath='/img/salon.jpeg'
               imgClasses='w-40 h-40'
               description='shop description'
               pageType='SHOP_LIST'
