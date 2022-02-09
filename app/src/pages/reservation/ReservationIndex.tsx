@@ -1,4 +1,4 @@
-import { PATHS } from '@/constants/paths'
+import { PATHS } from '@constants/paths'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Reservation from './Reservation'

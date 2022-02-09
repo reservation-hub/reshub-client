@@ -2,8 +2,8 @@ import React from 'react'
 import { StylistForList } from '@utils/api/request-response-types/client/models/Stylist'
 import { ListProps } from '@components/list/_PropsType'
 import InfiniteScroll from 'react-infinite-scroller'
-import CardList from '../CardList'
-import CardLoading from '../CardLoading'
+import CardList from '../../list/CardList'
+import CardLoading from '../../list/CardLoading'
 
 export interface StylistListProps<T> extends ListProps<T> {
   length?: number

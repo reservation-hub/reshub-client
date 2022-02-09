@@ -4,8 +4,8 @@ import InfiniteScroll from 'react-infinite-scroller'
 import Box from '@components/Template/Box'
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import ShopCardLoading from './ShopCardLoading'
-import LongCardList from '@/components/list/LongCardList'
-import { PATHS } from '@/constants/paths'
+import LongCardList from '@components/list/LongCardList'
+import { PATHS } from '@constants/paths'
 
 const SalonList = <T extends ShopForList[]>({
   item,

@@ -4,6 +4,7 @@ import { InputProps } from '../_PropsTypes'
 
 export interface CheckBoxProps extends InputProps {
   checkedValue?: string
+  setState?: React.Dispatch<React.SetStateAction<any>>
 }
 
 const CheckBox = ({
@@ -13,7 +14,9 @@ const CheckBox = ({
   fullWidth,
   label,
   control,
-  value
+  value,
+  placeholder,
+  setState
 }: CheckBoxProps) => {
   const { field } = useController({ name, control })
   const [isSelected, setIsSelected] = useState(false)
@@ -21,12 +24,20 @@ const CheckBox = ({
   const changeHandler = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const target = e.target
-
+      console.log(target)
       if (target.checked) {
         field.onChange(target.value)
+        setState &&
+          setState({
+            stylistId: Number(target.value),
+            stylistName: target.id,
+            stylistPrice: target.placeholder
+          })
         setIsSelected(true)
       } else {
-        field.onChange(field.value !== target.value)
+        field.onChange('')
+        setState &&
+          setState({ stylistId: null, stylistName: '', stylistPrice: null })
         setIsSelected(!isSelected)
       }
     },
@@ -51,6 +62,7 @@ const CheckBox = ({
         type='checkbox'
         name={name}
         value={value}
+        placeholder={placeholder}
         checked={value === field.value}
         onChange={changeHandler}
       />

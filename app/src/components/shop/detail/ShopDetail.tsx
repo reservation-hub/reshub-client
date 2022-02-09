@@ -4,8 +4,8 @@ import { SalonResponse } from '@utils/api/request-response-types/client/Shop'
 import { Items } from '@components/list/_PropsType'
 import DataTable from '@components/common/DataTable'
 import Box from '@components/Template/Box'
-import CardList from '@/components/list/CardList'
-import CardLoading from '@/components/list/CardLoading'
+import CardList from '@components/list/CardList'
+import CardLoading from '@components/list/CardLoading'
 
 export interface ShopDetailProps<T> extends Items<T> {
   menuItem?: DetailMenuItem[]

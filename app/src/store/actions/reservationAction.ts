@@ -15,7 +15,7 @@ import {
   UserReservationListQuery,
   UserReservationListResponse
 } from '@utils/api/request-response-types/client/User'
-import { PATHS } from '@/constants/paths'
+import { PATHS } from '@constants/paths'
 
 const reservationRequestStart = () => {
   return typedAction(RESERVATION_TYPE.REQUEST_START)
@@ -163,7 +163,7 @@ export const createReservation = (
       )
       dispatch(createReservationSuccess(res.data))
     } catch (e: any) {
-      const err = e.reseponse.data
+      const err = e.response
       dispatch(reservationRequestFailure(err))
     }
   }

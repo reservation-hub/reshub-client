@@ -1,10 +1,10 @@
 import React from 'react'
-import { ReservationStatus } from '@/utils/api/request-response-types/client/models/Reservation'
-import useConvertStatus from '@/utils/hooks/useConvertStatus'
-import { useModal } from '@/utils/hooks/useModal'
-import Button from '@/components/common/Button'
-import ModalOverlay from '@/components/modal/ModalOverlay'
-import ModalAlert from '@/components/modal/ModalAlert'
+import { ReservationStatus } from '@utils/api/request-response-types/client/models/Reservation'
+import useConvertStatus from '@utils/hooks/useConvertStatus'
+import { useModal } from '@utils/hooks/useModal'
+import Button from '@components/common/Button'
+import ModalOverlay from '@components/modal/ModalOverlay'
+import ModalAlert from '@components/modal/ModalAlert'
 import { LongCardListProps } from '../../list/LongCardList'
 
 const ReservationInfo = ({

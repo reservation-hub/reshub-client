@@ -1,54 +1,75 @@
-import React, { useEffect } from 'react'
-import { RootState } from '@/store/store'
+import React, { useEffect, useState } from 'react'
+import { RootState } from '@store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import {
   getReservation,
   getStylistReservation
-} from '@/store/actions/reservationAction'
+} from '@store/actions/reservationAction'
 import { StepProps } from './StepOne'
-import { fetchAllStylist } from '@/store/actions/stylistAction'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
-import CardList from '@/components/list/CardList'
-import Box from '@/components/Template/Box'
-import CardLoading from '@/components/list/CardLoading'
-import Paginate from '@/components/common/Paginate'
-import usePagination from '@/utils/hooks/usePagination'
+import CardList from '@components/list/CardList'
+import Box from '@components/Template/Box'
+import CardLoading from '@components/list/CardLoading'
+import ReservationCalendar from '@/components/reservation/ReservationCalendar'
+import { useCalendarValues } from '@/utils/hooks/useCalendarValues'
+import Cookies from 'js-cookie'
+import { SelectedStylistValue } from '@/components/reservation/_PropsTypes'
 
 const StepTwo = ({ shopId, control }: StepProps) => {
   const dispatch = useDispatch()
-  const { reservation, stylist } = useSelector((state: RootState) => state)
-  const { pageHandler, page } = usePagination(1)
 
-  const day = dayjs().format('YYYY-MM-DD')
+  const { reservation } = useSelector((state: RootState) => state)
 
-  console.log(reservation.stylistReservation, reservation.shopReservation)
+  const [selectedStylist, setSelectedStylist] = useState<SelectedStylistValue>({
+    stylistId: null,
+    stylistName: ''
+  })
+
+  Cookies.set('selectedStylist', selectedStylist)
+
+  const stylistForThisReservation = reservation.stylistReservation.find(
+    (s) => s.id === selectedStylist.stylistId
+  )
+
+  const parse = JSON.parse(String(Cookies.get('selectedMenu')))
+
+  const duration = parse.menuDuration ?? 60
+
+  const shopSeats = selectedStylist.stylistId
+    ? 1
+    : reservation.shopReservation.seats
+
+  const { convertToValues, reservationDate, calendarDays } = useCalendarValues(
+    reservation.shopReservation.values,
+    Number(selectedStylist.stylistId),
+    duration,
+    shopSeats,
+    stylistForThisReservation
+  )
+
+  const calendarValues = calendarDays.map((dayOfTheWeek, index) =>
+    convertToValues(dayOfTheWeek, index)
+  )
+
   useEffect(() => {
     dispatch(
       getReservation({
         shopId: Number(shopId),
-        reservationDate: day
+        reservationDate: dayjs(reservationDate).format('YYYY-MM-DD')
       })
     )
     dispatch(getStylistReservation(Number(shopId)))
-    dispatch(
-      fetchAllStylist({
-        shopId: Number(shopId),
-        page: 1,
-        order: OrderBy.DESC
-      })
-    )
   }, [])
 
   return (
     <>
       <Box title='スタイリスト選択' boxClass='pb-4'>
         <div className='flex flex-wrap w-full justify-between px-5 mb-5'>
-          {stylist.loading ? (
+          {reservation.loading ? (
             <CardLoading price count={10} />
           ) : (
             <>
-              {stylist.stylists.map((v, i) => (
+              {reservation.stylistReservation.map((v, i) => (
                 <CardList
                   key={i}
                   icon
@@ -58,16 +79,18 @@ const StepTwo = ({ shopId, control }: StepProps) => {
                   price={v.price}
                   id={v.id}
                   buttonText='選択'
+                  setState={setSelectedStylist}
                 />
               ))}
             </>
           )}
         </div>
       </Box>
-      <Paginate
-        totalPage={stylist.totalCount}
-        page={page}
-        pageChangeHandler={pageHandler}
+
+      <ReservationCalendar
+        name='reservationDate'
+        days={calendarValues}
+        control={control}
       />
     </>
   )

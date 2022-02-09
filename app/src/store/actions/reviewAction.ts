@@ -1,7 +1,7 @@
 import {
   UserReviewListQuery,
   UserReviewUpdateQuery
-} from '@/utils/api/request-response-types/client/User'
+} from '@utils/api/request-response-types/client/User'
 import apiEndpoint from '@utils/api/apiEndpoint'
 import { Review } from '@utils/api/request-response-types/client/models/Review'
 import {
@@ -159,7 +159,6 @@ export const deleteReview = (
   return async (dispatch) => {
     dispatch(reviewRequestStart())
     try {
-      console.log('delete review query', queryParams)
       const res = await apiEndpoint.review.deleteReview(queryParams)
       dispatch(deleteReviewSuccess(res.data))
     } catch (e: any) {

@@ -8,16 +8,18 @@ import {
   InsertUserQuery,
   UpdateUserPasswordQuery,
   UpdateUserQuery,
-  UserResponse,
   UserReviewListQuery,
   UserReviewListResponse,
-  UserReviewUpdateQuery,
   ReviewResponse,
-  UserReviewDeleteQuery
+  UserResponsesWithReservationDetails
 } from '@request-response-types/client/User'
 
-export const getUser = async (): Promise<AxiosResponse<UserResponse>> => {
-  return await instance.get<UserResponse>(`${baseEndpoint.users}/`)
+export const getUser = async (): Promise<
+  AxiosResponse<UserResponsesWithReservationDetails>
+> => {
+  return await instance.get<UserResponsesWithReservationDetails>(
+    `${baseEndpoint.users}/`
+  )
 }
 
 export const createUser = async (

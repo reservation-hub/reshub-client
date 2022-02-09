@@ -4,14 +4,14 @@ import { RootState } from '@store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '@store/actions/userAction'
 import { UserResponse } from '@utils/api/request-response-types/client/User'
-import MypageMenu from '@components/detail/user/MypageMenu'
+import MypageMenu from '@components/user/detail/MypageMenu'
 import {
   ReservationForList,
   ReservationStatus
 } from '@utils/api/request-response-types/client/models/Reservation'
-import MypageTop from '@components/detail/user/MypageTop'
-import { getUserReservationsIndex } from '@/store/actions/reservationAction'
-import { OrderBy } from '@/utils/api/request-response-types/client/Common'
+import { getUserReservationsIndex } from '@store/actions/reservationAction'
+import { OrderBy } from '@utils/api/request-response-types/client/Common'
+import MypageTop from '@components/user/detail/MypageTop'
 
 export type UserDetail = UserResponse & {
   kanaName: string
@@ -32,8 +32,8 @@ const MyPage = () => {
   const { user, reservation } = useSelector((state: RootState) => state)
 
   const rowItem = {
-    ...user.user,
-    kanaName: `${user.user?.firstNameKana} ${user.user?.lastNameKana}`
+    ...user.user.user,
+    kanaName: `${user.user.user?.firstNameKana} ${user.user.user?.lastNameKana}`
   } as UserDetail
 
   const subItems: MypageSubItems = {

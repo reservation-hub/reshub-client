@@ -4,7 +4,7 @@ import Main from '@pages/main/Main'
 import { RouteComponentProps } from 'react-router-dom'
 import { Shop } from '@pages/shop/ShopIndex'
 import { User } from '@pages/user/UserIndex'
-import { Reservation } from '@/pages/reservation/ReservationIndex'
+import { Reservation } from '@pages/reservation/ReservationIndex'
 
 export type TStaticContext = {
   statusCode?: number | undefined

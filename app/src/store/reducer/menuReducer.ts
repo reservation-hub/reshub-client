@@ -1,7 +1,7 @@
 import { Menu } from '@utils/api/request-response-types/client/models/Menu'
 import { MenuAction } from '@store/actions/menuAction'
 import { MenuState, MENU_TYPE } from '@store/types/menuTypes'
-import { PopularMenusResponse } from '@/utils/api/request-response-types/client/Menu'
+import { PopularMenusResponse } from '@utils/api/request-response-types/client/Menu'
 
 const initialState: MenuState = {
   loading: false,

@@ -14,3 +14,11 @@ export const VALID_TEXT = {
   IS_EMPTY: 'この項目は必須です。',
   INVALID_NUMBER: '半額数字で入力してください。'
 }
+
+// const stylistWorkDay = stylistDay
+//     ? workDay.map((v) =>
+//         useRange(10, 31).map((r) => ({
+//           id: r,
+//           number: r,
+//           isReserved: r === 10 || r === 11 || !test.includes(v)
+//         }))

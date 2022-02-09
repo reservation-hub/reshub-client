@@ -1,4 +1,4 @@
-import { PopularMenusResponse } from '@/utils/api/request-response-types/client/Menu'
+import { PopularMenusResponse } from '@utils/api/request-response-types/client/Menu'
 import { Menu } from '@utils/api/request-response-types/client/models/Menu'
 import { DefaultState } from '../store'
 

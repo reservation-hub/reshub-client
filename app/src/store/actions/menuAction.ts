@@ -6,7 +6,7 @@ import { Action } from 'redux'
 import history from '@utils/routers/history'
 import { Menu } from '@utils/api/request-response-types/client/models/Menu'
 import { SalonMenuListQuery } from '@utils/api/request-response-types/client/Shop'
-import { PopularMenusResponse } from '@/utils/api/request-response-types/client/Menu'
+import { PopularMenusResponse } from '@utils/api/request-response-types/client/Menu'
 
 const menuRequsetStart = () => {
   return typedAction(MENU_TYPE.REQUEST_START)
