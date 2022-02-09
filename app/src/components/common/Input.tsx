@@ -7,7 +7,8 @@ const INPUT_TYPE = {
   TEXT: 'text',
   NUMBER: 'number',
   FILE: 'file',
-  PASSWORD: 'password'
+  PASSWORD: 'password',
+  DATE: 'date'
 } as const
 
 export interface IInputProps extends InputProps {

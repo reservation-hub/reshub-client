@@ -11,7 +11,7 @@ import { RootState } from '@/store/store'
 
 const MyInformationEdit = () => {
   const dispatch = useDispatch()
-  const { auth, user } = useSelector((state: RootState) => state)
+  const { user } = useSelector((state: RootState) => state)
 
   const {
     control,
@@ -22,24 +22,24 @@ const MyInformationEdit = () => {
     resolver: zodResolver(userSchema),
     mode: 'onSubmit',
     defaultValues: {
-      username: user.user.user.username && '',
-      firstNameKana: '',
-      lastNameKana: '',
+      username: user.user.user && user.user.user.username || '',
+      firstNameKana: user.user.user && user.user.user.firstNameKana || '',
+      lastNameKana: user.user.user && user.user.user.lastNameKana || '',
       firstNameKanji: '',
       lastNameKanji: '',
       gender: undefined,
-      birthday: ''
+      birthday: user.user.user && user.user.user.birthday  || ''
     }
   })
 
-  console.log(watch())
-
   const onSubmit: SubmitHandler<UserSchema> = useCallback(
     (value: UserSchema) => {
-      dispatch(patchUser(1, value))
+      dispatch(patchUser(user.user.user.id, value))
     },
     []
   )
+
+  console.log(watch())
 
   useEffect(() => {
     dispatch(getUser())
