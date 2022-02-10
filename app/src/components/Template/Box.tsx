@@ -5,6 +5,7 @@ export interface IBoxProps extends ClassesAndChildren {
   boxClass?: string
   headerClass?: string
   spanClass?: string
+  sectionClass?: string
   title?: string
 }
 
@@ -13,6 +14,7 @@ const Box = ({
   boxClass,
   headerClass,
   spanClass,
+  sectionClass,
   title
 }: IBoxProps) => {
   return (
@@ -24,7 +26,7 @@ const Box = ({
           {title}
         </span>
       </div>
-      <section className='p-5'>{children}</section>
+      <section className={`${sectionClass} p-5`}>{children}</section>
     </div>
   )
 }

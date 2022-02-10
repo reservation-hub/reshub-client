@@ -9,6 +9,7 @@ import apiEndpoint from '@utils/api/apiEndpoint'
 import history from '@utils/routers/history'
 import { ShopForList } from '@utils/api/request-response-types/client/models/Shop'
 import {
+  PopularSalonListResponse,
   SalonListByAreaQuery,
   SalonListByNameQuery,
   SalonListQuery,
@@ -55,6 +56,10 @@ const shopSearchSuccess = (
   })
 }
 
+const getPopularShopSuccess = (data: PopularSalonListResponse) => {
+  return typedAction(SHOPS_TYPE.GET_POPULAR_SALON, data)
+}
+
 const getScheduleSuccess = (data: SalonScheduleResponse) => {
   return typedAction(SHOPS_TYPE.GET_SCHEDULE, data)
 }
@@ -68,9 +73,10 @@ const shopRequestFailure = (msg: string) => {
   return typedAction(SHOPS_TYPE.REQUEST_FAILURE, msg)
 }
 
-export const getShopsForIndex =
-  (queryParams: SalonListQuery): ThunkAction<void, RootState, null, Action> =>
-  async (dispatch) => {
+export const getShopsForIndex = (
+  queryParams: SalonListQuery
+): ThunkAction<void, RootState, null, Action> => {
+  return async (dispatch) => {
     dispatch(shopRequestStart())
     try {
       const res = await apiEndpoint.shops.getShops(queryParams)
@@ -81,6 +87,26 @@ export const getShopsForIndex =
       history.push('/error')
     }
   }
+}
+
+export const getPopularShop = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  Action
+> => {
+  return async (dispatch) => {
+    dispatch(shopRequestStart())
+    try {
+      const res = await apiEndpoint.shops.getPopularShop()
+      setTimeout(() => {
+        dispatch(getPopularShopSuccess(res.data))
+      }, 1500)
+    } catch {
+      history.push('/error')
+    }
+  }
+}
 
 // 全てのお店データを読み込む
 export const getShops =
@@ -190,6 +216,7 @@ export type ShopAction =
   | ReturnType<typeof shopRequestStart>
   | ReturnType<typeof fetchIndexSuccess>
   | ReturnType<typeof shopRequestSuccess>
+  | ReturnType<typeof getPopularShopSuccess>
   | ReturnType<typeof shopSearchSuccess>
   | ReturnType<typeof getScheduleSuccess>
   | ReturnType<typeof shopGetSuccess>

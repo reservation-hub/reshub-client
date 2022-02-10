@@ -12,7 +12,6 @@ import { getArea, getOneCity, getOnePref } from '@/store/actions/locationAction'
 import { RootState } from '@/store/store'
 import { useSearch } from '@/utils/hooks/useSearch'
 import { useModal } from '@/utils/hooks/useModal'
-import ModalOverlay from '../modal/ModalOverlay'
 
 export interface SearchBarProps extends ClassesAndChildren {
   searchFromTags?: () => void

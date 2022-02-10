@@ -11,7 +11,8 @@ import {
   SalonListResponse,
   SalonResponse,
   SalonScheduleQuery,
-  SalonScheduleResponse
+  SalonScheduleResponse,
+  PopularSalonListResponse
 } from '@request-response-types/client/Shop'
 
 export const fetchAll = async () => {
@@ -31,6 +32,14 @@ export const getShopSchedule = async (
 ): Promise<AxiosResponse<SalonScheduleResponse>> => {
   return await instance.get<SalonScheduleResponse>(
     `${baseEndpoint.shops}/${queryParams.shopId}/schedule`
+  )
+}
+
+export const getPopularShop = async (): Promise<
+  AxiosResponse<PopularSalonListResponse>
+> => {
+  return await instance.get<PopularSalonListResponse>(
+    `${baseEndpoint.shops}/popular`
   )
 }
 
@@ -77,6 +86,7 @@ const shops = {
   getShops,
   getShop,
   getShopSchedule,
+  getPopularShop,
   searchToShopsLocation,
   searchToShopsName
 }

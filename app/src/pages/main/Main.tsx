@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { getShopsForIndex } from '@store/actions/shopAction'
+import { getPopularShop, getShopsForIndex } from '@store/actions/shopAction'
 import SalonList from '@components/shop/list/SalonList'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
@@ -11,6 +11,7 @@ import history from '@utils/routers/history'
 import { PATHS } from '@constants/paths'
 import { OrderBy } from '@utils/api/request-response-types/client/Common'
 import useInfiniteScroll from '@utils/hooks/useInfiniteScroll'
+import CardList from '@/components/list/CardList'
 
 const Main = () => {
   const dispatch = useDispatch()
@@ -24,8 +25,22 @@ const Main = () => {
 
   const { loadMore, page, more } = useInfiniteScroll(shop.totalCount)
 
+  const rankingColor = (ranking: number) => {
+    switch (ranking) {
+      case 1:
+        return 'text-yellow-400'
+      case 2:
+        return 'text-gray-500'
+      case 3:
+        return 'text-yellow-800'
+      default:
+        return 'text-primary-dark'
+    }
+  }
+
   useEffect(() => {
     dispatch(getShopsForIndex({ page: page, order: OrderBy.DESC, take: 10 }))
+    dispatch(getPopularShop())
   }, [page, dispatch])
 
   return (
@@ -47,7 +62,20 @@ const Main = () => {
 
       <div className={contestSection}>
         <div className='h-full lg:mb-0 mb-5'>
-          <Box boxClass='h-[20rem] mb-4' title='ランキング'></Box>
+          <Box boxClass='mb-4' title='ランキング' sectionClass='flex flex-wrap'>
+            {shop.popularShops.map((v, i) => (
+              <div key={i} className='mx-auto'>
+                <span className={rankingColor(v.ranking)}>{v.ranking}位</span>
+                <CardList
+                  img='/img/salon.jpeg'
+                  name={v.name}
+                  address={`${v.prefectureName}${v.cityName}${v.address || ''}`}
+                  url={`${PATHS.SHOPS}/detail/${v.id}`}
+                  buttonText='サロン情報を見る'
+                />
+              </div>
+            ))}
+          </Box>
           <SalonList
             item={shop.fetchIndex}
             loading={shop.loading}

@@ -1,3 +1,4 @@
+import history from '@/utils/routers/history'
 import React from 'react'
 import { BiUserCircle } from 'react-icons/bi'
 import Button from '../common/Button'
@@ -13,8 +14,10 @@ export interface CardListProps {
   id?: number
   img?: string
   name?: string
+  address?: string
   price?: number
   buttonText?: string
+  url?: string
   setState?: React.Dispatch<React.SetStateAction<SelectedStylistValue>>
 }
 
@@ -23,9 +26,11 @@ const CardList = ({
   img,
   name,
   price,
+  address,
   buttonText,
   useReservationForm,
   control,
+  url,
   id,
   setState
 }: CardListProps) => {
@@ -43,6 +48,7 @@ const CardList = ({
       <div className='my-4'>
         <p>{name}</p>
         {price && <p>指名料: {price.toLocaleString()}¥</p>}
+        {address && <p>{address}</p>}
       </div>
 
       {useReservationForm ? (
@@ -59,7 +65,10 @@ const CardList = ({
           />
         </div>
       ) : (
-        <Button classes='bg-primary text-secondary-light mt-4 rounded-lg border-none'>
+        <Button
+          onClick={() => history.push(String(url))}
+          classes='bg-primary text-secondary-light mt-4 rounded-lg border-none'
+        >
           {buttonText}
         </Button>
       )}
