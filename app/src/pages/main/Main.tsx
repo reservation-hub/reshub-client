@@ -63,7 +63,7 @@ const Main = () => {
       <div className={contestSection}>
         <div className='h-full lg:mb-0 mb-5'>
           <Box boxClass='mb-4' title='ランキング' sectionClass='flex flex-wrap'>
-            {shop.popularShops.map((v, i) => (
+            {Object.values(shop.popularShops).map((v, i) => (
               <div key={i} className='mx-auto'>
                 <span className={rankingColor(v.ranking)}>{v.ranking}位</span>
                 <CardList
